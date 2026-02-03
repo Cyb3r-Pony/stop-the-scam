@@ -6,6 +6,7 @@ import Background from './components/Background';
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
   const [search, setSearch] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const strings = CONTENT[lang];
 
@@ -36,7 +37,7 @@ const App: React.FC = () => {
       {/* Institutional Header */}
       <header className="sticky top-0 z-50 glass border-b border-blue-900/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div 
+          <div
             className="flex items-center gap-4 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
@@ -52,28 +53,110 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          <nav className="flex items-center gap-2 lg:gap-4 overflow-x-auto no-scrollbar py-2">
+          {/* Desktop Navigation - hidden on mobile */}
+          <nav className="hidden md:flex items-center gap-2 lg:gap-4 overflow-x-auto no-scrollbar py-2">
             <button onClick={() => scrollToSection('blacklist')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Черна листа' : 'Blacklist'}</button>
             <button onClick={() => scrollToSection('warning-signs')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Признаци' : 'Signs'}</button>
             <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Мерки' : 'Markers'}</button>
             <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Предпазване' : 'Protection'}</button>
             <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Регистри' : 'Registers'}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}</button>
-            
+
             <div className="flex bg-slate-200/50 p-0.5 rounded ml-4 flex-shrink-0">
-              <button 
+              <button
                 onClick={() => setLang('bg')}
                 className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
               >
                 BG
               </button>
-              <button 
+              <button
                 onClick={() => setLang('en')}
                 className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
               >
                 EN
               </button>
             </div>
+          </nav>
+
+          {/* Mobile Menu Button - visible only on mobile */}
+          <div className="flex md:hidden items-center gap-3">
+            {/* Language toggle for mobile */}
+            <div className="flex bg-slate-200/50 p-0.5 rounded flex-shrink-0">
+              <button
+                onClick={() => setLang('bg')}
+                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+              >
+                BG
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+              >
+                EN
+              </button>
+            </div>
+
+            {/* Dropdown toggle button with arrow */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded bg-blue-700 text-white text-[10px] font-black uppercase tracking-wider transition-all hover:bg-blue-800"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              <span>{lang === 'bg' ? 'Меню' : 'Menu'}</span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-300 ${mobileMenuOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+        >
+          <nav className="flex flex-col border-t border-blue-900/20 bg-white/80 backdrop-blur-md">
+            <button
+              onClick={() => { scrollToSection('blacklist'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Черна листа' : 'Blacklist'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('warning-signs'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Признаци' : 'Signs'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('attention'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Мерки' : 'Markers'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('protection'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Предпазване' : 'Protection'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('registers'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Регистри' : 'Registers'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('victim'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
+            >
+              {lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}
+            </button>
           </nav>
         </div>
       </header>
