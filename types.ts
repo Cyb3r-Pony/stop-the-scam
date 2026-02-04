@@ -19,6 +19,11 @@ export interface ContentStrings {
   warningSigns: {
     title: string;
     items: Array<{ title: string; desc: string }>;
+    campaignLink?: {
+      text: string;
+      url: string;
+      linkText: string;
+    };
   };
   schemes: {
     title: string;

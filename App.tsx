@@ -275,6 +275,21 @@ const App: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            {strings.warningSigns.campaignLink && (
+              <div className="mt-12 p-6 rounded-lg bg-blue-950/30 border border-blue-500/30 text-center">
+                <p className="text-blue-200 font-medium mb-4">{strings.warningSigns.campaignLink.text}</p>
+                <a
+                  href={strings.warningSigns.campaignLink.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider text-sm rounded transition-all hover:gap-3"
+                >
+                  {strings.warningSigns.campaignLink.linkText}
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+              </div>
+            )}
           </div>
         </section>
 

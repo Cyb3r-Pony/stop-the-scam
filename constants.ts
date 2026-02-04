@@ -80,7 +80,12 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Фалшиви препоръки", desc: "Снимки на известни личности (Илон Мъск, Григор Димитров) в измамни реклами. Тези хора никога не са рекламирали подобни платформи." },
         { title: "Нестандартни плащания", desc: "Искат плащания само в криптовалута или банкови преводи към сметки на физически лица, вместо към корпоративни сметки на брокери." },
         { title: "Липса на прозрачност", desc: "Сайтът няма реален адрес, лиценз или данни за компанията. Ако информацията е скрита зад общи условия, вероятно е измама." }
-      ]
+      ],
+      campaignLink: {
+        text: "Кампания на КФН „Разпознай лицензирания инвестиционен посредник"",
+        url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
+        linkText: "Към кампанията"
+      }
     },
     schemes: {
       title: "Най-чести схеми",
@@ -128,7 +133,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         {
           region: "🇧🇬 България",
           items: [
-            { name: "КФН – Инвестиционни посредници", desc: "Регистър на лицензираните инвестиционни посредници в България.", link: "https://www.fsc.bg/investitsionna-deynost/spisatsi-podnadzorni-litsa/investitsionni-posredнitsi/", linkText: "Към КФН" },
+            { name: "КФН – Инвестиционни посредници", desc: "Регистър на лицензираните инвестиционни посредници в България.", link: "https://www.fsc.bg/investitsionna-deynost/spisatsi-podnadzorni-litsa/investitsionni-posrednitsi/", linkText: "Към КФН" },
             { name: "БНБ – Регистър по чл. 3а ЗКИ", desc: "Регистър на финансовите институции, поддържан от Българската народна банка.", link: "https://www.bnb.bg/RegistersAndServices/RSFIRegister/index.htm", linkText: "Към БНБ" },
             { name: "Търговски регистър (ТРРЮЛНЦ)", desc: "Проверка на регистрация на български фирми и юридически лица.", link: "https://portal.registryagency.bg/CR/reports/VerificationPersonOrg", linkText: "Към Търговски Регистър" }
           ]
@@ -206,7 +211,12 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Fake Testimonials", desc: "AI-generated or stolen photos of celebrities (Elon Musk) in ads. These people have no connection to these platforms." },
         { title: "Unusual Payments", desc: "Requests for crypto-only payments or bank transfers to personal accounts rather than corporate ones." },
         { title: "Lack of Transparency", desc: "No physical address, license info, or registration details. If the info is hidden, it's a red flag." }
-      ]
+      ],
+      campaignLink: {
+        text: "FSC Campaign: \"Recognize the Licensed Investment Intermediary\"",
+        url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
+        linkText: "View Campaign"
+      }
     },
     schemes: {
       title: "Common Scam Schemes",
