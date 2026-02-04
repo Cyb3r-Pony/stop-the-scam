@@ -82,7 +82,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Липса на прозрачност", desc: "Сайтът няма реален адрес, лиценз или данни за компанията. Ако информацията е скрита зад общи условия, вероятно е измама." }
       ],
       campaignLink: {
-        text: "Кампания на КФН „Разпознай лицензирания инвестиционен посредник"",
+        text: "Кампания на КФН: Разпознай лицензирания инвестиционен посредник",
         url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
         linkText: "Към кампанията"
       }
