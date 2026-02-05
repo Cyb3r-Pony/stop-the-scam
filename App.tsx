@@ -23,6 +23,12 @@ const App: React.FC = () => {
           domain: item.domain.replace(/^-/, ''),
           detectedAt: item.detected_at
         }));
+        // Sort by detection date (newest first)
+        domains.sort((a, b) => {
+          const dateA = new Date(a.detectedAt.replace(/\+00:00Z$/, 'Z')).getTime();
+          const dateB = new Date(b.detectedAt.replace(/\+00:00Z$/, 'Z')).getTime();
+          return dateB - dateA;
+        });
         setPhishingDomains(domains);
       } catch (error) {
         console.error('Failed to fetch phishing domains:', error);
@@ -44,7 +50,12 @@ const App: React.FC = () => {
   // Format date from ISO to DD.MM.YYYY
   const formatDate = (isoDate: string): string => {
     try {
-      const date = new Date(isoDate);
+      // Fix malformed date string: "+00:00Z" should be just "Z" or "+00:00"
+      const fixedDate = isoDate.replace(/\+00:00Z$/, 'Z');
+      const date = new Date(fixedDate);
+      if (isNaN(date.getTime())) {
+        return isoDate;
+      }
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const year = date.getFullYear();
