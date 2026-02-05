@@ -1,6 +1,11 @@
 
 export type Lang = 'bg' | 'en';
 
+export interface PhishingDomain {
+  domain: string;
+  detectedAt: string;
+}
+
 export interface ContentStrings {
   header: {
     title: string;
@@ -64,5 +69,14 @@ export interface ContentStrings {
   footer: {
     legal: string;
     disclaimer: string;
+  };
+  phishing: {
+    title: string;
+    description: string;
+    placeholder: string;
+    detectionDate: string;
+    source: string;
+    noResults: string;
+    entries: string;
   };
 }

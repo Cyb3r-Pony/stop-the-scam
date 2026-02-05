@@ -1,18 +1,58 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { SCAM_DOMAINS, CONTENT } from './constants';
-import { Lang } from './types';
+import { Lang, PhishingDomain } from './types';
 import Background from './components/Background';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
   const [search, setSearch] = useState('');
+  const [phishingSearch, setPhishingSearch] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+  const [phishingDomains, setPhishingDomains] = useState<PhishingDomain[]>([]);
+  const [phishingLoading, setPhishingLoading] = useState(true);
+
   const strings = CONTENT[lang];
+
+  // Fetch phishing domains from GitHub
+  useEffect(() => {
+    const fetchPhishingDomains = async () => {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/Cyb3r-Pony/bg-phishing-detector/main/feed/phishing_feed.json');
+        const data = await response.json();
+        const domains: PhishingDomain[] = data.map((item: { domain: string; detected_at: string }) => ({
+          domain: item.domain.replace(/^-/, ''),
+          detectedAt: item.detected_at
+        }));
+        setPhishingDomains(domains);
+      } catch (error) {
+        console.error('Failed to fetch phishing domains:', error);
+      } finally {
+        setPhishingLoading(false);
+      }
+    };
+    fetchPhishingDomains();
+  }, []);
 
   const filteredDomains = useMemo(() => {
     return SCAM_DOMAINS.filter(d => d.toLowerCase().includes(search.toLowerCase()));
   }, [search]);
+
+  const filteredPhishingDomains = useMemo(() => {
+    return phishingDomains.filter(d => d.domain.toLowerCase().includes(phishingSearch.toLowerCase()));
+  }, [phishingSearch, phishingDomains]);
+
+  // Format date from ISO to DD.MM.YYYY
+  const formatDate = (isoDate: string): string => {
+    try {
+      const date = new Date(isoDate);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}.${month}.${year}`;
+    } catch {
+      return isoDate;
+    }
+  };
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -60,6 +100,7 @@ const App: React.FC = () => {
             <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Мерки' : 'Markers'}</button>
             <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Предпазване' : 'Protection'}</button>
             <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Регистри' : 'Registers'}</button>
+            <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-cyan-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Фишинг' : 'Phishing'}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}</button>
 
             <div className="flex bg-slate-200/50 p-0.5 rounded ml-4 flex-shrink-0">
@@ -150,6 +191,12 @@ const App: React.FC = () => {
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {lang === 'bg' ? 'Регистри' : 'Registers'}
+            </button>
+            <button
+              onClick={() => { scrollToSection('phishing'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-cyan-600 hover:bg-cyan-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Фишинг' : 'Phishing'}
             </button>
             <button
               onClick={() => { scrollToSection('victim'); setMobileMenuOpen(false); }}
@@ -391,6 +438,76 @@ const App: React.FC = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Phishing Detector */}
+        <section id="phishing" className="py-24 bg-slate-950/80 backdrop-blur-sm border-y border-slate-900 selection:bg-cyan-500 selection:text-white">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <div className="mb-12 text-center flex flex-col items-center">
+              <span className="text-cyan-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
+                {lang === 'bg' ? 'Автоматично засичане' : 'Automatic Detection'}
+              </span>
+              <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
+                {strings.phishing.title}
+              </h2>
+              <div className="p-6 rounded-lg bg-cyan-950/30 border border-cyan-600/50 text-cyan-100 text-sm leading-relaxed shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-4xl mx-auto">
+                <strong className="block text-cyan-400 uppercase tracking-wider text-xs mb-2">
+                  {lang === 'bg' ? 'ИНФОРМАЦИЯ:' : 'INFO:'}
+                </strong>
+                {strings.phishing.description}
+              </div>
+            </div>
+
+            <div className="space-y-6 w-full flex flex-col items-center">
+              <div className="relative w-full max-w-xl mx-auto">
+                <input
+                  type="text"
+                  placeholder={strings.phishing.placeholder}
+                  value={phishingSearch}
+                  onChange={(e) => setPhishingSearch(e.target.value)}
+                  className="w-full bg-slate-900/50 border border-slate-800 text-white p-4 pl-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600/50 transition-all text-md mono"
+                />
+                <svg className="w-5 h-5 text-slate-600 absolute left-4 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+
+              <div className="bg-slate-900/40 rounded-lg border border-slate-800 overflow-hidden backdrop-blur-md w-full">
+                <div className="max-h-[600px] overflow-y-auto custom-scrollbar p-6">
+                  {phishingLoading ? (
+                    <div className="py-20 text-center">
+                      <div className="inline-block w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                      <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+                        {lang === 'bg' ? 'Зареждане...' : 'Loading...'}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {filteredPhishingDomains.map((item, i) => (
+                        <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-cyan-400 flex flex-col group/item hover:border-cyan-600 transition-all hover:bg-slate-800">
+                          <span className="tracking-tight truncate" title={item.domain}>{item.domain}</span>
+                          <span className="text-[9px] text-slate-500 mt-1">
+                            {strings.phishing.detectionDate} {formatDate(item.detectedAt)}
+                          </span>
+                        </div>
+                      ))}
+                      {filteredPhishingDomains.length === 0 && !phishingLoading && (
+                        <div className="col-span-full py-20 text-center">
+                          <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+                            {strings.phishing.noResults}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
+                  <span>{strings.phishing.source}</span>
+                  <span>{filteredPhishingDomains.length} {strings.phishing.entries}</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

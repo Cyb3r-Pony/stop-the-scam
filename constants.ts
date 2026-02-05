@@ -185,6 +185,15 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     footer: {
       legal: "Правна информация",
       disclaimer: "Сайтът е с превантивна цел. Данните са от официалния сайт на ГДБОП-МВР. Сайтът не носи отговорност за индивидуални инвестиционни решения."
+    },
+    phishing: {
+      title: "Фишинг Детектор",
+      description: "Автоматично засечени фишинг домейни, насочени към български потребители. Данните се актуализират в реално време от нашия скенер.",
+      placeholder: "Търсене на фишинг домейн...",
+      detectionDate: "Засечен на",
+      source: "Източник: github.com/Cyb3r-Pony",
+      noResults: "Няма намерени резултати",
+      entries: "Засечени"
     }
   },
   en: {
@@ -316,6 +325,15 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     footer: {
       legal: "Legal Info",
       disclaimer: "Informational purpose only. Data from official GDCOC-MoI sources. We are not responsible for individual financial decisions."
+    },
+    phishing: {
+      title: "Phishing Detector",
+      description: "Automatically detected phishing domains targeting Bulgarian users. Data is updated in real-time from our scanner.",
+      placeholder: "Search phishing domain...",
+      detectionDate: "Detected on",
+      source: "Source: github.com/Cyb3r-Pony",
+      noResults: "No results found",
+      entries: "Detected"
     }
   }
 };
