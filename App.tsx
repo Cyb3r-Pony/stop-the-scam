@@ -129,7 +129,7 @@ const App: React.FC = () => {
             <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Мерки' : 'Markers'}</button>
             <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Предпазване' : 'Protection'}</button>
             <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Регистри' : 'Registers'}</button>
-            <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Фишинг' : 'Phishing'}</button>
+            <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Фишинг' : 'Phishing'}</button>
             <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{lang === 'bg' ? 'Тест' : 'Quiz'}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}</button>
 
@@ -224,7 +224,7 @@ const App: React.FC = () => {
             </button>
             <button
               onClick={() => { scrollToSection('phishing'); setMobileMenuOpen(false); }}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-cyan-400 hover:text-cyan-300 hover:bg-cyan-50 transition-colors text-left border-b border-slate-200/50"
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {lang === 'bg' ? 'Фишинг' : 'Phishing'}
             </button>
