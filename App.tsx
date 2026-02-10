@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { SCAM_DOMAINS, CONTENT } from './constants';
 import { Lang, PhishingDomain } from './types';
 import Background from './components/Background';
+import Quiz from './components/Quiz';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
@@ -10,6 +11,7 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phishingDomains, setPhishingDomains] = useState<PhishingDomain[]>([]);
   const [phishingLoading, setPhishingLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState<'main' | 'quiz'>('main');
 
   const strings = CONTENT[lang];
 
@@ -66,6 +68,22 @@ const App: React.FC = () => {
   };
 
   const scrollToSection = (id: string) => {
+    if (currentPage !== 'main') {
+      setCurrentPage('main');
+      // Wait for re-render then scroll
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = el.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       const offset = 80;
@@ -90,7 +108,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div
             className="flex items-center gap-4 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-blue-700 flex items-center justify-center rounded shadow-sm">
@@ -112,6 +130,7 @@ const App: React.FC = () => {
             <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Предпазване' : 'Protection'}</button>
             <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Регистри' : 'Registers'}</button>
             <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-cyan-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Фишинг' : 'Phishing'}</button>
+            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{lang === 'bg' ? 'Тест' : 'Quiz'}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}</button>
 
             <div className="flex bg-slate-200/50 p-0.5 rounded ml-4 flex-shrink-0">
@@ -210,6 +229,12 @@ const App: React.FC = () => {
               {lang === 'bg' ? 'Фишинг' : 'Phishing'}
             </button>
             <button
+              onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 hover:bg-emerald-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {lang === 'bg' ? 'Тест за киберсигурност' : 'Security Quiz'}
+            </button>
+            <button
               onClick={() => { scrollToSection('victim'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
             >
@@ -220,6 +245,10 @@ const App: React.FC = () => {
       </header>
 
       <main className="flex-1">
+        {currentPage === 'quiz' ? (
+          <Quiz lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+        ) : (
+        <>
         {/* Section A: Institutional Guidance (Hero) */}
         <section className="relative py-24 px-6 overflow-hidden">
           <div className="max-w-5xl mx-auto">
@@ -542,6 +571,8 @@ const App: React.FC = () => {
              </p>
            </div>
         </section>
+        </>
+        )}
       </main>
 
       {/* Institutional Footer */}
