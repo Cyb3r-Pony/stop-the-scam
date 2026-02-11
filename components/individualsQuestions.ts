@@ -26,7 +26,7 @@ export const individualsPool: PoolQuestion[] = [
       explanation: "Banks do not require urgent action through email links. Always access accounts via official apps or typed URLs."
     },
     bg: {
-      question: "Получавате имейл от банката ви: „Вашият акаунт ще бъде заключен след 1 час. Натиснете тук." Какво правите?",
+      question: "Получавате имейл от банката ви: \u201EВашият акаунт ще бъде заключен след 1 час. Натиснете тук.\u201D Какво правите?",
       options: ["Натискам незабавно", "Отговарям с въпрос дали е истински", "Отварям приложението на банката директно, без линка", "Препращам го на приятели"],
       explanation: "Банките не принуждават спешни действия чрез линкове в имейли. Винаги достъпвайте услугите чрез официални приложения или въведени URL адреси."
     },
@@ -74,7 +74,7 @@ export const individualsPool: PoolQuestion[] = [
       explanation: "Microsoft does not call customers unsolicited. This is a common tech support scam."
     },
     bg: {
-      question: "Непознат се обажда, представяйки се за „Поддръжка на Microsoft". Какво най-вероятно се случва?",
+      question: "Непознат се обажда, представяйки се за \u201EПоддръжка на Microsoft\u201D. Какво най-вероятно се случва?",
       options: ["Легитимна помощ", "Опит за измама", "Софтуерна актуализация", "Предложение за възстановяване на средства"],
       explanation: "Microsoft не се обажда на клиенти непоискано. Това е класическа измама с техническа поддръжка."
     },
@@ -122,7 +122,7 @@ export const individualsPool: PoolQuestion[] = [
       explanation: "Attackers use lookalike domains to steal credentials."
     },
     bg: {
-      question: "Ако URL адресът на уебсайт е paypaI.com (с главно „i"), какво е това?",
+      question: "Ако URL адресът на уебсайт е paypaI.com (с главно \u201Ei\u201D), какво е това?",
       options: ["Нормален PayPal", "Фишинг домейн с typo-squatting", "Сигурен вход", "Грешка на браузъра"],
       explanation: "Атакуващите използват подобно изглеждащи символи, за да крадат данни за достъп."
     },
@@ -154,7 +154,7 @@ export const individualsPool: PoolQuestion[] = [
       explanation: "Friends' accounts get hacked. Always confirm suspicious links."
     },
     bg: {
-      question: "Приятел изпраща „Ти ли си на това видео?" със странен линк. Какво трябва да направите?",
+      question: "Приятел изпраща \u201EТи ли си на това видео?\u201D със странен линк. Какво трябва да направите?",
       options: ["Натисни го", "Попитай го/я чрез друго съобщение първо", "Препрати го", "Игнорирай предупрежденията на антивирусната"],
       explanation: "Акаунтите биват хакнати. Винаги потвърждавайте подозрителни съобщения."
     },
@@ -426,7 +426,7 @@ export const individualsPool: PoolQuestion[] = [
       explanation: "Fake virus pop-ups are common scams to steal money."
     },
     bg: {
-      question: "Какво е най-безопасното отговорено на подозрителен pop-up, който казва „Вирус открит"?",
+      question: "Какво е най-безопасното отговорено на подозрителен pop-up, който казва \u201EВирус открит\u201D?",
       options: ["Обадете се на показания номер", "Натиснете 'Поправи сега'", "Затворете браузъра и изпълнете надежен антивирус", "Въведете детайли на плащане"],
       explanation: "Фалшивите pop-up съобщения за вирус са често срещани измамни схеми, за да крадат пари."
     },
