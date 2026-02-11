@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import { Lang } from '../types';
+import { PoolQuestion, individualsPool } from './individualsQuestions';
+import { itAdminsPool } from './itAdminsQuestions';
+import { executivesPool } from './executivesQuestions';
 
 type QuizCategory = 'individuals' | 'it-admins' | 'executives';
-
-interface QuizQuestion {
-  question: string;
-  options: string[];
-  correct: number; // 0-based index
-  explanation: string;
-}
-
-interface QuizData {
-  title: string;
-  subtitle: string;
-  icon: React.ReactNode;
-  questions: QuizQuestion[];
-}
 
 interface Recommendation {
   tier: string;
@@ -27,7 +16,8 @@ interface Recommendation {
   priority: string;
 }
 
-const getQuizData = (lang: Lang): Record<QuizCategory, QuizData> => ({
+// Category metadata (title, subtitle, icon) — no questions here
+const getCategoryMeta = (lang: Lang) => ({
   'individuals': {
     title: lang === 'bg' ? 'Физически лица' : 'Individuals',
     subtitle: lang === 'bg' ? 'Ежедневни потребители' : 'Everyday Users',
@@ -35,157 +25,7 @@ const getQuizData = (lang: Lang): Record<QuizCategory, QuizData> => ({
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
-    ),
-    questions: [
-      {
-        question: lang === 'bg'
-          ? 'Получавате имейл от банката ви: „Вашият акаунт ще бъде заключен след 1 час. Натиснете тук." Какво правите?'
-          : 'You receive an email from your bank saying: "Your account will be locked in 1 hour. Click here." What do you do?',
-        options: [
-          lang === 'bg' ? 'Натискам незабавно' : 'Click immediately',
-          lang === 'bg' ? 'Отговарям с въпрос дали е истински' : 'Reply asking if it\'s real',
-          lang === 'bg' ? 'Отварям приложението на банката директно, без линка' : 'Open your bank app directly, not the link',
-          lang === 'bg' ? 'Препращам го на приятели' : 'Forward it to friends'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Банките не принуждават спешни действия чрез линкове в имейли. Винаги достъпвайте услугите чрез официални приложения или въведени URL адреси.'
-          : 'Banks don\'t force urgent actions through email links. Always access services through official apps or typed URLs.'
-      },
-      {
-        question: lang === 'bg' ? 'Коя е най-силната парола?' : 'What is the strongest password?',
-        options: [
-          'password123',
-          'Summer2026',
-          'John1988',
-          'X9!qR#2mZ@7p'
-        ],
-        correct: 3,
-        explanation: lang === 'bg'
-          ? 'Силните пароли са дълги, случайни и не се базират на думи от речника или лична информация.'
-          : 'Strong passwords are long, random, and not based on dictionary words or personal info.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какво представлява многофакторното удостоверяване (MFA)?'
-          : 'What is Multi-Factor Authentication (MFA)?',
-        options: [
-          lang === 'bg' ? 'Втора парола' : 'A second password',
-          lang === 'bg' ? 'Втора стъпка за верификация (код/приложение/устройство)' : 'A second verification step (code/app/device)',
-          lang === 'bg' ? 'Защитна стена' : 'A firewall',
-          lang === 'bg' ? 'Антивирусен софтуер' : 'Antivirus software'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'MFA блокира атакуващите дори ако откраднат паролата ви.'
-          : 'MFA blocks attackers even if they steal your password.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Непознат се обажда, представяйки се за „Поддръжка на Microsoft". Какво най-вероятно се случва?'
-          : 'A stranger calls claiming to be "Microsoft Support." What is most likely happening?',
-        options: [
-          lang === 'bg' ? 'Легитимна помощ' : 'Legitimate help',
-          lang === 'bg' ? 'Опит за измама' : 'A scam attempt',
-          lang === 'bg' ? 'Софтуерна актуализация' : 'A software update',
-          lang === 'bg' ? 'Предложение за възстановяване на средства' : 'A refund offer'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Microsoft не се обажда на клиенти непоискано. Това е класическа измама с техническа поддръжка.'
-          : 'Microsoft does not call customers unsolicited. This is classic tech support fraud.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какво трябва да направите преди да изтеглите прикачен файл?'
-          : 'What should you do before downloading an attachment?',
-        options: [
-          lang === 'bg' ? 'Да му се доверите, ако изглежда официално' : 'Trust it if it looks official',
-          lang === 'bg' ? 'Да го отворите бързо' : 'Open it quickly',
-          lang === 'bg' ? 'Да проверите подателя чрез друг канал' : 'Verify the sender through another channel',
-          lang === 'bg' ? 'Да деактивирате антивирусната програма' : 'Disable antivirus'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Подправянето на имейли е лесно. Проверката предотвратява заразяване с малуер.'
-          : 'Email spoofing is easy. Verification prevents malware infection.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Кое е най-безопасно при използване на обществен Wi-Fi?'
-          : 'Which is safest on public Wi-Fi?',
-        options: [
-          lang === 'bg' ? 'Онлайн банкиране' : 'Online banking',
-          lang === 'bg' ? 'Влизане в работен имейл' : 'Logging into work email',
-          lang === 'bg' ? 'Използване на VPN или избягване на чувствителни влизания' : 'Using a VPN or avoiding sensitive logins',
-          lang === 'bg' ? 'Споделяне на пароли' : 'Sharing passwords'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Обществените Wi-Fi мрежи често са несигурни и наблюдавани.'
-          : 'Public Wi-Fi is often insecure and monitored.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Ако URL адресът на уебсайт е paypaI.com (с главно „i"), какво е това?'
-          : 'If a website URL is paypaI.com (capital i), what is this?',
-        options: [
-          lang === 'bg' ? 'Нормален PayPal' : 'Normal PayPal',
-          lang === 'bg' ? 'Фишинг домейн с typo-squatting' : 'Typo-squatting phishing domain',
-          lang === 'bg' ? 'Сигурен вход' : 'Secure login',
-          lang === 'bg' ? 'Грешка на браузъра' : 'Browser bug'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Атакуващите използват подобно изглеждащи символи, за да крадат данни за достъп.'
-          : 'Attackers use lookalike characters to steal credentials.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Кой е най-безопасният начин за съхранение на пароли?'
-          : 'What is the safest way to store passwords?',
-        options: [
-          lang === 'bg' ? 'Приложение за бележки' : 'Notes app',
-          lang === 'bg' ? 'Само в браузъра' : 'Browser only',
-          lang === 'bg' ? 'Мениджър на пароли' : 'Password manager',
-          lang === 'bg' ? 'Лепящо листче на монитора' : 'Sticky note on monitor'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Мениджърите на пароли генерират и съхраняват силни уникални пароли по сигурен начин. Популярни опции включват Bitwarden, 1Password, NordPass, Password (за iOS) или вградените от Google/Samsung.'
-          : 'Password managers generate and store strong unique passwords securely. Popular options include Bitwarden, 1Password, NordPass, Password (for iOS), or built-in Google/Samsung managers.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Приятел изпраща „Ти ли си на това видео?" със странен линк. Какво трябва да направите?'
-          : 'A friend sends "Is this you in this video?" with a strange link. What should you do?',
-        options: [
-          lang === 'bg' ? 'Натисни го' : 'Click it',
-          lang === 'bg' ? 'Попитай го/я чрез друго съобщение първо' : 'Ask them via message first',
-          lang === 'bg' ? 'Препрати го' : 'Forward it',
-          lang === 'bg' ? 'Игнорирай предупрежденията на антивирусната' : 'Ignore antivirus warnings'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Акаунтите биват хакнати. Винаги потвърждавайте подозрителни съобщения.'
-          : 'Accounts get hijacked. Always confirm suspicious messages.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Коя е най-добрата защита срещу измами?'
-          : 'What is the best defense against scams?',
-        options: [
-          lang === 'bg' ? 'Доверие към хората' : 'Trusting people',
-          lang === 'bg' ? 'Бързо действие' : 'Fast action',
-          lang === 'bg' ? 'Скептицизъм + проверка' : 'Skepticism + verification',
-          lang === 'bg' ? 'Избягване на интернет' : 'Avoiding the internet'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Повечето измами успяват, защото жертвите действат под натиск, без да проверят.'
-          : 'Most scams succeed because victims act under pressure without verifying.'
-      }
-    ]
+    )
   },
   'it-admins': {
     title: lang === 'bg' ? 'IT Администратори' : 'IT Administrators',
@@ -195,159 +35,7 @@ const getQuizData = (lang: Lang): Record<QuizCategory, QuizData> => ({
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
-    ),
-    questions: [
-      {
-        question: lang === 'bg'
-          ? 'Кой е най-ефективният контрол срещу кражба на идентификационни данни?'
-          : 'What is the most effective control against credential theft?',
-        options: [
-          lang === 'bg' ? 'Ротация на пароли' : 'Password rotation',
-          lang === 'bg' ? 'MFA навсякъде' : 'MFA everywhere',
-          lang === 'bg' ? 'По-сложни потребителски имена' : 'More complex usernames',
-          lang === 'bg' ? 'Деактивиране на логирането' : 'Disabling logging'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'MFA спира повечето атаки за повторно използване на идентификационни данни и фишинг атаки.'
-          : 'MFA stops most credential reuse and phishing attacks.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какъв е най-големият риск от излагането на RDP директно в интернет?'
-          : 'What is the biggest risk of exposing RDP directly to the internet?',
-        options: [
-          lang === 'bg' ? 'Бавна производителност' : 'Slow performance',
-          lang === 'bg' ? 'Brute force + влизане на рансъмуер' : 'Brute force + ransomware entry',
-          lang === 'bg' ? 'По-добър отдалечен достъп' : 'Better remote access',
-          lang === 'bg' ? 'DNS грешки' : 'DNS errors'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Излагането на RDP е една от основните входни точки за рансъмуер.'
-          : 'RDP exposure is one of the top ransomware entry points.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Принципът на минималните привилегии означава:'
-          : 'Principle of Least Privilege means:',
-        options: [
-          lang === 'bg' ? 'Всеки е администратор' : 'Everyone is admin',
-          lang === 'bg' ? 'Потребителите получават само достъпа, от който се нуждаят' : 'Users get only the access they need',
-          lang === 'bg' ? 'Деактивиране на акаунти' : 'Disable accounts',
-          lang === 'bg' ? 'Споделяне на идентификационни данни' : 'Share credentials'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Намаляването на привилегиите ограничава обхвата на щетите при компрометиране.'
-          : 'Reducing privileges limits blast radius during compromise.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Коя е най-добрата стратегия за резервно копиране?'
-          : 'What is the best backup strategy?',
-        options: [
-          lang === 'bg' ? 'Едно резервно копие' : 'One backup copy',
-          lang === 'bg' ? 'Резервни копия на същия сървър' : 'Backups on same server',
-          lang === 'bg' ? 'Правило 3-2-1 с офлайн/неизменяемо съхранение' : '3-2-1 rule with offline/immutable storage',
-          lang === 'bg' ? 'Не са нужни резервни копия' : 'No backups needed'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Рансъмуерът първо атакува резервните копия. Офлайн/неизменяемото съхранение е критично важно.'
-          : 'Ransomware targets backups first. Offline/immutable is critical.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'За какво се използва SIEM?'
-          : 'What is a SIEM used for?',
-        options: [
-          lang === 'bg' ? 'Съхранение на пароли' : 'Password storage',
-          lang === 'bg' ? 'Събиране на логове + откриване на заплахи' : 'Log collection + threat detection',
-          lang === 'bg' ? 'Криптиране на файлове' : 'File encryption',
-          lang === 'bg' ? 'Сигурност на браузъра' : 'Browser security'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'SIEM корелира логове, за да открива подозрително поведение.'
-          : 'SIEM correlates logs to detect suspicious behavior.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Най-устойчивият на фишинг метод за удостоверяване?'
-          : 'Most phishing-resistant authentication method?',
-        options: [
-          lang === 'bg' ? 'SMS кодове' : 'SMS codes',
-          lang === 'bg' ? 'Сигурностни въпроси' : 'Security questions',
-          lang === 'bg' ? 'FIDO2 хардуерни ключове' : 'FIDO2 hardware keys',
-          lang === 'bg' ? 'Подсказки за пароли' : 'Password hints'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Хардуерните ключове предотвратяват повторно възпроизвеждане и фишинг.'
-          : 'Hardware-backed keys prevent replay and phishing.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Защо управлението на пачове е критично?'
-          : 'Why is patch management critical?',
-        options: [
-          lang === 'bg' ? 'Козметични актуализации' : 'Cosmetic updates',
-          lang === 'bg' ? 'Поправя уязвимости, експлоатирани в реалния свят' : 'Fixes vulnerabilities exploited in the wild',
-          lang === 'bg' ? 'Прави компютрите по-бързи' : 'Makes PCs faster',
-          lang === 'bg' ? 'Избягва MFA' : 'Avoids MFA'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Непачнатите системи са основни вектори за компрометиране.'
-          : 'Unpatched systems are primary compromise vectors.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какво е странично движение (lateral movement)?'
-          : 'What is lateral movement?',
-        options: [
-          lang === 'bg' ? 'VPN влизане' : 'VPN login',
-          lang === 'bg' ? 'Атакуващ, движещ се между вътрешни системи' : 'Attacker moving between internal systems',
-          lang === 'bg' ? 'Филтриране на имейли' : 'Email filtering',
-          lang === 'bg' ? 'Конфигуриране на защитна стена' : 'Firewall configuration'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'След първоначалното проникване, атакуващите се придвижват до домейн контролери и данни.'
-          : 'After initial breach, attackers pivot to domain controllers and data.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Най-добрият начин за откриване на компрометирани идентификационни данни?'
-          : 'Best way to detect compromised credentials?',
-        options: [
-          lang === 'bg' ? 'Деактивиране на всички акаунти' : 'Disable all accounts',
-          lang === 'bg' ? 'Мониторинг за невъзможни пътувания + аномални влизания' : 'Monitor impossible travel + anomalous logins',
-          lang === 'bg' ? 'Използване само на по-дълги пароли' : 'Use longer passwords only',
-          lang === 'bg' ? 'Игнориране на логове за влизане' : 'Ignore login logs'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Поведенческото откриване улавя откраднати идентификационни данни рано.'
-          : 'Behavioral detection catches stolen credentials early.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какъв е основният приоритет след като рансъмуер криптиране започне?'
-          : 'What is the top priority after ransomware encryption starts?',
-        options: [
-          lang === 'bg' ? 'Плати незабавно' : 'Pay immediately',
-          lang === 'bg' ? 'Изолирай заразените системи и спри разпространението' : 'Isolate infected systems and stop spread',
-          lang === 'bg' ? 'Рестартирай сървърите' : 'Reboot servers',
-          lang === 'bg' ? 'Изтрий логовете' : 'Delete logs'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Ограничаването е на първо място. Плащането не гарантира възстановяване.'
-          : 'Containment comes first. Paying does not guarantee recovery.'
-      }
-    ]
+    )
   },
   'executives': {
     title: lang === 'bg' ? 'Ръководители' : 'Executives',
@@ -356,162 +44,24 @@ const getQuizData = (lang: Lang): Record<QuizCategory, QuizData> => ({
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
-    ),
-    questions: [
-      {
-        question: lang === 'bg'
-          ? 'Какъв е най-големият риск за киберсигурността на ръководители?'
-          : 'Biggest cybersecurity risk for executives?',
-        options: [
-          lang === 'bg' ? 'Хакери, отгатващи пароли' : 'Hackers guessing passwords',
-          lang === 'bg' ? 'Човешка грешка + фишинг' : 'Human error + phishing',
-          lang === 'bg' ? 'Твърде много защитни стени' : 'Too many firewalls',
-          lang === 'bg' ? 'Актуализации на антивирусната' : 'Antivirus updates'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Повечето пробиви започват със социално инженерство, а не с brute force.'
-          : 'Most breaches begin with social engineering, not brute force.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Business Email Compromise (BEC) обикновено е насочен към:'
-          : 'Business Email Compromise (BEC) usually targets:',
-        options: [
-          lang === 'bg' ? 'Геймъри' : 'Gamers',
-          lang === 'bg' ? 'Финансови екипи и банкови преводи' : 'Finance teams and wire transfers',
-          lang === 'bg' ? 'Студенти' : 'Students',
-          lang === 'bg' ? 'Само софтуерни разработчици' : 'Software developers only'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'CFO и финансовите отдели са основни цели.'
-          : 'CFOs and finance departments are prime targets.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Ако рансъмуер удари, какво е най-важно?'
-          : 'If ransomware hits, what matters most?',
-        options: [
-          lang === 'bg' ? 'Бързо плащане' : 'Paying fast',
-          lang === 'bg' ? 'Публично мълчание' : 'Public silence',
-          lang === 'bg' ? 'План за непрекъснатост на бизнеса и възстановяване' : 'Business continuity and recovery plan',
-          lang === 'bg' ? 'Игнориране' : 'Ignoring it'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Подготвеността определя оцеляването повече от преговорите.'
-          : 'Preparedness determines survival more than negotiation.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Какво е най-скъпото въздействие на пробив?'
-          : 'What is the costliest breach impact?',
-        options: [
-          lang === 'bg' ? 'Подмяна на лаптоп' : 'Laptop replacement',
-          lang === 'bg' ? 'Загуба на доверие + престой + правна отговорност' : 'Loss of trust + downtime + legal exposure',
-          lang === 'bg' ? 'Повреда на принтер' : 'Printer failure',
-          lang === 'bg' ? 'Имейл спам' : 'Email spam'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Реалните щети са оперативни и репутационни.'
-          : 'Real damage is operational and reputational.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Кой е отговорен за киберсигурността в компанията?'
-          : 'Who is responsible for cybersecurity in a company?',
-        options: [
-          lang === 'bg' ? 'Само IT' : 'Only IT',
-          lang === 'bg' ? 'Само служителите' : 'Only employees',
-          lang === 'bg' ? 'Ръководство + управление + IT заедно' : 'Leadership + governance + IT together',
-          lang === 'bg' ? 'Външни одитори' : 'External auditors'
-        ],
-        correct: 2,
-        explanation: lang === 'bg'
-          ? 'Киберсигурността е бизнес риск, а не само технически.'
-          : 'Cybersecurity is a business risk, not just technical.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Най-добрата инвестиция за намаляване вероятността от пробив?'
-          : 'Best investment for reducing breach likelihood?',
-        options: [
-          lang === 'bg' ? 'Повече постери' : 'More posters',
-          lang === 'bg' ? 'Обучение на служители + MFA + реакция при инциденти' : 'Employee training + MFA + incident response',
-          lang === 'bg' ? 'Ново лого' : 'New logo',
-          lang === 'bg' ? 'Игнориране на съответствието' : 'Ignoring compliance'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Тези контроли спират повечето реални атаки.'
-          : 'These controls stop most real attacks.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Каква е целта на плана за реакция при инциденти?'
-          : 'What is the purpose of an Incident Response Plan?',
-        options: [
-          lang === 'bg' ? 'Маркетинг' : 'Marketing',
-          lang === 'bg' ? 'Ясни стъпки по време на пробив' : 'Clear steps during a breach',
-          lang === 'bg' ? 'Данъчна отчетност' : 'Tax reporting',
-          lang === 'bg' ? 'HR въвеждане' : 'HR onboarding'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Без план, реакцията се превръща в хаос, а забавянията увеличават щетите.'
-          : 'Without a plan, response becomes chaos and delays increase damage.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Защо ръководителите трябва да се интересуват от NIS2 / GDPR?'
-          : 'Why should executives care about NIS2 / GDPR?',
-        options: [
-          lang === 'bg' ? 'Само за юристи' : 'Only for lawyers',
-          lang === 'bg' ? 'Регулаторни глоби + отговорност' : 'Regulatory fines + accountability',
-          lang === 'bg' ? 'Незадължителни насоки' : 'Optional guidelines',
-          lang === 'bg' ? 'Само за банки' : 'Only for banks'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Неспазването на съответствието може да доведе до отговорност на ниво ръководство.'
-          : 'Compliance failures can become leadership-level liability.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Най-добрата защита срещу CEO измама („Изпратете този превод сега")?'
-          : 'What is the best defense against CEO fraud ("Send this transfer now")?',
-        options: [
-          lang === 'bg' ? 'Доверете се на спешните имейли' : 'Trust urgent emails',
-          lang === 'bg' ? 'Процес за верификация на плащания' : 'Verification process for payments',
-          lang === 'bg' ? 'По-бързо банкиране' : 'Faster banking',
-          lang === 'bg' ? 'Без пароли' : 'No passwords'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Одобренията на плащания трябва да изискват независима верификация.'
-          : 'Payment approvals must require independent verification.'
-      },
-      {
-        question: lang === 'bg'
-          ? 'Метриката #1 за киберсигурност, която ръководството трябва да изисква е:'
-          : 'The #1 cybersecurity metric leadership should demand is:',
-        options: [
-          lang === 'bg' ? 'Брой изпратени имейли' : 'Number of emails sent',
-          lang === 'bg' ? 'Време за откриване + реакция при инциденти' : 'Time to detect + respond to incidents',
-          lang === 'bg' ? 'Брой IT служители' : 'Number of IT staff',
-          lang === 'bg' ? 'Обновяване на лого' : 'Logo refresh'
-        ],
-        correct: 1,
-        explanation: lang === 'bg'
-          ? 'Скоростта на откриване и реакция определя въздействието на пробива.'
-          : 'Speed of detection and response determines breach impact.'
-      }
-    ]
+    )
   }
 });
 
+// Pools by category
+const pools: Record<QuizCategory, PoolQuestion[]> = {
+  'individuals': individualsPool,
+  'it-admins': itAdminsPool,
+  'executives': executivesPool
+};
+
+// Shuffle and pick 10 questions from a pool
+const pickRandomQuestions = (pool: PoolQuestion[], count: number = 10): PoolQuestion[] => {
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+};
+
+// Score-based recommendations (unchanged from original)
 const getRecommendations = (lang: Lang, category: QuizCategory, score: number): Recommendation => {
   if (category === 'individuals') {
     if (score <= 3) {
@@ -725,66 +275,129 @@ const getRecommendations = (lang: Lang, category: QuizCategory, score: number): 
   }
 };
 
-// Topic-based bonus recommendations
-const getTopicRecommendations = (lang: Lang, category: QuizCategory, wrongIndices: number[]): string[] => {
+// Topic-based recommendations using actual topic tags from wrong answers
+const getTopicRecommendations = (lang: Lang, category: QuizCategory, wrongQuestions: PoolQuestion[]): string[] => {
+  const wrongTopics = new Set(wrongQuestions.map(q => q.topic));
   const tips: string[] = [];
 
   if (category === 'individuals') {
-    // Check phishing-related questions (Q1, Q4, Q7, Q9)
-    if (wrongIndices.some(i => [0, 3, 6, 8].includes(i))) {
+    if (wrongTopics.has('Phishing')) {
       tips.push(lang === 'bg'
         ? 'Допълнете обучението си по фишинг симулации — попаднахте в капана на въпросите за фишинг.'
         : 'Complete phishing simulation training — you fell for phishing-related questions.');
     }
-    // Password-related (Q2, Q8)
-    if (wrongIndices.some(i => [1, 7].includes(i))) {
+    if (wrongTopics.has('Password Security')) {
       tips.push(lang === 'bg'
         ? 'Внедрете мениджър на пароли + MFA — паролите ви имат нужда от подобрение.'
         : 'Deploy a password manager + MFA — your password practices need improvement.');
     }
-    // MFA/VPN (Q3, Q5, Q6)
-    if (wrongIndices.some(i => [2, 4, 5].includes(i))) {
+    if (wrongTopics.has('MFA')) {
       tips.push(lang === 'bg'
-        ? 'Прегледайте защитата на мрежата и удостоверяването — помислете за VPN и MFA.'
-        : 'Review your network protection and authentication — consider VPN and MFA.');
+        ? 'Активирайте MFA за всички критични акаунти — пропуснахте въпросите за многофакторно удостоверяване.'
+        : 'Enable MFA on all critical accounts — you missed multi-factor authentication questions.');
+    }
+    if (wrongTopics.has('Social Engineering')) {
+      tips.push(lang === 'bg'
+        ? 'Научете се да разпознавате тактиките за социално инженерство — спешност, страх и имитация.'
+        : 'Learn to recognize social engineering tactics — urgency, fear, and impersonation.');
+    }
+    if (wrongTopics.has('Network Security')) {
+      tips.push(lang === 'bg'
+        ? 'Прегледайте защитата на мрежата — помислете за VPN и проверка на HTTPS.'
+        : 'Review your network protection — consider VPN and HTTPS verification.');
+    }
+    if (wrongTopics.has('Identity Protection')) {
+      tips.push(lang === 'bg'
+        ? 'Ограничете споделянето на лична информация онлайн — атакуващите я използват за кражба на самоличност.'
+        : 'Limit sharing personal information online — attackers use it for identity theft.');
+    }
+    if (wrongTopics.has('Incident Response')) {
+      tips.push(lang === 'bg'
+        ? 'Подгответе план за действие при компрометиран акаунт — знайте какво да направите веднага.'
+        : 'Prepare an action plan for compromised accounts — know what to do immediately.');
     }
   } else if (category === 'it-admins') {
-    // Ransomware-related (Q2, Q4, Q10)
-    if (wrongIndices.some(i => [1, 3, 9].includes(i))) {
+    if (wrongTopics.has('Ransomware')) {
       tips.push(lang === 'bg'
         ? 'Тествайте възстановяването от резервни копия в рамките на 30 дни — пропуснахте въпросите за рансъмуер.'
         : 'Test backup recovery within 30 days — you missed ransomware-related questions.');
     }
-    // Auth-related (Q1, Q6)
-    if (wrongIndices.some(i => [0, 5].includes(i))) {
+    if (wrongTopics.has('MFA')) {
       tips.push(lang === 'bg'
         ? 'Приоритизирайте внедряването на FIDO2/MFA — удостоверяването ви има слабости.'
         : 'Prioritize FIDO2/MFA deployment — your authentication has weaknesses.');
     }
-    // Detection (Q5, Q8, Q9)
-    if (wrongIndices.some(i => [4, 7, 8].includes(i))) {
+    if (wrongTopics.has('Monitoring')) {
       tips.push(lang === 'bg'
         ? 'Подобрете възможностите за мониторинг и откриване — внедрете SIEM/XDR решение.'
         : 'Improve monitoring and detection capabilities — deploy a SIEM/XDR solution.');
     }
-  } else {
-    // BEC/Fraud (Q2, Q9)
-    if (wrongIndices.some(i => [1, 8].includes(i))) {
+    if (wrongTopics.has('Access Control')) {
       tips.push(lang === 'bg'
-        ? 'Въведете работни процеси за двойно одобрение на плащания — пропуснахте въпросите за CEO измама.'
-        : 'Introduce dual approval workflows for payments — you missed CEO fraud questions.');
+        ? 'Прегледайте политиките за контрол на достъпа — приложете принципа на минималните привилегии.'
+        : 'Review access control policies — apply the principle of least privilege.');
     }
-    // Governance (Q5, Q8)
-    if (wrongIndices.some(i => [4, 7].includes(i))) {
+    if (wrongTopics.has('Incident Response')) {
+      tips.push(lang === 'bg'
+        ? 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.'
+        : 'Create and test an incident response plan within 30 days.');
+    }
+    if (wrongTopics.has('Network Security')) {
+      tips.push(lang === 'bg'
+        ? 'Прегледайте мрежовата сегментация и отдалечения достъп — намалете повърхността за атака.'
+        : 'Review network segmentation and remote access — reduce the attack surface.');
+    }
+    if (wrongTopics.has('Endpoint Security')) {
+      tips.push(lang === 'bg'
+        ? 'Внедрете EDR и application whitelisting за по-добра защита на крайните точки.'
+        : 'Deploy EDR and application whitelisting for better endpoint protection.');
+    }
+    if (wrongTopics.has('Patch Management')) {
+      tips.push(lang === 'bg'
+        ? 'Автоматизирайте управлението на пачове — непачнатите системи са основна входна точка.'
+        : 'Automate patch management — unpatched systems are a primary entry point.');
+    }
+  } else {
+    // executives
+    if (wrongTopics.has('BEC')) {
+      tips.push(lang === 'bg'
+        ? 'Въведете работни процеси за двойно одобрение на плащания — пропуснахте въпросите за BEC измама.'
+        : 'Introduce dual approval workflows for payments — you missed BEC fraud questions.');
+    }
+    if (wrongTopics.has('Governance')) {
       tips.push(lang === 'bg'
         ? 'Установете кибер управление на ниво борд — регулаторното съответствие е критично.'
         : 'Establish board-level cyber governance — regulatory compliance is critical.');
     }
-    // Incident Response (Q3, Q7, Q10)
-    if (wrongIndices.some(i => [2, 6, 9].includes(i))) {
+    if (wrongTopics.has('Incident Response')) {
       tips.push(lang === 'bg'
         ? 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.'
         : 'Create and test an incident response plan within 30 days.');
+    }
+    if (wrongTopics.has('Ransomware')) {
+      tips.push(lang === 'bg'
+        ? 'Осигурете тествани резервни копия и план за непрекъснатост на бизнеса.'
+        : 'Ensure tested backups and a business continuity plan are in place.');
+    }
+    if (wrongTopics.has('Social Engineering')) {
+      tips.push(lang === 'bg'
+        ? 'Инвестирайте в обучение на служителите — човешката грешка е основна входна точка.'
+        : 'Invest in employee training — human error is the primary entry point.');
+    }
+    if (wrongTopics.has('Third-Party Risk')) {
+      tips.push(lang === 'bg'
+        ? 'Прегледайте риска от трети страни — доставчиците могат да станат пътища за атака.'
+        : 'Review third-party risk — suppliers can become attack paths.');
+    }
+    if (wrongTopics.has('Compliance')) {
+      tips.push(lang === 'bg'
+        ? 'Осигурете готовност за GDPR и NIS2 — неспазването носи сериозни санкции.'
+        : 'Ensure GDPR and NIS2 readiness — non-compliance carries serious penalties.');
+    }
+    if (wrongTopics.has('Monitoring')) {
+      tips.push(lang === 'bg'
+        ? 'Изисквайте редовни доклади за време за откриване и реакция при инциденти.'
+        : 'Demand regular reporting on detection and response times.');
     }
   }
 
@@ -798,44 +411,57 @@ interface QuizProps {
 
 const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   const [selectedCategory, setSelectedCategory] = useState<QuizCategory | null>(null);
+  const [sessionQuestions, setSessionQuestions] = useState<PoolQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
+  const [wrongQuestions, setWrongQuestions] = useState<PoolQuestion[]>([]);
   const [quizComplete, setQuizComplete] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(new Array(10).fill(false));
 
-  const quizData = getQuizData(lang);
+  const categoryMeta = getCategoryMeta(lang);
   const categories: QuizCategory[] = ['individuals', 'it-admins', 'executives'];
 
-  const resetQuiz = () => {
+  const resetQuiz = (cat?: QuizCategory) => {
+    const category = cat || selectedCategory;
+    if (category) {
+      setSessionQuestions(pickRandomQuestions(pools[category]));
+    }
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
     setScore(0);
-    setWrongAnswers([]);
+    setWrongQuestions([]);
     setQuizComplete(false);
     setAnsweredQuestions(new Array(10).fill(false));
   };
 
   const handleCategorySelect = (cat: QuizCategory) => {
     setSelectedCategory(cat);
-    resetQuiz();
+    const picked = pickRandomQuestions(pools[cat]);
+    setSessionQuestions(picked);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setScore(0);
+    setWrongQuestions([]);
+    setQuizComplete(false);
+    setAnsweredQuestions(new Array(10).fill(false));
   };
 
   const handleAnswerSelect = (index: number) => {
-    if (showExplanation) return; // Already answered
+    if (showExplanation) return;
     setSelectedAnswer(index);
     setShowExplanation(true);
 
-    const currentQuiz = quizData[selectedCategory!];
-    const isCorrect = index === currentQuiz.questions[currentQuestion].correct;
+    const q = sessionQuestions[currentQuestion];
+    const isCorrect = index === q.correct;
 
     if (isCorrect) {
       setScore(prev => prev + 1);
     } else {
-      setWrongAnswers(prev => [...prev, currentQuestion]);
+      setWrongQuestions(prev => [...prev, q]);
     }
 
     const newAnswered = [...answeredQuestions];
@@ -844,8 +470,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   };
 
   const handleNextQuestion = () => {
-    const currentQuiz = quizData[selectedCategory!];
-    if (currentQuestion < currentQuiz.questions.length - 1) {
+    if (currentQuestion < sessionQuestions.length - 1) {
       setCurrentQuestion(prev => prev + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
@@ -856,7 +481,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
 
   const optionLabels = ['A', 'B', 'C', 'D'];
 
-  // Category selection screen
+  // ─── Category selection screen ─────────────────────────────────
   if (!selectedCategory) {
     return (
       <div className="min-h-screen pt-8 pb-24 px-6">
@@ -889,15 +514,15 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
             </h2>
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
               {lang === 'bg'
-                ? 'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове.'
-                : 'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk.'}
+                ? 'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове. Всяка сесия е различна — 10 произволни въпроса от 30.'
+                : 'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk. Each session is different — 10 random questions from a pool of 30.'}
             </p>
           </div>
 
           {/* Category cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {categories.map((cat) => {
-              const data = quizData[cat];
+              const meta = categoryMeta[cat];
               const catColors = cat === 'individuals'
                 ? { border: 'border-blue-500/30', hover: 'hover:border-blue-400', bg: 'bg-blue-600', text: 'text-blue-400', glow: 'hover:shadow-blue-900/30' }
                 : cat === 'it-admins'
@@ -911,14 +536,14 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
                   className={`relative p-8 rounded-xl border ${catColors.border} ${catColors.hover} bg-white/5 hover:bg-white/10 transition-all group text-left hover:shadow-2xl ${catColors.glow} hover:-translate-y-1 duration-300`}
                 >
                   <div className={`w-14 h-14 rounded-lg ${catColors.bg} text-white flex items-center justify-center mb-6 shadow-lg`}>
-                    {data.icon}
+                    {meta.icon}
                   </div>
                   <h3 className={`text-2xl font-bold text-white mb-2 group-hover:${catColors.text} transition-colors`}>
-                    {data.title}
+                    {meta.title}
                   </h3>
-                  <p className="text-slate-400 text-sm mb-6">{data.subtitle}</p>
+                  <p className="text-slate-400 text-sm mb-6">{meta.subtitle}</p>
                   <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <span>10 {lang === 'bg' ? 'въпроса' : 'questions'}</span>
+                    <span>10 {lang === 'bg' ? 'от 30 въпроса' : 'of 30 questions'}</span>
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -932,12 +557,10 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
     );
   }
 
-  const currentQuiz = quizData[selectedCategory];
-
-  // Quiz complete screen
+  // ─── Results screen ────────────────────────────────────────────
   if (quizComplete) {
     const recommendation = getRecommendations(lang, selectedCategory, score);
-    const topicTips = getTopicRecommendations(lang, selectedCategory, wrongAnswers);
+    const topicTips = getTopicRecommendations(lang, selectedCategory, wrongQuestions);
     const percentage = Math.round((score / 10) * 100);
 
     return (
@@ -945,7 +568,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
         <div className="max-w-3xl mx-auto">
           {/* Back button */}
           <button
-            onClick={() => { setSelectedCategory(null); resetQuiz(); }}
+            onClick={() => { setSelectedCategory(null); }}
             className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 group"
           >
             <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1033,10 +656,10 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              {lang === 'bg' ? 'Опитай отново' : 'Try Again'}
+              {lang === 'bg' ? 'Опитай с нови въпроси' : 'Try With New Questions'}
             </button>
             <button
-              onClick={() => { setSelectedCategory(null); resetQuiz(); }}
+              onClick={() => { setSelectedCategory(null); }}
               className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all border border-white/10"
             >
               {lang === 'bg' ? 'Избери друг тест' : 'Choose Another Quiz'}
@@ -1047,8 +670,12 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
     );
   }
 
-  // Active quiz screen
-  const question = currentQuiz.questions[currentQuestion];
+  // ─── Active quiz screen ────────────────────────────────────────
+  const question = sessionQuestions[currentQuestion];
+  if (!question) return null;
+
+  const langData = lang === 'bg' ? question.bg : question.en;
+  const topicLabel = lang === 'bg' ? question.topicBg : question.topic;
   const isCorrect = selectedAnswer === question.correct;
 
   return (
@@ -1057,7 +684,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
         {/* Top bar */}
         <div className="flex items-center justify-between mb-8">
           <button
-            onClick={() => { setSelectedCategory(null); resetQuiz(); }}
+            onClick={() => { setSelectedCategory(null); }}
             className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
           >
             <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1069,7 +696,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
           </button>
           <div className="flex items-center gap-3">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-              {currentQuiz.title}
+              {categoryMeta[selectedCategory].title}
             </span>
             <div className="px-3 py-1 bg-slate-800 rounded text-emerald-400 text-sm font-bold mono">
               {score}/{currentQuestion + (showExplanation ? 1 : 0)}
@@ -1110,6 +737,16 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
           </div>
         </div>
 
+        {/* Topic tag */}
+        <div className="mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-900/30 border border-blue-500/20 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+            {topicLabel}
+          </span>
+        </div>
+
         {/* Question */}
         <div className="mb-8">
           <div className="flex items-start gap-4">
@@ -1117,14 +754,14 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               {currentQuestion + 1}
             </div>
             <h3 className="text-xl md:text-2xl font-bold text-white leading-tight pt-1">
-              {question.question}
+              {langData.question}
             </h3>
           </div>
         </div>
 
         {/* Options */}
         <div className="space-y-3 mb-8">
-          {question.options.map((option, i) => {
+          {langData.options.map((option, i) => {
             let optionStyle = 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-emerald-500/30 cursor-pointer';
 
             if (showExplanation) {
@@ -1197,7 +834,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-3">
                 {lang === 'bg' ? 'Обяснение' : 'Explanation'}
               </h4>
-              <p className="text-slate-300 leading-relaxed">{question.explanation}</p>
+              <p className="text-slate-300 leading-relaxed">{langData.explanation}</p>
             </div>
 
             {/* Next button */}
