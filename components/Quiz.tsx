@@ -17,10 +17,12 @@ interface Recommendation {
 }
 
 // Category metadata (title, subtitle, icon) — no questions here
+const t = (lang: Lang, bg: string, en: string, de: string) => lang === 'bg' ? bg : lang === 'en' ? en : de;
+
 const getCategoryMeta = (lang: Lang) => ({
   'individuals': {
-    title: lang === 'bg' ? 'Физически лица' : 'Individuals',
-    subtitle: lang === 'bg' ? 'Ежедневни потребители' : 'Everyday Users',
+    title: t(lang, 'Физически лица', 'Individuals', 'Privatpersonen'),
+    subtitle: t(lang, 'Ежедневни потребители', 'Everyday Users', 'Alltaegliche Nutzer'),
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -28,8 +30,8 @@ const getCategoryMeta = (lang: Lang) => ({
     )
   },
   'it-admins': {
-    title: lang === 'bg' ? 'IT Администратори' : 'IT Administrators',
-    subtitle: lang === 'bg' ? 'Технически персонал' : 'Technical Staff',
+    title: t(lang, 'IT Администратори', 'IT Administrators', 'IT-Administratoren'),
+    subtitle: t(lang, 'Технически персонал', 'Technical Staff', 'Technisches Personal'),
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -38,8 +40,8 @@ const getCategoryMeta = (lang: Lang) => ({
     )
   },
   'executives': {
-    title: lang === 'bg' ? 'Ръководители' : 'Executives',
-    subtitle: lang === 'bg' ? 'CEO, CFO, бизнес лидери' : 'CEO, CFO, Business Leaders',
+    title: t(lang, 'Ръководители', 'Executives', 'Fuehrungskraefte'),
+    subtitle: t(lang, 'CEO, CFO, бизнес лидери', 'CEO, CFO, Business Leaders', 'CEO, CFO, Geschaeftsfuehrer'),
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -61,18 +63,14 @@ const pickRandomQuestions = (pool: PoolQuestion[], count: number = 10): PoolQues
   return shuffled.slice(0, count);
 };
 
-// Score-based recommendations (unchanged from original)
+// Score-based recommendations
 const getRecommendations = (lang: Lang, category: QuizCategory, score: number): Recommendation => {
   if (category === 'individuals') {
     if (score <= 3) {
       return {
-        tier: lang === 'bg' ? 'Висок риск' : 'High Risk',
-        tierColor: 'text-red-400',
-        tierBg: 'bg-red-950/40',
-        tierBorder: 'border-red-600/50',
-        message: lang === 'bg'
-          ? 'В момента сте уязвими към най-честите измами.'
-          : 'You are currently vulnerable to the most common scams.',
+        tier: t(lang, 'Висок риск', 'High Risk', 'Hohes Risiko'),
+        tierColor: 'text-red-400', tierBg: 'bg-red-950/40', tierBorder: 'border-red-600/50',
+        message: t(lang, 'В момента сте уязвими към най-честите измами.', 'You are currently vulnerable to the most common scams.', 'Sie sind derzeit anfaellig fuer die haeufigsten Betrugsmaschen.'),
         actions: lang === 'bg' ? [
           'Активирайте многофакторно удостоверяване (MFA) за имейл, банкиране и социални акаунти.',
           'Започнете да използвате мениджър на пароли (Bitwarden, 1Password, NordPass, Password за iOS, или вградените от Google/Samsung).',
@@ -80,196 +78,211 @@ const getRecommendations = (lang: Lang, category: QuizCategory, score: number): 
           'Научете се да разпознавате езика на измамите, базиран на спешност („акаунтът заключен", „последно предупреждение").',
           'Използвайте VPN за допълнителна сигурност (препоръка: NordVPN или WireGuard).',
           'Инсталирайте платена антивирусна програма (препоръка: Bitdefender, Kaspersky или Malwarebytes).'
-        ] : [
+        ] : lang === 'en' ? [
           'Enable Multi-Factor Authentication (MFA) on email, banking, and social accounts.',
           'Start using a password manager (Bitwarden, 1Password, NordPass, Password for iOS, or built-in Google/Samsung managers).',
           'Never click login links in emails or SMS — always open apps manually.',
           'Learn to identify urgency-based scam language ("account locked", "final warning").',
           'Use a VPN for additional security (recommended: NordVPN or WireGuard).',
           'Install a paid antivirus program (recommended: Bitdefender, Kaspersky, or Malwarebytes).'
+        ] : [
+          'Aktivieren Sie Multi-Faktor-Authentifizierung (MFA) fuer E-Mail, Banking und soziale Konten.',
+          'Beginnen Sie mit einem Passwort-Manager (Bitwarden, 1Password, NordPass oder integrierte Google/Samsung-Manager).',
+          'Klicken Sie nie auf Login-Links in E-Mails oder SMS — oeffnen Sie Apps immer manuell.',
+          'Lernen Sie, dringlichkeitsbasierte Betrugssprache zu erkennen („Konto gesperrt", „letzte Warnung").',
+          'Verwenden Sie ein VPN fuer zusaetzliche Sicherheit (empfohlen: NordVPN oder WireGuard).',
+          'Installieren Sie ein kostenpflichtiges Antivirenprogramm (empfohlen: Bitdefender, Kaspersky oder Malwarebytes).'
         ],
-        priority: lang === 'bg' ? 'Предотвратяване на превземане на акаунт.' : 'Prevent account takeover.'
+        priority: t(lang, 'Предотвратяване на превземане на акаунт.', 'Prevent account takeover.', 'Kontoubernahme verhindern.')
       };
     } else if (score <= 7) {
       return {
-        tier: lang === 'bg' ? 'Умерен риск' : 'Moderate Risk',
-        tierColor: 'text-yellow-400',
-        tierBg: 'bg-yellow-950/40',
-        tierBorder: 'border-yellow-600/50',
-        message: lang === 'bg'
-          ? 'Имате добра осведоменост, но остават пропуски.'
-          : 'You have good awareness, but gaps remain.',
+        tier: t(lang, 'Умерен риск', 'Moderate Risk', 'Mittleres Risiko'),
+        tierColor: 'text-yellow-400', tierBg: 'bg-yellow-950/40', tierBorder: 'border-yellow-600/50',
+        message: t(lang, 'Имате добра осведоменост, но остават пропуски.', 'You have good awareness, but gaps remain.', 'Sie haben ein gutes Bewusstsein, aber es bestehen noch Luecken.'),
         actions: lang === 'bg' ? [
           'Заменете повтарящите се пароли с уникални.',
           'Прегледайте настройките за поверителност/сигурност в социалните платформи.',
           'Избягвайте обществен Wi-Fi за чувствителни влизания, освен ако не използвате VPN (препоръка: NordVPN или WireGuard).',
           'Практикувайте проверка на подозрителни съобщения, като се обадите директно на подателя.',
           'Обмислете платена антивирусна програма за по-добра защита (Bitdefender, Kaspersky или Malwarebytes).'
-        ] : [
+        ] : lang === 'en' ? [
           'Replace reused passwords with unique ones.',
           'Review privacy/security settings on social platforms.',
           'Avoid public Wi-Fi for sensitive logins unless using a VPN (recommended: NordVPN or WireGuard).',
           'Practice verifying suspicious messages by calling the sender directly.',
           'Consider a paid antivirus for better protection (Bitdefender, Kaspersky, or Malwarebytes).'
+        ] : [
+          'Ersetzen Sie wiederverwendete Passwoerter durch einzigartige.',
+          'Ueberpruefen Sie die Datenschutz-/Sicherheitseinstellungen in sozialen Plattformen.',
+          'Vermeiden Sie oeffentliches WLAN fuer sensible Anmeldungen, es sei denn, Sie verwenden ein VPN (empfohlen: NordVPN oder WireGuard).',
+          'Ueberpruefen Sie verdaechtige Nachrichten, indem Sie den Absender direkt anrufen.',
+          'Erwaegen Sie ein kostenpflichtiges Antivirenprogramm fuer besseren Schutz (Bitdefender, Kaspersky oder Malwarebytes).'
         ],
-        priority: lang === 'bg' ? 'Намаляване вероятността за успех на фишинг.' : 'Reduce phishing success probability.'
+        priority: t(lang, 'Намаляване вероятността за успех на фишинг.', 'Reduce phishing success probability.', 'Phishing-Erfolgswahrscheinlichkeit reduzieren.')
       };
     } else {
       return {
-        tier: lang === 'bg' ? 'Силна осведоменост' : 'Strong Awareness',
-        tierColor: 'text-emerald-400',
-        tierBg: 'bg-emerald-950/40',
-        tierBorder: 'border-emerald-600/50',
-        message: lang === 'bg'
-          ? 'Значително по-трудно е да бъдете измамени от средностатистическия потребител.'
-          : 'You are significantly harder to scam than average.',
+        tier: t(lang, 'Силна осведоменост', 'Strong Awareness', 'Starkes Bewusstsein'),
+        tierColor: 'text-emerald-400', tierBg: 'bg-emerald-950/40', tierBorder: 'border-emerald-600/50',
+        message: t(lang, 'Значително по-трудно е да бъдете измамени от средностатистическия потребител.', 'You are significantly harder to scam than average.', 'Sie sind deutlich schwerer zu betruegen als der Durchschnitt.'),
         actions: lang === 'bg' ? [
           'Използвайте хардуерни ключове за сигурност (FIDO2) за критични акаунти.',
           'Наблюдавайте за компрометирани идентификационни данни (HaveIBeenPwned).',
           'Обучете членовете на семейството — атакуващите се насочват към най-слабото звено.'
-        ] : [
+        ] : lang === 'en' ? [
           'Use hardware security keys (FIDO2) for critical accounts.',
           'Monitor for breached credentials (HaveIBeenPwned).',
           'Educate family members — attackers target the weakest link.'
+        ] : [
+          'Verwenden Sie Hardware-Sicherheitsschluessel (FIDO2) fuer kritische Konten.',
+          'Ueberwachen Sie kompromittierte Zugangsdaten (HaveIBeenPwned).',
+          'Schulen Sie Familienmitglieder — Angreifer zielen auf das schwaechste Glied.'
         ],
-        priority: lang === 'bg' ? 'Поддържане на устойчивост и помощ на другите.' : 'Maintain resilience and help others.'
+        priority: t(lang, 'Поддържане на устойчивост и помощ на другите.', 'Maintain resilience and help others.', 'Widerstandsfaehigkeit bewahren und anderen helfen.')
       };
     }
   } else if (category === 'it-admins') {
     if (score <= 3) {
       return {
-        tier: lang === 'bg' ? 'Критично излагане' : 'Critical Exposure',
-        tierColor: 'text-red-400',
-        tierBg: 'bg-red-950/40',
-        tierBorder: 'border-red-600/50',
-        message: lang === 'bg'
-          ? 'Вашата среда вероятно е готова за компрометиране.'
-          : 'Your environment is likely compromise-ready.',
+        tier: t(lang, 'Критично излагане', 'Critical Exposure', 'Kritische Gefaehrdung'),
+        tierColor: 'text-red-400', tierBg: 'bg-red-950/40', tierBorder: 'border-red-600/50',
+        message: t(lang, 'Вашата среда вероятно е готова за компрометиране.', 'Your environment is likely compromise-ready.', 'Ihre Umgebung ist wahrscheinlich kompromittierungsbereit.'),
         actions: lang === 'bg' ? [
           'Наложете MFA за целия отдалечен достъп и администраторски акаунти.',
           'Премахнете директното излагане на RDP/VPN портали към интернет.',
           'Пачнете всички системи с известни експлоатирани уязвимости.',
           'Проверете дали резервните копия са офлайн/неизменяеми и тествани.'
-        ] : [
+        ] : lang === 'en' ? [
           'Enforce MFA across all remote access and admin accounts.',
           'Remove direct exposure of RDP/VPN portals to the internet.',
           'Patch all systems with known exploited vulnerabilities.',
           'Verify backups are offline/immutable and tested.'
+        ] : [
+          'Erzwingen Sie MFA fuer alle Fernzugriffe und Admin-Konten.',
+          'Entfernen Sie die direkte Exposition von RDP/VPN-Portalen zum Internet.',
+          'Patchen Sie alle Systeme mit bekannten ausgenutzten Schwachstellen.',
+          'Stellen Sie sicher, dass Backups offline/unveraenderlich und getestet sind.'
         ],
-        priority: lang === 'bg' ? 'Спиране на входните пътища за рансъмуер.' : 'Stop ransomware entry paths.'
+        priority: t(lang, 'Спиране на входните пътища за рансъмуер.', 'Stop ransomware entry paths.', 'Ransomware-Einstiegspfade stoppen.')
       };
     } else if (score <= 7) {
       return {
-        tier: lang === 'bg' ? 'Нуждае се от укрепване' : 'Needs Hardening',
-        tierColor: 'text-yellow-400',
-        tierBg: 'bg-yellow-950/40',
-        tierBorder: 'border-yellow-600/50',
-        message: lang === 'bg'
-          ? 'Разбирате основите, но може да ви липсва оперативна зрялост.'
-          : 'You understand the basics but may lack operational maturity.',
+        tier: t(lang, 'Нуждае се от укрепване', 'Needs Hardening', 'Haertung erforderlich'),
+        tierColor: 'text-yellow-400', tierBg: 'bg-yellow-950/40', tierBorder: 'border-yellow-600/50',
+        message: t(lang, 'Разбирате основите, но може да ви липсва оперативна зрялост.', 'You understand the basics but may lack operational maturity.', 'Sie verstehen die Grundlagen, aber es fehlt moeglicherweise an operativer Reife.'),
         actions: lang === 'bg' ? [
           'Приложете минимални привилегии и премахнете ненужните администраторски права.',
           'Централизирайте логовете в SIEM/XDR за откриване.',
           'Внедрете устойчиво на фишинг удостоверяване (FIDO2).',
           'Проведете настолни упражнения за рансъмуер инциденти.'
-        ] : [
+        ] : lang === 'en' ? [
           'Apply least privilege and remove unnecessary admin rights.',
           'Centralize logs into SIEM/XDR for detection.',
           'Deploy phishing-resistant authentication (FIDO2).',
           'Run tabletop ransomware incident exercises.'
+        ] : [
+          'Wenden Sie das Prinzip der minimalen Rechte an und entfernen Sie unnoetige Adminrechte.',
+          'Zentralisieren Sie Logs in SIEM/XDR zur Erkennung.',
+          'Implementieren Sie phishing-resistente Authentifizierung (FIDO2).',
+          'Fuehren Sie Planspiel-Uebungen fuer Ransomware-Vorfaelle durch.'
         ],
-        priority: lang === 'bg' ? 'Подобряване скоростта на откриване и ограничаване.' : 'Improve detection + containment speed.'
+        priority: t(lang, 'Подобряване скоростта на откриване и ограничаване.', 'Improve detection + containment speed.', 'Erkennungs- und Eindaemmungsgeschwindigkeit verbessern.')
       };
     } else {
       return {
-        tier: lang === 'bg' ? 'Зряла сигурностна позиция' : 'Mature Security Posture',
-        tierColor: 'text-emerald-400',
-        tierBg: 'bg-emerald-950/40',
-        tierBorder: 'border-emerald-600/50',
-        message: lang === 'bg'
-          ? 'Работите над базовото ниво.'
-          : 'You\'re operating above baseline.',
+        tier: t(lang, 'Зряла сигурностна позиция', 'Mature Security Posture', 'Reife Sicherheitslage'),
+        tierColor: 'text-emerald-400', tierBg: 'bg-emerald-950/40', tierBorder: 'border-emerald-600/50',
+        message: t(lang, 'Работите над базовото ниво.', 'You\'re operating above baseline.', 'Sie arbeiten ueber dem Basisniveau.'),
         actions: lang === 'bg' ? [
           'Имплементирайте Zero Trust сегментация.',
           'Добавете неизменяеми резервни копия + тримесечни учения за възстановяване.',
           'Наблюдавайте индикатори за странично движение (Kerberos аномалии, достъп до DC).',
           'Редовно тествайте защитите с red-team симулации.'
-        ] : [
+        ] : lang === 'en' ? [
           'Implement Zero Trust segmentation.',
           'Add immutable backups + quarterly recovery drills.',
           'Monitor lateral movement indicators (Kerberos anomalies, DC access).',
           'Regularly test defenses with red-team simulations.'
+        ] : [
+          'Implementieren Sie Zero-Trust-Segmentierung.',
+          'Fuegen Sie unveraenderliche Backups + vierteljaehrliche Wiederherstellungsuebungen hinzu.',
+          'Ueberwachen Sie Lateral-Movement-Indikatoren (Kerberos-Anomalien, DC-Zugriff).',
+          'Testen Sie regelmaessig die Verteidigung mit Red-Team-Simulationen.'
         ],
-        priority: lang === 'bg' ? 'Устойчивост срещу софистицирани актьори.' : 'Resilience against sophisticated actors.'
+        priority: t(lang, 'Устойчивост срещу софистицирани актьори.', 'Resilience against sophisticated actors.', 'Widerstandsfaehigkeit gegen anspruchsvolle Angreifer.')
       };
     }
   } else {
     // executives
     if (score <= 3) {
       return {
-        tier: lang === 'bg' ? 'Бизнес-ниво риск' : 'Business-Level Risk',
-        tierColor: 'text-red-400',
-        tierBg: 'bg-red-950/40',
-        tierBorder: 'border-red-600/50',
-        message: lang === 'bg'
-          ? 'Киберсигурността е в момента основна слабост в управлението.'
-          : 'Cybersecurity is currently a major governance weakness.',
+        tier: t(lang, 'Бизнес-ниво риск', 'Business-Level Risk', 'Unternehmensrisiko'),
+        tierColor: 'text-red-400', tierBg: 'bg-red-950/40', tierBorder: 'border-red-600/50',
+        message: t(lang, 'Киберсигурността е в момента основна слабост в управлението.', 'Cybersecurity is currently a major governance weakness.', 'Cybersicherheit ist derzeit eine grosse Schwachstelle in der Unternehmensfuehrung.'),
         actions: lang === 'bg' ? [
           'Третирайте кибер като корпоративен риск, не като „IT проблем".',
           'Създайте контроли за верификация на плащания срещу CEO измама/BEC.',
           'Изискайте план за реакция при инциденти с определени отговорници за решения.',
           'Осигурете готовност за съответствие (GDPR, NIS2).'
-        ] : [
+        ] : lang === 'en' ? [
           'Treat cyber as enterprise risk, not "an IT problem."',
           'Establish payment verification controls against CEO fraud/BEC.',
           'Require an incident response plan with assigned decision owners.',
           'Ensure compliance readiness (GDPR, NIS2).'
+        ] : [
+          'Behandeln Sie Cyber als Unternehmensrisiko, nicht als „IT-Problem".',
+          'Richten Sie Zahlungsverifizierungskontrollen gegen CEO-Betrug/BEC ein.',
+          'Fordern Sie einen Incident-Response-Plan mit benannten Entscheidungstraegern.',
+          'Stellen Sie die Compliance-Bereitschaft sicher (DSGVO, NIS2).'
         ],
-        priority: lang === 'bg' ? 'Предотвратяване на финансова и правна катастрофа.' : 'Prevent financial and legal catastrophe.'
+        priority: t(lang, 'Предотвратяване на финансова и правна катастрофа.', 'Prevent financial and legal catastrophe.', 'Finanzielle und rechtliche Katastrophen verhindern.')
       };
     } else if (score <= 7) {
       return {
-        tier: lang === 'bg' ? 'Подобрява се, но с пропуски' : 'Improving, But Gaps Exist',
-        tierColor: 'text-yellow-400',
-        tierBg: 'bg-yellow-950/40',
-        tierBorder: 'border-yellow-600/50',
-        message: lang === 'bg'
-          ? 'Разпознавате заплахите, но може да ви липсва структуриран надзор.'
-          : 'You recognize threats but may lack structured oversight.',
+        tier: t(lang, 'Подобрява се, но с пропуски', 'Improving, But Gaps Exist', 'Verbesserung, aber Luecken bestehen'),
+        tierColor: 'text-yellow-400', tierBg: 'bg-yellow-950/40', tierBorder: 'border-yellow-600/50',
+        message: t(lang, 'Разпознавате заплахите, но може да ви липсва структуриран надзор.', 'You recognize threats but may lack structured oversight.', 'Sie erkennen Bedrohungen, aber es fehlt moeglicherweise an strukturierter Aufsicht.'),
         actions: lang === 'bg' ? [
           'Изисквайте измерими метрики: време за откриване, време за реакция, време за възстановяване от резервно копие.',
           'Одобрете задължително обучение по сигурност.',
           'Валидирайте покритието на кибер застраховката и изключенията.',
           'Провеждайте тримесечни упражнения за симулация на пробив.'
-        ] : [
+        ] : lang === 'en' ? [
           'Demand measurable metrics: detection time, response time, backup recovery time.',
           'Approve mandatory security awareness training.',
           'Validate cyber insurance coverage and exclusions.',
           'Conduct quarterly breach simulation exercises.'
+        ] : [
+          'Fordern Sie messbare Kennzahlen: Erkennungszeit, Reaktionszeit, Backup-Wiederherstellungszeit.',
+          'Genehmigen Sie verpflichtende Sicherheitsschulungen.',
+          'Validieren Sie den Cyber-Versicherungsschutz und Ausschluesse.',
+          'Fuehren Sie vierteljaehrliche Breach-Simulationsuebungen durch.'
         ],
-        priority: lang === 'bg' ? 'Управление и готовност.' : 'Governance and preparedness.'
+        priority: t(lang, 'Управление и готовност.', 'Governance and preparedness.', 'Governance und Bereitschaft.')
       };
     } else {
       return {
-        tier: lang === 'bg' ? 'Силна лидерска осведоменост' : 'Strong Leadership Awareness',
-        tierColor: 'text-emerald-400',
-        tierBg: 'bg-emerald-950/40',
-        tierBorder: 'border-emerald-600/50',
-        message: lang === 'bg'
-          ? 'Вашето мислене е в съответствие с най-добрите практики.'
-          : 'Your mindset aligns with best practice.',
+        tier: t(lang, 'Силна лидерска осведоменост', 'Strong Leadership Awareness', 'Starkes Fuehrungsbewusstsein'),
+        tierColor: 'text-emerald-400', tierBg: 'bg-emerald-950/40', tierBorder: 'border-emerald-600/50',
+        message: t(lang, 'Вашето мислене е в съответствие с най-добрите практики.', 'Your mindset aligns with best practice.', 'Ihre Denkweise entspricht den Best Practices.'),
         actions: lang === 'bg' ? [
           'Интегрирайте киберсигурността в отчетността на борда.',
           'Финансирайте проактивна устойчивост: SOC мониторинг, тестове за проникване.',
           'Изисквайте управление на риска от трети страни за доставчици.',
           'Изградете култура, в която верификацията е нормална, а не обидна.'
-        ] : [
+        ] : lang === 'en' ? [
           'Integrate cybersecurity into board-level reporting.',
           'Fund proactive resilience: SOC monitoring, penetration testing.',
           'Require third-party risk management for suppliers.',
           'Build a culture where verification is normal, not rude.'
+        ] : [
+          'Integrieren Sie Cybersicherheit in die Berichterstattung auf Vorstandsebene.',
+          'Finanzieren Sie proaktive Resilienz: SOC-Monitoring, Penetrationstests.',
+          'Fordern Sie Drittanbieter-Risikomanagement fuer Lieferanten.',
+          'Bauen Sie eine Kultur auf, in der Verifizierung normal und nicht unhöflich ist.'
         ],
-        priority: lang === 'bg' ? 'Дългосрочно оперативно доверие и непрекъснатост.' : 'Long-term operational trust and continuity.'
+        priority: t(lang, 'Дългосрочно оперативно доверие и непрекъснатост.', 'Long-term operational trust and continuity.', 'Langfristiges operatives Vertrauen und Kontinuitaet.')
       };
     }
   }
@@ -281,124 +294,31 @@ const getTopicRecommendations = (lang: Lang, category: QuizCategory, wrongQuesti
   const tips: string[] = [];
 
   if (category === 'individuals') {
-    if (wrongTopics.has('Phishing')) {
-      tips.push(lang === 'bg'
-        ? 'Допълнете обучението си по фишинг симулации — попаднахте в капана на въпросите за фишинг.'
-        : 'Complete phishing simulation training — you fell for phishing-related questions.');
-    }
-    if (wrongTopics.has('Password Security')) {
-      tips.push(lang === 'bg'
-        ? 'Внедрете мениджър на пароли + MFA — паролите ви имат нужда от подобрение.'
-        : 'Deploy a password manager + MFA — your password practices need improvement.');
-    }
-    if (wrongTopics.has('MFA')) {
-      tips.push(lang === 'bg'
-        ? 'Активирайте MFA за всички критични акаунти — пропуснахте въпросите за многофакторно удостоверяване.'
-        : 'Enable MFA on all critical accounts — you missed multi-factor authentication questions.');
-    }
-    if (wrongTopics.has('Social Engineering')) {
-      tips.push(lang === 'bg'
-        ? 'Научете се да разпознавате тактиките за социално инженерство — спешност, страх и имитация.'
-        : 'Learn to recognize social engineering tactics — urgency, fear, and impersonation.');
-    }
-    if (wrongTopics.has('Network Security')) {
-      tips.push(lang === 'bg'
-        ? 'Прегледайте защитата на мрежата — помислете за VPN и проверка на HTTPS.'
-        : 'Review your network protection — consider VPN and HTTPS verification.');
-    }
-    if (wrongTopics.has('Identity Protection')) {
-      tips.push(lang === 'bg'
-        ? 'Ограничете споделянето на лична информация онлайн — атакуващите я използват за кражба на самоличност.'
-        : 'Limit sharing personal information online — attackers use it for identity theft.');
-    }
-    if (wrongTopics.has('Incident Response')) {
-      tips.push(lang === 'bg'
-        ? 'Подгответе план за действие при компрометиран акаунт — знайте какво да направите веднага.'
-        : 'Prepare an action plan for compromised accounts — know what to do immediately.');
-    }
+    if (wrongTopics.has('Phishing')) tips.push(t(lang, 'Допълнете обучението си по фишинг симулации — попаднахте в капана на въпросите за фишинг.', 'Complete phishing simulation training — you fell for phishing-related questions.', 'Absolvieren Sie ein Phishing-Simulationstraining — Sie sind auf Phishing-Fragen hereingefallen.'));
+    if (wrongTopics.has('Password Security')) tips.push(t(lang, 'Внедрете мениджър на пароли + MFA — паролите ви имат нужда от подобрение.', 'Deploy a password manager + MFA — your password practices need improvement.', 'Nutzen Sie einen Passwort-Manager + MFA — Ihre Passwort-Praktiken muessen verbessert werden.'));
+    if (wrongTopics.has('MFA')) tips.push(t(lang, 'Активирайте MFA за всички критични акаунти — пропуснахте въпросите за многофакторно удостоверяване.', 'Enable MFA on all critical accounts — you missed multi-factor authentication questions.', 'Aktivieren Sie MFA fuer alle kritischen Konten — Sie haben MFA-Fragen falsch beantwortet.'));
+    if (wrongTopics.has('Social Engineering')) tips.push(t(lang, 'Научете се да разпознавате тактиките за социално инженерство — спешност, страх и имитация.', 'Learn to recognize social engineering tactics — urgency, fear, and impersonation.', 'Lernen Sie, Social-Engineering-Taktiken zu erkennen — Dringlichkeit, Angst und Identitaetsbetrug.'));
+    if (wrongTopics.has('Network Security')) tips.push(t(lang, 'Прегледайте защитата на мрежата — помислете за VPN и проверка на HTTPS.', 'Review your network protection — consider VPN and HTTPS verification.', 'Ueberpruefen Sie Ihren Netzwerkschutz — erwaegen Sie VPN und HTTPS-Verifizierung.'));
+    if (wrongTopics.has('Identity Protection')) tips.push(t(lang, 'Ограничете споделянето на лична информация онлайн — атакуващите я използват за кражба на самоличност.', 'Limit sharing personal information online — attackers use it for identity theft.', 'Beschraenken Sie das Teilen persoenlicher Informationen online — Angreifer nutzen sie fuer Identitaetsdiebstahl.'));
+    if (wrongTopics.has('Incident Response')) tips.push(t(lang, 'Подгответе план за действие при компрометиран акаунт — знайте какво да направите веднага.', 'Prepare an action plan for compromised accounts — know what to do immediately.', 'Bereiten Sie einen Aktionsplan fuer kompromittierte Konten vor — wissen Sie, was sofort zu tun ist.'));
   } else if (category === 'it-admins') {
-    if (wrongTopics.has('Ransomware')) {
-      tips.push(lang === 'bg'
-        ? 'Тествайте възстановяването от резервни копия в рамките на 30 дни — пропуснахте въпросите за рансъмуер.'
-        : 'Test backup recovery within 30 days — you missed ransomware-related questions.');
-    }
-    if (wrongTopics.has('MFA')) {
-      tips.push(lang === 'bg'
-        ? 'Приоритизирайте внедряването на FIDO2/MFA — удостоверяването ви има слабости.'
-        : 'Prioritize FIDO2/MFA deployment — your authentication has weaknesses.');
-    }
-    if (wrongTopics.has('Monitoring')) {
-      tips.push(lang === 'bg'
-        ? 'Подобрете възможностите за мониторинг и откриване — внедрете SIEM/XDR решение.'
-        : 'Improve monitoring and detection capabilities — deploy a SIEM/XDR solution.');
-    }
-    if (wrongTopics.has('Access Control')) {
-      tips.push(lang === 'bg'
-        ? 'Прегледайте политиките за контрол на достъпа — приложете принципа на минималните привилегии.'
-        : 'Review access control policies — apply the principle of least privilege.');
-    }
-    if (wrongTopics.has('Incident Response')) {
-      tips.push(lang === 'bg'
-        ? 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.'
-        : 'Create and test an incident response plan within 30 days.');
-    }
-    if (wrongTopics.has('Network Security')) {
-      tips.push(lang === 'bg'
-        ? 'Прегледайте мрежовата сегментация и отдалечения достъп — намалете повърхността за атака.'
-        : 'Review network segmentation and remote access — reduce the attack surface.');
-    }
-    if (wrongTopics.has('Endpoint Security')) {
-      tips.push(lang === 'bg'
-        ? 'Внедрете EDR и application whitelisting за по-добра защита на крайните точки.'
-        : 'Deploy EDR and application whitelisting for better endpoint protection.');
-    }
-    if (wrongTopics.has('Patch Management')) {
-      tips.push(lang === 'bg'
-        ? 'Автоматизирайте управлението на пачове — непачнатите системи са основна входна точка.'
-        : 'Automate patch management — unpatched systems are a primary entry point.');
-    }
+    if (wrongTopics.has('Ransomware')) tips.push(t(lang, 'Тествайте възстановяването от резервни копия в рамките на 30 дни — пропуснахте въпросите за рансъмуер.', 'Test backup recovery within 30 days — you missed ransomware-related questions.', 'Testen Sie die Backup-Wiederherstellung innerhalb von 30 Tagen — Sie haben Ransomware-Fragen verpasst.'));
+    if (wrongTopics.has('MFA')) tips.push(t(lang, 'Приоритизирайте внедряването на FIDO2/MFA — удостоверяването ви има слабости.', 'Prioritize FIDO2/MFA deployment — your authentication has weaknesses.', 'Priorisieren Sie die FIDO2/MFA-Bereitstellung — Ihre Authentifizierung hat Schwachstellen.'));
+    if (wrongTopics.has('Monitoring')) tips.push(t(lang, 'Подобрете възможностите за мониторинг и откриване — внедрете SIEM/XDR решение.', 'Improve monitoring and detection capabilities — deploy a SIEM/XDR solution.', 'Verbessern Sie die Ueberwachungs- und Erkennungsfaehigkeiten — implementieren Sie eine SIEM/XDR-Loesung.'));
+    if (wrongTopics.has('Access Control')) tips.push(t(lang, 'Прегледайте политиките за контрол на достъпа — приложете принципа на минималните привилегии.', 'Review access control policies — apply the principle of least privilege.', 'Ueberpruefen Sie die Zugangskontrollrichtlinien — wenden Sie das Prinzip der minimalen Rechte an.'));
+    if (wrongTopics.has('Incident Response')) tips.push(t(lang, 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.', 'Create and test an incident response plan within 30 days.', 'Erstellen und testen Sie einen Incident-Response-Plan innerhalb von 30 Tagen.'));
+    if (wrongTopics.has('Network Security')) tips.push(t(lang, 'Прегледайте мрежовата сегментация и отдалечения достъп — намалете повърхността за атака.', 'Review network segmentation and remote access — reduce the attack surface.', 'Ueberpruefen Sie die Netzwerksegmentierung und den Fernzugriff — reduzieren Sie die Angriffsflaeche.'));
+    if (wrongTopics.has('Endpoint Security')) tips.push(t(lang, 'Внедрете EDR и application whitelisting за по-добра защита на крайните точки.', 'Deploy EDR and application whitelisting for better endpoint protection.', 'Implementieren Sie EDR und Application-Whitelisting fuer besseren Endpunktschutz.'));
+    if (wrongTopics.has('Patch Management')) tips.push(t(lang, 'Автоматизирайте управлението на пачове — непачнатите системи са основна входна точка.', 'Automate patch management — unpatched systems are a primary entry point.', 'Automatisieren Sie das Patch-Management — ungepatchte Systeme sind ein Haupteinstiegspunkt.'));
   } else {
-    // executives
-    if (wrongTopics.has('BEC')) {
-      tips.push(lang === 'bg'
-        ? 'Въведете работни процеси за двойно одобрение на плащания — пропуснахте въпросите за BEC измама.'
-        : 'Introduce dual approval workflows for payments — you missed BEC fraud questions.');
-    }
-    if (wrongTopics.has('Governance')) {
-      tips.push(lang === 'bg'
-        ? 'Установете кибер управление на ниво борд — регулаторното съответствие е критично.'
-        : 'Establish board-level cyber governance — regulatory compliance is critical.');
-    }
-    if (wrongTopics.has('Incident Response')) {
-      tips.push(lang === 'bg'
-        ? 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.'
-        : 'Create and test an incident response plan within 30 days.');
-    }
-    if (wrongTopics.has('Ransomware')) {
-      tips.push(lang === 'bg'
-        ? 'Осигурете тествани резервни копия и план за непрекъснатост на бизнеса.'
-        : 'Ensure tested backups and a business continuity plan are in place.');
-    }
-    if (wrongTopics.has('Social Engineering')) {
-      tips.push(lang === 'bg'
-        ? 'Инвестирайте в обучение на служителите — човешката грешка е основна входна точка.'
-        : 'Invest in employee training — human error is the primary entry point.');
-    }
-    if (wrongTopics.has('Third-Party Risk')) {
-      tips.push(lang === 'bg'
-        ? 'Прегледайте риска от трети страни — доставчиците могат да станат пътища за атака.'
-        : 'Review third-party risk — suppliers can become attack paths.');
-    }
-    if (wrongTopics.has('Compliance')) {
-      tips.push(lang === 'bg'
-        ? 'Осигурете готовност за GDPR и NIS2 — неспазването носи сериозни санкции.'
-        : 'Ensure GDPR and NIS2 readiness — non-compliance carries serious penalties.');
-    }
-    if (wrongTopics.has('Monitoring')) {
-      tips.push(lang === 'bg'
-        ? 'Изисквайте редовни доклади за време за откриване и реакция при инциденти.'
-        : 'Demand regular reporting on detection and response times.');
-    }
+    if (wrongTopics.has('BEC')) tips.push(t(lang, 'Въведете работни процеси за двойно одобрение на плащания — пропуснахте въпросите за BEC измама.', 'Introduce dual approval workflows for payments — you missed BEC fraud questions.', 'Fuehren Sie duale Genehmigungsworkflows fuer Zahlungen ein — Sie haben BEC-Betrug-Fragen verpasst.'));
+    if (wrongTopics.has('Governance')) tips.push(t(lang, 'Установете кибер управление на ниво борд — регулаторното съответствие е критично.', 'Establish board-level cyber governance — regulatory compliance is critical.', 'Etablieren Sie Cyber-Governance auf Vorstandsebene — regulatorische Compliance ist entscheidend.'));
+    if (wrongTopics.has('Incident Response')) tips.push(t(lang, 'Създайте и тествайте план за реакция при инциденти в рамките на 30 дни.', 'Create and test an incident response plan within 30 days.', 'Erstellen und testen Sie einen Incident-Response-Plan innerhalb von 30 Tagen.'));
+    if (wrongTopics.has('Ransomware')) tips.push(t(lang, 'Осигурете тествани резервни копия и план за непрекъснатост на бизнеса.', 'Ensure tested backups and a business continuity plan are in place.', 'Stellen Sie getestete Backups und einen Business-Continuity-Plan sicher.'));
+    if (wrongTopics.has('Social Engineering')) tips.push(t(lang, 'Инвестирайте в обучение на служителите — човешката грешка е основна входна точка.', 'Invest in employee training — human error is the primary entry point.', 'Investieren Sie in Mitarbeiterschulungen — menschliche Fehler sind der Haupteinstiegspunkt.'));
+    if (wrongTopics.has('Third-Party Risk')) tips.push(t(lang, 'Прегледайте риска от трети страни — доставчиците могат да станат пътища за атака.', 'Review third-party risk — suppliers can become attack paths.', 'Ueberpruefen Sie das Drittanbieterrisiko — Lieferanten koennen zu Angriffspfaden werden.'));
+    if (wrongTopics.has('Compliance')) tips.push(t(lang, 'Осигурете готовност за GDPR и NIS2 — неспазването носи сериозни санкции.', 'Ensure GDPR and NIS2 readiness — non-compliance carries serious penalties.', 'Stellen Sie DSGVO- und NIS2-Bereitschaft sicher — Nichteinhaltung zieht schwere Strafen nach sich.'));
+    if (wrongTopics.has('Monitoring')) tips.push(t(lang, 'Изисквайте редовни доклади за време за откриване и реакция при инциденти.', 'Demand regular reporting on detection and response times.', 'Fordern Sie regelmaessige Berichte ueber Erkennungs- und Reaktionszeiten.'));
   }
 
   return tips;
@@ -495,7 +415,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <span className="text-sm font-bold uppercase tracking-wider">
-              {lang === 'bg' ? 'Обратно към началото' : 'Back to Home'}
+              {t(lang, 'Обратно към началото', 'Back to Home', 'Zurueck zur Startseite')}
             </span>
           </button>
 
@@ -505,17 +425,18 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <div className="w-12 h-0.5 bg-emerald-600/30 rounded-full hidden sm:block"></div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-900/40 backdrop-blur-md border border-emerald-500/30 rounded-full text-emerald-400 text-[11px] font-bold uppercase tracking-[0.2em]">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                {lang === 'bg' ? 'ТЕСТ ЗА КИБЕРСИГУРНОСТ' : 'CYBERSECURITY QUIZ'}
+                {t(lang, 'ТЕСТ ЗА КИБЕРСИГУРНОСТ', 'CYBERSECURITY QUIZ', 'CYBERSICHERHEITS-QUIZ')}
               </div>
               <div className="w-12 h-0.5 bg-emerald-600/30 rounded-full hidden sm:block"></div>
             </div>
             <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.05] max-w-4xl mx-auto mb-6">
-              {lang === 'bg' ? 'Тествайте знанията си' : 'Test Your Knowledge'}
+              {t(lang, 'Тествайте знанията си', 'Test Your Knowledge', 'Testen Sie Ihr Wissen')}
             </h2>
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-              {lang === 'bg'
-                ? 'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове. Всяка сесия е различна — 10 произволни въпроса от 30.'
-                : 'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk. Each session is different — 10 random questions from a pool of 30.'}
+              {t(lang,
+                'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове. Всяка сесия е различна — 10 произволни въпроса от 30.',
+                'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk. Each session is different — 10 random questions from a pool of 30.',
+                'Praktische Entscheidungsfragen zu realen Betrugsmaschen, Phishing, Ransomware und Geschaeftsrisiken. Jede Sitzung ist anders — 10 zufaellige Fragen aus einem Pool von 30.')}
             </p>
           </div>
 
@@ -543,7 +464,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
                   </h3>
                   <p className="text-slate-400 text-sm mb-6">{meta.subtitle}</p>
                   <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <span>10 {lang === 'bg' ? 'от 30 въпроса' : 'of 30 questions'}</span>
+                    <span>10 {t(lang, 'от 30 въпроса', 'of 30 questions', 'von 30 Fragen')}</span>
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -575,7 +496,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <span className="text-sm font-bold uppercase tracking-wider">
-              {lang === 'bg' ? 'Обратно към тестовете' : 'Back to Quizzes'}
+              {t(lang, 'Обратно към тестовете', 'Back to Quizzes', 'Zurueck zu den Quizzes')}
             </span>
           </button>
 
@@ -587,7 +508,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
             <h2 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-4">
               {score}<span className="text-slate-600">/10</span>
             </h2>
-            <p className="text-xl text-slate-400">{percentage}% {lang === 'bg' ? 'правилни' : 'correct'}</p>
+            <p className="text-xl text-slate-400">{percentage}% {t(lang, 'правилни', 'correct', 'richtig')}</p>
 
             {/* Score bar */}
             <div className="max-w-md mx-auto mt-8">
@@ -606,7 +527,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
           <div className={`p-8 rounded-xl ${recommendation.tierBg} border ${recommendation.tierBorder} mb-8`}>
             <p className="text-lg text-white font-medium mb-6">{recommendation.message}</p>
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">
-              {lang === 'bg' ? 'Препоръчани действия:' : 'Recommended Actions:'}
+              {t(lang, 'Препоръчани действия:', 'Recommended Actions:', 'Empfohlene Massnahmen:')}
             </h4>
             <div className="space-y-3">
               {recommendation.actions.map((action, i) => (
@@ -622,7 +543,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
             </div>
             <div className="mt-6 pt-6 border-t border-white/10">
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-                {lang === 'bg' ? 'Приоритет:' : 'Priority:'}
+                {t(lang, 'Приоритет:', 'Priority:', 'Prioritaet:')}
               </span>
               <p className={`${recommendation.tierColor} font-bold mt-1`}>{recommendation.priority}</p>
             </div>
@@ -632,7 +553,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
           {topicTips.length > 0 && (
             <div className="p-8 rounded-xl bg-slate-900/60 border border-slate-800 mb-8">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-4">
-                {lang === 'bg' ? 'Допълнителни препоръки по теми:' : 'Topic-Based Recommendations:'}
+                {t(lang, 'Допълнителни препоръки по теми:', 'Topic-Based Recommendations:', 'Themenbasierte Empfehlungen:')}
               </h4>
               <div className="space-y-3">
                 {topicTips.map((tip, i) => (
@@ -656,13 +577,13 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              {lang === 'bg' ? 'Опитай с нови въпроси' : 'Try With New Questions'}
+              {t(lang, 'Опитай с нови въпроси', 'Try With New Questions', 'Mit neuen Fragen versuchen')}
             </button>
             <button
               onClick={() => { setSelectedCategory(null); }}
               className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all border border-white/10"
             >
-              {lang === 'bg' ? 'Избери друг тест' : 'Choose Another Quiz'}
+              {t(lang, 'Избери друг тест', 'Choose Another Quiz', 'Anderes Quiz waehlen')}
             </button>
           </div>
         </div>
@@ -674,8 +595,8 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   const question = sessionQuestions[currentQuestion];
   if (!question) return null;
 
-  const langData = lang === 'bg' ? question.bg : question.en;
-  const topicLabel = lang === 'bg' ? question.topicBg : question.topic;
+  const langData = lang === 'bg' ? question.bg : lang === 'en' ? question.en : (question.de || question.en);
+  const topicLabel = lang === 'bg' ? question.topicBg : lang === 'de' ? (question.topicDe || question.topic) : question.topic;
   const isCorrect = selectedAnswer === question.correct;
 
   return (
@@ -691,7 +612,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <span className="text-sm font-bold uppercase tracking-wider hidden sm:inline">
-              {lang === 'bg' ? 'Изход' : 'Exit'}
+              {t(lang, 'Изход', 'Exit', 'Beenden')}
             </span>
           </button>
           <div className="flex items-center gap-3">
@@ -708,7 +629,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
         <div className="mb-10">
           <div className="flex justify-between items-center mb-2">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-              {lang === 'bg' ? 'Напредък' : 'Progress'}
+              {t(lang, 'Напредък', 'Progress', 'Fortschritt')}
             </span>
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
               {currentQuestion + 1}/10
@@ -824,15 +745,15 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               <span className="text-2xl">{isCorrect ? '\u2705' : '\u274C'}</span>
               <span className={`font-bold text-lg ${isCorrect ? 'text-emerald-300' : 'text-red-300'}`}>
                 {isCorrect
-                  ? (lang === 'bg' ? 'Правилно!' : 'Correct!')
-                  : (lang === 'bg' ? 'Грешно!' : 'Incorrect!')}
+                  ? t(lang, 'Правилно!', 'Correct!', 'Richtig!')
+                  : t(lang, 'Грешно!', 'Incorrect!', 'Falsch!')}
               </span>
             </div>
 
             {/* Explanation */}
             <div className="p-6 rounded-lg bg-slate-900/60 border border-slate-800">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-3">
-                {lang === 'bg' ? 'Обяснение' : 'Explanation'}
+                {t(lang, 'Обяснение', 'Explanation', 'Erklaerung')}
               </h4>
               <p className="text-slate-300 leading-relaxed">{langData.explanation}</p>
             </div>
@@ -843,8 +764,8 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
               className="w-full px-6 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all flex items-center justify-center gap-2"
             >
               {currentQuestion < 9
-                ? (lang === 'bg' ? 'Следващ въпрос' : 'Next Question')
-                : (lang === 'bg' ? 'Виж резултатите' : 'See Results')}
+                ? t(lang, 'Следващ въпрос', 'Next Question', 'Naechste Frage')
+                : t(lang, 'Виж резултатите', 'See Results', 'Ergebnisse anzeigen')}
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

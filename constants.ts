@@ -335,5 +335,145 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       noResults: "No results found",
       entries: "Detected"
     }
+  },
+  de: {
+    header: {
+      title: "Stopp den Betrug",
+      subtitle: "Offizieller Sicherheitsleitfaden zum Schutz von Anlegern",
+      ctaList: "Schwarze Liste",
+      ctaRegisters: "Lizenz pruefen"
+    },
+    hero: {
+      title: "Schuetzen Sie Ihre Ersparnisse vor Anlagebetrug",
+      description: "Ihr erster Schutzschild gegen Finanzbetrug. Lernen Sie, betruegerische Plattformen zu erkennen und sicher zu investieren."
+    },
+    alert: {
+      title: "Kritische Warnung",
+      description: "Dieses Portal verwendet offizielle Daten der Direktion Cyberkriminalitaet des bulgarischen Innenministeriums. Wenn Sie aufgefordert werden, ueber eine Seite auf der schwarzen Liste zu investieren, brechen Sie den Kontakt sofort ab."
+    },
+    warningSigns: {
+      title: "Warnzeichen",
+      items: [
+        { title: "Versprechen schneller Gewinne", desc: "Garantiert hohe Renditen ohne Risiko sind unmoeglich. Betrueger zeigen gefaelschte Diagramme mit 200-300% Wachstum." },
+        { title: "Typosquatting (falsche Domains)", desc: "Bekannte Marken werden imitiert: microsoft.com wird zu mircosoft.com; 'rn' wird statt 'm' verwendet, um zu taeuschen." },
+        { title: "Entscheidungsdruck", desc: "Betrueger draengen immer zur Eile – 'das Angebot laeuft jetzt ab'. Sie wollen nicht, dass Sie Zeit haben, die Lizenz zu pruefen." },
+        { title: "Gefaelschte Empfehlungen", desc: "KI-generierte oder gestohlene Fotos von Prominenten (Elon Musk) in Werbung. Diese Personen haben keine Verbindung zu diesen Plattformen." },
+        { title: "Unuebliche Zahlungsmethoden", desc: "Nur Krypto-Zahlungen oder Bankueberweisungen auf Privatkonten statt auf Firmenkonten von lizenzierten Brokern." },
+        { title: "Fehlende Transparenz", desc: "Keine physische Adresse, keine Lizenzinformationen oder Registrierungsdaten. Wenn die Informationen verborgen sind, ist es ein Warnsignal." }
+      ],
+      campaignLink: {
+        text: "FSC-Kampagne: Den lizenzierten Anlagevermittler erkennen",
+        url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
+        linkText: "Zur Kampagne"
+      }
+    },
+    schemes: {
+      title: "Haeufigste Betrugsmaschen",
+      items: [
+        { type: 'crypto', title: "Gefaelschter Kryptohandel", desc: "Plattformen mit gefaelschten Diagrammen und massivem Wachstum. Ihr Geld wird nie tatsaechlich investiert." },
+        { type: 'stock', title: "Gefaelschte Boerse", desc: "Angebote fuer Apple-/Tesla-Aktien. Spaeter verlangen sie 'Freischaltungsgebuehren' fuer Auszahlungen." },
+        { type: 'recovery', title: "Rueckgewinnungsbetrug", desc: "Jemand ruft an und verspricht, Ihr verlorenes Geld zurueckzuholen – gegen eine Gebuehr. Es ist ein zweiter Betrug am selben Opfer." }
+      ]
+    },
+    technical: {
+      title: "Technische Warnhinweise",
+      broker: {
+        title: "In der Kommunikation:",
+        items: [
+          "Verwendung von Gmail/Outlook statt professioneller E-Mail",
+          "Fernzugriff ueber AnyDesk oder TeamViewer wird verlangt",
+          "Sprechen Ihre Sprache, rufen aber aus dem Ausland an",
+          "Verwendung von Stock-Fotos als Profilbilder"
+        ]
+      },
+      platform: {
+        title: "Auf der Plattform:",
+        items: [
+          "Guthaben waechst am Wochenende (wenn die Maerkte geschlossen sind)",
+          "Diagramme fallen nie – nur Gewinn wird angezeigt",
+          "Forderung von '27% Steuer' bei Auszahlungsversuchen",
+          "Unrealistische Renditen wie 10% pro Tag"
+        ]
+      }
+    },
+    protection: {
+      title: "So schuetzen Sie sich",
+      steps: [
+        { title: "Datenschutz", desc: "Geben Sie niemals persoenliche Daten, Ausweiskopien oder Bankdaten auf unverifizierten Seiten an, die Preise oder Gewinne versprechen." },
+        { title: "Zwei-Faktor-Authentifizierung (2FA)", desc: "Aktivieren Sie immer 2FA fuer alle Ihre Bank- und Finanzanwendungen. Dies ist die staerkste Barriere gegen Hacker." },
+        { title: "Software-Sicherheit", desc: "Verwenden Sie aktuelle Antivirensoftware und vermeiden Sie unbedingt Raubkopien, die versteckte Bedrohungen enthalten koennen." },
+        { title: "Passwoerter & Manager", desc: "Verwenden Sie einzigartige, komplexe Passwoerter fuer jedes Konto. Ein Passwort-Manager ist der sicherste Weg, sie zu speichern." },
+        { title: "Vertrauenswuerdige Marken", desc: "Investieren Sie nur ueber bekannte, lizenzierte und international anerkannte Finanzinstitute. Pruefen Sie deren Geschichte." },
+        { title: "Werbung ignorieren", desc: "Vertrauen Sie keinen Anzeigen in sozialen Medien oder Google-Ergebnissen fuer Begriffe wie 'Krypto kaufen' oder 'schnelle Investition'." }
+      ]
+    },
+    registers: {
+      title: "Offizielle Register",
+      sections: [
+        {
+          region: "🇧🇬 Bulgarien",
+          items: [
+            { name: "KFN – Anlagevermittler", desc: "Vollstaendiges Register der lizenzierten Anlagevermittler in Bulgarien.", link: "https://www.fsc.bg/investitsionna-deynost/spisatsi-podnadzorni-litsa/investitsionni-posrednitsi/", linkText: "Zur KFN" },
+            { name: "BNB – Finanzinstitute", desc: "Register gemaess Art. 3a des Kreditinstitutsgesetzes.", link: "https://www.bnb.bg/RegistersAndServices/RSFIRegister/index.htm", linkText: "Zur BNB" },
+            { name: "Handelsregister (TR)", desc: "Ueberpruefung der Registrierung bulgarischer juristischer Personen.", link: "https://portal.registryagency.bg/CR/reports/VerificationPersonOrg", linkText: "Zum Handelsregister" }
+          ]
+        },
+        {
+          region: "🇪🇺 Europaeische Union",
+          items: [
+            { name: "ESMA – MiFID-II-Datenbank", desc: "EU-weite Datenbank lizenzierter Finanzvermittler nach MiFID II.", link: "https://registers.esma.europa.eu/publication/searchRegister?core=esma_registers_upreg", linkText: "Zur ESMA" },
+            { name: "ESMA – MiCA-Uebergangsregister", desc: "Register der Krypto-Dienstleister (CASP) gemaess MiCA-Verordnung.", link: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica#InterimMiCARegister", linkText: "Zu MiCA" }
+          ]
+        },
+        {
+          region: "🌍 Internationale Regulierungsbehoerden",
+          items: [
+            { name: "FINRA BrokerCheck (USA)", desc: "Ueberpruefung von Brokern und Anlageberatern in den USA.", link: "https://brokercheck.finra.org/", linkText: "Zur FINRA" },
+            { name: "FCA Register (GB)", desc: "Register lizenzierter Finanzunternehmen in Grossbritannien.", link: "https://register.fca.org.uk/s/", linkText: "Zur FCA" },
+            { name: "FINMA Register (CH)", desc: "Register lizenzierter Finanzinstitute in der Schweiz.", link: "https://www.finma.ch/en/finma-public/authorised-institutions-individuals-and-products/", linkText: "Zur FINMA" },
+            { name: "SEC IAPD (USA)", desc: "SEC-Datenbank fuer Anlagevermittler und -berater.", link: "https://adviserinfo.sec.gov/", linkText: "Zur SEC" },
+            { name: "IOSCO I-SCAN", desc: "Internationales Netzwerk fuer Warnsignale bei Finanzbetrug.", link: "https://www.iosco.org/i-scan/", linkText: "Zu IOSCO" }
+          ]
+        }
+      ]
+    },
+    faq: {
+      title: "Haeufig gestellte Fragen",
+      items: [
+        { q: "Wenn eine Seite nicht auf der Liste steht, ist sie dann sicher?", a: "NEIN! Die Liste ist nicht vollstaendig. Taeglich erscheinen neue Seiten. Pruefen Sie immer zuerst die Lizenz." },
+        { q: "Was bedeuten die eckigen Klammern [ ]?", a: "Sie werden nicht mehr fuer die Indexierung verwendet, wurden aber urspruenglich von der Polizei hinzugefuegt, um versehentliche Klicks zu verhindern." }
+      ]
+    },
+    domains: {
+      title: "Schwarze Liste der Domains",
+      notice: "Diese Domains wurden offiziell vom GDBOP-MdI als betruegerisch identifiziert.",
+      placeholder: "Domain zur Pruefung eingeben...",
+      showing: "Angezeigt",
+      of: "von"
+    },
+    victim: {
+      title: "Bereits betroffen? Handeln Sie sofort!",
+      steps: [
+        "Beenden Sie jegliche Kommunikation mit den Betruegern",
+        "Leisten Sie keine weiteren Zahlungen",
+        "Informieren Sie sofort Ihre Bank",
+        "Erstatten Sie Anzeige bei der naechsten Polizeidienststelle oder dem GDBOP",
+        "Bewahren Sie alle Chats, E-Mails und Bankunterlagen auf"
+      ],
+      emergencyNote: "WARTEN SIE NICHT. JEDE STUNDE ZAEHLT BEI DER RUECKGEWINNUNG IHRER GELDER."
+    },
+    footer: {
+      legal: "Rechtliche Hinweise",
+      disclaimer: "Nur zu Informationszwecken. Daten aus offiziellen Quellen des GDBOP-MdI. Wir uebernehmen keine Verantwortung fuer individuelle Finanzentscheidungen."
+    },
+    phishing: {
+      title: "Phishing-Detektor",
+      description: "Automatisch erkannte Phishing-Domains, die auf bulgarische Nutzer abzielen. Die Daten werden in Echtzeit von unserem Scanner aktualisiert.",
+      placeholder: "Phishing-Domain suchen...",
+      detectionDate: "Erkannt am",
+      source: "Quelle: github.com/Cyb3r-Pony",
+      noResults: "Keine Ergebnisse gefunden",
+      entries: "Erkannt"
+    }
   }
 };

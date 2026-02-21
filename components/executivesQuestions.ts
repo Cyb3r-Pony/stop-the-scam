@@ -5,6 +5,7 @@ export const executivesPool: PoolQuestion[] = [
     id: "exec-1",
     topic: "Social Engineering",
     topicBg: "Социално инженерство",
+    topicDe: "Social Engineering",
     en: {
       question: "Biggest cybersecurity risk for executives?",
       options: ["Hackers guessing passwords", "Human error and phishing", "Too many firewalls", "Antivirus updates"],
@@ -15,12 +16,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Хакери, отгатващи пароли", "Човешка грешка + фишинг", "Твърде много защитни стени", "Актуализации на антивирусната"],
       explanation: "Повечето пробиви започват със социално инженерство, а не с brute force."
     },
+    de: {
+      question: "Groesstes Cybersicherheitsrisiko fuer Fuehrungskraefte?",
+      options: ["Hacker erraten Passwoerter", "Menschliches Versagen und Phishing", "Zu viele Firewalls", "Antivirus-Updates"],
+      explanation: "Die meisten Sicherheitsverletzungen beginnen mit Social Engineering, nicht mit Brute Force."
+    },
     correct: 1
   },
   {
     id: "exec-2",
     topic: "BEC",
     topicBg: "Имейл измама (BEC)",
+    topicDe: "E-Mail-Betrug (BEC)",
     en: {
       question: "Business Email Compromise (BEC) usually targets:",
       options: ["Gamers", "Finance teams and wire transfers", "Students", "Developers only"],
@@ -31,12 +38,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Геймъри", "Финансови екипи и банкови преводи", "Студенти", "Само софтуерни разработчици"],
       explanation: "CFO и финансовите отдели са основни цели."
     },
+    de: {
+      question: "Business Email Compromise (BEC) zielt normalerweise auf:",
+      options: ["Gamer", "Finanzteams und Ueberweisungen", "Studenten", "Nur Entwickler"],
+      explanation: "BEC-Angriffe zielen auf Zahlungsumleitungen und Rechnungsbetrug ab."
+    },
     correct: 1
   },
   {
     id: "exec-3",
     topic: "Ransomware",
     topicBg: "Рансъмуер",
+    topicDe: "Ransomware",
     en: {
       question: "If ransomware hits, what matters most?",
       options: ["Paying fast", "Staying silent", "Business continuity and recovery plan", "Ignoring it"],
@@ -47,12 +60,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Бързо плащане", "Публично мълчание", "План за непрекъснатост на бизнеса и възстановяване", "Игнориране"],
       explanation: "Подготвеността определя оцеляването повече от преговорите."
     },
+    de: {
+      question: "Wenn Ransomware zuschlaegt, was ist am wichtigsten?",
+      options: ["Schnell bezahlen", "Stillschweigen bewahren", "Geschaeftskontinuitaets- und Wiederherstellungsplan", "Ignorieren"],
+      explanation: "Vorbereitung bestimmt das Ueberleben mehr als Verhandlungen."
+    },
     correct: 2
   },
   {
     id: "exec-4",
     topic: "Incident Response",
     topicBg: "Реакция при инциденти",
+    topicDe: "Reaktion auf Vorfaelle",
     en: {
       question: "What is the costliest impact of a breach?",
       options: ["Replacing laptops", "Downtime, reputational loss, and legal exposure", "More spam emails", "Slower Wi-Fi"],
@@ -63,12 +82,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Подмяна на лаптоп", "Загуба на доверие + престой + правна отговорност", "Повреда на принтер", "Имейл спам"],
       explanation: "Реалните щети са оперативни и репутационни."
     },
+    de: {
+      question: "Was ist die teuerste Auswirkung eines Sicherheitsvorfalls?",
+      options: ["Laptops ersetzen", "Ausfallzeit, Reputationsverlust und rechtliche Haftung", "Mehr Spam-E-Mails", "Langsameres WLAN"],
+      explanation: "Die wahren Kosten sind Betriebsunterbrechung, Vertrauensverlust und regulatorische Strafen."
+    },
     correct: 1
   },
   {
     id: "exec-5",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "Who is responsible for cybersecurity in a company?",
       options: ["Only IT", "Only the CEO", "Leadership, governance, and IT together", "External auditors only"],
@@ -79,12 +104,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Само IT", "Само служителите", "Ръководство + управление + IT заедно", "Външни одитори"],
       explanation: "Киберсигурността е бизнес риск, а не само технически."
     },
+    de: {
+      question: "Wer ist fuer die Cybersicherheit im Unternehmen verantwortlich?",
+      options: ["Nur die IT", "Nur der CEO", "Fuehrung, Governance und IT gemeinsam", "Nur externe Pruefer"],
+      explanation: "Cybersicherheit ist ein Geschaeftsrisiko, das die Verantwortung der Fuehrungsebene erfordert."
+    },
     correct: 2
   },
   {
     id: "exec-6",
     topic: "BEC",
     topicBg: "Имейл измама (BEC)",
+    topicDe: "E-Mail-Betrug (BEC)",
     en: {
       question: "Best defense against CEO fraud is:",
       options: ["Trust urgent emails", "Independent payment verification workflows", "Removing MFA", "Allowing single-person approvals"],
@@ -95,12 +126,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Доверете се на спешните имейли", "Процес за верификация на плащания", "По-бързо банкиране", "Без пароли"],
       explanation: "Одобренията на плащания трябва да изискват независима верификация."
     },
+    de: {
+      question: "Beste Verteidigung gegen CEO-Betrug ist:",
+      options: ["Dringenden E-Mails vertrauen", "Unabhaengige Zahlungsverifizierungsprozesse", "MFA entfernen", "Einzelperson-Genehmigungen zulassen"],
+      explanation: "Ueberweisungen muessen eine unabhaengige Bestaetigung und Vier-Augen-Prinzip erfordern."
+    },
     correct: 1
   },
   {
     id: "exec-7",
     topic: "Compliance",
     topicBg: "Съответствие",
+    topicDe: "Compliance",
     en: {
       question: "Why should executives care about GDPR/NIS2?",
       options: ["They are optional", "Fines and accountability apply at leadership level", "Only IT needs them", "They stop phishing automatically"],
@@ -111,12 +148,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Само за юристи", "Регулаторни глоби + отговорност", "Незадължителни насоки", "Само за банки"],
       explanation: "Неспазването на съответствието може да доведе до отговорност на ниво ръководство."
     },
+    de: {
+      question: "Warum sollten Fuehrungskraefte sich fuer DSGVO/NIS2 interessieren?",
+      options: ["Sie sind optional", "Bussgelder und Haftung gelten auf Fuehrungsebene", "Nur die IT braucht sie", "Sie stoppen Phishing automatisch"],
+      explanation: "Vorschriften schaffen rechtliche und finanzielle Konsequenzen bei mangelhafter Governance."
+    },
     correct: 1
   },
   {
     id: "exec-8",
     topic: "Incident Response",
     topicBg: "Реакция при инциденти",
+    topicDe: "Reaktion auf Vorfaelle",
     en: {
       question: "What is the main purpose of an Incident Response Plan?",
       options: ["Marketing", "Clear roles and actions during a breach", "Reducing taxes", "Hiring more staff"],
@@ -127,12 +170,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Маркетинг", "Ясни стъпки по време на пробив", "Данъчна отчетност", "HR въвеждане"],
       explanation: "Без план, реакцията се превръща в хаос, а забавянията увеличават щетите."
     },
+    de: {
+      question: "Was ist der Hauptzweck eines Incident-Response-Plans?",
+      options: ["Marketing", "Klare Rollen und Massnahmen bei einem Sicherheitsvorfall", "Steuern senken", "Mehr Personal einstellen"],
+      explanation: "Ohne Plan wird die Reaktion chaotisch und Verzoegerungen vergroessern den Schaden."
+    },
     correct: 1
   },
   {
     id: "exec-9",
     topic: "Ransomware",
     topicBg: "Рансъмуер",
+    topicDe: "Ransomware",
     en: {
       question: "What is the biggest mistake during ransomware incidents?",
       options: ["Containing systems", "Assuming paying guarantees recovery", "Activating IR team", "Restoring backups"],
@@ -143,12 +192,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Ограничаване на системи", "Предположение, че плащането гарантира възстановяване", "Активиране на IR екип", "Възстановяване на резервни копия"],
       explanation: "Плащането не гарантира дешифриране или предотвратява бъдещо насочване."
     },
+    de: {
+      question: "Was ist der groesste Fehler bei Ransomware-Vorfaellen?",
+      options: ["Systeme eindaemmen", "Annehmen, dass Zahlung die Wiederherstellung garantiert", "IR-Team aktivieren", "Backups wiederherstellen"],
+      explanation: "Eine Zahlung garantiert weder die Entschluesselung noch verhindert sie kuenftige Angriffe."
+    },
     correct: 1
   },
   {
     id: "exec-10",
     topic: "Third-Party Risk",
     topicBg: "Риск от трети страни",
+    topicDe: "Drittanbieter-Risiko",
     en: {
       question: "What is third-party risk?",
       options: ["Risk from your own employees", "Risk introduced by suppliers and service providers", "Risk from printers only", "Risk from office furniture"],
@@ -159,12 +214,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Риск от вашите служители", "Риск, въведен от доставчици и доставчици на услуги", "Риск само от принтери", "Риск от офис мебели"],
       explanation: "Доставчиците могат да станат пътища за атака във вашата организация."
     },
+    de: {
+      question: "Was ist Drittanbieter-Risiko?",
+      options: ["Risiko durch eigene Mitarbeiter", "Risiko durch Lieferanten und Dienstleister", "Risiko nur durch Drucker", "Risiko durch Bueromoebel"],
+      explanation: "Lieferanten koennen zu Angriffspfaden in Ihre Organisation werden."
+    },
     correct: 1
   },
   {
     id: "exec-11",
     topic: "Monitoring",
     topicBg: "Мониторинг",
+    topicDe: "Ueberwachung",
     en: {
       question: "Which is the best executive-level cyber metric?",
       options: ["Number of IT tickets", "Time to detect and respond (MTTD/MTTR)", "Number of passwords reset", "Logo redesign frequency"],
@@ -175,12 +236,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Брой IT билети", "Време за откриване и отговор (MTTD/MTTR)", "Брой нулирани пароли", "Честота на редизайн на лого"],
       explanation: "Скоростта на откритие и отговор определя въздействието на инцидента."
     },
+    de: {
+      question: "Welche ist die beste Cybersicherheits-Kennzahl auf Fuehrungsebene?",
+      options: ["Anzahl der IT-Tickets", "Zeit bis zur Erkennung und Reaktion (MTTD/MTTR)", "Anzahl zurueckgesetzter Passwoerter", "Haeufigkeit des Logo-Redesigns"],
+      explanation: "Die Geschwindigkeit von Erkennung und Reaktion bestimmt die Auswirkung eines Vorfalls."
+    },
     correct: 1
   },
   {
     id: "exec-12",
     topic: "Social Engineering",
     topicBg: "Социално инженерство",
+    topicDe: "Social Engineering",
     en: {
       question: "Why is security awareness training necessary?",
       options: ["It is just compliance paperwork", "Humans are the most exploited attack surface", "Firewalls make it irrelevant", "It reduces internet costs"],
@@ -191,12 +258,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Това е само документация за съответствие", "Хората са най-експлоатираната повърхност за атака", "Защитните стени го правят неуместно", "Намалява интернет разходите"],
       explanation: "Повечето атаки успяват чрез фишинг и манипулация, не чрез технически brute force."
     },
+    de: {
+      question: "Warum ist Sicherheitsbewusstseinsschulung notwendig?",
+      options: ["Es ist nur Compliance-Papierkram", "Menschen sind die am meisten ausgenutzte Angriffsflaeche", "Firewalls machen sie ueberfluessig", "Sie senkt die Internetkosten"],
+      explanation: "Die meisten Angriffe gelingen durch Phishing und Manipulation, nicht durch technische Brute Force."
+    },
     correct: 1
   },
   {
     id: "exec-13",
     topic: "BEC",
     topicBg: "Имейл измама (BEC)",
+    topicDe: "E-Mail-Betrug (BEC)",
     en: {
       question: "What is Business Email Compromise primarily about?",
       options: ["Website defacement", "Manipulating payments and invoices", "Gaming fraud", "Software bugs"],
@@ -207,12 +280,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Дефигуриране на уебсайтове", "Манипулиране на плащания и фактури", "Мошенничество при игри", "Софтуерни грешки"],
       explanation: "BEC се насочва към финансови процеси, не към инфраструктура."
     },
+    de: {
+      question: "Worum geht es bei Business Email Compromise hauptsaechlich?",
+      options: ["Website-Verunstaltung", "Manipulation von Zahlungen und Rechnungen", "Gaming-Betrug", "Softwarefehler"],
+      explanation: "BEC zielt auf Finanzprozesse ab, nicht auf die Infrastruktur."
+    },
     correct: 1
   },
   {
     id: "exec-14",
     topic: "Ransomware",
     topicBg: "Рансъмуер",
+    topicDe: "Ransomware",
     en: {
       question: "What should executives demand from backups?",
       options: ["That they exist somewhere", "That they are tested and recoverable quickly", "That they are stored on the same server", "That they are never used"],
@@ -223,12 +302,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Да съществуват някъде", "Да бъдат тествани и възстановяеми бързо", "Да бъдат съхранени на един и същи сървър", "Никога да не се използват"],
       explanation: "Нетествани резервни копия често не успяват при реално възстановяване."
     },
+    de: {
+      question: "Was sollten Fuehrungskraefte von Backups verlangen?",
+      options: ["Dass sie irgendwo existieren", "Dass sie getestet und schnell wiederherstellbar sind", "Dass sie auf demselben Server gespeichert sind", "Dass sie nie verwendet werden"],
+      explanation: "Ungetestete Backups versagen oft bei einer echten Wiederherstellung."
+    },
     correct: 1
   },
   {
     id: "exec-15",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "Cybersecurity budget should be viewed as:",
       options: ["Pure cost with no return", "Business resilience investment", "Optional spending", "Only an IT luxury"],
@@ -239,12 +324,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Чист разход без възвращаемост", "Инвестиция в устойчивост на бизнеса", "Факултативни разходи", "Само IT лукс"],
       explanation: "Сигурността намалява престоя, мошенничеството и катастрофалните загуби."
     },
+    de: {
+      question: "Das Cybersicherheitsbudget sollte betrachtet werden als:",
+      options: ["Reine Kosten ohne Rendite", "Investition in Geschaeftsresilienz", "Optionale Ausgaben", "Nur ein IT-Luxus"],
+      explanation: "Sicherheit reduziert Ausfallzeiten, Betrug und katastrophale Verluste."
+    },
     correct: 1
   },
   {
     id: "exec-16",
     topic: "Incident Response",
     topicBg: "Реакция при инциденти",
+    topicDe: "Reaktion auf Vorfaelle",
     en: {
       question: "What is the executive role during a breach?",
       options: ["Ignore IT decisions", "Make governance, legal, and business continuity decisions", "Write malware signatures", "Disable monitoring"],
@@ -255,12 +346,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Игнориране на IT решения", "Вземане на решения за управление, юридически и непрекъснатост на бизнеса", "Писане на малуер сигнатури", "Деактивиране на мониторинг"],
       explanation: "Ръководителите разпределят рисковите решения, комуникации и приоритети на непрекъснатост."
     },
+    de: {
+      question: "Welche Rolle hat die Fuehrungsebene bei einem Sicherheitsvorfall?",
+      options: ["IT-Entscheidungen ignorieren", "Governance-, Rechts- und Geschaeftskontinuitaetsentscheidungen treffen", "Malware-Signaturen schreiben", "Ueberwachung deaktivieren"],
+      explanation: "Fuehrungskraefte verantworten Risikoentscheidungen, Kommunikation und Kontinuitaetsprioritaeten."
+    },
     correct: 1
   },
   {
     id: "exec-17",
     topic: "BEC",
     topicBg: "Имейл измама (BEC)",
+    topicDe: "E-Mail-Betrug (BEC)",
     en: {
       question: "Why is dual approval important for payments?",
       options: ["It slows down finance", "It prevents single-person fraud and BEC scams", "It replaces audits", "It eliminates phishing"],
@@ -271,12 +368,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Забавя финансирането", "Предотвратява мошенничество на един човек и BEC измами", "Замяна на одити", "Елиминира фишинг"],
       explanation: "Двойната контрола блокира спешни измамни преводи."
     },
+    de: {
+      question: "Warum ist die doppelte Genehmigung bei Zahlungen wichtig?",
+      options: ["Es verlangsamt die Finanzen", "Es verhindert Einzelperson-Betrug und BEC-Maschen", "Es ersetzt Audits", "Es eliminiert Phishing"],
+      explanation: "Das Vier-Augen-Prinzip blockiert dringende betruegerische Ueberweisungsanfragen."
+    },
     correct: 1
   },
   {
     id: "exec-18",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "What is the best approach to cyber insurance?",
       options: ["Rely on it instead of security", "Use it as a supplement, not a replacement", "Assume it covers all ransom payments", "Ignore exclusions"],
@@ -287,12 +390,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Разчитайте на нея вместо на сигурност", "Използвайте я като допълнение, не замяна", "Предполагайте, че покрива всички плащания на откуп", "Игнорирайте изключенията"],
       explanation: "Застраховката помага финансово, но не предотвратява инцидентите."
     },
+    de: {
+      question: "Was ist der beste Ansatz fuer eine Cyberversicherung?",
+      options: ["Sich darauf statt auf Sicherheit verlassen", "Als Ergaenzung nutzen, nicht als Ersatz", "Annehmen, dass alle Loesegeld-Zahlungen abgedeckt sind", "Ausschluesse ignorieren"],
+      explanation: "Versicherung hilft finanziell, verhindert aber keine Vorfaelle."
+    },
     correct: 1
   },
   {
     id: "exec-19",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "Why should boards receive cyber risk reporting?",
       options: ["For entertainment", "Cyber risk is enterprise-level business risk", "Only IT needs metrics", "It is unrelated to strategy"],
@@ -303,12 +412,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["За развлечение", "Киберрискът е бизнес риск на ниво предприятие", "Само IT нуждаят се от метрики", "Това е несвързано със стратегията"],
       explanation: "Бордовете трябва да надзирават основните оперативни и финансови рискове."
     },
+    de: {
+      question: "Warum sollten Vorstaende Cyberrisiko-Berichte erhalten?",
+      options: ["Zur Unterhaltung", "Cyberrisiko ist ein Geschaeftsrisiko auf Unternehmensebene", "Nur die IT braucht Kennzahlen", "Es hat nichts mit der Strategie zu tun"],
+      explanation: "Vorstaende muessen wesentliche betriebliche und finanzielle Risiken ueberwachen."
+    },
     correct: 1
   },
   {
     id: "exec-20",
     topic: "Ransomware",
     topicBg: "Рансъмуер",
+    topicDe: "Ransomware",
     en: {
       question: "What is the most common entry point for ransomware?",
       options: ["Employee phishing and stolen credentials", "Office printers", "Coffee machines", "Company logo files"],
@@ -319,12 +434,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Служителски фишинг и крадени идентификационни данни", "Офис принтери", "Кофейни машини", "Файлове на фирмени логота"],
       explanation: "Рансъмуерът обикновено започва с фишинг или експонирани идентификационни данни."
     },
+    de: {
+      question: "Was ist der haeufigste Einstiegspunkt fuer Ransomware?",
+      options: ["Mitarbeiter-Phishing und gestohlene Zugangsdaten", "Buero-Drucker", "Kaffeemaschinen", "Firmenlogo-Dateien"],
+      explanation: "Ransomware beginnt ueblicherweise mit Phishing oder offengelegten Zugangsdaten."
+    },
     correct: 0
   },
   {
     id: "exec-21",
     topic: "Third-Party Risk",
     topicBg: "Риск от трети страни",
+    topicDe: "Drittanbieter-Risiko",
     en: {
       question: "A supplier is breached. Why does it matter to you?",
       options: ["It never affects customers", "Attackers may pivot into your environment through trust relationships", "It improves your security", "It reduces compliance obligations"],
@@ -335,12 +456,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Никога не засяга клиентите", "Атакуващите могат да се преместят във вашата среда чрез доверителни отношения", "Подобрява вашата сигурност", "Намалява задълженията за съответствие"],
       explanation: "Атаките на веригата на доставки са основен вектор на съвременната заплаха."
     },
+    de: {
+      question: "Ein Lieferant wurde gehackt. Warum ist das fuer Sie wichtig?",
+      options: ["Es betrifft nie Kunden", "Angreifer koennen ueber Vertrauensbeziehungen in Ihre Umgebung eindringen", "Es verbessert Ihre Sicherheit", "Es reduziert Compliance-Verpflichtungen"],
+      explanation: "Lieferkettenangriffe sind ein wichtiger moderner Bedrohungsvektor."
+    },
     correct: 1
   },
   {
     id: "exec-22",
     topic: "Incident Response",
     topicBg: "Реакция при инциденти",
+    topicDe: "Reaktion auf Vorfaelle",
     en: {
       question: "What should executives avoid doing during incidents?",
       options: ["Following the IR plan", "Making impulsive decisions without facts", "Engaging legal counsel", "Activating crisis communications"],
@@ -351,12 +478,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Следване на плана за реакция", "Вземане на импулсивни решения без факти", "Ангажиране на юридическо съвещание", "Активиране на кризисна комуникация"],
       explanation: "Лошите решения под налягане често влошават резултатите."
     },
+    de: {
+      question: "Was sollten Fuehrungskraefte bei Vorfaellen vermeiden?",
+      options: ["Dem IR-Plan folgen", "Impulsive Entscheidungen ohne Fakten treffen", "Rechtsberatung einschalten", "Krisenkommunikation aktivieren"],
+      explanation: "Schlechte Entscheidungen unter Druck verschlechtern oft die Ergebnisse."
+    },
     correct: 1
   },
   {
     id: "exec-23",
     topic: "Vulnerability Management",
     topicBg: "Управление на уязвимости",
+    topicDe: "Schwachstellenmanagement",
     en: {
       question: "What is the primary purpose of penetration testing?",
       options: ["Marketing", "Identifying exploitable weaknesses before attackers do", "Replacing audits", "Reducing HR workload"],
@@ -367,12 +500,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Маркетинг", "Идентификуване на експлоатируеми слабости преди атакуващите", "Замяна на одити", "Намаляване на HR работата"],
       explanation: "Тестването разкрива пропуски в контролите и експозицията."
     },
+    de: {
+      question: "Was ist der Hauptzweck von Penetrationstests?",
+      options: ["Marketing", "Ausnutzbare Schwachstellen identifizieren, bevor Angreifer es tun", "Audits ersetzen", "HR-Arbeitslast reduzieren"],
+      explanation: "Tests decken Luecken in Kontrollen und Exposition auf."
+    },
     correct: 1
   },
   {
     id: "exec-24",
     topic: "Access Control",
     topicBg: "Контрол на достъпа",
+    topicDe: "Zugriffskontrolle",
     en: {
       question: "What does 'assume breach' mean?",
       options: ["No security is needed", "Design controls expecting attackers may already be inside", "Ignore compliance", "Stop using email"],
@@ -383,12 +522,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Не е необходима сигурност", "Проектирайте контроли очаквайки атакуващите да бъдат вътре", "Игнорирайте съответствието", "Спрете да използвате имейл"],
       explanation: "Предположението за пробив стимулира по-силно мониторинг и стратегии за ограничаване."
     },
+    de: {
+      question: "Was bedeutet 'Assume Breach' (Sicherheitsvorfall annehmen)?",
+      options: ["Keine Sicherheit noetig", "Kontrollen so entwerfen, als ob Angreifer bereits drin sind", "Compliance ignorieren", "E-Mail nicht mehr verwenden"],
+      explanation: "Die Annahme eines Sicherheitsvorfalls foerdert staerkere Ueberwachung und Eindaemmungsstrategien."
+    },
     correct: 1
   },
   {
     id: "exec-25",
     topic: "Phishing",
     topicBg: "Фишинг",
+    topicDe: "Phishing",
     en: {
       question: "Which is the best approach to executive phishing protection?",
       options: ["Executives are too busy for training", "High-value targets require stronger controls and awareness", "Only interns get phished", "Remove email access"],
@@ -399,12 +544,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Ръководителите са твърде заети за обучение", "Целите с висока стойност изискват по-силни контроли и осведоменост", "Само стажанти попадат в фишинг", "Премахнете достъпа до имейл"],
       explanation: "Ръководителите са основни цели за BEC и копиеломни фишинг атаки."
     },
+    de: {
+      question: "Was ist der beste Ansatz zum Schutz von Fuehrungskraeften vor Phishing?",
+      options: ["Fuehrungskraefte sind zu beschaeftigt fuer Schulungen", "Hochwertige Ziele erfordern staerkere Kontrollen und Bewusstsein", "Nur Praktikanten werden gephisht", "E-Mail-Zugang entfernen"],
+      explanation: "Fuehrungskraefte sind Hauptziele fuer BEC und Spear-Phishing."
+    },
     correct: 1
   },
   {
     id: "exec-26",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "What is a realistic cybersecurity goal?",
       options: ["Perfect security forever", "Risk reduction and resilience", "No policies needed", "Only compliance checklists"],
@@ -415,12 +566,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Перфектна сигурност завинаги", "Намаляване на риска и устойчивост", "Не са необходими политики", "Само контролни списъци за съответствие"],
       explanation: "Сигурността е за управление на риска и осигуряване на непрекъснатост."
     },
+    de: {
+      question: "Was ist ein realistisches Cybersicherheitsziel?",
+      options: ["Perfekte Sicherheit fuer immer", "Risikoreduktion und Resilienz", "Keine Richtlinien noetig", "Nur Compliance-Checklisten"],
+      explanation: "Bei Sicherheit geht es um Risikomanagement und Sicherstellung der Kontinuitaet."
+    },
     correct: 1
   },
   {
     id: "exec-27",
     topic: "Monitoring",
     topicBg: "Мониторинг",
+    topicDe: "Ueberwachung",
     en: {
       question: "Why is logging and monitoring important at leadership level?",
       options: ["It increases printer usage", "You cannot respond to threats you cannot see", "It replaces insurance", "It stops all breaches automatically"],
@@ -431,12 +588,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Увеличава употребата на принтери", "Не можете да отговорите на заплахи, които не виждате", "Замяна на застраховката", "Спира всички пробиви автоматично"],
       explanation: "Видимостта определя скоростта на откритие и ограничаване."
     },
+    de: {
+      question: "Warum sind Protokollierung und Ueberwachung auf Fuehrungsebene wichtig?",
+      options: ["Es erhoeht die Druckernutzung", "Man kann nicht auf Bedrohungen reagieren, die man nicht sieht", "Es ersetzt die Versicherung", "Es stoppt alle Sicherheitsverletzungen automatisch"],
+      explanation: "Sichtbarkeit bestimmt die Erkennungsgeschwindigkeit und Eindaemmung."
+    },
     correct: 1
   },
   {
     id: "exec-28",
     topic: "Social Engineering",
     topicBg: "Социално инженерство",
+    topicDe: "Social Engineering",
     en: {
       question: "What is the most effective cultural security message?",
       options: ["Security is IT's job", "Verification is normal and expected", "Never report mistakes", "Speed matters more than safety"],
@@ -447,12 +610,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Сигурността е работа на IT", "Верификацията е нормална и очаквана", "Никога не докладвайте грешки", "Скоростта е по-важна от безопасността"],
       explanation: "Здравата сигурностна култура стимулира верификацията и докладването."
     },
+    de: {
+      question: "Was ist die wirksamste kulturelle Sicherheitsbotschaft?",
+      options: ["Sicherheit ist die Aufgabe der IT", "Verifizierung ist normal und erwartet", "Fehler nie melden", "Geschwindigkeit ist wichtiger als Sicherheit"],
+      explanation: "Eine gesunde Sicherheitskultur foerdert Verifizierung und Meldung."
+    },
     correct: 1
   },
   {
     id: "exec-29",
     topic: "Incident Response",
     topicBg: "Реакция при инциденти",
+    topicDe: "Reaktion auf Vorfaelle",
     en: {
       question: "Why should incident simulations be run regularly?",
       options: ["They waste time", "They reveal decision gaps before real crises", "They replace backups", "They prevent all phishing"],
@@ -463,12 +632,18 @@ export const executivesPool: PoolQuestion[] = [
       options: ["Пропилат време", "Разкриват пропуски в решенията преди реални кризи", "Замяна на резервни копия", "Предотвратяват всички фишинг"],
       explanation: "Практиката подобрява готовността и намалява хаоса по време на реални инциденти."
     },
+    de: {
+      question: "Warum sollten Vorfallsimulationen regelmaessig durchgefuehrt werden?",
+      options: ["Sie verschwenden Zeit", "Sie decken Entscheidungsluecken vor realen Krisen auf", "Sie ersetzen Backups", "Sie verhindern jedes Phishing"],
+      explanation: "Uebung verbessert die Bereitschaft und reduziert das Chaos bei realen Vorfaellen."
+    },
     correct: 1
   },
   {
     id: "exec-30",
     topic: "Governance",
     topicBg: "Управление",
+    topicDe: "Governance",
     en: {
       question: "What is the most important executive takeaway about cybersecurity?",
       options: ["It is purely technical", "It is business survival and trust management", "It is optional", "It ends with antivirus"],
@@ -478,6 +653,11 @@ export const executivesPool: PoolQuestion[] = [
       question: "Какво е най-важното, което ръководителем трябва да знае за киберсигурност?",
       options: ["Това е чисто технически", "Това е оцеляване на бизнеса и управление на доверието", "Това е факултативно", "Завършва с антивирус"],
       explanation: "Киберсигурността директно влияе на приходите, операциите, репутацията и юридическата отговорност."
+    },
+    de: {
+      question: "Was ist die wichtigste Erkenntnis fuer Fuehrungskraefte zur Cybersicherheit?",
+      options: ["Es ist rein technisch", "Es geht um Geschaeftsueberleben und Vertrauensmanagement", "Es ist optional", "Es endet mit Antivirus"],
+      explanation: "Cybersicherheit wirkt sich direkt auf Umsatz, Betrieb, Reputation und rechtliche Haftung aus."
     },
     correct: 1
   }

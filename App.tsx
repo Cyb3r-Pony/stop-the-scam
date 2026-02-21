@@ -15,6 +15,9 @@ const App: React.FC = () => {
 
   const strings = CONTENT[lang];
 
+  // Helper for inline 3-way translations
+  const t = (bg: string, en: string, de: string) => lang === 'bg' ? bg : lang === 'en' ? en : de;
+
   // Fetch phishing domains from GitHub
   useEffect(() => {
     const fetchPhishingDomains = async () => {
@@ -124,14 +127,14 @@ const App: React.FC = () => {
 
           {/* Desktop Navigation - hidden on mobile */}
           <nav className="hidden md:flex items-center gap-2 lg:gap-4 overflow-x-auto no-scrollbar py-2">
-            <button onClick={() => scrollToSection('blacklist')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Черна листа' : 'Blacklist'}</button>
-            <button onClick={() => scrollToSection('warning-signs')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Признаци' : 'Signs'}</button>
-            <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Мерки' : 'Markers'}</button>
-            <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Предпазване' : 'Protection'}</button>
-            <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Регистри' : 'Registers'}</button>
-            <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Фишинг' : 'Phishing'}</button>
-            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{lang === 'bg' ? 'Тест' : 'Quiz'}</button>
-            <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}</button>
+            <button onClick={() => scrollToSection('blacklist')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
+            <button onClick={() => scrollToSection('warning-signs')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Признаци', 'Signs', 'Warnzeichen')}</button>
+            <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Мерки', 'Markers', 'Merkmale')}</button>
+            <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Предпазване', 'Protection', 'Schutz')}</button>
+            <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Регистри', 'Registers', 'Register')}</button>
+            <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
+            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
+            <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
 
             <div className="flex bg-slate-200/50 p-0.5 rounded ml-4 flex-shrink-0">
               <button
@@ -145,6 +148,12 @@ const App: React.FC = () => {
                 className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
               >
                 EN
+              </button>
+              <button
+                onClick={() => setLang('de')}
+                className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+              >
+                DE
               </button>
             </div>
           </nav>
@@ -165,6 +174,12 @@ const App: React.FC = () => {
               >
                 EN
               </button>
+              <button
+                onClick={() => setLang('de')}
+                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+              >
+                DE
+              </button>
             </div>
 
             {/* Dropdown toggle button with arrow */}
@@ -174,7 +189,7 @@ const App: React.FC = () => {
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
             >
-              <span>{lang === 'bg' ? 'Меню' : 'Menu'}</span>
+              <span>{t('Меню', 'Menu', 'Menue')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-300 ${mobileMenuOpen ? 'rotate-180' : ''}`}
                 fill="none"
@@ -196,49 +211,49 @@ const App: React.FC = () => {
               onClick={() => { scrollToSection('blacklist'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Черна листа' : 'Blacklist'}
+              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
             </button>
             <button
               onClick={() => { scrollToSection('warning-signs'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Признаци' : 'Signs'}
+              {t('Признаци', 'Signs', 'Warnzeichen')}
             </button>
             <button
               onClick={() => { scrollToSection('attention'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Мерки' : 'Markers'}
+              {t('Мерки', 'Markers', 'Merkmale')}
             </button>
             <button
               onClick={() => { scrollToSection('protection'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Предпазване' : 'Protection'}
+              {t('Предпазване', 'Protection', 'Schutz')}
             </button>
             <button
               onClick={() => { scrollToSection('registers'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Регистри' : 'Registers'}
+              {t('Регистри', 'Registers', 'Register')}
             </button>
             <button
               onClick={() => { scrollToSection('phishing'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Фишинг' : 'Phishing'}
+              {t('Фишинг', 'Phishing', 'Phishing')}
             </button>
             <button
               onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 hover:bg-emerald-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {lang === 'bg' ? 'Тест за киберсигурност' : 'Security Quiz'}
+              {t('Тест за киберсигурност', 'Security Quiz', 'Sicherheitsquiz')}
             </button>
             <button
               onClick={() => { scrollToSection('victim'); setMobileMenuOpen(false); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
             >
-              {lang === 'bg' ? 'Ако сте жертва' : 'Victim Help'}
+              {t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}
             </button>
           </nav>
         </div>
@@ -257,7 +272,7 @@ const App: React.FC = () => {
                   <div className="w-12 h-0.5 bg-blue-600/30 rounded-full hidden sm:block"></div>
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-900/40 backdrop-blur-md border border-blue-500/30 rounded-full text-blue-400 text-[11px] font-bold uppercase tracking-[0.2em]">
                     <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                    {lang === 'bg' ? 'БОРБА С КИБЕРПРЕСТЪПНОСТТА' : 'FIGHTING CYBERCRIME'}
+                    {t('БОРБА С КИБЕРПРЕСТЪПНОСТТА', 'FIGHTING CYBERCRIME', 'KAMPF GEGEN CYBERKRIMINALITAET')}
                   </div>
                   <div className="w-12 h-0.5 bg-blue-600/30 rounded-full hidden sm:block"></div>
               </div>
@@ -274,7 +289,7 @@ const App: React.FC = () => {
                 <div className="flex items-center gap-4">
                     <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                     <span className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">
-                        {lang === 'bg' ? 'СЪВЕТИ ЗА КИБЕРСИГУРНОСТ' : 'CYBERSECURITY ADVICE'}
+                        {t('СЪВЕТИ ЗА КИБЕРСИГУРНОСТ', 'CYBERSECURITY ADVICE', 'CYBERSICHERHEITSHINWEISE')}
                     </span>
                     <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                 </div>
@@ -296,7 +311,7 @@ const App: React.FC = () => {
               </h2>
               <div className="p-6 rounded-lg bg-red-950/30 border border-red-600/50 text-red-100 text-sm leading-relaxed shadow-[0_0_20px_rgba(185,28,28,0.2)] max-w-4xl mx-auto">
                 <strong className="block text-red-400 uppercase tracking-wider text-xs mb-2">
-                  {lang === 'bg' ? 'ВНИМАНИЕ:' : 'NOTICE:'}
+                  {t('ВНИМАНИЕ:', 'NOTICE:', 'ACHTUNG:')}
                 </strong>
                 {strings.alert.description}
               </div>
@@ -323,22 +338,22 @@ const App: React.FC = () => {
                       <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-red-400 flex flex-col group/item hover:border-red-600 transition-all hover:bg-slate-800">
                         <span className="tracking-tight truncate" title={domain}>{domain}</span>
                         <span className="text-[8px] uppercase font-bold text-slate-600 mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                          {lang === 'bg' ? 'ЧЕРЕН СПИСЪК' : 'BLACKLISTED'}
+                          {t('ЧЕРЕН СПИСЪК', 'BLACKLISTED', 'GESPERRT')}
                         </span>
                       </div>
                     ))}
                     {filteredDomains.length === 0 && (
                       <div className="col-span-full py-20 text-center">
                         <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-                          {lang === 'bg' ? 'Няма намерени записи' : 'No records matching query'}
+                          {t('Няма намерени записи', 'No records matching query', 'Keine passenden Eintraege gefunden')}
                         </p>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
-                  <span>{lang === 'bg' ? 'Източник: cybercrime.bg' : 'Source: cybercrime.bg'}</span>
-                  <span>{filteredDomains.length} {lang === 'bg' ? 'Намерени' : 'Entries Filtered'}</span>
+                  <span>{t('Източник: cybercrime.bg', 'Source: cybercrime.bg', 'Quelle: cybercrime.bg')}</span>
+                  <span>{filteredDomains.length} {t('Намерени', 'Entries Filtered', 'Eintraege gefiltert')}</span>
                 </div>
               </div>
             </div>
@@ -487,14 +502,14 @@ const App: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
             <div className="mb-12 text-center flex flex-col items-center">
               <span className="text-cyan-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
-                {lang === 'bg' ? 'Автоматично засичане' : 'Automatic Detection'}
+                {t('Автоматично засичане', 'Automatic Detection', 'Automatische Erkennung')}
               </span>
               <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
                 {strings.phishing.title}
               </h2>
               <div className="p-6 rounded-lg bg-cyan-950/30 border border-cyan-600/50 text-cyan-100 text-sm leading-relaxed shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-4xl mx-auto">
                 <strong className="block text-cyan-400 uppercase tracking-wider text-xs mb-2">
-                  {lang === 'bg' ? 'ИНФОРМАЦИЯ:' : 'INFO:'}
+                  {t('ИНФОРМАЦИЯ:', 'INFO:', 'INFORMATION:')}
                 </strong>
                 {strings.phishing.description}
               </div>
@@ -520,7 +535,7 @@ const App: React.FC = () => {
                     <div className="py-20 text-center">
                       <div className="inline-block w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                       <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-                        {lang === 'bg' ? 'Зареждане...' : 'Loading...'}
+                        {t('Зареждане...', 'Loading...', 'Laden...')}
                       </p>
                     </div>
                   ) : (
@@ -592,14 +607,14 @@ const App: React.FC = () => {
             <div className="flex flex-col justify-end text-right md:text-left">
               <h4 className="text-white font-black uppercase text-[10px] tracking-[0.3em] mb-4">Official Platform</h4>
               <p className="text-sm font-medium leading-relaxed max-w-md text-slate-400">
-                {lang === 'bg' ? 'Сайт за обществена осведоменост и превенция на финансови злоупотреби.' : 'Public awareness platform for the prevention of financial abuse.'}
+                {t('Сайт за обществена осведоменост и превенция на финансови злоупотреби.', 'Public awareness platform for the prevention of financial abuse.', 'Plattform zur Aufklaerung und Praevention von Finanzbetrug.')}
               </p>
             </div>
           </div>
           
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
-              © 2026 {lang === 'bg' ? 'Спри Измамата' : 'Stop The Scam'}
+              © 2026 {t('Спри Измамата', 'Stop The Scam', 'Stopp den Betrug')}
             </div>
           </div>
         </div>

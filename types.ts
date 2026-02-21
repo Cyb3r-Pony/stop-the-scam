@@ -1,5 +1,5 @@
 
-export type Lang = 'bg' | 'en';
+export type Lang = 'bg' | 'en' | 'de';
 
 export interface PhishingDomain {
   domain: string;

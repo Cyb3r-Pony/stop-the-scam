@@ -5,6 +5,7 @@ export const itAdminsPool: PoolQuestion[] = [
     id: 'it-1',
     topic: 'MFA',
     topicBg: 'МФУ',
+    topicDe: 'MFA',
     en: {
       question: 'What is the most effective control against credential theft?',
       options: [
@@ -25,12 +26,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'MFA спира повечето атаки за повторно използване на идентификационни данни и фишинг атаки.'
     },
+    de: {
+      question: 'Was ist die wirksamste Massnahme gegen den Diebstahl von Zugangsdaten?',
+      options: [
+        'Passwortrotation',
+        'MFA ueberall',
+        'Laengere Benutzernamen',
+        'Protokollierung deaktivieren'
+      ],
+      explanation: 'MFA blockiert die meisten Angriffe durch Wiederverwendung von Zugangsdaten und Phishing-Angriffe.'
+    },
     correct: 1
   },
   {
     id: 'it-2',
     topic: 'Ransomware',
     topicBg: 'Рансъмуер',
+    topicDe: 'Ransomware',
     en: {
       question: 'Why is exposing RDP directly to the internet dangerous?',
       options: [
@@ -51,12 +63,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Излагането на RDP е една от основните входни точки за рансъмуер.'
     },
+    de: {
+      question: 'Warum ist es gefaehrlich, RDP direkt dem Internet auszusetzen?',
+      options: [
+        'Es reduziert die Bandbreite',
+        'Es ermoeglicht Brute-Force-Angriffe und Ransomware-Eindringen',
+        'Es verbessert die Fernarbeit',
+        'Es stoert DNS'
+      ],
+      explanation: 'Offenes RDP ist einer der am haeufigsten ausgenutzten Einstiegspunkte fuer Ransomware.'
+    },
     correct: 1
   },
   {
     id: 'it-3',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'Least Privilege means:',
       options: [
@@ -77,12 +100,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Намаляването на привилегиите ограничава обхвата на щетите при компрометиране.'
     },
+    de: {
+      question: 'Das Prinzip der minimalen Berechtigung (Least Privilege) bedeutet:',
+      options: [
+        'Jeder ist Administrator',
+        'Benutzer erhalten nur den benoetigten Zugriff',
+        'Alle Konten deaktivieren',
+        'Zugangsdaten teilen'
+      ],
+      explanation: 'Die Reduzierung von Berechtigungen begrenzt die Auswirkungen einer Kompromittierung.'
+    },
     correct: 1
   },
   {
     id: 'it-4',
     topic: 'Ransomware',
     topicBg: 'Рансъмуер',
+    topicDe: 'Ransomware',
     en: {
       question: 'Best backup strategy is:',
       options: [
@@ -103,12 +137,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Рансъмуерът първо атакува резервните копия. Офлайн/неизменяемото съхранение е критично важно.'
     },
+    de: {
+      question: 'Die beste Backup-Strategie ist:',
+      options: [
+        'Eine einzelne Sicherungskopie',
+        'Backups auf demselben Server',
+        '3-2-1-Regel mit Offline-/unveraenderlichem Speicher',
+        'Keine Backups noetig'
+      ],
+      explanation: 'Ransomware greift zuerst Backups an. Offline-/unveraenderlicher Speicher ist entscheidend.'
+    },
     correct: 2
   },
   {
     id: 'it-5',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'What is a SIEM used for?',
       options: [
@@ -129,12 +174,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'SIEM корелира логове, за да открива подозрително поведение.'
     },
+    de: {
+      question: 'Wofuer wird ein SIEM verwendet?',
+      options: [
+        'Passwortspeicherung',
+        'Log-Erfassung und Bedrohungserkennung',
+        'Festplattenverschluesselung',
+        'DNS-Hosting'
+      ],
+      explanation: 'SIEM korreliert Protokolle fuer die Sicherheitsueberwachung.'
+    },
     correct: 1
   },
   {
     id: 'it-6',
     topic: 'MFA',
     topicBg: 'МФУ',
+    topicDe: 'MFA',
     en: {
       question: 'Most phishing-resistant authentication method?',
       options: [
@@ -155,12 +211,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Хардуерните ключове предотвратяват повторно възпроизвеждане и фишинг.'
     },
+    de: {
+      question: 'Welche Authentifizierungsmethode ist am widerstandsfaehigsten gegen Phishing?',
+      options: [
+        'SMS-Codes',
+        'Sicherheitsfragen',
+        'FIDO2-Hardware-Schluessel',
+        'Passworthinweise'
+      ],
+      explanation: 'Hardwaregestuetzte Schluessel verhindern Phishing-Replay-Angriffe.'
+    },
     correct: 2
   },
   {
     id: 'it-7',
     topic: 'Patch Management',
     topicBg: 'Управление на пачове',
+    topicDe: 'Patch-Management',
     en: {
       question: 'Why is patch management critical?',
       options: [
@@ -181,12 +248,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Непачнатите системи са основни вектори за компрометиране.'
     },
+    de: {
+      question: 'Warum ist Patch-Management entscheidend?',
+      options: [
+        'Kosmetische Aktualisierungen',
+        'Behebt aktiv ausgenutzte Schwachstellen',
+        'Verbessert die Monitoraufloesung',
+        'Vermeidet MFA'
+      ],
+      explanation: 'Ungepatchte Systeme sind ein primaerer Angriffsvektor fuer Kompromittierungen.'
+    },
     correct: 1
   },
   {
     id: 'it-8',
     topic: 'Lateral Movement',
     topicBg: 'Странично движение',
+    topicDe: 'Laterale Bewegung',
     en: {
       question: 'What is lateral movement?',
       options: [
@@ -207,12 +285,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'След първоначалното проникване, атакуващите се придвижват до домейн контролери и данни.'
     },
+    de: {
+      question: 'Was ist laterale Bewegung (Lateral Movement)?',
+      options: [
+        'VPN-Anmeldung',
+        'Ein Angreifer bewegt sich zwischen internen Systemen',
+        'Firewall-Update',
+        'Datentraegerbereinigung'
+      ],
+      explanation: 'Nach dem ersten Zugriff bewegen sich Angreifer weiter zu Domaenencontrollern und kritischen Daten.'
+    },
     correct: 1
   },
   {
     id: 'it-9',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'Best way to detect compromised credentials?',
       options: [
@@ -233,12 +322,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Поведенческото откриване улавя откраднати идентификационни данни рано.'
     },
+    de: {
+      question: 'Wie erkennt man kompromittierte Zugangsdaten am besten?',
+      options: [
+        'Alle Konten deaktivieren',
+        'Anomale Anmeldungen und unmoeglich Reisen ueberwachen',
+        'Kuerzere Passwoerter verwenden',
+        'Anmeldeprotokolle ignorieren'
+      ],
+      explanation: 'Verhaltensbasierte Erkennung entdeckt gestohlene Zugangsdaten fruehzeitig.'
+    },
     correct: 1
   },
   {
     id: 'it-10',
     topic: 'Ransomware',
     topicBg: 'Рансъмуер',
+    topicDe: 'Ransomware',
     en: {
       question: 'Top priority after ransomware encryption starts?',
       options: [
@@ -259,12 +359,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Ограничаването е на първо място. Плащането не гарантира възстановяване.'
     },
+    de: {
+      question: 'Was hat hoechste Prioritaet, nachdem eine Ransomware-Verschluesselung begonnen hat?',
+      options: [
+        'Sofort bezahlen',
+        'Infizierte Systeme isolieren, um die Ausbreitung zu stoppen',
+        'Protokolle loeschen',
+        'Server neu starten'
+      ],
+      explanation: 'Eindaemmung hat Vorrang. Eine Zahlung garantiert keine Wiederherstellung.'
+    },
     correct: 1
   },
   {
     id: 'it-11',
     topic: 'Network Security',
     topicBg: 'Мрежова сигурност',
+    topicDe: 'Netzwerksicherheit',
     en: {
       question: 'What is the primary goal of network segmentation?',
       options: [
@@ -285,12 +396,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Сегментацията ограничава странично движение и намалява обхвата на щетите при компрометиране.'
     },
+    de: {
+      question: 'Was ist das Hauptziel der Netzwerksegmentierung?',
+      options: [
+        'WLAN-Geschwindigkeit verbessern',
+        'Angreifer daran hindern, sich frei im Netzwerk zu bewegen',
+        'DNS-Aufloesung beschleunigen',
+        'Endpunktschutz ersetzen'
+      ],
+      explanation: 'Segmentierung begrenzt laterale Bewegung und reduziert den Schadensradius einer Kompromittierung.'
+    },
     correct: 1
   },
   {
     id: 'it-12',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'Which practice best reduces the risk of Active Directory compromise?',
       options: [
@@ -311,12 +433,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Разделянето на привилегирани акаунти и ограничаване където могат да се влизат защитава домейн контролера.'
     },
+    de: {
+      question: 'Welche Praxis reduziert das Risiko einer Active-Directory-Kompromittierung am besten?',
+      options: [
+        'Gemeinsame Administratorkonten verwenden',
+        'Mehrstufiges Admin-Modell und separate privilegierte Konten',
+        'Alle Protokolle deaktivieren',
+        'Admin-Anmeldung von jedem Geraet erlauben'
+      ],
+      explanation: 'Die Trennung privilegierter Konten und die Einschraenkung der Anmeldeorte schuetzt die Domaenenkontrolle.'
+    },
     correct: 1
   },
   {
     id: 'it-13',
     topic: 'Incident Response',
     topicBg: 'Реакция при инциденти',
+    topicDe: 'Vorfallreaktion',
     en: {
       question: 'What is the most important first step in incident response?',
       options: [
@@ -337,12 +470,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Ограничаването спира разпространението и запазването на доказателствата дава възможност за разследване и възстановяване.'
     },
+    de: {
+      question: 'Was ist der wichtigste erste Schritt bei der Vorfallreaktion?',
+      options: [
+        'Den Vorfall oeffentlich bekannt geben',
+        'Eindaemmung und Beweissicherung',
+        'Betroffene Systeme sofort loeschen',
+        'Bis zu den Geschaeftszeiten ignorieren'
+      ],
+      explanation: 'Eindaemmung stoppt die Ausbreitung und Beweissicherung ermoeglicht Untersuchung und Wiederherstellung.'
+    },
     correct: 1
   },
   {
     id: 'it-14',
     topic: 'Endpoint Security',
     topicBg: 'Защита на крайни точки',
+    topicDe: 'Endpunktsicherheit',
     en: {
       question: 'What is EDR primarily designed for?',
       options: [
@@ -363,12 +507,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'EDR осигурява видимост на крайни точки, както и възможности за открит и отговор на малуер и активност на атакуващите.'
     },
+    de: {
+      question: 'Wofuer ist EDR hauptsaechlich konzipiert?',
+      options: [
+        'Firewalls ersetzen',
+        'Erkennung und Reaktion auf Endpunkt-Bedrohungen',
+        'Backups speichern',
+        'E-Mails verschluesseln'
+      ],
+      explanation: 'EDR bietet Endpunkt-Sichtbarkeit sowie Erkennungs- und Reaktionsfaehigkeiten gegen Malware und Angreiferaktivitaet.'
+    },
     correct: 1
   },
   {
     id: 'it-15',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'Why is disabling PowerShell logging a bad idea?',
       options: [
@@ -389,12 +544,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'PowerShell е често използван инструмент за атака; логирането е от съществено значение за видимост.'
     },
+    de: {
+      question: 'Warum ist das Deaktivieren der PowerShell-Protokollierung eine schlechte Idee?',
+      options: [
+        'Es verlangsamt Systeme',
+        'Angreifer missbrauchen haeufig PowerShell, und Protokolle sind entscheidend fuer die Erkennung',
+        'Es erhoeht die Patch-Haeufigkeit',
+        'Es stoert MFA'
+      ],
+      explanation: 'PowerShell ist ein gaengiges Angriffswerkzeug; Protokollierung ist fuer die Sichtbarkeit unerlaesslich.'
+    },
     correct: 1
   },
   {
     id: 'it-16',
     topic: 'Endpoint Security',
     topicBg: 'Защита на крайни точки',
+    topicDe: 'Endpunktsicherheit',
     en: {
       question: 'What is the purpose of an allow-list (application whitelisting)?',
       options: [
@@ -415,12 +581,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Списъкът на позволените приложения намалява изпълнението на малуер чрез ограничаване на това какво може да работи.'
     },
+    de: {
+      question: 'Was ist der Zweck einer Positivliste (Application Whitelisting)?',
+      options: [
+        'Gesamten Netzwerkverkehr blockieren',
+        'Nur genehmigte Anwendungen zur Ausfuehrung zulassen',
+        'Backups verschluesseln',
+        'Passwort-Manager ersetzen'
+      ],
+      explanation: 'Positivlisten reduzieren Malware-Ausfuehrung, indem sie einschraenken, was ausgefuehrt werden darf.'
+    },
     correct: 1
   },
   {
     id: 'it-17',
     topic: 'Network Security',
     topicBg: 'Мрежова сигурност',
+    topicDe: 'Netzwerksicherheit',
     en: {
       question: 'Which is the best approach for securing remote access?',
       options: [
@@ -441,12 +618,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Безопасният отдалечен достъп изисква MFA, контролирани входни точки и прилагане на политики.'
     },
+    de: {
+      question: 'Was ist der beste Ansatz zur Sicherung des Fernzugriffs?',
+      options: [
+        'RDP mit starken Passwoertern freigeben',
+        'VPN mit MFA und bedingten Zugriffsrichtlinien verwenden',
+        'Admin-Zugriff von persoenlichen Geraeten erlauben',
+        'Verschluesselung deaktivieren'
+      ],
+      explanation: 'Sicherer Fernzugriff erfordert MFA, kontrollierte Einstiegspunkte und Richtliniendurchsetzung.'
+    },
     correct: 1
   },
   {
     id: 'it-18',
     topic: 'Ransomware',
     topicBg: 'Рансъмуер',
+    topicDe: 'Ransomware',
     en: {
       question: 'What is the key benefit of immutable backups?',
       options: [
@@ -467,12 +655,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Неизменяемите резервни копия защитават данните за възстановяване от манипулация от страна на атакуващите.'
     },
+    de: {
+      question: 'Was ist der wichtigste Vorteil unveraenderlicher Backups?',
+      options: [
+        'Sie laufen schneller',
+        'Sie koennen von Ransomware nicht geaendert oder geloescht werden',
+        'Sie machen Patching ueberfluessig',
+        'Sie verhindern Phishing'
+      ],
+      explanation: 'Unveraenderliche Backups schuetzen Wiederherstellungsdaten vor Manipulation durch Angreifer.'
+    },
     correct: 1
   },
   {
     id: 'it-19',
     topic: 'Password Security',
     topicBg: 'Сигурност на пароли',
+    topicDe: 'Passwortsicherheit',
     en: {
       question: 'What is credential stuffing?',
       options: [
@@ -493,12 +692,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Атакуващите преизползват нарушени двойки потребител/парола в различни системи.'
     },
+    de: {
+      question: 'Was ist Credential Stuffing?',
+      options: [
+        'Passwoerter verschluesseln',
+        'Gestohlene Zugangsdaten verwenden, um auf mehrere Dienste zuzugreifen',
+        'DNS-Abfragen blockieren',
+        'Zertifikate installieren'
+      ],
+      explanation: 'Angreifer verwenden gehackte Benutzername-/Passwort-Paare systemuebergreifend wieder.'
+    },
     correct: 1
   },
   {
     id: 'it-20',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'Which log source is most critical for detecting AD attacks?',
       options: [
@@ -519,12 +729,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'DC логовете дават най-силната видимост в удостоверяване и злоупотреба на привилегии.'
     },
+    de: {
+      question: 'Welche Log-Quelle ist am kritischsten fuer die Erkennung von AD-Angriffen?',
+      options: [
+        'Drucker-Protokolle',
+        'Domaenencontroller-Sicherheitsereignisprotokolle',
+        'Browser-Verlauf',
+        'Monitorhelligkeitseinstellungen'
+      ],
+      explanation: 'DC-Protokolle bieten die beste Sichtbarkeit in Authentifizierung und Privilegienmissbrauch.'
+    },
     correct: 1
   },
   {
     id: 'it-21',
     topic: 'Vulnerability Management',
     topicBg: 'Управление на уязвимости',
+    topicDe: 'Schwachstellenmanagement',
     en: {
       question: 'What is the purpose of vulnerability management?',
       options: [
@@ -545,12 +766,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Управлението на уязвимостите систематично намалява експлоатируемата повърхност на атака.'
     },
+    de: {
+      question: 'Was ist der Zweck des Schwachstellenmanagements?',
+      options: [
+        'Nur Antivirus-Scans durchfuehren',
+        'Sicherheitsschwaechen identifizieren, priorisieren und beheben',
+        'Updates deaktivieren',
+        'SIEM ersetzen'
+      ],
+      explanation: 'Schwachstellenmanagement reduziert die ausnutzbare Angriffsflaeche systematisch.'
+    },
     correct: 1
   },
   {
     id: 'it-22',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'What does Zero Trust mean in practice?',
       options: [
@@ -571,12 +803,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Zero Trust предполага нарушение и изисква непрекъсната верификация.'
     },
+    de: {
+      question: 'Was bedeutet Zero Trust in der Praxis?',
+      options: [
+        'Dem gesamten internen Datenverkehr vertrauen',
+        'Nie vertrauen, Zugriffsanfragen immer verifizieren',
+        'MFA deaktivieren',
+        'Nur Antivirus verwenden'
+      ],
+      explanation: 'Zero Trust setzt einen Sicherheitsvorfall voraus und erfordert kontinuierliche Verifizierung.'
+    },
     correct: 1
   },
   {
     id: 'it-23',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'Why are service accounts high risk?',
       options: [
@@ -597,12 +840,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Сервизните акаунти често се злоупотребяват поради слабо управление и високи привилегии.'
     },
+    de: {
+      question: 'Warum sind Dienstkonten ein hohes Risiko?',
+      options: [
+        'Sie haben keine Passwoerter',
+        'Sie haben oft uebermassige Berechtigungen und langlebige Zugangsdaten',
+        'Sie koennen nicht auf Systeme zugreifen',
+        'Sie ersetzen Firewalls'
+      ],
+      explanation: 'Dienstkonten werden haeufig aufgrund schwacher Governance und hoher Berechtigungen missbraucht.'
+    },
     correct: 1
   },
   {
     id: 'it-24',
     topic: 'Phishing',
     topicBg: 'Фишинг',
+    topicDe: 'Phishing',
     en: {
       question: 'What is the best defense against phishing emails reaching users?',
       options: [
@@ -623,12 +877,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Защитата от фишинг изисква множество слои, не един контрол.'
     },
+    de: {
+      question: 'Was ist die beste Verteidigung gegen Phishing-E-Mails, die Benutzer erreichen?',
+      options: [
+        'Keine E-Mail-Filterung',
+        'Mehrschichtige Kontrollen: sicheres E-Mail-Gateway + DMARC + Schulung',
+        'Nur starke Passwoerter',
+        'HTTPS deaktivieren'
+      ],
+      explanation: 'Phishing-Abwehr erfordert mehrere Schichten, nicht eine einzelne Kontrolle.'
+    },
     correct: 1
   },
   {
     id: 'it-25',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'What is the main reason to implement PAM (Privileged Access Management)?',
       options: [
@@ -649,12 +914,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'PAM намалява вероятността за злоупотреба на администраторски идентификационни данни.'
     },
+    de: {
+      question: 'Was ist der Hauptgrund fuer die Implementierung von PAM (Privileged Access Management)?',
+      options: [
+        'Anmeldungen beschleunigen',
+        'Privilegierte Konten kontrollieren, ueberwachen und schuetzen',
+        'Backups ersetzen',
+        'Auditing deaktivieren'
+      ],
+      explanation: 'PAM reduziert die Wahrscheinlichkeit des Missbrauchs von Administratorzugangsdaten.'
+    },
     correct: 1
   },
   {
     id: 'it-26',
     topic: 'Incident Response',
     topicBg: 'Реакция при инциденти',
+    topicDe: 'Vorfallreaktion',
     en: {
       question: 'What should be done immediately after detecting data exfiltration?',
       options: [
@@ -675,12 +951,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Изтичането на данни изисква ограничаване и отговор, с известност към регулаторните изисквания.'
     },
+    de: {
+      question: 'Was sollte sofort nach der Erkennung einer Datenexfiltration getan werden?',
+      options: [
+        'Ignorieren',
+        'Eindaemmen, Umfang untersuchen und gemaess Richtlinie/Gesetz benachrichtigen',
+        'Alle Protokolle loeschen',
+        'Dauerhaft herunterfahren'
+      ],
+      explanation: 'Datenexfiltration erfordert Eindaemmung und eine regulatorisch bewusste Reaktion.'
+    },
     correct: 1
   },
   {
     id: 'it-27',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'Why is DNS monitoring valuable?',
       options: [
@@ -701,12 +988,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Подозрителния DNS трафик е често срещан показател на компрометиране.'
     },
+    de: {
+      question: 'Warum ist DNS-Ueberwachung wertvoll?',
+      options: [
+        'Sie ersetzt Patching',
+        'Angreifer nutzen DNS haeufig fuer C2 und Exfiltration',
+        'Sie verbessert die Tastaturgeschwindigkeit',
+        'Sie blockiert automatisch alle Malware'
+      ],
+      explanation: 'Verdaechtiger DNS-Datenverkehr ist ein haeufiger Indikator fuer eine Kompromittierung.'
+    },
     correct: 1
   },
   {
     id: 'it-28',
     topic: 'Access Control',
     topicBg: 'Контрол на достъпа',
+    topicDe: 'Zugriffskontrolle',
     en: {
       question: 'Which is the best practice for admin workstation security?',
       options: [
@@ -727,12 +1025,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'PAWs намаляват експозицията на привилегирани идентификационни данни на малуер.'
     },
+    de: {
+      question: 'Was ist die beste Praxis fuer die Sicherheit von Admin-Workstations?',
+      options: [
+        'Admin-Konten ueberall verwenden',
+        'Dedizierte Privileged-Access-Workstations (PAWs)',
+        'Endpunktkontrollen deaktivieren',
+        'Admin-Passwoerter teilen'
+      ],
+      explanation: 'PAWs reduzieren die Exposition privilegierter Zugangsdaten gegenueber Malware.'
+    },
     correct: 1
   },
   {
     id: 'it-29',
     topic: 'Incident Response',
     topicBg: 'Реакция при инциденти',
+    topicDe: 'Vorfallreaktion',
     en: {
       question: 'What is the primary goal of tabletop exercises?',
       options: [
@@ -753,12 +1062,23 @@ export const itAdminsPool: PoolQuestion[] = [
       ],
       explanation: 'Упражненията валидират способност за отговор преди реални инциденти да възникнат.'
     },
+    de: {
+      question: 'Was ist das Hauptziel von Planspieluebungen (Tabletop Exercises)?',
+      options: [
+        'Penetrationstests ersetzen',
+        'Bereitschaft zur Vorfallreaktion und Entscheidungsfindung testen',
+        'Phishing-Volumen erhoehen',
+        'Backups entfernen'
+      ],
+      explanation: 'Uebungen validieren die Reaktionsfaehigkeit, bevor echte Vorfaelle auftreten.'
+    },
     correct: 1
   },
   {
     id: 'it-30',
     topic: 'Monitoring',
     topicBg: 'Мониторинг',
+    topicDe: 'Ueberwachung',
     en: {
       question: 'What is the best measure of SOC effectiveness?',
       options: [
@@ -778,6 +1098,16 @@ export const itAdminsPool: PoolQuestion[] = [
         'Само дължина на парола'
       ],
       explanation: 'Скоростта на открит и отговор определя въздействието на пробива.'
+    },
+    de: {
+      question: 'Was ist das beste Mass fuer die Effektivitaet eines SOC?',
+      options: [
+        'Anzahl gesendeter E-Mails',
+        'Mittlere Erkennungszeit (MTTD) und mittlere Reaktionszeit (MTTR)',
+        'Anzahl installierter Drucker',
+        'Nur Passwortlaenge'
+      ],
+      explanation: 'Erkennungs- und Reaktionsgeschwindigkeit bestimmen die Auswirkung eines Sicherheitsvorfalls.'
     },
     correct: 1
   }
