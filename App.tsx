@@ -602,6 +602,13 @@ const App: React.FC = () => {
                 <h3 className="text-white font-black text-xl uppercase tracking-tighter">{strings.header.title}</h3>
               </div>
               <p className="text-sm leading-relaxed max-w-sm text-slate-400">{strings.footer.disclaimer}</p>
+              <div className="mt-4 flex flex-col gap-1">
+                {strings.footer.officialLinks.map((link, i) => (
+                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
+                    {link.name} &rarr; {link.url.replace('https://', '')}
+                  </a>
+                ))}
+              </div>
             </div>
             
             <div className="flex flex-col justify-end text-right md:text-left">

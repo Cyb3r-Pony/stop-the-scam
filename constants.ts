@@ -184,7 +184,11 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     },
     footer: {
       legal: "Правна информация",
-      disclaimer: "Сайтът е с превантивна цел. Данните са от официалния сайт на ГДБОП-МВР. Сайтът не носи отговорност за индивидуални инвестиционни решения."
+      disclaimer: "Сайтът е с превантивна цел. Данните са от официалния сайт на ГДБОП-МВР. Сайтът не носи отговорност за индивидуални инвестиционни решения.",
+      officialLinks: [
+        { name: "Дирекция \"Киберпрестъпност\"", url: "https://cybercrime.bg" },
+        { name: "ГДБОП - Главна дирекция \"Борба с организираната престъпност\"", url: "https://gdbop.bg" }
+      ]
     },
     phishing: {
       title: "Фишинг Детектор",
@@ -209,7 +213,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     },
     alert: {
       title: "Critical Warning",
-      description: "This portal uses official data from the Cybercrime Directorate of GDCOC-Ministry of Interior. If invited to invest via a site on the blacklist, terminate communication immediately."
+      description: "This portal uses official data from the Cybercrime Directorate of GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior. If invited to invest via a site on the blacklist, terminate communication immediately."
     },
     warningSigns: {
       title: "Warning Signs",
@@ -306,7 +310,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     },
     domains: {
       title: "Domain Blacklist",
-      notice: "These domains are officially identified as fraudulent by the GDCOC-MoI.",
+      notice: "These domains are officially identified as fraudulent by GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior.",
       placeholder: "Enter domain to check...",
       showing: "Showing",
       of: "of"
@@ -317,14 +321,18 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         "Stop all communication with scammers",
         "Do not make any further payments",
         "Inform your bank immediately",
-        "Report to the nearest police station or GDCOC",
+        "Report to the nearest police station or GDCOC (General Directorate Combating Organised Crime, Bulgaria)",
         "Keep all chats, emails, and bank receipts"
       ],
       emergencyNote: "DO NOT WAIT. EVERY HOUR COUNTS IN FINANCIAL RECOVERY."
     },
     footer: {
       legal: "Legal Info",
-      disclaimer: "Informational purpose only. Data from official GDCOC-MoI sources. We are not responsible for individual financial decisions."
+      disclaimer: "Informational purpose only. Data from official GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior sources. We are not responsible for individual financial decisions.",
+      officialLinks: [
+        { name: "Cybercrime Directorate (Bulgaria)", url: "https://cybercrime.bg" },
+        { name: "GDCOC - General Directorate Combating Organised Crime (Bulgaria)", url: "https://gdbop.bg" }
+      ]
     },
     phishing: {
       title: "Phishing Detector",
@@ -349,7 +357,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     },
     alert: {
       title: "Kritische Warnung",
-      description: "Dieses Portal verwendet offizielle Daten der Direktion Cyberkriminalitaet des bulgarischen Innenministeriums. Wenn Sie aufgefordert werden, ueber eine Seite auf der schwarzen Liste zu investieren, brechen Sie den Kontakt sofort ab."
+      description: "Dieses Portal verwendet offizielle Daten der Direktion Cyberkriminalitaet des GDBOP (Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet), bulgarisches Innenministerium. Wenn Sie aufgefordert werden, ueber eine Seite auf der schwarzen Liste zu investieren, brechen Sie den Kontakt sofort ab."
     },
     warningSigns: {
       title: "Warnzeichen",
@@ -446,7 +454,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
     },
     domains: {
       title: "Schwarze Liste der Domains",
-      notice: "Diese Domains wurden offiziell vom GDBOP-MdI als betruegerisch identifiziert.",
+      notice: "Diese Domains wurden offiziell vom GDBOP (Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet), bulgarisches Innenministerium, als betruegerisch identifiziert.",
       placeholder: "Domain zur Pruefung eingeben...",
       showing: "Angezeigt",
       of: "von"
@@ -457,14 +465,18 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         "Beenden Sie jegliche Kommunikation mit den Betruegern",
         "Leisten Sie keine weiteren Zahlungen",
         "Informieren Sie sofort Ihre Bank",
-        "Erstatten Sie Anzeige bei der naechsten Polizeidienststelle oder dem GDBOP",
+        "Erstatten Sie Anzeige bei der naechsten Polizeidienststelle oder dem GDBOP (Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet, Bulgarien)",
         "Bewahren Sie alle Chats, E-Mails und Bankunterlagen auf"
       ],
       emergencyNote: "WARTEN SIE NICHT. JEDE STUNDE ZAEHLT BEI DER RUECKGEWINNUNG IHRER GELDER."
     },
     footer: {
       legal: "Rechtliche Hinweise",
-      disclaimer: "Nur zu Informationszwecken. Daten aus offiziellen Quellen des GDBOP-MdI. Wir uebernehmen keine Verantwortung fuer individuelle Finanzentscheidungen."
+      disclaimer: "Nur zu Informationszwecken. Daten aus offiziellen Quellen des GDBOP (Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet), bulgarisches Innenministerium. Wir uebernehmen keine Verantwortung fuer individuelle Finanzentscheidungen.",
+      officialLinks: [
+        { name: "Direktion Cyberkriminalitaet (Bulgarien)", url: "https://cybercrime.bg" },
+        { name: "GDBOP - Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet (Bulgarien)", url: "https://gdbop.bg" }
+      ]
     },
     phishing: {
       title: "Phishing-Detektor",

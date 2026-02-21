@@ -69,6 +69,7 @@ export interface ContentStrings {
   footer: {
     legal: string;
     disclaimer: string;
+    officialLinks: Array<{ name: string; url: string }>;
   };
   phishing: {
     title: string;
