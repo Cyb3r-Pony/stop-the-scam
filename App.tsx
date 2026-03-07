@@ -191,7 +191,7 @@ const App: React.FC = () => {
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
             >
-              <span>{t('Меню', 'Menu', 'Menue')}</span>
+              <span>{t('Меню', 'Menu', 'Menü')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-300 ${mobileMenuOpen ? 'rotate-180' : ''}`}
                 fill="none"
@@ -280,7 +280,7 @@ const App: React.FC = () => {
                   <div className="w-12 h-0.5 bg-blue-600/30 rounded-full hidden sm:block"></div>
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-900/40 backdrop-blur-md border border-blue-500/30 rounded-full text-blue-400 text-[11px] font-bold uppercase tracking-[0.2em]">
                     <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                    {t('БОРБА С КИБЕРПРЕСТЪПНОСТТА', 'FIGHTING CYBERCRIME', 'KAMPF GEGEN CYBERKRIMINALITAET')}
+                    {t('БОРБА С КИБЕРПРЕСТЪПНОСТТА', 'FIGHTING CYBERCRIME', 'KAMPF GEGEN CYBERKRIMINALITÄT')}
                   </div>
                   <div className="w-12 h-0.5 bg-blue-600/30 rounded-full hidden sm:block"></div>
               </div>
@@ -375,7 +375,7 @@ const App: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               {strings.stopChallengeProtect.items.map((item, i) => (
                 <div key={i} className={`p-6 md:p-8 rounded-lg border text-center transition-all hover:scale-[1.02] flex flex-col ${i === 0 ? 'border-red-600/50 bg-red-950/20 hover:bg-red-950/40' : i === 1 ? 'border-amber-600/50 bg-amber-950/20 hover:bg-amber-950/40' : 'border-emerald-600/50 bg-emerald-950/20 hover:bg-emerald-950/40'}`}>
-                  <div className={`text-3xl md:text-4xl lg:text-5xl font-black mb-4 break-words ${i === 0 ? 'text-red-500' : i === 1 ? 'text-amber-500' : 'text-emerald-500'}`}>{item.keyword}</div>
+                  <div className={`text-4xl md:text-2xl lg:text-3xl font-black mb-4 ${i === 0 ? 'text-red-500' : i === 1 ? 'text-amber-500' : 'text-emerald-500'}`}>{item.keyword}</div>
                   <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -601,7 +601,7 @@ const App: React.FC = () => {
                     {filteredDomains.length === 0 && (
                       <div className="col-span-full py-20 text-center">
                         <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-                          {t('Няма намерени записи', 'No records matching query', 'Keine passenden Eintraege gefunden')}
+                          {t('Няма намерени записи', 'No records matching query', 'Keine passenden Einträge gefunden')}
                         </p>
                       </div>
                     )}
@@ -609,7 +609,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
                   <span>{t('Източник: cybercrime.bg', 'Source: cybercrime.bg', 'Quelle: cybercrime.bg')}</span>
-                  <span>{filteredDomains.length} {t('Намерени', 'Entries Filtered', 'Eintraege gefiltert')}</span>
+                  <span>{filteredDomains.length} {t('Намерени', 'Entries Filtered', 'Einträge gefiltert')}</span>
                 </div>
               </div>
             </div>
@@ -733,7 +733,7 @@ const App: React.FC = () => {
             <div className="flex flex-col justify-end text-right md:text-left">
               <h4 className="text-white font-black uppercase text-[10px] tracking-[0.3em] mb-4">Official Platform</h4>
               <p className="text-sm font-medium leading-relaxed max-w-md text-slate-400">
-                {t('Сайт за обществена осведоменост и превенция на финансови злоупотреби.', 'Public awareness platform for the prevention of financial abuse.', 'Plattform zur Aufklaerung und Praevention von Finanzbetrug.')}
+                {t('Сайт за обществена осведоменост и превенция на финансови злоупотреби.', 'Public awareness platform for the prevention of financial abuse.', 'Plattform zur Aufklärung und Prävention von Finanzbetrug.')}
               </p>
             </div>
           </div>
