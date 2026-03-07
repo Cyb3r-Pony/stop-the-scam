@@ -136,28 +136,29 @@ const App: React.FC = () => {
             <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
             <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
-
-            <div className="flex bg-slate-200/50 p-0.5 rounded ml-4 flex-shrink-0">
-              <button
-                onClick={() => setLang('bg')}
-                className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                BG
-              </button>
-              <button
-                onClick={() => setLang('en')}
-                className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLang('de')}
-                className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                DE
-              </button>
-            </div>
           </nav>
+
+          {/* Desktop Language Toggle - always visible, outside scrollable nav */}
+          <div className="hidden md:flex bg-slate-200/50 p-0.5 rounded ml-2 flex-shrink-0">
+            <button
+              onClick={() => setLang('bg')}
+              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+            >
+              BG
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang('de')}
+              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
+            >
+              DE
+            </button>
+          </div>
 
           {/* Mobile Menu Button - visible only on mobile */}
           <div className="flex md:hidden items-center gap-2 flex-shrink-0">
@@ -373,8 +374,8 @@ const App: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               {strings.stopChallengeProtect.items.map((item, i) => (
-                <div key={i} className={`p-8 rounded-lg border text-center transition-all hover:scale-[1.02] ${i === 0 ? 'border-red-600/50 bg-red-950/20 hover:bg-red-950/40' : i === 1 ? 'border-amber-600/50 bg-amber-950/20 hover:bg-amber-950/40' : 'border-emerald-600/50 bg-emerald-950/20 hover:bg-emerald-950/40'}`}>
-                  <div className={`text-5xl font-black mb-4 ${i === 0 ? 'text-red-500' : i === 1 ? 'text-amber-500' : 'text-emerald-500'}`}>{item.keyword}</div>
+                <div key={i} className={`p-6 md:p-8 rounded-lg border text-center transition-all hover:scale-[1.02] flex flex-col ${i === 0 ? 'border-red-600/50 bg-red-950/20 hover:bg-red-950/40' : i === 1 ? 'border-amber-600/50 bg-amber-950/20 hover:bg-amber-950/40' : 'border-emerald-600/50 bg-emerald-950/20 hover:bg-emerald-950/40'}`}>
+                  <div className={`text-3xl md:text-4xl lg:text-5xl font-black mb-4 break-words ${i === 0 ? 'text-red-500' : i === 1 ? 'text-amber-500' : 'text-emerald-500'}`}>{item.keyword}</div>
                   <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
