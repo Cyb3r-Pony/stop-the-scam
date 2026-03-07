@@ -67,6 +67,43 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Защитете своите спестявания от инвестиционни измами",
       description: "Вашият първи щит срещу финансови злоупотреби. Научете как да разпознавате фалшиви платформи и да инвестирате сигурно."
     },
+    statistics: {
+      title: "Мащабът на проблема",
+      subtitle: "Реални данни за финансовите измами в България и Европа",
+      items: [
+        { value: "4 млрд. EUR", label: "Годишни загуби от онлайн инвестиционни измами в Европа", source: "Investigate Europe, 2024" },
+        { value: "240 млн. USD", label: "Общи плащания към мрежа от кол центрове за измами, оперираща от София", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "27 000+", label: "Жертви на една единствена измамническа мрежа в 24 държави за 3 години", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "79", label: "Фалшиви платформи за търговия, използвани от мрежа в София, 62 от тях с предупреждения от регулатори", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "20 000+", label: "Български граждани, пострадали от пирамидалната схема BETL през 2024 г.", source: "Свободна Европа / Moreto.net, 2024" },
+        { value: "80 млн. лв.", label: "Приблизителна сума, събрана от BETL преди прекратяване на плащанията", source: "Moreto.net, 2024" }
+      ],
+      sourceNote: "Източници: Investigate Europe, BIRD.bg, Свободна Европа, Moreto.net"
+    },
+    scamLifecycle: {
+      title: "Как работи типична инвестиционна измама",
+      subtitle: "Стъпка по стъпка: от първия контакт до пълната загуба",
+      steps: [
+        { label: "Реклама / Контакт", desc: "Виждате реклама в социални мрежи или получавате обаждане от \"брокер\" с обещание за лесни печалби" },
+        { label: "Регистрация", desc: "Регистрирате се във фалшива платформа и депозирате малка сума (250-500 EUR)" },
+        { label: "Фалшива печалба", desc: "Платформата показва бърз ръст на баланса ви – всичко е фалшиво" },
+        { label: "Малко теглене", desc: "Позволяват ви да изтеглите малка сума, за да спечелят доверието ви" },
+        { label: "Голям депозит", desc: "\"Брокерът\" ви убеждава да инвестирате значително повече – 5 000, 10 000 или повече EUR" },
+        { label: "Блокиране", desc: "При опит за теглене ви искат \"данък 27%\", \"такса за отблокиране\" или \"застраховка\"" },
+        { label: "Пълна загуба", desc: "Платформата спира да работи или брокерът изчезва. Парите ви са загубени безвъзвратно" },
+        { label: "Повторна измама", desc: "Месеци по-късно ви звънят от \"адвокатска кантора\" с обещание да възстановят парите – за нова такса" }
+      ]
+    },
+    stopChallengeProtect: {
+      title: "Спри. Помисли. Провери.",
+      subtitle: "Три прости стъпки, които могат да ви спасят от измама",
+      items: [
+        { keyword: "СПРИ", desc: "Спрете за момент и помислете, преди да дадете парите си или личните си данни. Не бързайте – измамниците разчитат на емоционални и прибързани решения." },
+        { keyword: "ПОМИСЛИ", desc: "Може ли да е измама? Имате право да откажете, да отхвърлите или да игнорирате всяка молба. Само измамниците ще се опитат да ви притиснат или да ви вкарат в паника." },
+        { keyword: "ПРОВЕРИ", desc: "Свържете се с банката си незабавно, ако подозирате измама. Проверете лиценза на компанията в официалните регистри. Обадете се на познати, ако получите съмнителна молба от тяхно име." }
+      ],
+      source: "Адаптирано от Take Five to Stop Fraud (UK)"
+    },
     alert: {
       title: "Критично предупреждение",
       description: "Този портал използва данни от Дирекция 'Киберпрестъпност' при ГДБОП-МВР. Ако ви канят да инвестирате в сайт от черния списък, прекъснете връзката незабавно."
@@ -85,7 +122,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Измами за \"възстановяване\"", desc: "След като сте загубили пари, ви се обаждат с обещание да ги върнат срещу заплащане. Това е повторна измама, насочена към същата жертва." },
         { title: "Фалшиви лицензи", desc: "Показват ви фалшиви сертификати от регулатори (КФН, FCA, CySEC). Винаги проверявайте лиценза директно в официалните регистри." },
         { title: "Тактика \"малка печалба\"", desc: "Позволяват ви да изтеглите малка сума, за да спечелят доверието ви. След това поискват значително по-голяма инвестиция, която никога няма да върнат." },
-        { title: "Непоискан контакт", desc: "Свързват се с вас без повод чрез телефон, социални мрежи или месинджър. Легитимни брокери не правят студени обаждания с обещания за бързи печалби." }
+        { title: "Непоискан контакт", desc: "Свързват се с вас без повод чрез телефон, социални мрежи или месинджър. Легитимни брокери не правят студени обаждания с обещания за бързи печалби." },
+        { title: "AI Deepfakes – клонирани гласове и видеа", desc: "Измамниците използват изкуствен интелект за клониране на гласове, снимки и видеа. Може да получите обаждане с гласа на ваш близък, който моли за спешна помощ. Винаги се обадете лично на човека за потвърждение." },
+        { title: "Фалшиви покупки и доставки", desc: "Обяви за несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Сайтът изчезва след няколко дни." }
       ],
       campaignLink: {
         text: "Кампания на КФН: Разпознай лицензирания инвестиционен посредник",
@@ -114,7 +153,10 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS фишинг (Smishing)", desc: "Фалшиви SMS съобщения от банки, куриерски фирми или данъчни служби. Съдържат линкове към фалшиви сайтове за кражба на лични и финансови данни.", example: "SMS \"Пратката ви е задържана, заплатете 2.99 лв. тук:\" с линк към фалшив сайт на Еконт или Спиди, който краде данните на банковата ви карта." },
         { title: "Измами в месинджъри", desc: "Фалшиви инвестиционни групи в WhatsApp, Viber или Telegram. Примамват с обещания за високоплатена дистанционна работа, или се свързват за \"купуване\" на обявен от вас артикул.", example: "Покана за Telegram група \"VIP Инвестиции\" с фалшиви скрийншоти на печалби, или съобщение за \"купуване\" на вашата обява в OLX с линк към фалшива страница." },
         { title: "Малуер (зловреден софтуер)", desc: "Троянски коне, рансъмуер, шпионски софтуер. Разпространяват се чрез пиратски софтуер, фалшиви реклами, компрометирани сайтове или злонамерени прикачени файлове.", example: "Изтегляте \"безплатен\" Photoshop от торент сайт, а вместо него получавате банков троянец, който краде паролите и финансовите ви данни." },
-        { title: "Неоторизиран отдалечен достъп", desc: "Измамници получават достъп до компютъра ви чрез фишинг, изтекли/откраднати пароли или злонамерени файлове. След това инсталират AnyDesk или TeamViewer за пълен контрол.", example: "\"Техническа поддръжка на Microsoft\" ви звъни и моли да инсталирате AnyDesk, за да \"поправят проблем\". След като получат достъп, крадат данни или инсталират malware." }
+        { title: "Неоторизиран отдалечен достъп", desc: "Измамници получават достъп до компютъра ви чрез фишинг, изтекли/откраднати пароли или злонамерени файлове. След това инсталират AnyDesk или TeamViewer за пълен контрол.", example: "\"Техническа поддръжка на Microsoft\" ви звъни и моли да инсталирате AnyDesk, за да \"поправят проблем\". След като получат достъп, крадат данни или инсталират malware." },
+        { title: "Пирамидални / Понци схеми", desc: "Инвестиционни схеми, при които печалбите на ранните участници се изплащат от вноските на новите. Схемата неизбежно рухва, когато новите инвеститори намалеят. Всички плащания обикновено са в криптовалута.", example: "BETL (Blue Technologies Lending) в България: обещаваше 20$/ден от пакет за 540$. Над 20 000 българи пострадаха, събрани са около 80 млн. лв. преди схемата да рухне през декември 2024 г." },
+        { title: "AI Deepfake измами", desc: "Изкуственият интелект позволява клониране на глас, лице и видео на реални хора. Измамниците създават убедителни обаждания или видео съобщения от \"ваши близки\" или \"известни личности\", които молят за пари или рекламират фалшиви инвестиции.", example: "Получавате видео обаждане от \"вашия син\" с неговия глас и лице, който моли за спешен превод от 5 000 лв. В действителност е AI-генериран deepfake. Винаги се обадете лично за потвърждение." },
+        { title: "Фалшиви покупки и доставки", desc: "Несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Фалшиви SMS от \"куриерски\" фирми водят към сайтове за кражба на данни.", example: "Реклама във Facebook за маркови маратонки на 70% отстъпка. Сайтът изглежда професионално, но след плащане стоката никога не пристига, а данните на картата ви са откраднати." }
       ]
     },
     technical: {
@@ -152,7 +194,8 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Архивиране на данни", desc: "Правете редовни резервни копия (backup) на важните си файлове на външен диск или облачно хранилище. Това е защита срещу рансъмуер и загуба на данни." },
         { title: "Следете банковите извлечения", desc: "Проверявайте редовно извлеченията на банковите си сметки и кредитни карти за неоторизирани транзакции. При съмнение информирайте банката незабавно." },
         { title: "Защитете Wi-Fi мрежата", desc: "Използвайте силна парола за домашния Wi-Fi. Избягвайте публични Wi-Fi мрежи за банкови операции или въвеждане на пароли." },
-        { title: "Образовайте близките си", desc: "Споделяйте знанията за измами с възрастни роднини и деца, които са по-уязвими. Един разговор може да предотврати загуба на хиляди левове." }
+        { title: "Образовайте близките си", desc: "Споделяйте знанията за измами с възрастни роднини и деца, които са по-уязвими. Един разговор може да предотврати загуба на хиляди левове." },
+        { title: "Внимавайте с AI Deepfakes", desc: "Изкуственият интелект може да клонира гласове и създава фалшиви видеа. Ако получите обаждане или видео от близък с молба за пари, затворете и им се обадете лично на познатия ви номер за потвърждение." }
       ]
     },
     registers: {
@@ -239,6 +282,43 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Protect Your Savings from Investment Fraud",
       description: "Your primary shield against financial abuse. Learn to recognize fraudulent platforms and invest securely."
     },
+    statistics: {
+      title: "The Scale of the Problem",
+      subtitle: "Real data on financial fraud in Bulgaria and Europe",
+      items: [
+        { value: "EUR 4 Billion", label: "Annual losses from online investment fraud across Europe", source: "Investigate Europe, 2024" },
+        { value: "USD 240 Million", label: "Total payments to a scam call center network operating from Sofia, Bulgaria", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "27,000+", label: "Victims of a single fraud network across 24 countries over 3 years", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "79", label: "Fake trading platforms used by a Sofia-based network, 62 flagged by regulators", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "20,000+", label: "Bulgarian citizens defrauded by the BETL pyramid scheme in 2024", source: "Radio Free Europe / Moreto.net, 2024" },
+        { value: "BGN 80 Million", label: "Approximate amount collected by BETL before payments ceased", source: "Moreto.net, 2024" }
+      ],
+      sourceNote: "Sources: Investigate Europe, BIRD.bg, Radio Free Europe, Moreto.net"
+    },
+    scamLifecycle: {
+      title: "How a Typical Investment Scam Works",
+      subtitle: "Step by step: from first contact to total loss",
+      steps: [
+        { label: "Ad / Cold Call", desc: "You see a social media ad or receive a call from a \"broker\" promising easy profits" },
+        { label: "Registration", desc: "You register on a fake platform and deposit a small amount (EUR 250-500)" },
+        { label: "Fake Profits", desc: "The platform shows rapid balance growth – it's all fabricated" },
+        { label: "Small Withdrawal", desc: "They allow you to withdraw a small sum to build your trust" },
+        { label: "Large Deposit", desc: "The \"broker\" convinces you to invest significantly more – EUR 5,000, 10,000 or more" },
+        { label: "Blocked", desc: "When you try to withdraw, they demand a \"27% tax\", \"unlocking fee\", or \"insurance\"" },
+        { label: "Total Loss", desc: "The platform goes offline or the broker vanishes. Your money is gone permanently" },
+        { label: "Recovery Scam", desc: "Months later, a \"law firm\" calls promising to recover your funds – for yet another fee" }
+      ]
+    },
+    stopChallengeProtect: {
+      title: "Stop. Challenge. Protect.",
+      subtitle: "Three simple steps that can save you from fraud",
+      items: [
+        { keyword: "STOP", desc: "Take a moment to stop and think before parting with your money or personal information. Don't rush – scammers rely on emotional, hasty decisions." },
+        { keyword: "CHALLENGE", desc: "Could it be fake? It's okay to reject, refuse, or ignore any request. Only criminals will try to rush or panic you into action." },
+        { keyword: "PROTECT", desc: "Contact your bank immediately if you suspect fraud. Verify the company's license through official registers. Call your relatives directly if you receive a suspicious request in their name." }
+      ],
+      source: "Adapted from Take Five to Stop Fraud (UK)"
+    },
     alert: {
       title: "Critical Warning",
       description: "This portal uses official data from the Cybercrime Directorate of GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior. If invited to invest via a site on the blacklist, terminate communication immediately."
@@ -257,7 +337,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "\"Recovery\" Scams", desc: "After you've lost money, someone contacts you promising to recover your funds for a fee. It's a second scam targeting the same victim." },
         { title: "Fake Regulatory Approval", desc: "They show fake certificates from regulators (FSC, FCA, CySEC). Always verify licenses directly through official registers." },
         { title: "\"Small Win\" Tactic", desc: "They allow you to withdraw a small amount to build trust. Then they request a significantly larger deposit that you'll never get back." },
-        { title: "Unsolicited Contact", desc: "They reach out to you uninvited via phone, social media, or messaging apps. Legitimate brokers don't make cold calls promising quick profits." }
+        { title: "Unsolicited Contact", desc: "They reach out to you uninvited via phone, social media, or messaging apps. Legitimate brokers don't make cold calls promising quick profits." },
+        { title: "AI Deepfakes – Cloned Voices & Videos", desc: "Scammers use artificial intelligence to clone voices, photos, and videos. You may receive a call with a family member's voice asking for urgent help. Always call the person directly to verify." },
+        { title: "Fake Purchases & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. The site disappears within days." }
       ],
       campaignLink: {
         text: "FSC Campaign: \"Recognize the Licensed Investment Intermediary\"",
@@ -286,7 +368,10 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS Phishing (Smishing)", desc: "Fake SMS messages from banks, courier services, or tax authorities. They contain links to fraudulent sites designed to steal your personal and financial data.", example: "SMS \"Your package is held, pay $2.99 here:\" with a link to a fake courier website that steals your card details." },
         { title: "Messaging App Scams", desc: "Fake investment groups on WhatsApp, Viber, or Telegram. They lure victims with promises of high-paying remote jobs, or contact you about \"buying\" items you've listed for sale.", example: "Telegram group invite for \"VIP Investments\" with fake profit screenshots, or a message about \"buying\" your online listing via a fake payment page." },
         { title: "Malware", desc: "Trojans, ransomware, spyware. Spread through pirated software, fake advertisements, compromised websites, or malicious email attachments.", example: "You download \"free\" Photoshop from a torrent site, but instead receive a banking trojan that steals your passwords and financial data." },
-        { title: "Unauthorized Remote Access", desc: "Scammers gain access to your PC via phishing, leaked/stolen credentials, or malicious files. They then install AnyDesk or TeamViewer for full control over your device.", example: "\"Microsoft Tech Support\" calls and asks you to install AnyDesk to \"fix a problem\". Once they have access, they steal data or install malware." }
+        { title: "Unauthorized Remote Access", desc: "Scammers gain access to your PC via phishing, leaked/stolen credentials, or malicious files. They then install AnyDesk or TeamViewer for full control over your device.", example: "\"Microsoft Tech Support\" calls and asks you to install AnyDesk to \"fix a problem\". Once they have access, they steal data or install malware." },
+        { title: "Pyramid / Ponzi Schemes", desc: "Investment schemes where early participants are paid with new investors' money. The scheme inevitably collapses when recruitment slows. All payments are typically in cryptocurrency to avoid banking oversight.", example: "BETL (Blue Technologies Lending) in Bulgaria: promised $20/day from a $540 package. Over 20,000 Bulgarians were defrauded, approximately BGN 80 million collected before the scheme collapsed in December 2024." },
+        { title: "AI Deepfake Scams", desc: "Artificial intelligence enables cloning of real people's voice, face, and video. Scammers create convincing calls or video messages from \"your relatives\" or \"celebrities\" requesting money or promoting fake investments.", example: "You receive a video call from \"your son\" with his voice and face, asking for an urgent transfer of $5,000. In reality, it's an AI-generated deepfake. Always call back personally to verify." },
+        { title: "Fake Purchase & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. Fake SMS from \"courier\" services lead to sites that steal your payment details.", example: "Facebook ad for branded sneakers at 70% off. The site looks professional, but after payment the goods never arrive and your card details are stolen." }
       ]
     },
     technical: {
@@ -324,7 +409,8 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Back Up Your Data", desc: "Make regular backups of important files to an external drive or cloud storage. This protects against ransomware and data loss." },
         { title: "Monitor Bank Statements", desc: "Regularly check your bank and credit card statements for unauthorized transactions. If anything looks suspicious, contact your bank immediately." },
         { title: "Secure Your Wi-Fi", desc: "Use a strong password for your home Wi-Fi. Avoid public Wi-Fi networks for banking operations or entering passwords." },
-        { title: "Educate Your Family", desc: "Share scam awareness with elderly relatives and children who may be more vulnerable. One conversation can prevent thousands in losses." }
+        { title: "Educate Your Family", desc: "Share scam awareness with elderly relatives and children who may be more vulnerable. One conversation can prevent thousands in losses." },
+        { title: "Beware of AI Deepfakes", desc: "AI can clone voices and create fake videos. If you receive a call or video from a loved one asking for money, hang up and call them directly on their known number to verify." }
       ]
     },
     registers: {
@@ -411,6 +497,43 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Schuetzen Sie Ihre Ersparnisse vor Anlagebetrug",
       description: "Ihr erster Schutzschild gegen Finanzbetrug. Lernen Sie, betruegerische Plattformen zu erkennen und sicher zu investieren."
     },
+    statistics: {
+      title: "Das Ausmass des Problems",
+      subtitle: "Echte Daten zu Finanzbetrug in Bulgarien und Europa",
+      items: [
+        { value: "4 Mrd. EUR", label: "Jaehrliche Verluste durch Online-Anlagebetrug in Europa", source: "Investigate Europe, 2024" },
+        { value: "240 Mio. USD", label: "Gesamtzahlungen an ein Betrugs-Callcenter-Netzwerk mit Sitz in Sofia", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "27.000+", label: "Opfer eines einzelnen Betrugsnetzwerks in 24 Laendern ueber 3 Jahre", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "79", label: "Gefaelschte Handelsplattformen eines Netzwerks in Sofia, 62 von Regulierungsbehoerden gemeldet", source: "BIRD.bg / Scam Empire, 2024" },
+        { value: "20.000+", label: "Bulgarische Buerger, die 2024 durch das BETL-Pyramidensystem betrogen wurden", source: "Radio Free Europe / Moreto.net, 2024" },
+        { value: "80 Mio. BGN", label: "Geschaetzter Betrag, der von BETL vor Einstellung der Zahlungen gesammelt wurde", source: "Moreto.net, 2024" }
+      ],
+      sourceNote: "Quellen: Investigate Europe, BIRD.bg, Radio Free Europe, Moreto.net"
+    },
+    scamLifecycle: {
+      title: "Wie ein typischer Anlagebetrug funktioniert",
+      subtitle: "Schritt fuer Schritt: vom Erstkontakt bis zum Totalverlust",
+      steps: [
+        { label: "Werbung / Kaltakquise", desc: "Sie sehen eine Social-Media-Werbung oder erhalten einen Anruf von einem \"Broker\" mit Versprechen leichter Gewinne" },
+        { label: "Registrierung", desc: "Sie registrieren sich auf einer gefaelschten Plattform und zahlen einen kleinen Betrag ein (250-500 EUR)" },
+        { label: "Gefaelschte Gewinne", desc: "Die Plattform zeigt schnelles Wachstum Ihres Guthabens – alles ist gefaelscht" },
+        { label: "Kleine Auszahlung", desc: "Sie duerfen einen kleinen Betrag abheben, um Ihr Vertrauen zu gewinnen" },
+        { label: "Grosse Einzahlung", desc: "Der \"Broker\" ueberredet Sie, deutlich mehr zu investieren – 5.000, 10.000 EUR oder mehr" },
+        { label: "Blockierung", desc: "Bei Auszahlungsversuchen fordern sie eine \"27% Steuer\", \"Freischaltungsgebuehr\" oder \"Versicherung\"" },
+        { label: "Totalverlust", desc: "Die Plattform geht offline oder der Broker verschwindet. Ihr Geld ist unwiederbringlich verloren" },
+        { label: "Rueckgewinnungsbetrug", desc: "Monate spaeter ruft eine \"Anwaltskanzlei\" an und verspricht, Ihr Geld zurueckzuholen – gegen eine weitere Gebuehr" }
+      ]
+    },
+    stopChallengeProtect: {
+      title: "Stopp. Hinterfragen. Schuetzen.",
+      subtitle: "Drei einfache Schritte, die Sie vor Betrug bewahren koennen",
+      items: [
+        { keyword: "STOPP", desc: "Nehmen Sie sich einen Moment Zeit zum Nachdenken, bevor Sie Geld oder persoenliche Daten weitergeben. Hetzen Sie nicht – Betrueger setzen auf emotionale, uebereilte Entscheidungen." },
+        { keyword: "HINTERFRAGEN", desc: "Koennte es Betrug sein? Es ist voellig in Ordnung, Anfragen abzulehnen oder zu ignorieren. Nur Kriminelle werden versuchen, Sie unter Druck zu setzen oder in Panik zu versetzen." },
+        { keyword: "SCHUETZEN", desc: "Kontaktieren Sie sofort Ihre Bank, wenn Sie Betrug vermuten. Ueberpruefen Sie die Lizenz des Unternehmens in offiziellen Registern. Rufen Sie Angehoerige direkt an, wenn Sie eine verdaechtige Anfrage in deren Namen erhalten." }
+      ],
+      source: "Adaptiert von Take Five to Stop Fraud (UK)"
+    },
     alert: {
       title: "Kritische Warnung",
       description: "Dieses Portal verwendet offizielle Daten der Direktion Cyberkriminalitaet des GDBOP (Generaldirektion zur Bekaempfung der Organisierten Kriminalitaet), bulgarisches Innenministerium. Wenn Sie aufgefordert werden, ueber eine Seite auf der schwarzen Liste zu investieren, brechen Sie den Kontakt sofort ab."
@@ -429,7 +552,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "\"Rueckgewinnungs\"-Betrug", desc: "Nachdem Sie Geld verloren haben, kontaktiert Sie jemand und verspricht, Ihr Geld gegen eine Gebuehr zurueckzuholen. Es ist ein zweiter Betrug am selben Opfer." },
         { title: "Gefaelschte Lizenzen", desc: "Sie zeigen gefaelschte Zertifikate von Regulierungsbehoerden (FSC, FCA, CySEC). Ueberpruefen Sie Lizenzen immer direkt in offiziellen Registern." },
         { title: "\"Kleiner Gewinn\"-Taktik", desc: "Sie erlauben eine kleine Auszahlung, um Vertrauen aufzubauen. Dann fordern sie eine deutlich groessere Einzahlung, die Sie nie zurueckbekommen." },
-        { title: "Unaufgeforderte Kontaktaufnahme", desc: "Sie melden sich ungefragt per Telefon, Social Media oder Messenger-Apps. Serioese Broker machen keine Kaltakquise mit Versprechen schneller Gewinne." }
+        { title: "Unaufgeforderte Kontaktaufnahme", desc: "Sie melden sich ungefragt per Telefon, Social Media oder Messenger-Apps. Serioese Broker machen keine Kaltakquise mit Versprechen schneller Gewinne." },
+        { title: "AI Deepfakes – Geklonte Stimmen & Videos", desc: "Betrueger nutzen kuenstliche Intelligenz zum Klonen von Stimmen, Fotos und Videos. Sie koennten einen Anruf mit der Stimme eines Familienmitglieds erhalten, das um dringende Hilfe bittet. Rufen Sie die Person immer direkt an." },
+        { title: "Gefaelschte Kaeufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnaeppchenpreisen in sozialen Medien oder gefaelschten Online-Shops. Sie zahlen, erhalten aber nie die Ware. Die Seite verschwindet innerhalb von Tagen." }
       ],
       campaignLink: {
         text: "FSC-Kampagne: Den lizenzierten Anlagevermittler erkennen",
@@ -458,7 +583,10 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS-Phishing (Smishing)", desc: "Gefaelschte SMS von Banken, Kurierdiensten oder Steuerbehoerden. Sie enthalten Links zu betruegerischen Seiten zum Diebstahl Ihrer persoenlichen und finanziellen Daten.", example: "SMS \"Ihr Paket wird zurueckgehalten, zahlen Sie 2,99 EUR hier:\" mit Link zu einer gefaelschten Kurier-Website, die Ihre Kartendaten stiehlt." },
         { title: "Messenger-Betrug", desc: "Gefaelschte Investmentgruppen auf WhatsApp, Viber oder Telegram. Sie locken mit Versprechen von gut bezahlter Fernarbeit oder kontaktieren Sie wegen des \"Kaufs\" Ihrer zum Verkauf angebotenen Artikel.", example: "Telegram-Gruppeneinladung fuer \"VIP-Investments\" mit gefaelschten Gewinn-Screenshots, oder eine Nachricht ueber den \"Kauf\" Ihres Online-Inserats ueber eine gefaelschte Zahlungsseite." },
         { title: "Malware (Schadsoftware)", desc: "Trojaner, Ransomware, Spyware. Verbreitung ueber Raubkopien, gefaelschte Werbung, kompromittierte Websites oder schaedliche E-Mail-Anhaenge.", example: "Sie laden \"kostenloses\" Photoshop von einer Torrent-Seite herunter, erhalten aber stattdessen einen Banking-Trojaner, der Ihre Passwoerter und Finanzdaten stiehlt." },
-        { title: "Unbefugter Fernzugriff", desc: "Betrueger erhalten Zugriff auf Ihren PC ueber Phishing, geleakte/gestohlene Zugangsdaten oder schaedliche Dateien. Dann installieren sie AnyDesk oder TeamViewer fuer volle Kontrolle ueber Ihr Geraet.", example: "\"Microsoft Tech Support\" ruft an und bittet Sie, AnyDesk zu installieren, um \"ein Problem zu beheben\". Sobald sie Zugang haben, stehlen sie Daten oder installieren Malware." }
+        { title: "Unbefugter Fernzugriff", desc: "Betrueger erhalten Zugriff auf Ihren PC ueber Phishing, geleakte/gestohlene Zugangsdaten oder schaedliche Dateien. Dann installieren sie AnyDesk oder TeamViewer fuer volle Kontrolle ueber Ihr Geraet.", example: "\"Microsoft Tech Support\" ruft an und bittet Sie, AnyDesk zu installieren, um \"ein Problem zu beheben\". Sobald sie Zugang haben, stehlen sie Daten oder installieren Malware." },
+        { title: "Pyramiden- / Ponzi-Systeme", desc: "Anlageschemata, bei denen fruehe Teilnehmer mit dem Geld neuer Investoren bezahlt werden. Das Schema bricht unweigerlich zusammen, wenn die Rekrutierung nachlässt. Alle Zahlungen erfolgen typischerweise in Kryptowährung.", example: "BETL (Blue Technologies Lending) in Bulgarien: versprach 20$/Tag aus einem 540$-Paket. Ueber 20.000 Bulgaren wurden betrogen, ca. 80 Mio. BGN gesammelt, bevor das Schema im Dezember 2024 zusammenbrach." },
+        { title: "AI-Deepfake-Betrug", desc: "Kuenstliche Intelligenz ermoeglicht das Klonen von Stimme, Gesicht und Video realer Personen. Betrueger erstellen ueberzeugende Anrufe oder Videonachrichten von \"Ihren Angehoerigen\" oder \"Prominenten\", die um Geld bitten.", example: "Sie erhalten einen Videoanruf von \"Ihrem Sohn\" mit seiner Stimme und seinem Gesicht, der um eine dringende Ueberweisung von 5.000 EUR bittet. In Wirklichkeit ist es ein KI-generierter Deepfake. Rufen Sie immer persoenlich zurueck." },
+        { title: "Gefaelschte Kaeufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnaeppchenpreisen in sozialen Medien oder gefaelschten Online-Shops. Sie zahlen, aber die Ware kommt nie an. Gefaelschte SMS von \"Kurierdiensten\" fuehren zu Datendiebstahl-Seiten.", example: "Facebook-Werbung fuer Marken-Sneaker mit 70% Rabatt. Die Seite sieht professionell aus, aber nach der Zahlung kommt die Ware nie an und Ihre Kartendaten werden gestohlen." }
       ]
     },
     technical: {
@@ -496,7 +624,8 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Daten sichern", desc: "Erstellen Sie regelmaessige Backups wichtiger Dateien auf einer externen Festplatte oder in der Cloud. Dies schuetzt vor Ransomware und Datenverlust." },
         { title: "Kontoauszuege pruefen", desc: "Ueberpruefen Sie regelmaessig Ihre Bank- und Kreditkartenauszuege auf unautorisierte Transaktionen. Bei Verdacht kontaktieren Sie sofort Ihre Bank." },
         { title: "WLAN absichern", desc: "Verwenden Sie ein starkes Passwort fuer Ihr Heim-WLAN. Vermeiden Sie oeffentliche WLAN-Netze fuer Bankgeschaefte oder die Eingabe von Passwoertern." },
-        { title: "Familie aufklaeren", desc: "Teilen Sie Ihr Wissen ueber Betrug mit aelteren Verwandten und Kindern, die moeglicherweise anfaelliger sind. Ein Gespraech kann Tausende an Verlusten verhindern." }
+        { title: "Familie aufklaeren", desc: "Teilen Sie Ihr Wissen ueber Betrug mit aelteren Verwandten und Kindern, die moeglicherweise anfaelliger sind. Ein Gespraech kann Tausende an Verlusten verhindern." },
+        { title: "Vorsicht vor AI-Deepfakes", desc: "KI kann Stimmen klonen und gefaelschte Videos erstellen. Wenn Sie einen Anruf oder ein Video von einem Angehoerigen mit einer Geldforderung erhalten, legen Sie auf und rufen Sie direkt unter der bekannten Nummer zurueck." }
       ]
     },
     registers: {

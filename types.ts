@@ -17,6 +17,23 @@ export interface ContentStrings {
     title: string;
     description: string;
   };
+  statistics: {
+    title: string;
+    subtitle: string;
+    items: Array<{ value: string; label: string; source: string }>;
+    sourceNote: string;
+  };
+  scamLifecycle: {
+    title: string;
+    subtitle: string;
+    steps: Array<{ label: string; desc: string }>;
+  };
+  stopChallengeProtect: {
+    title: string;
+    subtitle: string;
+    items: Array<{ keyword: string; desc: string }>;
+    source: string;
+  };
   alert: {
     title: string;
     description: string;

@@ -306,6 +306,84 @@ const App: React.FC = () => {
           </div>
         </section>
 
+        {/* Statistics */}
+        <section id="statistics" className="py-24 bg-slate-950/80 backdrop-blur-sm border-b border-slate-800">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-16 text-center">
+              <span className="text-red-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
+                {t('Статистика', 'Statistics', 'Statistiken')}
+              </span>
+              <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">{strings.statistics.title}</h2>
+              <p className="text-slate-400 text-lg max-w-3xl mx-auto">{strings.statistics.subtitle}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {strings.statistics.items.map((item, i) => (
+                <div key={i} className="p-8 rounded-lg border border-red-900/30 bg-red-950/20 hover:bg-red-950/40 hover:border-red-600/50 transition-all text-center group">
+                  <div className="text-4xl md:text-5xl font-black text-red-500 mb-3 group-hover:scale-105 transition-transform">{item.value}</div>
+                  <p className="text-slate-300 text-sm font-medium mb-3 leading-relaxed">{item.label}</p>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">{item.source}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">{strings.statistics.sourceNote}</p>
+          </div>
+        </section>
+
+        {/* Scam Lifecycle Flowchart */}
+        <section id="scam-lifecycle" className="py-24 bg-white/5 backdrop-blur-sm border-b border-white/10">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="mb-16 text-center">
+              <span className="text-orange-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
+                {t('Анатомия на измамата', 'Anatomy of a Scam', 'Anatomie eines Betrugs')}
+              </span>
+              <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">{strings.scamLifecycle.title}</h2>
+              <p className="text-slate-400 text-lg max-w-3xl mx-auto">{strings.scamLifecycle.subtitle}</p>
+            </div>
+
+            <div className="relative">
+              {/* Vertical line connecting steps */}
+              <div className="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-red-500 to-red-900 hidden sm:block"></div>
+
+              <div className="space-y-6">
+                {strings.scamLifecycle.steps.map((step, i) => (
+                  <div key={i} className="flex gap-6 items-start group relative">
+                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-black text-sm md:text-lg flex-shrink-0 border-2 z-10 transition-all ${i < 6 ? 'bg-orange-950/80 border-orange-500/50 text-orange-400 group-hover:border-orange-400 group-hover:bg-orange-900/50' : 'bg-red-950/80 border-red-500/50 text-red-400 group-hover:border-red-400 group-hover:bg-red-900/50'}`}>
+                      {i + 1}
+                    </div>
+                    <div className={`flex-1 p-6 rounded-lg border transition-all ${i < 6 ? 'border-orange-900/30 bg-orange-950/10 hover:bg-orange-950/30 hover:border-orange-500/30' : 'border-red-900/30 bg-red-950/10 hover:bg-red-950/30 hover:border-red-500/30'}`}>
+                      <h4 className={`font-bold text-lg mb-2 ${i < 6 ? 'text-orange-400' : 'text-red-400'}`}>{step.label}</h4>
+                      <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stop - Challenge - Protect */}
+        <section className="py-24 bg-slate-900/60 backdrop-blur-md border-b border-slate-800">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="mb-16 text-center">
+              <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">{strings.stopChallengeProtect.title}</h2>
+              <p className="text-slate-400 text-lg max-w-3xl mx-auto">{strings.stopChallengeProtect.subtitle}</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              {strings.stopChallengeProtect.items.map((item, i) => (
+                <div key={i} className={`p-8 rounded-lg border text-center transition-all hover:scale-[1.02] ${i === 0 ? 'border-red-600/50 bg-red-950/20 hover:bg-red-950/40' : i === 1 ? 'border-amber-600/50 bg-amber-950/20 hover:bg-amber-950/40' : 'border-emerald-600/50 bg-emerald-950/20 hover:bg-emerald-950/40'}`}>
+                  <div className={`text-5xl font-black mb-4 ${i === 0 ? 'text-red-500' : i === 1 ? 'text-amber-500' : 'text-emerald-500'}`}>{item.keyword}</div>
+                  <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">{strings.stopChallengeProtect.source}</p>
+          </div>
+        </section>
+
         {/* Common Scam Types */}
         <section id="scam-types" className="py-24 bg-slate-900/60 backdrop-blur-md border-b border-slate-800">
           <div className="max-w-7xl mx-auto px-6">
