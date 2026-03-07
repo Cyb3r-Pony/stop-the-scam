@@ -110,17 +110,17 @@ const App: React.FC = () => {
       <header className="sticky top-0 z-50 glass border-b border-blue-900/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div
-            className="flex items-center gap-4 cursor-pointer"
+            className="flex items-center gap-4 cursor-pointer min-w-0"
             onClick={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-700 flex items-center justify-center rounded shadow-sm">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-8 h-8 bg-blue-700 flex items-center justify-center rounded shadow-sm flex-shrink-0">
                 <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <div>
-                <h1 className="font-bold text-lg tracking-tight text-slate-900 leading-tight uppercase">{strings.header.title}</h1>
+              <div className="min-w-0">
+                <h1 className="font-bold text-lg tracking-tight text-slate-900 leading-tight uppercase truncate">{strings.header.title}</h1>
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@ const App: React.FC = () => {
           </nav>
 
           {/* Mobile Menu Button - visible only on mobile */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex md:hidden items-center gap-2 flex-shrink-0">
             {/* Language toggle for mobile */}
             <div className="flex bg-slate-200/50 p-0.5 rounded flex-shrink-0">
               <button

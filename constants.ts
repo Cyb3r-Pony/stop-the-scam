@@ -146,7 +146,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Сигурност на софтуера", desc: "Поддържайте актуална антивирусна програма и абсолютно избягвайте инсталирането на пиратски софтуер, който може да компрометира вашето устройство." },
         { title: "Пароли и Мениджъри", desc: "Използвайте уникални и сложни пароли за всяко приложение. Password Manager (мениджър на пароли) е най-добрият начин да ги съхранявате сигурно." },
         { title: "Доверие към брандове", desc: "Инвестирайте само чрез известни, лицензирани и международно разпознаваеми платформи. Проверявайте тяхната история и репутация." },
-        { title: "Игнорирайте реклами", desc: "Не се доверявайте на реклами в социални мрежи или Google при търсене на думи като 'купуване на крипто' или 'бърза инвестиция'." }
+        { title: "Игнорирайте реклами", desc: "Не се доверявайте на реклами в социални мрежи или Google при търсене на думи като 'купуване на крипто' или 'бърза инвестиция'." },
+        { title: "Проверявайте линкове", desc: "Преди да кликнете, задръжте курсора върху линка за да видите реалния URL адрес. Не отваряйте линкове от непознати имейли, SMS или съобщения в месинджъри." },
+        { title: "Редовни актуализации", desc: "Поддържайте операционната система, браузъра и приложенията актуални. Обновленията за сигурност поправят известни уязвимости, използвани от хакери." },
+        { title: "Архивиране на данни", desc: "Правете редовни резервни копия (backup) на важните си файлове на външен диск или облачно хранилище. Това е защита срещу рансъмуер и загуба на данни." },
+        { title: "Следете банковите извлечения", desc: "Проверявайте редовно извлеченията на банковите си сметки и кредитни карти за неоторизирани транзакции. При съмнение информирайте банката незабавно." },
+        { title: "Защитете Wi-Fi мрежата", desc: "Използвайте силна парола за домашния Wi-Fi. Избягвайте публични Wi-Fi мрежи за банкови операции или въвеждане на пароли." },
+        { title: "Образовайте близките си", desc: "Споделяйте знанията за измами с възрастни роднини и деца, които са по-уязвими. Един разговор може да предотврати загуба на хиляди левове." }
       ]
     },
     registers: {
@@ -312,7 +318,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Software Security", desc: "Use up-to-date antivirus software and strictly avoid pirated software, which can contain hidden threats like keyloggers." },
         { title: "Passwords & Managers", desc: "Use unique, complex passwords for every important account. A Password Manager is the safest way to store them." },
         { title: "Trust Verified Brands", desc: "Only invest through known, licensed, and internationally recognized financial institutions. Check their history." },
-        { title: "Ignore Search Ads", desc: "Don't trust social media ads or Google recommended results for keywords like 'buy crypto' or 'quick investment'." }
+        { title: "Ignore Search Ads", desc: "Don't trust social media ads or Google recommended results for keywords like 'buy crypto' or 'quick investment'." },
+        { title: "Verify Before You Click", desc: "Hover over links to check the real URL before clicking. Never open links from unknown emails, SMS, or messenger messages." },
+        { title: "Regular Software Updates", desc: "Keep your operating system, browser, and apps up to date. Security patches fix known vulnerabilities exploited by hackers." },
+        { title: "Back Up Your Data", desc: "Make regular backups of important files to an external drive or cloud storage. This protects against ransomware and data loss." },
+        { title: "Monitor Bank Statements", desc: "Regularly check your bank and credit card statements for unauthorized transactions. If anything looks suspicious, contact your bank immediately." },
+        { title: "Secure Your Wi-Fi", desc: "Use a strong password for your home Wi-Fi. Avoid public Wi-Fi networks for banking operations or entering passwords." },
+        { title: "Educate Your Family", desc: "Share scam awareness with elderly relatives and children who may be more vulnerable. One conversation can prevent thousands in losses." }
       ]
     },
     registers: {
@@ -478,7 +490,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Software-Sicherheit", desc: "Verwenden Sie aktuelle Antivirensoftware und vermeiden Sie unbedingt Raubkopien, die versteckte Bedrohungen enthalten koennen." },
         { title: "Passwoerter & Manager", desc: "Verwenden Sie einzigartige, komplexe Passwoerter fuer jedes Konto. Ein Passwort-Manager ist der sicherste Weg, sie zu speichern." },
         { title: "Vertrauenswuerdige Marken", desc: "Investieren Sie nur ueber bekannte, lizenzierte und international anerkannte Finanzinstitute. Pruefen Sie deren Geschichte." },
-        { title: "Werbung ignorieren", desc: "Vertrauen Sie keinen Anzeigen in sozialen Medien oder Google-Ergebnissen fuer Begriffe wie 'Krypto kaufen' oder 'schnelle Investition'." }
+        { title: "Werbung ignorieren", desc: "Vertrauen Sie keinen Anzeigen in sozialen Medien oder Google-Ergebnissen fuer Begriffe wie 'Krypto kaufen' oder 'schnelle Investition'." },
+        { title: "Links ueberpruefen", desc: "Bewegen Sie den Mauszeiger ueber Links, um die echte URL zu sehen, bevor Sie klicken. Oeffnen Sie keine Links aus unbekannten E-Mails, SMS oder Messenger-Nachrichten." },
+        { title: "Regelmaessige Updates", desc: "Halten Sie Betriebssystem, Browser und Apps aktuell. Sicherheitsupdates beheben bekannte Schwachstellen, die von Hackern ausgenutzt werden." },
+        { title: "Daten sichern", desc: "Erstellen Sie regelmaessige Backups wichtiger Dateien auf einer externen Festplatte oder in der Cloud. Dies schuetzt vor Ransomware und Datenverlust." },
+        { title: "Kontoauszuege pruefen", desc: "Ueberpruefen Sie regelmaessig Ihre Bank- und Kreditkartenauszuege auf unautorisierte Transaktionen. Bei Verdacht kontaktieren Sie sofort Ihre Bank." },
+        { title: "WLAN absichern", desc: "Verwenden Sie ein starkes Passwort fuer Ihr Heim-WLAN. Vermeiden Sie oeffentliche WLAN-Netze fuer Bankgeschaefte oder die Eingabe von Passwoertern." },
+        { title: "Familie aufklaeren", desc: "Teilen Sie Ihr Wissen ueber Betrug mit aelteren Verwandten und Kindern, die moeglicherweise anfaelliger sind. Ein Gespraech kann Tausende an Verlusten verhindern." }
       ]
     },
     registers: {
