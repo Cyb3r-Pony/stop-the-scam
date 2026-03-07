@@ -79,7 +79,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Натиск за решение", desc: "Измамниците винаги бързат – 'офертата изтича сега'. Те не искат да имате време да проучите лиценза им или да се консултирате с експерт." },
         { title: "Фалшиви препоръки", desc: "Снимки на известни личности (Илон Мъск, Григор Димитров) в измамни реклами. Тези хора никога не са рекламирали подобни платформи." },
         { title: "Нестандартни плащания", desc: "Искат плащания само в криптовалута или банкови преводи към сметки на физически лица, вместо към корпоративни сметки на брокери." },
-        { title: "Липса на прозрачност", desc: "Сайтът няма реален адрес, лиценз или данни за компанията. Ако информацията е скрита зад общи условия, вероятно е измама." }
+        { title: "Липса на прозрачност", desc: "Сайтът няма реален адрес, лиценз или данни за компанията. Ако информацията е скрита зад общи условия, вероятно е измама." },
+        { title: "Социално инженерство", desc: "Измамниците ви манипулират чрез ласкавост, фалшиво приятелство или романтика. Те изграждат доверие, преди да поискат пари или лични данни." },
+        { title: "Изолиране от близки", desc: "Предупреждават ви да не се консултирате с роднини, приятели или експерти. Целта е да няма кой да ви спре от \"инвестицията\"." },
+        { title: "Измами за \"възстановяване\"", desc: "След като сте загубили пари, ви се обаждат с обещание да ги върнат срещу заплащане. Това е повторна измама, насочена към същата жертва." },
+        { title: "Фалшиви лицензи", desc: "Показват ви фалшиви сертификати от регулатори (КФН, FCA, CySEC). Винаги проверявайте лиценза директно в официалните регистри." },
+        { title: "Тактика \"малка печалба\"", desc: "Позволяват ви да изтеглите малка сума, за да спечелят доверието ви. След това поискват значително по-голяма инвестиция, която никога няма да върнат." },
+        { title: "Непоискан контакт", desc: "Свързват се с вас без повод чрез телефон, социални мрежи или месинджър. Легитимни брокери не правят студени обаждания с обещания за бързи печалби." }
       ],
       campaignLink: {
         text: "Кампания на КФН: Разпознай лицензирания инвестиционен посредник",
@@ -93,6 +99,22 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { type: 'crypto', title: "Фалшива крипто търговия", desc: "Платформи с красиви графики, които показват фалшив баланс. Парите ви никога не се инвестират реално." },
         { type: 'stock', title: "Фалшива борса", desc: "Предлагат акции на Apple, Tesla или Amazon. Когато решите да теглите, ви искат 'такса за отблокиране'." },
         { type: 'recovery', title: "Измама за връщане на пари", desc: "Обаждат се след като сте били измамени, обещавайки помощ. Това е втора измама срещу същата жертва." }
+      ]
+    },
+    scamTypes: {
+      title: "Най-разпространени финансови измами",
+      subtitle: "Познаването на различните видове измами е първата стъпка към вашата защита",
+      items: [
+        { title: "Инвестиционни измами", desc: "Фалшиви платформи за търговия с форекс, акции или стоки. Обещават нереалистична доходност и показват фалшиви графики на печалба. Парите ви никога не се инвестират реално.", example: "Получавате обаждане от \"брокер\" на IG Markets, но сайтът е ig-markets-pro.com вместо истинския igmarkets.com." },
+        { title: "Компрометиране на бизнес имейл (BEC)", desc: "Измамниците имитират ръководители или бизнес партньори чрез фалшиви или компрометирани имейли. Нареждат спешен превод към \"нова сметка\" на доставчик.", example: "Имейл от \"шефа\" с молба да преведете 50 000 лв. към нова сметка за спешна сделка. Имейлът изглежда автентичен, но адресът е леко променен." },
+        { title: "Романтични измами", desc: "Изграждат фалшива романтична връзка онлайн в продължение на седмици или месеци. След като спечелят доверието ви, молят за пари поради \"спешен случай\".", example: "Нов познат от приложение за запознанства казва, че е заседнал в чужбина и се нуждае от пари за самолетен билет или медицинско лечение." },
+        { title: "Крипто измами", desc: "Фалшиви крипто борси, DeFi проекти и \"pump-and-dump\" схеми. Обещават бързо обогатяване чрез нови токени, mining платформи или \"уникални\" инвестиционни възможности.", example: "Реклама в социални мрежи за \"Нов Bitcoin ETF с 500% гарантирана печалба\" води към фалшив сайт, имитиращ истинска борса." },
+        { title: "Фишинг", desc: "Фалшиви уебсайтове или имейли, копиращи банки, доставчици или институции. Целят кражба на пароли, лични данни или банкова/финансова информация.", example: "Имейл от \"Вашата банка\" с линк за \"потвърждение на профила\" води към идентичен, но фалшив сайт, който краде вашите данни за вход." },
+        { title: "Зловредни прикачени файлове", desc: "Имейли с прикачени .pdf, .docx или .exe файлове, съдържащи malware (зловреден софтуер). При отваряне инфектират устройството ви с keylogger, ransomware или троянец.", example: "Имейл \"Фактура от DHL\" или \"Документ от НАП\" с прикачен ZIP файл, който при отваряне инсталира keylogger на компютъра ви." },
+        { title: "SMS фишинг (Smishing)", desc: "Фалшиви SMS съобщения от банки, куриерски фирми или данъчни служби. Съдържат линкове към фалшиви сайтове за кражба на лични и финансови данни.", example: "SMS \"Пратката ви е задържана, заплатете 2.99 лв. тук:\" с линк към фалшив сайт на Еконт или Спиди, който краде данните на банковата ви карта." },
+        { title: "Измами в месинджъри", desc: "Фалшиви инвестиционни групи в WhatsApp, Viber или Telegram. Примамват с обещания за високоплатена дистанционна работа, или се свързват за \"купуване\" на обявен от вас артикул.", example: "Покана за Telegram група \"VIP Инвестиции\" с фалшиви скрийншоти на печалби, или съобщение за \"купуване\" на вашата обява в OLX с линк към фалшива страница." },
+        { title: "Малуер (зловреден софтуер)", desc: "Троянски коне, рансъмуер, шпионски софтуер. Разпространяват се чрез пиратски софтуер, фалшиви реклами, компрометирани сайтове или злонамерени прикачени файлове.", example: "Изтегляте \"безплатен\" Photoshop от торент сайт, а вместо него получавате банков троянец, който краде паролите и финансовите ви данни." },
+        { title: "Неоторизиран отдалечен достъп", desc: "Измамници получават достъп до компютъра ви чрез фишинг, изтекли/откраднати пароли или злонамерени файлове. След това инсталират AnyDesk или TeamViewer за пълен контрол.", example: "\"Техническа поддръжка на Microsoft\" ви звъни и моли да инсталирате AnyDesk, за да \"поправят проблем\". След като получат достъп, крадат данни или инсталират malware." }
       ]
     },
     technical: {
@@ -223,7 +245,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Pressure to Decide", desc: "Scammers are always in a hurry – 'offer expires now'. They don't want you to have time to research or consult others." },
         { title: "Fake Testimonials", desc: "AI-generated or stolen photos of celebrities (Elon Musk) in ads. These people have no connection to these platforms." },
         { title: "Unusual Payments", desc: "Requests for crypto-only payments or bank transfers to personal accounts rather than corporate ones." },
-        { title: "Lack of Transparency", desc: "No physical address, license info, or registration details. If the info is hidden, it's a red flag." }
+        { title: "Lack of Transparency", desc: "No physical address, license info, or registration details. If the info is hidden, it's a red flag." },
+        { title: "Social Engineering", desc: "Scammers manipulate through flattery, fake friendship, or romance. They build trust over time before requesting money or personal data." },
+        { title: "Isolation from Others", desc: "They warn you not to consult family, friends, or financial experts. The goal is to prevent anyone from stopping your \"investment\"." },
+        { title: "\"Recovery\" Scams", desc: "After you've lost money, someone contacts you promising to recover your funds for a fee. It's a second scam targeting the same victim." },
+        { title: "Fake Regulatory Approval", desc: "They show fake certificates from regulators (FSC, FCA, CySEC). Always verify licenses directly through official registers." },
+        { title: "\"Small Win\" Tactic", desc: "They allow you to withdraw a small amount to build trust. Then they request a significantly larger deposit that you'll never get back." },
+        { title: "Unsolicited Contact", desc: "They reach out to you uninvited via phone, social media, or messaging apps. Legitimate brokers don't make cold calls promising quick profits." }
       ],
       campaignLink: {
         text: "FSC Campaign: \"Recognize the Licensed Investment Intermediary\"",
@@ -237,6 +265,22 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { type: 'crypto', title: "Fake Crypto Trading", desc: "Platforms with fake charts showing massive growth. Your money is never actually invested." },
         { type: 'stock', title: "Fake Stock Exchange", desc: "Offering Apple/Tesla stocks. They later demand 'unlocking fees' to withdraw funds." },
         { type: 'recovery', title: "Recovery Scams", desc: "Someone calls promising to recover your lost money for a fee. It's a second scam targeting the same victim." }
+      ]
+    },
+    scamTypes: {
+      title: "Most Common Financial Scams",
+      subtitle: "Knowing the different types of scams is the first step toward protecting yourself",
+      items: [
+        { title: "Investment Fraud", desc: "Fake platforms for trading forex, stocks, or commodities. They promise unrealistic returns and show fabricated profit charts. Your money is never actually invested.", example: "You receive a call from a \"broker\" at IG Markets, but the website is ig-markets-pro.com instead of the real igmarkets.com." },
+        { title: "Business Email Compromise (BEC)", desc: "Scammers impersonate executives or business partners via spoofed or compromised emails. They request urgent wire transfers to \"new supplier accounts\".", example: "An email from your \"CEO\" asking you to transfer $50,000 to a new account for an urgent deal. The email looks authentic but the address is slightly altered." },
+        { title: "Romance Scams", desc: "They build a fake romantic relationship online over weeks or months. After gaining your trust, they ask for money due to an \"emergency\".", example: "A new acquaintance from a dating app says they're stranded abroad and need money for a plane ticket or medical treatment." },
+        { title: "Crypto Investment Scams", desc: "Fake crypto exchanges, DeFi projects, and pump-and-dump schemes. They promise quick wealth through new tokens, mining platforms, or \"exclusive\" investment opportunities.", example: "Social media ad for a \"New Bitcoin ETF with 500% guaranteed returns\" leads to a fake website mimicking a real exchange." },
+        { title: "Phishing", desc: "Fake websites or emails mimicking banks, delivery services, or institutions. They aim to steal passwords, personal data, or banking/financial information.", example: "Email from \"Your Bank\" with a link to \"verify your profile\" leads to an identical but fraudulent site that steals your login credentials." },
+        { title: "Malicious Email Attachments", desc: "Emails with .pdf, .docx, or .exe attachments containing malware. Opening them infects your device with keyloggers, ransomware, or trojans.", example: "Email titled \"Invoice from DHL\" or \"Tax Document\" with a ZIP attachment that installs a keylogger on your computer when opened." },
+        { title: "SMS Phishing (Smishing)", desc: "Fake SMS messages from banks, courier services, or tax authorities. They contain links to fraudulent sites designed to steal your personal and financial data.", example: "SMS \"Your package is held, pay $2.99 here:\" with a link to a fake courier website that steals your card details." },
+        { title: "Messaging App Scams", desc: "Fake investment groups on WhatsApp, Viber, or Telegram. They lure victims with promises of high-paying remote jobs, or contact you about \"buying\" items you've listed for sale.", example: "Telegram group invite for \"VIP Investments\" with fake profit screenshots, or a message about \"buying\" your online listing via a fake payment page." },
+        { title: "Malware", desc: "Trojans, ransomware, spyware. Spread through pirated software, fake advertisements, compromised websites, or malicious email attachments.", example: "You download \"free\" Photoshop from a torrent site, but instead receive a banking trojan that steals your passwords and financial data." },
+        { title: "Unauthorized Remote Access", desc: "Scammers gain access to your PC via phishing, leaked/stolen credentials, or malicious files. They then install AnyDesk or TeamViewer for full control over your device.", example: "\"Microsoft Tech Support\" calls and asks you to install AnyDesk to \"fix a problem\". Once they have access, they steal data or install malware." }
       ]
     },
     technical: {
@@ -367,7 +411,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Entscheidungsdruck", desc: "Betrueger draengen immer zur Eile – 'das Angebot laeuft jetzt ab'. Sie wollen nicht, dass Sie Zeit haben, die Lizenz zu pruefen." },
         { title: "Gefaelschte Empfehlungen", desc: "KI-generierte oder gestohlene Fotos von Prominenten (Elon Musk) in Werbung. Diese Personen haben keine Verbindung zu diesen Plattformen." },
         { title: "Unuebliche Zahlungsmethoden", desc: "Nur Krypto-Zahlungen oder Bankueberweisungen auf Privatkonten statt auf Firmenkonten von lizenzierten Brokern." },
-        { title: "Fehlende Transparenz", desc: "Keine physische Adresse, keine Lizenzinformationen oder Registrierungsdaten. Wenn die Informationen verborgen sind, ist es ein Warnsignal." }
+        { title: "Fehlende Transparenz", desc: "Keine physische Adresse, keine Lizenzinformationen oder Registrierungsdaten. Wenn die Informationen verborgen sind, ist es ein Warnsignal." },
+        { title: "Social Engineering", desc: "Betrueger manipulieren durch Schmeichelei, vorgetaeuschte Freundschaft oder Romantik. Sie bauen Vertrauen auf, bevor sie Geld oder persoenliche Daten verlangen." },
+        { title: "Isolation von anderen", desc: "Sie warnen Sie davor, Familie, Freunde oder Finanzexperten zu konsultieren. Das Ziel ist, niemanden an Ihrer \"Investition\" zweifeln zu lassen." },
+        { title: "\"Rueckgewinnungs\"-Betrug", desc: "Nachdem Sie Geld verloren haben, kontaktiert Sie jemand und verspricht, Ihr Geld gegen eine Gebuehr zurueckzuholen. Es ist ein zweiter Betrug am selben Opfer." },
+        { title: "Gefaelschte Lizenzen", desc: "Sie zeigen gefaelschte Zertifikate von Regulierungsbehoerden (FSC, FCA, CySEC). Ueberpruefen Sie Lizenzen immer direkt in offiziellen Registern." },
+        { title: "\"Kleiner Gewinn\"-Taktik", desc: "Sie erlauben eine kleine Auszahlung, um Vertrauen aufzubauen. Dann fordern sie eine deutlich groessere Einzahlung, die Sie nie zurueckbekommen." },
+        { title: "Unaufgeforderte Kontaktaufnahme", desc: "Sie melden sich ungefragt per Telefon, Social Media oder Messenger-Apps. Serioese Broker machen keine Kaltakquise mit Versprechen schneller Gewinne." }
       ],
       campaignLink: {
         text: "FSC-Kampagne: Den lizenzierten Anlagevermittler erkennen",
@@ -381,6 +431,22 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { type: 'crypto', title: "Gefaelschter Kryptohandel", desc: "Plattformen mit gefaelschten Diagrammen und massivem Wachstum. Ihr Geld wird nie tatsaechlich investiert." },
         { type: 'stock', title: "Gefaelschte Boerse", desc: "Angebote fuer Apple-/Tesla-Aktien. Spaeter verlangen sie 'Freischaltungsgebuehren' fuer Auszahlungen." },
         { type: 'recovery', title: "Rueckgewinnungsbetrug", desc: "Jemand ruft an und verspricht, Ihr verlorenes Geld zurueckzuholen – gegen eine Gebuehr. Es ist ein zweiter Betrug am selben Opfer." }
+      ]
+    },
+    scamTypes: {
+      title: "Die haeufigsten Finanzbetrugsarten",
+      subtitle: "Das Wissen ueber verschiedene Betrugsarten ist der erste Schritt zu Ihrem Schutz",
+      items: [
+        { title: "Anlagebetrug", desc: "Gefaelschte Plattformen fuer den Handel mit Forex, Aktien oder Rohstoffen. Sie versprechen unrealistische Renditen und zeigen gefaelschte Gewinndiagramme. Ihr Geld wird nie tatsaechlich investiert.", example: "Sie erhalten einen Anruf von einem \"Broker\" bei IG Markets, aber die Website ist ig-markets-pro.com statt der echten igmarkets.com." },
+        { title: "Business-E-Mail-Betrug (BEC)", desc: "Betrueger geben sich per gefaelschter oder kompromittierter E-Mail als Fuehrungskraefte oder Geschaeftspartner aus. Sie fordern dringende Ueberweisungen auf \"neue Lieferantenkonten\".", example: "Eine E-Mail vom \"Chef\" mit der Bitte, 50.000 EUR fuer ein dringendes Geschaeft zu ueberweisen. Die E-Mail sieht authentisch aus, aber die Adresse ist leicht veraendert." },
+        { title: "Romantik-Betrug", desc: "Sie bauen online ueber Wochen oder Monate eine falsche romantische Beziehung auf. Nachdem sie Ihr Vertrauen gewonnen haben, bitten sie wegen eines \"Notfalls\" um Geld.", example: "Eine neue Bekanntschaft aus einer Dating-App sagt, sie sitze im Ausland fest und brauche Geld fuer ein Flugticket oder eine medizinische Behandlung." },
+        { title: "Krypto-Betrug", desc: "Gefaelschte Krypto-Boersen, DeFi-Projekte und Pump-and-Dump-Schemata. Sie versprechen schnellen Reichtum durch neue Token, Mining-Plattformen oder \"exklusive\" Investitionsmoeglichkeiten.", example: "Social-Media-Werbung fuer einen \"Neuen Bitcoin-ETF mit 500% garantierter Rendite\" fuehrt zu einer gefaelschten Website, die eine echte Boerse imitiert." },
+        { title: "Phishing", desc: "Gefaelschte Websites oder E-Mails, die Banken, Lieferdienste oder Behoerden imitieren. Ziel ist der Diebstahl von Passwoertern, persoenlichen Daten oder Bank-/Finanzinformationen.", example: "E-Mail von \"Ihrer Bank\" mit einem Link zur \"Profilbestaetigung\" fuehrt zu einer identischen, aber betruegerischen Seite, die Ihre Zugangsdaten stiehlt." },
+        { title: "Schaedliche E-Mail-Anhaenge", desc: "E-Mails mit .pdf-, .docx- oder .exe-Anhaengen, die Malware enthalten. Beim Oeffnen wird Ihr Geraet mit Keyloggern, Ransomware oder Trojanern infiziert.", example: "E-Mail \"Rechnung von DHL\" oder \"Steuerdokument\" mit einem ZIP-Anhang, der beim Oeffnen einen Keylogger auf Ihrem Computer installiert." },
+        { title: "SMS-Phishing (Smishing)", desc: "Gefaelschte SMS von Banken, Kurierdiensten oder Steuerbehoerden. Sie enthalten Links zu betruegerischen Seiten zum Diebstahl Ihrer persoenlichen und finanziellen Daten.", example: "SMS \"Ihr Paket wird zurueckgehalten, zahlen Sie 2,99 EUR hier:\" mit Link zu einer gefaelschten Kurier-Website, die Ihre Kartendaten stiehlt." },
+        { title: "Messenger-Betrug", desc: "Gefaelschte Investmentgruppen auf WhatsApp, Viber oder Telegram. Sie locken mit Versprechen von gut bezahlter Fernarbeit oder kontaktieren Sie wegen des \"Kaufs\" Ihrer zum Verkauf angebotenen Artikel.", example: "Telegram-Gruppeneinladung fuer \"VIP-Investments\" mit gefaelschten Gewinn-Screenshots, oder eine Nachricht ueber den \"Kauf\" Ihres Online-Inserats ueber eine gefaelschte Zahlungsseite." },
+        { title: "Malware (Schadsoftware)", desc: "Trojaner, Ransomware, Spyware. Verbreitung ueber Raubkopien, gefaelschte Werbung, kompromittierte Websites oder schaedliche E-Mail-Anhaenge.", example: "Sie laden \"kostenloses\" Photoshop von einer Torrent-Seite herunter, erhalten aber stattdessen einen Banking-Trojaner, der Ihre Passwoerter und Finanzdaten stiehlt." },
+        { title: "Unbefugter Fernzugriff", desc: "Betrueger erhalten Zugriff auf Ihren PC ueber Phishing, geleakte/gestohlene Zugangsdaten oder schaedliche Dateien. Dann installieren sie AnyDesk oder TeamViewer fuer volle Kontrolle ueber Ihr Geraet.", example: "\"Microsoft Tech Support\" ruft an und bittet Sie, AnyDesk zu installieren, um \"ein Problem zu beheben\". Sobald sie Zugang haben, stehlen sie Daten oder installieren Malware." }
       ]
     },
     technical: {

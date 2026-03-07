@@ -127,11 +127,12 @@ const App: React.FC = () => {
 
           {/* Desktop Navigation - hidden on mobile */}
           <nav className="hidden md:flex items-center gap-2 lg:gap-4 overflow-x-auto no-scrollbar py-2">
-            <button onClick={() => scrollToSection('blacklist')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
+            <button onClick={() => scrollToSection('scam-types')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-amber-500 transition-colors whitespace-nowrap">{t('Измами', 'Scams', 'Betrug')}</button>
             <button onClick={() => scrollToSection('warning-signs')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Признаци', 'Signs', 'Warnzeichen')}</button>
             <button onClick={() => scrollToSection('attention')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Мерки', 'Markers', 'Merkmale')}</button>
             <button onClick={() => scrollToSection('protection')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Предпазване', 'Protection', 'Schutz')}</button>
             <button onClick={() => scrollToSection('registers')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Регистри', 'Registers', 'Register')}</button>
+            <button onClick={() => scrollToSection('blacklist')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
             <button onClick={() => scrollToSection('phishing')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
             <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
             <button onClick={() => scrollToSection('victim')} className="px-3 py-1 text-[10px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
@@ -208,10 +209,10 @@ const App: React.FC = () => {
         >
           <nav className="flex flex-col border-t border-blue-900/20 bg-white/80 backdrop-blur-md">
             <button
-              onClick={() => { scrollToSection('blacklist'); setMobileMenuOpen(false); }}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
+              onClick={() => { scrollToSection('scam-types'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-amber-500 hover:bg-amber-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
+              {t('Видове измами', 'Types of Scams', 'Betrugsarten')}
             </button>
             <button
               onClick={() => { scrollToSection('warning-signs'); setMobileMenuOpen(false); }}
@@ -236,6 +237,12 @@ const App: React.FC = () => {
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Регистри', 'Registers', 'Register')}
+            </button>
+            <button
+              onClick={() => { scrollToSection('blacklist'); setMobileMenuOpen(false); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
             </button>
             <button
               onClick={() => { scrollToSection('phishing'); setMobileMenuOpen(false); }}
@@ -263,7 +270,7 @@ const App: React.FC = () => {
         {currentPage === 'quiz' ? (
           <Quiz lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         ) : (
-        <>
+        <div key={lang}>
         {/* Section A: Institutional Guidance (Hero) */}
         <section className="relative py-24 px-6 overflow-hidden">
           <div className="max-w-5xl mx-auto">
@@ -299,63 +306,35 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Section B: Blacklist - Centered Design */}
-        <section id="blacklist" className="py-24 bg-slate-950/80 backdrop-blur-sm border-y border-slate-900 selection:bg-red-500 selection:text-white">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <div className="mb-12 text-center flex flex-col items-center">
-              <span className="text-red-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
-                {strings.alert.title}
+        {/* Common Scam Types */}
+        <section id="scam-types" className="py-24 bg-slate-900/60 backdrop-blur-md border-b border-slate-800">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-16 text-center">
+              <span className="text-amber-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
+                {t('Видове измами', 'Types of Fraud', 'Betrugsarten')}
               </span>
-              <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
-                {strings.domains.title}
-              </h2>
-              <div className="p-6 rounded-lg bg-red-950/30 border border-red-600/50 text-red-100 text-sm leading-relaxed shadow-[0_0_20px_rgba(185,28,28,0.2)] max-w-4xl mx-auto">
-                <strong className="block text-red-400 uppercase tracking-wider text-xs mb-2">
-                  {t('ВНИМАНИЕ:', 'NOTICE:', 'ACHTUNG:')}
-                </strong>
-                {strings.alert.description}
-              </div>
+              <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">{strings.scamTypes.title}</h2>
+              <p className="text-slate-400 text-lg max-w-3xl mx-auto">{strings.scamTypes.subtitle}</p>
             </div>
 
-            <div className="space-y-6 w-full flex flex-col items-center">
-              <div className="relative w-full max-w-xl mx-auto">
-                <input 
-                  type="text"
-                  placeholder={strings.domains.placeholder}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full bg-slate-900/50 border border-slate-800 text-white p-4 pl-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600/50 transition-all text-md mono"
-                />
-                <svg className="w-5 h-5 text-slate-600 absolute left-4 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-
-              <div className="bg-slate-900/40 rounded-lg border border-slate-800 overflow-hidden backdrop-blur-md w-full">
-                <div className="max-h-[600px] overflow-y-auto custom-scrollbar p-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {filteredDomains.map((domain, i) => (
-                      <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-red-400 flex flex-col group/item hover:border-red-600 transition-all hover:bg-slate-800">
-                        <span className="tracking-tight truncate" title={domain}>{domain}</span>
-                        <span className="text-[8px] uppercase font-bold text-slate-600 mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                          {t('ЧЕРЕН СПИСЪК', 'BLACKLISTED', 'GESPERRT')}
-                        </span>
-                      </div>
-                    ))}
-                    {filteredDomains.length === 0 && (
-                      <div className="col-span-full py-20 text-center">
-                        <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-                          {t('Няма намерени записи', 'No records matching query', 'Keine passenden Eintraege gefunden')}
-                        </p>
-                      </div>
-                    )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {strings.scamTypes.items.map((item, i) => (
+                <div key={i} className="relative p-8 rounded-lg border border-slate-700/50 bg-slate-950/50 hover:bg-slate-950/80 hover:border-amber-500/30 transition-all group">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-10 h-10 rounded bg-amber-600/20 text-amber-500 flex items-center justify-center font-black text-sm flex-shrink-0 border border-amber-600/30 group-hover:bg-amber-600/30 transition-colors">
+                      {i + 1}
+                    </div>
+                    <h4 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors pt-1.5">{item.title}</h4>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed text-sm mb-4">{item.desc}</p>
+                  <div className="p-3 rounded bg-amber-950/20 border border-amber-900/30">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-600 block mb-1">
+                      {t('Пример:', 'Example:', 'Beispiel:')}
+                    </span>
+                    <p className="text-amber-200/70 text-xs leading-relaxed italic">{item.example}</p>
                   </div>
                 </div>
-                <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
-                  <span>{t('Източник: cybercrime.bg', 'Source: cybercrime.bg', 'Quelle: cybercrime.bg')}</span>
-                  <span>{filteredDomains.length} {t('Намерени', 'Entries Filtered', 'Eintraege gefiltert')}</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -364,7 +343,7 @@ const App: React.FC = () => {
         <section id="warning-signs" className="py-24 bg-white/5 backdrop-blur-sm border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-16">
-              <span className="text-blue-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">Psychological Patterns</span>
+              <span className="text-blue-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">{t('Психологически модели', 'Psychological Patterns', 'Psychologische Muster')}</span>
               <h2 className="text-4xl font-extrabold text-white tracking-tight">{strings.warningSigns.title}</h2>
             </div>
 
@@ -497,6 +476,67 @@ const App: React.FC = () => {
           </div>
         </section>
 
+        {/* Blacklist */}
+        <section id="blacklist" className="py-24 bg-slate-950/80 backdrop-blur-sm border-y border-slate-900 selection:bg-red-500 selection:text-white">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <div className="mb-12 text-center flex flex-col items-center">
+              <span className="text-red-500 font-black text-xs uppercase tracking-[0.3em] block mb-4">
+                {strings.alert.title}
+              </span>
+              <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
+                {strings.domains.title}
+              </h2>
+              <div className="p-6 rounded-lg bg-red-950/30 border border-red-600/50 text-red-100 text-sm leading-relaxed shadow-[0_0_20px_rgba(185,28,28,0.2)] max-w-4xl mx-auto">
+                <strong className="block text-red-400 uppercase tracking-wider text-xs mb-2">
+                  {t('ВНИМАНИЕ:', 'NOTICE:', 'ACHTUNG:')}
+                </strong>
+                {strings.alert.description}
+              </div>
+            </div>
+
+            <div className="space-y-6 w-full flex flex-col items-center">
+              <div className="relative w-full max-w-xl mx-auto">
+                <input
+                  type="text"
+                  placeholder={strings.domains.placeholder}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full bg-slate-900/50 border border-slate-800 text-white p-4 pl-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600/50 transition-all text-md mono"
+                />
+                <svg className="w-5 h-5 text-slate-600 absolute left-4 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+
+              <div className="bg-slate-900/40 rounded-lg border border-slate-800 overflow-hidden backdrop-blur-md w-full">
+                <div className="max-h-[600px] overflow-y-auto custom-scrollbar p-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {filteredDomains.map((domain, i) => (
+                      <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-red-400 flex flex-col group/item hover:border-red-600 transition-all hover:bg-slate-800">
+                        <span className="tracking-tight truncate" title={domain}>{domain}</span>
+                        <span className="text-[8px] uppercase font-bold text-slate-600 mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
+                          {t('ЧЕРЕН СПИСЪК', 'BLACKLISTED', 'GESPERRT')}
+                        </span>
+                      </div>
+                    ))}
+                    {filteredDomains.length === 0 && (
+                      <div className="col-span-full py-20 text-center">
+                        <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+                          {t('Няма намерени записи', 'No records matching query', 'Keine passenden Eintraege gefunden')}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
+                  <span>{t('Източник: cybercrime.bg', 'Source: cybercrime.bg', 'Quelle: cybercrime.bg')}</span>
+                  <span>{filteredDomains.length} {t('Намерени', 'Entries Filtered', 'Eintraege gefiltert')}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Phishing Detector */}
         <section id="phishing" className="py-24 bg-slate-950/80 backdrop-blur-sm border-y border-slate-900 selection:bg-cyan-500 selection:text-white">
           <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
@@ -586,7 +626,7 @@ const App: React.FC = () => {
              </p>
            </div>
         </section>
-        </>
+        </div>
         )}
       </main>
 

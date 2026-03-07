@@ -34,6 +34,11 @@ export interface ContentStrings {
     title: string;
     items: Array<{ title: string; desc: string; type: 'crypto' | 'stock' | 'recovery' }>;
   };
+  scamTypes: {
+    title: string;
+    subtitle: string;
+    items: Array<{ title: string; desc: string; example: string }>;
+  };
   technical: {
     title: string;
     broker: { title: string; items: string[] };
