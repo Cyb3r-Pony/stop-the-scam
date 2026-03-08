@@ -71,23 +71,7 @@ const App: React.FC = () => {
     }
   };
 
-  const scrollToSection = (id: string) => {
-    if (currentPage !== 'main') {
-      setCurrentPage('main');
-      // Wait for re-render then scroll
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          const offset = 80;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = el.getBoundingClientRect().top;
-          const elementPosition = elementRect - bodyRect;
-          const offsetPosition = elementPosition - offset;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      }, 100);
-      return;
-    }
+  const doScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       const offset = 80;
@@ -95,11 +79,26 @@ const App: React.FC = () => {
       const elementRect = el.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+  const scrollToSection = (id: string) => {
+    const needsMenuClose = mobileMenuOpen;
+    if (needsMenuClose) setMobileMenuOpen(false);
+
+    if (currentPage !== 'main') {
+      setCurrentPage('main');
+      // Wait for re-render (and menu collapse) then scroll
+      setTimeout(() => doScroll(id), needsMenuClose ? 350 : 100);
+      return;
+    }
+
+    if (needsMenuClose) {
+      // Wait for menu collapse animation (300ms) before calculating scroll position
+      setTimeout(() => doScroll(id), 350);
+    } else {
+      doScroll(id);
     }
   };
 
@@ -211,55 +210,55 @@ const App: React.FC = () => {
         >
           <nav className="flex flex-col border-t border-blue-900/20 bg-white/80 backdrop-blur-md">
             <button
-              onClick={() => { scrollToSection('scam-types'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('scam-types')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-amber-500 hover:bg-amber-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Видове измами', 'Types of Scams', 'Betrugsarten')}
             </button>
             <button
-              onClick={() => { scrollToSection('warning-signs'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('warning-signs')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Признаци', 'Signs', 'Warnzeichen')}
             </button>
             <button
-              onClick={() => { scrollToSection('attention'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('attention')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Мерки', 'Markers', 'Merkmale')}
             </button>
             <button
-              onClick={() => { scrollToSection('protection'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('protection')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Предпазване', 'Protection', 'Schutz')}
             </button>
             <button
-              onClick={() => { scrollToSection('registers'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('registers')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Регистри', 'Registers', 'Register')}
             </button>
             <button
-              onClick={() => { scrollToSection('blacklist'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('blacklist')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
             </button>
             <button
-              onClick={() => { scrollToSection('phishing'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('phishing')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Фишинг', 'Phishing', 'Phishing')}
             </button>
             <button
-              onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }}
+              onClick={() => { setMobileMenuOpen(false); setCurrentPage('quiz'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 hover:bg-emerald-50 transition-colors text-left border-b border-slate-200/50"
             >
               {t('Тест за киберсигурност', 'Security Quiz', 'Sicherheitsquiz')}
             </button>
             <button
-              onClick={() => { scrollToSection('victim'); setMobileMenuOpen(false); }}
+              onClick={() => scrollToSection('victim')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
             >
               {t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}
