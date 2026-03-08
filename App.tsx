@@ -504,16 +504,57 @@ const App: React.FC = () => {
             </div>
 
             {/* Download Flyer */}
-            <div className="mt-16 text-center">
-              <a
-                href="/flyer-bg.pdf"
-                download="Спри-Измамата-Флаер.pdf"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50 text-sm uppercase tracking-wider"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                {t('Изтегли флаер (PDF)', 'Download Flyer (PDF)', 'Flyer herunterladen (PDF)')}
-              </a>
-              <p className="text-slate-500 text-xs mt-3">{t('Разпечатайте и споделете с близки', 'Print and share with others', 'Drucken und mit anderen teilen')}</p>
+            <div className="mt-20 max-w-2xl mx-auto">
+              <div className="p-8 rounded-xl border border-white/10 bg-white/5 text-center">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  {t('Информационна листовка', 'Awareness Flyer', 'Informationsflyer')}
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                  {t(
+                    'Едностраничен PDF флаер на български с топ 5 признака на измама, рамката „Спри. Помисли. Провери.", спешни стъпки при измама, съвети за защита и полезни контакти. Разпечатайте го и го споделете с близки, колеги или съседи.',
+                    'A one-page PDF flyer in Bulgarian featuring the top 5 scam warning signs, the "Stop. Think. Check." framework, emergency steps if scammed, protection tips, and useful contacts. Print it and share with family, colleagues, or neighbors.',
+                    'Ein einseitiges PDF-Flugblatt auf Bulgarisch mit den Top-5-Betrugsmerkmalen, dem „Stopp. Denk nach. Prüf es."-Rahmen, Notfallschritten bei Betrug, Schutztipps und nützlichen Kontakten. Drucken Sie es aus und teilen Sie es.'
+                  )}
+                </p>
+                <a
+                  href="/flyer-bg.pdf"
+                  download="Спри-Измамата-Флаер.pdf"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50 text-sm uppercase tracking-wider"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  {t('Изтегли флаер (PDF)', 'Download Flyer (PDF)', 'Flyer herunterladen (PDF)')}
+                </a>
+
+                {/* File verification */}
+                <div className="mt-6 pt-6 border-t border-white/10 text-left">
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                      {t('Проверка на файла', 'File Verification', 'Dateiüberprüfung')}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mb-3 leading-relaxed">
+                    {t(
+                      'Сравнете SHA-256 хеша на изтегления файл, за да се уверите, че не е бил модифициран. Можете да проверите файла и в VirusTotal.',
+                      'Compare the SHA-256 hash of the downloaded file to verify it has not been tampered with. You can also check the file on VirusTotal.',
+                      'Vergleichen Sie den SHA-256-Hash der heruntergeladenen Datei, um sicherzustellen, dass sie nicht verändert wurde. Sie können die Datei auch bei VirusTotal prüfen.'
+                    )}
+                  </p>
+                  <div className="bg-black/30 rounded p-3 mb-3">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">SHA-256</span>
+                    <code className="text-[11px] text-blue-400 break-all font-mono leading-relaxed select-all">9430314a6a3d9020c3b95e87ddeaf516a2830f4b3972c69243b1e50ad0ebd1be</code>
+                  </div>
+                  <a
+                    href="https://www.virustotal.com/gui/file/9430314a6a3d9020c3b95e87ddeaf516a2830f4b3972c69243b1e50ad0ebd1be"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    {t('Провери във VirusTotal', 'Check on VirusTotal', 'Auf VirusTotal prüfen')}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
