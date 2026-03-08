@@ -74,7 +74,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { value: "4 млрд. EUR", label: "Годишни загуби от онлайн инвестиционни измами в Европа" },
         { value: "240 млн. USD", label: "Общи плащания към мрежа от кол центрове за измами, оперираща от София" },
         { value: "27 000+", label: "Жертви на една единствена измамническа мрежа в 24 държави за 3 години" },
-        { value: "300+", label: "Регистрирани платформи, насочени към български граждани, с жертви на инвестиционни измами в България" },
+        { value: "300+", label: "Идентифицирани платформи за инвестиционни измами, насочени към български граждани" },
         { value: "20 000+", label: "Български граждани, пострадали от пирамидалната схема BETL през 2024 г." },
         { value: "80 млн. USD", label: "Приблизителна сума, събрана от BETL преди прекратяване на плащанията" }
       ]
@@ -287,7 +287,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { value: "EUR 4 Billion", label: "Annual losses from online investment fraud across Europe" },
         { value: "USD 240 Million", label: "Total payments to a scam call center network operating from Sofia, Bulgaria" },
         { value: "27,000+", label: "Victims of a single fraud network across 24 countries over 3 years" },
-        { value: "300+", label: "Registered platforms targeting Bulgarian citizens with investment fraud victims in Bulgaria" },
+        { value: "300+", label: "Identified investment scam platforms targeting Bulgarian citizens" },
         { value: "20,000+", label: "Bulgarian citizens defrauded by the BETL pyramid scheme in 2024" },
         { value: "USD 80 Million", label: "Approximate amount collected by BETL before payments ceased" }
       ]
@@ -500,7 +500,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { value: "4 Mrd. EUR", label: "Jährliche Verluste durch Online-Anlagebetrug in Europa" },
         { value: "240 Mio. USD", label: "Gesamtzahlungen an ein Betrugs-Callcenter-Netzwerk mit Sitz in Sofia" },
         { value: "27.000+", label: "Opfer eines einzelnen Betrugsnetzwerks in 24 Ländern über 3 Jahre" },
-        { value: "300+", label: "Registrierte Plattformen, die bulgarische Bürger ins Visier nehmen, mit Opfern von Anlagebetrug in Bulgarien" },
+        { value: "300+", label: "Identifizierte Anlagebetrugplattformen, die auf bulgarische Bürger abzielen" },
         { value: "20.000+", label: "Bulgarische Bürger, die 2024 durch das BETL-Pyramidensystem betrogen wurden" },
         { value: "80 Mio. USD", label: "Geschätzter Betrag, der von BETL vor Einstellung der Zahlungen gesammelt wurde" }
       ]
