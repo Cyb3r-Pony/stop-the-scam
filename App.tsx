@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [phishingDomains, setPhishingDomains] = useState<PhishingDomain[]>([]);
   const [phishingLoading, setPhishingLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState<'main' | 'quiz'>('main');
+  const [shareOpen, setShareOpen] = useState(false);
 
   const strings = CONTENT[lang];
 
@@ -322,13 +323,10 @@ const App: React.FC = () => {
               {strings.statistics.items.map((item, i) => (
                 <div key={i} className="p-8 rounded-lg border border-red-900/30 bg-red-950/20 hover:bg-red-950/40 hover:border-red-600/50 transition-all text-center group">
                   <div className="text-4xl md:text-5xl font-black text-red-500 mb-3 group-hover:scale-105 transition-transform">{item.value}</div>
-                  <p className="text-slate-300 text-sm font-medium mb-3 leading-relaxed">{item.label}</p>
-                  <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">{item.source}</span>
+                  <p className="text-slate-300 text-sm font-medium leading-relaxed">{item.label}</p>
                 </div>
               ))}
             </div>
-
-            <p className="text-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">{strings.statistics.sourceNote}</p>
           </div>
         </section>
 
@@ -709,42 +707,57 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Floating Social Share Buttons */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
-        <a
-          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstop-the-scam.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          title={t('Сподели във Facebook', 'Share on Facebook', 'Auf Facebook teilen')}
-          className="w-11 h-11 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
+      {/* Floating Social Share Button with Toggle */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {shareOpen && (
+          <div className="flex flex-col gap-2 mb-1">
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstop-the-scam.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title={t('Сподели във Facebook', 'Share on Facebook', 'Auf Facebook teilen')}
+              className="w-11 h-11 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a
+              href="viber://forward?text=https%3A%2F%2Fstop-the-scam.com"
+              title={t('Сподели във Viber', 'Share on Viber', 'Auf Viber teilen')}
+              className="w-11 h-11 rounded-full bg-[#7360f2] hover:bg-[#6550e0] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.518 6.764.375 9.947c-.144 3.183-.332 9.152 5.56 10.85l.007.003-.004 2.483s-.04.998.621 1.203c.795.248 1.263-.51 2.024-1.327.418-.45.994-1.108 1.43-1.613 3.937.331 6.962-.425 7.306-.538.794-.263 5.283-.833 6.014-6.798.753-6.14-.354-10.018-2.325-11.776C19.211.457 15.452-.04 11.398.002zm.432 2.09c3.481-.035 6.664.315 8.4 1.83 1.592 1.398 2.586 4.665 1.928 9.998-.586 4.783-3.922 5.19-4.584 5.41-.282.092-2.866.74-6.156.536 0 0-2.437 2.94-3.2 3.705-.12.12-.26.167-.353.144-.13-.032-.166-.186-.164-.412l.025-4.022c-4.863-1.397-4.576-6.344-4.46-8.904.118-2.56.704-4.726 2.1-6.108C6.646 2.995 8.814 2.264 11.83 2.092zM11.59 5.39c-.24 0-.24.373 0 .377a6.39 6.39 0 014.488 1.66 5.39 5.39 0 011.572 3.83c.004.244.377.24.373 0a5.755 5.755 0 00-1.69-4.098 6.772 6.772 0 00-4.743-1.77zm.245 1.828c-.236-.016-.247.35-.01.37a4.42 4.42 0 012.611 1.19c.618.656.917 1.403.94 2.312.007.24.38.236.373 0-.025-1.032-.366-1.893-1.065-2.635a4.78 4.78 0 00-2.849-1.237zm-2.26.614c-.322-.035-.612.078-.834.31l-.379.44c-.222.257-.49.213-.49.213-2.32-.584-3.693-3.264-3.693-3.264s-.162-.265.1-.564l.39-.417c.37-.388.363-.9.085-1.453l-.607-1.12-.607-1.1c-.256-.37-.604-.6-.94-.518 0 0-.72.17-1.408.916a3.078 3.078 0 00-.567 1.2c-.273 1.38.293 3.098 1.637 5.022 1.1 1.694 3.406 4.473 7.159 5.698.894.213 1.6.09 2.106-.17.507-.26.79-.652.79-.652l.305-.412c.326-.43.143-.89-.304-1.105l-1.782-.84c-.285-.135-.595-.058-.78.182l-.376.451c-.197.236-.576.198-.576.198z"/></svg>
+            </a>
+            <a
+              href="https://wa.me/?text=https%3A%2F%2Fstop-the-scam.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title={t('Сподели в WhatsApp', 'Share on WhatsApp', 'Auf WhatsApp teilen')}
+              className="w-11 h-11 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a
+              href="https://t.me/share/url?url=https%3A%2F%2Fstop-the-scam.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title={t('Сподели в Telegram', 'Share on Telegram', 'Auf Telegram teilen')}
+              className="w-11 h-11 rounded-full bg-[#0088cc] hover:bg-[#0077b5] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+          </div>
+        )}
+        <button
+          onClick={() => setShareOpen(!shareOpen)}
+          title={t('Сподели', 'Share', 'Teilen')}
+          className="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a
-          href="viber://forward?text=https%3A%2F%2Fstop-the-scam.com"
-          title={t('Сподели във Viber', 'Share on Viber', 'Auf Viber teilen')}
-          className="w-11 h-11 rounded-full bg-[#7360f2] hover:bg-[#6550e0] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
-        >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.518 6.764.375 9.947c-.144 3.183-.332 9.152 5.56 10.85l.007.003-.004 2.483s-.04.998.621 1.203c.795.248 1.263-.51 2.024-1.327.418-.45.994-1.108 1.43-1.613 3.937.331 6.962-.425 7.306-.538.794-.263 5.283-.833 6.014-6.798.753-6.14-.354-10.018-2.325-11.776C19.211.457 15.452-.04 11.398.002zm.432 2.09c3.481-.035 6.664.315 8.4 1.83 1.592 1.398 2.586 4.665 1.928 9.998-.586 4.783-3.922 5.19-4.584 5.41-.282.092-2.866.74-6.156.536 0 0-2.437 2.94-3.2 3.705-.12.12-.26.167-.353.144-.13-.032-.166-.186-.164-.412l.025-4.022c-4.863-1.397-4.576-6.344-4.46-8.904.118-2.56.704-4.726 2.1-6.108C6.646 2.995 8.814 2.264 11.83 2.092zM11.59 5.39c-.24 0-.24.373 0 .377a6.39 6.39 0 014.488 1.66 5.39 5.39 0 011.572 3.83c.004.244.377.24.373 0a5.755 5.755 0 00-1.69-4.098 6.772 6.772 0 00-4.743-1.77zm.245 1.828c-.236-.016-.247.35-.01.37a4.42 4.42 0 012.611 1.19c.618.656.917 1.403.94 2.312.007.24.38.236.373 0-.025-1.032-.366-1.893-1.065-2.635a4.78 4.78 0 00-2.849-1.237zm-2.26.614c-.322-.035-.612.078-.834.31l-.379.44c-.222.257-.49.213-.49.213-2.32-.584-3.693-3.264-3.693-3.264s-.162-.265.1-.564l.39-.417c.37-.388.363-.9.085-1.453l-.607-1.12-.607-1.1c-.256-.37-.604-.6-.94-.518 0 0-.72.17-1.408.916a3.078 3.078 0 00-.567 1.2c-.273 1.38.293 3.098 1.637 5.022 1.1 1.694 3.406 4.473 7.159 5.698.894.213 1.6.09 2.106-.17.507-.26.79-.652.79-.652l.305-.412c.326-.43.143-.89-.304-1.105l-1.782-.84c-.285-.135-.595-.058-.78.182l-.376.451c-.197.236-.576.198-.576.198z"/></svg>
-        </a>
-        <a
-          href="https://wa.me/?text=https%3A%2F%2Fstop-the-scam.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          title={t('Сподели в WhatsApp', 'Share on WhatsApp', 'Auf WhatsApp teilen')}
-          className="w-11 h-11 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
-        >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <a
-          href="https://t.me/share/url?url=https%3A%2F%2Fstop-the-scam.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          title={t('Сподели в Telegram', 'Share on Telegram', 'Auf Telegram teilen')}
-          className="w-11 h-11 rounded-full bg-[#0088cc] hover:bg-[#0077b5] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
-        >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        </a>
+          {shareOpen ? (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+          )}
+        </button>
       </div>
 
       {/* Institutional Footer */}

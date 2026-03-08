@@ -20,8 +20,8 @@ export interface ContentStrings {
   statistics: {
     title: string;
     subtitle: string;
-    items: Array<{ value: string; label: string; source: string }>;
-    sourceNote: string;
+    items: Array<{ value: string; label: string }>;
+
   };
   scamLifecycle: {
     title: string;

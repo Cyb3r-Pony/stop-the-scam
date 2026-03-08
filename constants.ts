@@ -71,14 +71,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Мащабът на проблема",
       subtitle: "Реални данни за финансовите измами в България и Европа",
       items: [
-        { value: "4 млрд. EUR", label: "Годишни загуби от онлайн инвестиционни измами в Европа", source: "Investigate Europe, 2024" },
-        { value: "240 млн. USD", label: "Общи плащания към мрежа от кол центрове за измами, оперираща от София", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "27 000+", label: "Жертви на една единствена измамническа мрежа в 24 държави за 3 години", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "79", label: "Фалшиви платформи за търговия, използвани от мрежа в София, 62 от тях с предупреждения от регулатори", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "20 000+", label: "Български граждани, пострадали от пирамидалната схема BETL през 2024 г.", source: "Свободна Европа / Moreto.net, 2024" },
-        { value: "80 млн. лв.", label: "Приблизителна сума, събрана от BETL преди прекратяване на плащанията", source: "Moreto.net, 2024" }
-      ],
-      sourceNote: "Източници: Investigate Europe, BIRD.bg, Свободна Европа, Moreto.net"
+        { value: "4 млрд. EUR", label: "Годишни загуби от онлайн инвестиционни измами в Европа" },
+        { value: "240 млн. USD", label: "Общи плащания към мрежа от кол центрове за измами, оперираща от София" },
+        { value: "27 000+", label: "Жертви на една единствена измамническа мрежа в 24 държави за 3 години" },
+        { value: "300+", label: "Регистрирани платформи, насочени към български граждани, с жертви на инвестиционни измами в България" },
+        { value: "20 000+", label: "Български граждани, пострадали от пирамидалната схема BETL през 2024 г." },
+        { value: "80 млн. USD", label: "Приблизителна сума, събрана от BETL преди прекратяване на плащанията" }
+      ]
     },
     scamLifecycle: {
       title: "Как работи типична инвестиционна измама",
@@ -153,7 +152,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS фишинг (Smishing)", desc: "Фалшиви SMS съобщения от банки, куриерски фирми или данъчни служби. Съдържат линкове към фалшиви сайтове за кражба на лични и финансови данни.", example: "SMS \"Пратката ви е задържана, заплатете 2.99 лв. тук:\" с линк към фалшив сайт на Еконт или Спиди, който краде данните на банковата ви карта." },
         { title: "Измами в месинджъри", desc: "Фалшиви инвестиционни групи в WhatsApp, Viber или Telegram. Примамват с обещания за високоплатена дистанционна работа, или се свързват за \"купуване\" на обявен от вас артикул.", example: "Покана за Telegram група \"VIP Инвестиции\" с фалшиви скрийншоти на печалби, или съобщение за \"купуване\" на вашата обява в OLX с линк към фалшива страница." },
         { title: "Неоторизиран отдалечен достъп", desc: "Измамници получават достъп до компютъра ви чрез фишинг, изтекли/откраднати пароли или злонамерени файлове. След това инсталират AnyDesk или TeamViewer за пълен контрол.", example: "\"Техническа поддръжка на Microsoft\" ви звъни и моли да инсталирате AnyDesk, за да \"поправят проблем\". След като получат достъп, крадат данни или инсталират malware." },
-        { title: "Пирамидални / Понци схеми", desc: "Инвестиционни схеми, при които печалбите на ранните участници се изплащат от вноските на новите. Схемата неизбежно рухва, когато новите инвеститори намалеят. Всички плащания обикновено са в криптовалута.", example: "BETL (Blue Technologies Lending) в България: обещаваше 20$/ден от пакет за 540$. Над 20 000 българи пострадаха, събрани са около 80 млн. лв. преди схемата да рухне през декември 2024 г." },
+        { title: "Пирамидални / Понци схеми", desc: "Инвестиционни схеми, при които печалбите на ранните участници се изплащат от вноските на новите. Схемата неизбежно рухва, когато новите инвеститори намалеят. Всички плащания обикновено са в криптовалута.", example: "BETL (Blue Technologies Lending) в България: обещаваше 20$/ден от пакет за 540$. Над 20 000 българи пострадаха, събрани са около 80 млн. USD преди схемата да рухне през декември 2024 г." },
         { title: "AI Deepfake измами", desc: "Изкуственият интелект позволява клониране на глас, лице и видео на реални хора. Измамниците създават убедителни обаждания или видео съобщения от \"ваши близки\" или \"известни личности\", които молят за пари или рекламират фалшиви инвестиции.", example: "Получавате видео обаждане от \"вашия син\" с неговия глас и лице, който моли за спешен превод от 5 000 лв. В действителност е AI-генериран deepfake. Винаги се обадете лично за потвърждение." },
         { title: "Фалшиви покупки и доставки", desc: "Несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Фалшиви SMS от \"куриерски\" фирми водят към сайтове за кражба на данни.", example: "Реклама във Facebook за маркови маратонки на 70% отстъпка. Сайтът изглежда професионално, но след плащане стоката никога не пристига, а данните на картата ви са откраднати." }
       ]
@@ -248,7 +247,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         "Не правете повече плащания под никакъв предлог",
         "Информирайте своята банка незабавно",
         "Подайте сигнал в най-близкото РПУ или ГДБОП",
-        "Запазете всички чатове, имейли и банкови преписки"
+        "Запазете всички чатове, имейли, банкови преписки, хешове на транзакции и крипто адреси, към които сте изпращали средства"
       ],
       emergencyNote: "НЕ ЧАКАЙТЕ. ВСЕКИ ЧАС Е ОТ ЗНАЧЕНИЕ ЗА ВЪЗСТАНОВЯВАНЕТО НА СРЕДСТВАТА."
     },
@@ -285,14 +284,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "The Scale of the Problem",
       subtitle: "Real data on financial fraud in Bulgaria and Europe",
       items: [
-        { value: "EUR 4 Billion", label: "Annual losses from online investment fraud across Europe", source: "Investigate Europe, 2024" },
-        { value: "USD 240 Million", label: "Total payments to a scam call center network operating from Sofia, Bulgaria", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "27,000+", label: "Victims of a single fraud network across 24 countries over 3 years", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "79", label: "Fake trading platforms used by a Sofia-based network, 62 flagged by regulators", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "20,000+", label: "Bulgarian citizens defrauded by the BETL pyramid scheme in 2024", source: "Radio Free Europe / Moreto.net, 2024" },
-        { value: "BGN 80 Million", label: "Approximate amount collected by BETL before payments ceased", source: "Moreto.net, 2024" }
-      ],
-      sourceNote: "Sources: Investigate Europe, BIRD.bg, Radio Free Europe, Moreto.net"
+        { value: "EUR 4 Billion", label: "Annual losses from online investment fraud across Europe" },
+        { value: "USD 240 Million", label: "Total payments to a scam call center network operating from Sofia, Bulgaria" },
+        { value: "27,000+", label: "Victims of a single fraud network across 24 countries over 3 years" },
+        { value: "300+", label: "Registered platforms targeting Bulgarian citizens with investment fraud victims in Bulgaria" },
+        { value: "20,000+", label: "Bulgarian citizens defrauded by the BETL pyramid scheme in 2024" },
+        { value: "USD 80 Million", label: "Approximate amount collected by BETL before payments ceased" }
+      ]
     },
     scamLifecycle: {
       title: "How a Typical Investment Scam Works",
@@ -367,7 +365,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS Phishing (Smishing)", desc: "Fake SMS messages from banks, courier services, or tax authorities. They contain links to fraudulent sites designed to steal your personal and financial data.", example: "SMS \"Your package is held, pay $2.99 here:\" with a link to a fake courier website that steals your card details." },
         { title: "Messaging App Scams", desc: "Fake investment groups on WhatsApp, Viber, or Telegram. They lure victims with promises of high-paying remote jobs, or contact you about \"buying\" items you've listed for sale.", example: "Telegram group invite for \"VIP Investments\" with fake profit screenshots, or a message about \"buying\" your online listing via a fake payment page." },
         { title: "Unauthorized Remote Access", desc: "Scammers gain access to your PC via phishing, leaked/stolen credentials, or malicious files. They then install AnyDesk or TeamViewer for full control over your device.", example: "\"Microsoft Tech Support\" calls and asks you to install AnyDesk to \"fix a problem\". Once they have access, they steal data or install malware." },
-        { title: "Pyramid / Ponzi Schemes", desc: "Investment schemes where early participants are paid with new investors' money. The scheme inevitably collapses when recruitment slows. All payments are typically in cryptocurrency to avoid banking oversight.", example: "BETL (Blue Technologies Lending) in Bulgaria: promised $20/day from a $540 package. Over 20,000 Bulgarians were defrauded, approximately BGN 80 million collected before the scheme collapsed in December 2024." },
+        { title: "Pyramid / Ponzi Schemes", desc: "Investment schemes where early participants are paid with new investors' money. The scheme inevitably collapses when recruitment slows. All payments are typically in cryptocurrency to avoid banking oversight.", example: "BETL (Blue Technologies Lending) in Bulgaria: promised $20/day from a $540 package. Over 20,000 Bulgarians were defrauded, approximately USD 80 million collected before the scheme collapsed in December 2024." },
         { title: "AI Deepfake Scams", desc: "Artificial intelligence enables cloning of real people's voice, face, and video. Scammers create convincing calls or video messages from \"your relatives\" or \"celebrities\" requesting money or promoting fake investments.", example: "You receive a video call from \"your son\" with his voice and face, asking for an urgent transfer of $5,000. In reality, it's an AI-generated deepfake. Always call back personally to verify." },
         { title: "Fake Purchase & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. Fake SMS from \"courier\" services lead to sites that steal your payment details.", example: "Facebook ad for branded sneakers at 70% off. The site looks professional, but after payment the goods never arrive and your card details are stolen." }
       ]
@@ -462,7 +460,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         "Do not make any further payments",
         "Inform your bank immediately",
         "Report to the nearest police station or GDCOC (General Directorate Combating Organised Crime, Bulgaria)",
-        "Keep all chats, emails, and bank receipts"
+        "Keep all chats, emails, bank receipts, transaction hashes, and crypto addresses you sent assets to"
       ],
       emergencyNote: "DO NOT WAIT. EVERY HOUR COUNTS IN FINANCIAL RECOVERY."
     },
@@ -499,14 +497,13 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Das Ausmass des Problems",
       subtitle: "Echte Daten zu Finanzbetrug in Bulgarien und Europa",
       items: [
-        { value: "4 Mrd. EUR", label: "Jährliche Verluste durch Online-Anlagebetrug in Europa", source: "Investigate Europe, 2024" },
-        { value: "240 Mio. USD", label: "Gesamtzahlungen an ein Betrugs-Callcenter-Netzwerk mit Sitz in Sofia", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "27.000+", label: "Opfer eines einzelnen Betrugsnetzwerks in 24 Ländern über 3 Jahre", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "79", label: "Gefälschte Handelsplattformen eines Netzwerks in Sofia, 62 von Regulierungsbehörden gemeldet", source: "BIRD.bg / Scam Empire, 2024" },
-        { value: "20.000+", label: "Bulgarische Bürger, die 2024 durch das BETL-Pyramidensystem betrogen wurden", source: "Radio Free Europe / Moreto.net, 2024" },
-        { value: "80 Mio. BGN", label: "Geschätzter Betrag, der von BETL vor Einstellung der Zahlungen gesammelt wurde", source: "Moreto.net, 2024" }
-      ],
-      sourceNote: "Quellen: Investigate Europe, BIRD.bg, Radio Free Europe, Moreto.net"
+        { value: "4 Mrd. EUR", label: "Jährliche Verluste durch Online-Anlagebetrug in Europa" },
+        { value: "240 Mio. USD", label: "Gesamtzahlungen an ein Betrugs-Callcenter-Netzwerk mit Sitz in Sofia" },
+        { value: "27.000+", label: "Opfer eines einzelnen Betrugsnetzwerks in 24 Ländern über 3 Jahre" },
+        { value: "300+", label: "Registrierte Plattformen, die bulgarische Bürger ins Visier nehmen, mit Opfern von Anlagebetrug in Bulgarien" },
+        { value: "20.000+", label: "Bulgarische Bürger, die 2024 durch das BETL-Pyramidensystem betrogen wurden" },
+        { value: "80 Mio. USD", label: "Geschätzter Betrag, der von BETL vor Einstellung der Zahlungen gesammelt wurde" }
+      ]
     },
     scamLifecycle: {
       title: "Wie ein typischer Anlagebetrug funktioniert",
@@ -581,7 +578,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "SMS-Phishing (Smishing)", desc: "Gefälschte SMS von Banken, Kurierdiensten oder Steuerbehörden. Sie enthalten Links zu betrügerischen Seiten zum Diebstahl Ihrer persönlichen und finanziellen Daten.", example: "SMS \"Ihr Paket wird zurückgehalten, zahlen Sie 2,99 EUR hier:\" mit Link zu einer gefälschten Kurier-Website, die Ihre Kartendaten stiehlt." },
         { title: "Messenger-Betrug", desc: "Gefälschte Investmentgruppen auf WhatsApp, Viber oder Telegram. Sie locken mit Versprechen von gut bezahlter Fernarbeit oder kontaktieren Sie wegen des \"Kaufs\" Ihrer zum Verkauf angebotenen Artikel.", example: "Telegram-Gruppeneinladung für \"VIP-Investments\" mit gefälschten Gewinn-Screenshots, oder eine Nachricht über den \"Kauf\" Ihres Online-Inserats über eine gefälschte Zahlungsseite." },
         { title: "Unbefugter Fernzugriff", desc: "Betrüger erhalten Zugriff auf Ihren PC über Phishing, geleakte/gestohlene Zugangsdaten oder schädliche Dateien. Dann installieren sie AnyDesk oder TeamViewer für volle Kontrolle über Ihr Gerät.", example: "\"Microsoft Tech Support\" ruft an und bittet Sie, AnyDesk zu installieren, um \"ein Problem zu beheben\". Sobald sie Zugang haben, stehlen sie Daten oder installieren Malware." },
-        { title: "Pyramiden- / Ponzi-Systeme", desc: "Anlageschemata, bei denen frühe Teilnehmer mit dem Geld neuer Investoren bezahlt werden. Das Schema bricht unweigerlich zusammen, wenn die Rekrutierung nachlässt. Alle Zahlungen erfolgen typischerweise in Kryptowährung.", example: "BETL (Blue Technologies Lending) in Bulgarien: versprach 20$/Tag aus einem 540$-Paket. Über 20.000 Bulgaren wurden betrogen, ca. 80 Mio. BGN gesammelt, bevor das Schema im Dezember 2024 zusammenbrach." },
+        { title: "Pyramiden- / Ponzi-Systeme", desc: "Anlageschemata, bei denen frühe Teilnehmer mit dem Geld neuer Investoren bezahlt werden. Das Schema bricht unweigerlich zusammen, wenn die Rekrutierung nachlässt. Alle Zahlungen erfolgen typischerweise in Kryptowährung.", example: "BETL (Blue Technologies Lending) in Bulgarien: versprach 20$/Tag aus einem 540$-Paket. Über 20.000 Bulgaren wurden betrogen, ca. 80 Mio. USD gesammelt, bevor das Schema im Dezember 2024 zusammenbrach." },
         { title: "AI-Deepfake-Betrug", desc: "Künstliche Intelligenz ermöglicht das Klonen von Stimme, Gesicht und Video realer Personen. Betrüger erstellen überzeugende Anrufe oder Videonachrichten von \"Ihren Angehörigen\" oder \"Prominenten\", die um Geld bitten.", example: "Sie erhalten einen Videoanruf von \"Ihrem Sohn\" mit seiner Stimme und seinem Gesicht, der um eine dringende Überweisung von 5.000 EUR bittet. In Wirklichkeit ist es ein KI-generierter Deepfake. Rufen Sie immer persönlich zurück." },
         { title: "Gefälschte Käufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnäppchenpreisen in sozialen Medien oder gefälschten Online-Shops. Sie zahlen, aber die Ware kommt nie an. Gefälschte SMS von \"Kurierdiensten\" führen zu Datendiebstahl-Seiten.", example: "Facebook-Werbung für Marken-Sneaker mit 70% Rabatt. Die Seite sieht professionell aus, aber nach der Zahlung kommt die Ware nie an und Ihre Kartendaten werden gestohlen." }
       ]
@@ -676,7 +673,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         "Leisten Sie keine weiteren Zahlungen",
         "Informieren Sie sofort Ihre Bank",
         "Erstatten Sie Anzeige bei der nächsten Polizeidienststelle oder dem GDBOP (Generaldirektion zur Bekämpfung der Organisierten Kriminalität, Bulgarien)",
-        "Bewahren Sie alle Chats, E-Mails und Bankunterlagen auf"
+        "Bewahren Sie alle Chats, E-Mails, Bankunterlagen, Transaktions-Hashes und Krypto-Adressen auf, an die Sie Vermögenswerte gesendet haben"
       ],
       emergencyNote: "WARTEN SIE NICHT. JEDE STUNDE ZÄHLT BEI DER RÜCKGEWINNUNG IHRER GELDER."
     },
