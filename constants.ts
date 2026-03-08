@@ -59,9 +59,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
   bg: {
     header: {
       title: "Спри Измамата",
-      subtitle: "Официален наръчник за защита на гражданите и инвеститорите",
-      ctaList: "Черна листа",
-      ctaRegisters: "Проверка на лиценз"
     },
     hero: {
       title: "Защитете своите спестявания от инвестиционни измами",
@@ -130,14 +127,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
         linkText: "Към кампанията"
       }
-    },
-    schemes: {
-      title: "Най-чести схеми",
-      items: [
-        { type: 'crypto', title: "Фалшива крипто търговия", desc: "Платформи с красиви графики, които показват фалшив баланс. Парите ви никога не се инвестират реално." },
-        { type: 'stock', title: "Фалшива борса", desc: "Предлагат акции на Apple, Tesla или Amazon. Когато решите да теглите, ви искат 'такса за отблокиране'." },
-        { type: 'recovery', title: "Измама за връщане на пари", desc: "Обаждат се след като сте били измамени, обещавайки помощ. Това е втора измама срещу същата жертва." }
-      ]
     },
     scamTypes: {
       title: "Най-разпространени финансови измами",
@@ -226,19 +215,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         }
       ]
     },
-    faq: {
-      title: "Често задавани въпроси",
-      items: [
-        { q: "Ако сайтът не е в списъка, безопасен ли е?", a: "НЕ! Списъкът не е изчерпателен. Нови сайтове се появяват ежедневно. Винаги проверявайте лиценза." },
-        { q: "Какво означават скобите [ ] в имената?", a: "Вече не се използват в списъка за по-добра индексация, но по принцип се добавят от органите, за да направят линковете некликаеми." }
-      ]
-    },
     domains: {
       title: "Черна листа на домейни",
-      notice: "Тези домейни са официално идентифицирани като измамни от ГДБОП.",
       placeholder: "Въведете домейн за проверка...",
-      showing: "Показани",
-      of: "от"
     },
     victim: {
       title: "Вече сте жертва? Действайте веднага!",
@@ -252,7 +231,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       emergencyNote: "НЕ ЧАКАЙТЕ. ВСЕКИ ЧАС Е ОТ ЗНАЧЕНИЕ ЗА ВЪЗСТАНОВЯВАНЕТО НА СРЕДСТВАТА."
     },
     footer: {
-      legal: "Правна информация",
       disclaimer: "Сайтът е с превантивна цел. Данните са от официалния сайт на ГДБОП-МВР. Сайтът не носи отговорност за индивидуални инвестиционни решения.",
       officialLinks: [
         { name: "Дирекция \"Киберпрестъпност\"", url: "https://cybercrime.bg" },
@@ -272,9 +250,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
   en: {
     header: {
       title: "Stop The Scam",
-      subtitle: "Official Security Guide for Citizens and Investors",
-      ctaList: "Blacklist",
-      ctaRegisters: "Verify License"
     },
     hero: {
       title: "Protect Your Savings from Investment Fraud",
@@ -343,14 +318,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
         linkText: "View Campaign"
       }
-    },
-    schemes: {
-      title: "Common Scam Schemes",
-      items: [
-        { type: 'crypto', title: "Fake Crypto Trading", desc: "Platforms with fake charts showing massive growth. Your money is never actually invested." },
-        { type: 'stock', title: "Fake Stock Exchange", desc: "Offering Apple/Tesla stocks. They later demand 'unlocking fees' to withdraw funds." },
-        { type: 'recovery', title: "Recovery Scams", desc: "Someone calls promising to recover your lost money for a fee. It's a second scam targeting the same victim." }
-      ]
     },
     scamTypes: {
       title: "Most Common Financial Scams",
@@ -439,19 +406,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         }
       ]
     },
-    faq: {
-      title: "FAQ",
-      items: [
-        { q: "If a site is not on the list, is it safe?", a: "NO! The list is not exhaustive. New sites appear daily. Always verify the license first." },
-        { q: "What do the [ ] brackets mean?", a: "They are no longer used for indexing purposes, but typically added by police to prevent accidental clicks." }
-      ]
-    },
     domains: {
       title: "Domain Blacklist",
-      notice: "These domains are officially identified as fraudulent by GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior.",
       placeholder: "Enter domain to check...",
-      showing: "Showing",
-      of: "of"
     },
     victim: {
       title: "Already a victim? Act now!",
@@ -465,7 +422,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       emergencyNote: "DO NOT WAIT. EVERY HOUR COUNTS IN FINANCIAL RECOVERY."
     },
     footer: {
-      legal: "Legal Info",
       disclaimer: "Informational purpose only. Data from official GDCOC (General Directorate Combating Organised Crime), Bulgarian Ministry of Interior sources. We are not responsible for individual financial decisions.",
       officialLinks: [
         { name: "Cybercrime Directorate (Bulgaria)", url: "https://cybercrime.bg" },
@@ -485,9 +441,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
   de: {
     header: {
       title: "Stopp den Betrug",
-      subtitle: "Offizieller Sicherheitsleitfaden zum Schutz von Anlegern",
-      ctaList: "Schwarze Liste",
-      ctaRegisters: "Lizenz prüfen"
     },
     hero: {
       title: "Schützen Sie Ihre Ersparnisse vor Anlagebetrug",
@@ -556,14 +509,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         url: "https://www.fsc.bg/za-potrebitelya/investiczionna-dejnost/razpoznay-litsenziraniya-investitsionen-posrednik/",
         linkText: "Zur Kampagne"
       }
-    },
-    schemes: {
-      title: "Häufigste Betrugsmaschen",
-      items: [
-        { type: 'crypto', title: "Gefälschter Kryptohandel", desc: "Plattformen mit gefälschten Diagrammen und massivem Wachstum. Ihr Geld wird nie tatsächlich investiert." },
-        { type: 'stock', title: "Gefälschte Börse", desc: "Angebote für Apple-/Tesla-Aktien. Später verlangen sie 'Freischaltungsgebühren' für Auszahlungen." },
-        { type: 'recovery', title: "Rückgewinnungsbetrug", desc: "Jemand ruft an und verspricht, Ihr verlorenes Geld zurückzuholen – gegen eine Gebühr. Es ist ein zweiter Betrug am selben Opfer." }
-      ]
     },
     scamTypes: {
       title: "Die häufigsten Finanzbetrugsarten",
@@ -652,19 +597,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         }
       ]
     },
-    faq: {
-      title: "Häufig gestellte Fragen",
-      items: [
-        { q: "Wenn eine Seite nicht auf der Liste steht, ist sie dann sicher?", a: "NEIN! Die Liste ist nicht vollständig. Täglich erscheinen neue Seiten. Prüfen Sie immer zuerst die Lizenz." },
-        { q: "Was bedeuten die eckigen Klammern [ ]?", a: "Sie werden nicht mehr für die Indexierung verwendet, wurden aber ursprünglich von der Polizei hinzugefügt, um versehentliche Klicks zu verhindern." }
-      ]
-    },
     domains: {
       title: "Schwarze Liste der Domains",
-      notice: "Diese Domains wurden offiziell vom GDBOP (Generaldirektion zur Bekämpfung der Organisierten Kriminalität), bulgarisches Innenministerium, als betrügerisch identifiziert.",
       placeholder: "Domain zur Prüfung eingeben...",
-      showing: "Angezeigt",
-      of: "von"
     },
     victim: {
       title: "Bereits betroffen? Handeln Sie sofort!",
@@ -678,7 +613,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       emergencyNote: "WARTEN SIE NICHT. JEDE STUNDE ZÄHLT BEI DER RÜCKGEWINNUNG IHRER GELDER."
     },
     footer: {
-      legal: "Rechtliche Hinweise",
       disclaimer: "Nur zu Informationszwecken. Daten aus offiziellen Quellen des GDBOP (Generaldirektion zur Bekämpfung der Organisierten Kriminalität), bulgarisches Innenministerium. Wir übernehmen keine Verantwortung für individuelle Finanzentscheidungen.",
       officialLinks: [
         { name: "Direktion Cyberkriminalität (Bulgarien)", url: "https://cybercrime.bg" },

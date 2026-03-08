@@ -394,8 +394,10 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
       setCurrentQuestion(prev => prev + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setQuizComplete(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

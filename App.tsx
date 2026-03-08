@@ -13,6 +13,8 @@ const App: React.FC = () => {
   const [phishingLoading, setPhishingLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState<'main' | 'quiz'>('main');
   const [shareOpen, setShareOpen] = useState(false);
+  const [blacklistVisible, setBlacklistVisible] = useState(40);
+  const [phishingVisible, setPhishingVisible] = useState(40);
 
   const strings = CONTENT[lang];
 
@@ -641,7 +643,7 @@ const App: React.FC = () => {
               <div className="bg-slate-900/40 rounded-lg border border-slate-800 overflow-hidden backdrop-blur-md w-full">
                 <div className="max-h-[600px] overflow-y-auto custom-scrollbar p-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {filteredDomains.map((domain, i) => (
+                    {filteredDomains.slice(0, search ? filteredDomains.length : blacklistVisible).map((domain, i) => (
                       <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-red-400 flex flex-col group/item hover:border-red-600 transition-all hover:bg-slate-800">
                         <span className="tracking-tight truncate" title={domain}>{domain}</span>
                         <span className="text-[8px] uppercase font-bold text-slate-600 mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
@@ -657,6 +659,16 @@ const App: React.FC = () => {
                       </div>
                     )}
                   </div>
+                  {!search && blacklistVisible < filteredDomains.length && (
+                    <div className="text-center pt-4">
+                      <button
+                        onClick={() => setBlacklistVisible(prev => prev + 80)}
+                        className="px-6 py-2 text-xs font-bold uppercase tracking-widest text-red-400 border border-red-900/50 rounded hover:bg-red-950/30 transition-all"
+                      >
+                        {t('Покажи още', 'Show More', 'Mehr anzeigen')} ({filteredDomains.length - blacklistVisible} {t('оставащи', 'remaining', 'verbleibend')})
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
                   <span>{t('Източник: cybercrime.bg', 'Source: cybercrime.bg', 'Quelle: cybercrime.bg')}</span>
@@ -709,8 +721,9 @@ const App: React.FC = () => {
                       </p>
                     </div>
                   ) : (
+                    <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                      {filteredPhishingDomains.map((item, i) => (
+                      {filteredPhishingDomains.slice(0, phishingSearch ? filteredPhishingDomains.length : phishingVisible).map((item, i) => (
                         <div key={i} className="mono text-[12px] bg-slate-900/80 border border-slate-800 p-3 rounded text-cyan-400 flex flex-col group/item hover:border-cyan-600 transition-all hover:bg-slate-800">
                           <span className="tracking-tight truncate" title={item.domain}>{item.domain}</span>
                           <span className="text-[9px] text-slate-500 mt-1">
@@ -726,6 +739,17 @@ const App: React.FC = () => {
                         </div>
                       )}
                     </div>
+                    {!phishingSearch && phishingVisible < filteredPhishingDomains.length && (
+                      <div className="text-center pt-4">
+                        <button
+                          onClick={() => setPhishingVisible(prev => prev + 80)}
+                          className="px-6 py-2 text-xs font-bold uppercase tracking-widest text-cyan-400 border border-cyan-900/50 rounded hover:bg-cyan-950/30 transition-all"
+                        >
+                          {t('Покажи още', 'Show More', 'Mehr anzeigen')} ({filteredPhishingDomains.length - phishingVisible} {t('оставащи', 'remaining', 'verbleibend')})
+                        </button>
+                      </div>
+                    )}
+                    </>
                   )}
                 </div>
                 <div className="px-6 py-4 bg-slate-950/60 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex justify-between">
@@ -765,7 +789,7 @@ const App: React.FC = () => {
         {shareOpen && (
           <div className="flex flex-col gap-2 mb-1">
             <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstop-the-scam.com"
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstop-the-scam.xyz"
               target="_blank"
               rel="noopener noreferrer"
               title={t('Сподели във Facebook', 'Share on Facebook', 'Auf Facebook teilen')}
@@ -774,14 +798,14 @@ const App: React.FC = () => {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
             <a
-              href="viber://forward?text=https%3A%2F%2Fstop-the-scam.com"
+              href="viber://forward?text=https%3A%2F%2Fstop-the-scam.xyz"
               title={t('Сподели във Viber', 'Share on Viber', 'Auf Viber teilen')}
               className="w-11 h-11 rounded-full bg-[#7360f2] hover:bg-[#6550e0] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.518 6.764.375 9.947c-.144 3.183-.332 9.152 5.56 10.85l.007.003-.004 2.483s-.04.998.621 1.203c.795.248 1.263-.51 2.024-1.327.418-.45.994-1.108 1.43-1.613 3.937.331 6.962-.425 7.306-.538.794-.263 5.283-.833 6.014-6.798.753-6.14-.354-10.018-2.325-11.776C19.211.457 15.452-.04 11.398.002zm.432 2.09c3.481-.035 6.664.315 8.4 1.83 1.592 1.398 2.586 4.665 1.928 9.998-.586 4.783-3.922 5.19-4.584 5.41-.282.092-2.866.74-6.156.536 0 0-2.437 2.94-3.2 3.705-.12.12-.26.167-.353.144-.13-.032-.166-.186-.164-.412l.025-4.022c-4.863-1.397-4.576-6.344-4.46-8.904.118-2.56.704-4.726 2.1-6.108C6.646 2.995 8.814 2.264 11.83 2.092zM11.59 5.39c-.24 0-.24.373 0 .377a6.39 6.39 0 014.488 1.66 5.39 5.39 0 011.572 3.83c.004.244.377.24.373 0a5.755 5.755 0 00-1.69-4.098 6.772 6.772 0 00-4.743-1.77zm.245 1.828c-.236-.016-.247.35-.01.37a4.42 4.42 0 012.611 1.19c.618.656.917 1.403.94 2.312.007.24.38.236.373 0-.025-1.032-.366-1.893-1.065-2.635a4.78 4.78 0 00-2.849-1.237zm-2.26.614c-.322-.035-.612.078-.834.31l-.379.44c-.222.257-.49.213-.49.213-2.32-.584-3.693-3.264-3.693-3.264s-.162-.265.1-.564l.39-.417c.37-.388.363-.9.085-1.453l-.607-1.12-.607-1.1c-.256-.37-.604-.6-.94-.518 0 0-.72.17-1.408.916a3.078 3.078 0 00-.567 1.2c-.273 1.38.293 3.098 1.637 5.022 1.1 1.694 3.406 4.473 7.159 5.698.894.213 1.6.09 2.106-.17.507-.26.79-.652.79-.652l.305-.412c.326-.43.143-.89-.304-1.105l-1.782-.84c-.285-.135-.595-.058-.78.182l-.376.451c-.197.236-.576.198-.576.198z"/></svg>
             </a>
             <a
-              href="https://wa.me/?text=https%3A%2F%2Fstop-the-scam.com"
+              href="https://wa.me/?text=https%3A%2F%2Fstop-the-scam.xyz"
               target="_blank"
               rel="noopener noreferrer"
               title={t('Сподели в WhatsApp', 'Share on WhatsApp', 'Auf WhatsApp teilen')}
@@ -790,7 +814,7 @@ const App: React.FC = () => {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
             <a
-              href="https://t.me/share/url?url=https%3A%2F%2Fstop-the-scam.com"
+              href="https://t.me/share/url?url=https%3A%2F%2Fstop-the-scam.xyz"
               target="_blank"
               rel="noopener noreferrer"
               title={t('Сподели в Telegram', 'Share on Telegram', 'Auf Telegram teilen')}
@@ -835,7 +859,7 @@ const App: React.FC = () => {
             </div>
             
             <div className="flex flex-col justify-end text-right md:text-left">
-              <h4 className="text-white font-black uppercase text-[10px] tracking-[0.3em] mb-4">Official Platform</h4>
+              <h4 className="text-white font-black uppercase text-[10px] tracking-[0.3em] mb-4">{t('Официална платформа', 'Official Platform', 'Offizielle Plattform')}</h4>
               <p className="text-sm font-medium leading-relaxed max-w-md text-slate-400">
                 {t('Сайт за обществена осведоменост и превенция на финансови злоупотреби.', 'Public awareness platform for the prevention of financial abuse.', 'Plattform zur Aufklärung und Prävention von Finanzbetrug.')}
               </p>

@@ -9,9 +9,6 @@ export interface PhishingDomain {
 export interface ContentStrings {
   header: {
     title: string;
-    subtitle: string;
-    ctaList: string;
-    ctaRegisters: string;
   };
   hero: {
     title: string;
@@ -47,10 +44,6 @@ export interface ContentStrings {
       linkText: string;
     };
   };
-  schemes: {
-    title: string;
-    items: Array<{ title: string; desc: string; type: 'crypto' | 'stock' | 'recovery' }>;
-  };
   scamTypes: {
     title: string;
     subtitle: string;
@@ -63,7 +56,7 @@ export interface ContentStrings {
   };
   protection: {
     title: string;
-    steps: Array<{ title: string; desc: string; highlight?: string }>;
+    steps: Array<{ title: string; desc: string }>;
   };
   registers: {
     title: string;
@@ -72,16 +65,9 @@ export interface ContentStrings {
       items: Array<{ name: string; desc: string; link: string; linkText: string }>;
     }>;
   };
-  faq: {
-    title: string;
-    items: Array<{ q: string; a: string }>;
-  };
   domains: {
     title: string;
-    notice: string;
     placeholder: string;
-    showing: string;
-    of: string;
   };
   victim: {
     title: string;
@@ -89,7 +75,6 @@ export interface ContentStrings {
     emergencyNote: string;
   };
   footer: {
-    legal: string;
     disclaimer: string;
     officialLinks: Array<{ name: string; url: string }>;
   };
