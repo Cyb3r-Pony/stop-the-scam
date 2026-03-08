@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спри Измамата - Информационна листовка</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    width: 210mm;
+    min-height: 297mm;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 16mm 14mm 16mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative lines */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      linear-gradient(90deg, transparent 0%, transparent 48%, rgba(59,130,246,0.06) 49%, rgba(59,130,246,0.06) 51%, transparent 52%),
+      linear-gradient(0deg, transparent 0%, transparent 48%, rgba(59,130,246,0.04) 49%, rgba(59,130,246,0.04) 51%, transparent 52%);
+    pointer-events: none;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5mm;
+    padding-bottom: 4mm;
+    border-bottom: 2px solid rgba(59,130,246,0.3);
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: #1d4ed8;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-icon svg { width: 22px; height: 22px; }
+  .logo-text {
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+  .header-badge {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    margin-bottom: 5mm;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 900;
+    color: #ef4444;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 2mm;
+  }
+  .hero p {
+    font-size: 10px;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+  }
+
+  /* SCP Section */
+  .scp {
+    display: flex;
+    gap: 3mm;
+    margin-bottom: 5mm;
+  }
+  .scp-item {
+    flex: 1;
+    background: rgba(30,41,59,0.8);
+    border-radius: 6px;
+    padding: 3mm;
+    text-align: center;
+  }
+  .scp-stop {
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+  .scp-stop .scp-keyword { color: #ef4444; }
+  .scp-think {
+    border: 1px solid rgba(245,158,11,0.3);
+  }
+  .scp-think .scp-keyword { color: #f59e0b; }
+  .scp-check {
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .scp-check .scp-keyword { color: #22c55e; }
+  .scp-keyword {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5mm;
+  }
+  .scp-desc {
+    font-size: 7.5px;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+
+  /* Two column layout */
+  .columns {
+    display: flex;
+    gap: 4mm;
+    flex: 1;
+  }
+  .col-left {
+    flex: 1.15;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-right {
+    flex: 0.85;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 3mm;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-title .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Warning signs */
+  .warning-title { color: #f59e0b; }
+  .warning-title .dot { background: #f59e0b; }
+  .warning-list { list-style: none; display: flex; flex-direction: column; gap: 2mm; }
+  .warning-item {
+    background: rgba(30,41,59,0.6);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 4px 4px 0;
+    padding: 2.5mm 3mm;
+  }
+  .warning-item-title {
+    font-size: 9px;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 0.5mm;
+  }
+  .warning-item-desc {
+    font-size: 7.5px;
+    line-height: 1.45;
+    color: #94a3b8;
+  }
+
+  /* Protection tips */
+  .protection {
+    margin-top: 3mm;
+  }
+  .protection-title { color: #22c55e; }
+  .protection-title .dot { background: #22c55e; }
+  .protection-list { list-style: none; display: flex; flex-direction: column; gap: 1.5mm; }
+  .protection-item {
+    background: rgba(30,41,59,0.6);
+    border-left: 3px solid #22c55e;
+    border-radius: 0 4px 4px 0;
+    padding: 2mm 3mm;
+  }
+  .protection-item-title {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #4ade80;
+    margin-bottom: 0.3mm;
+  }
+  .protection-item-desc {
+    font-size: 7px;
+    line-height: 1.45;
+    color: #94a3b8;
+  }
+
+  /* Emergency steps */
+  .emergency {
+    background: linear-gradient(135deg, rgba(127,29,29,0.4), rgba(153,27,27,0.2));
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px;
+    padding: 4mm;
+  }
+  .emergency-title { color: #ef4444; }
+  .emergency-title .dot { background: #ef4444; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 2.5mm; }
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5mm;
+  }
+  .step-num {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    background: #dc2626;
+    color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 900;
+  }
+  .step-text {
+    font-size: 8.5px;
+    line-height: 1.5;
+    color: #e2e8f0;
+    font-weight: 600;
+    padding-top: 1px;
+  }
+
+  .emergency-note {
+    margin-top: 3mm;
+    padding: 2.5mm;
+    background: rgba(220,38,38,0.15);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 900;
+    color: #fca5a5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Contacts */
+  .contacts {
+    margin-top: 3mm;
+    background: rgba(30,41,59,0.6);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 6px;
+    padding: 3mm;
+  }
+  .contacts-title {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #60a5fa;
+    margin-bottom: 2mm;
+  }
+  .contact-row {
+    font-size: 7.5px;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+  .contact-row strong { color: #cbd5e1; }
+
+  /* Footer */
+  .footer {
+    margin-top: 4mm;
+    padding-top: 3mm;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    font-size: 7px;
+    color: #475569;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .footer-right {
+    font-size: 7.5px;
+    color: #3b82f6;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+      </div>
+      <span class="logo-text">Спри Измамата</span>
+    </div>
+    <span class="header-badge">Борба с киберпрестъпността</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Защитете се от инвестиционни измами</h1>
+    <p>Информационна листовка за разпознаване и предотвратяване на финансови злоупотреби</p>
+  </div>
+
+  <!-- Stop Challenge Protect -->
+  <div class="scp">
+    <div class="scp-item scp-stop">
+      <div class="scp-keyword">Спри</div>
+      <div class="scp-desc">Спрете за момент, преди да дадете парите или данните си. Не бързайте &mdash; измамниците разчитат на прибързани решения.</div>
+    </div>
+    <div class="scp-item scp-think">
+      <div class="scp-keyword">Помисли</div>
+      <div class="scp-desc">Може ли да е измама? Имате право да откажете. Само измамниците ще се опитат да ви притиснат или вкарат в паника.</div>
+    </div>
+    <div class="scp-item scp-check">
+      <div class="scp-keyword">Провери</div>
+      <div class="scp-desc">Проверете лиценза на компанията в официалните регистри. Обадете се на банката си, ако нещо е съмнително.</div>
+    </div>
+  </div>
+
+  <!-- Two columns -->
+  <div class="columns">
+
+    <!-- Left: Warning Signs + Protection -->
+    <div class="col-left">
+      <div class="section-title warning-title">
+        <span class="dot"></span> Топ 5 признака на измама
+      </div>
+      <ul class="warning-list">
+        <li class="warning-item">
+          <div class="warning-item-title">1. Обещания за бърза печалба</div>
+          <div class="warning-item-desc">Гарантирана висока доходност без риск е невъзможна. Фалшиви графики с 200&ndash;300% ръст за дни &mdash; класическа тактика за измама.</div>
+        </li>
+        <li class="warning-item">
+          <div class="warning-item-title">2. Натиск за бързо решение</div>
+          <div class="warning-item-desc">Измамниците винаги бързат: &bdquo;офертата изтича сега&ldquo;. Не ви дават време да проучите лиценза или да се консултирате.</div>
+        </li>
+        <li class="warning-item">
+          <div class="warning-item-title">3. Фалшиви препоръки от известни личности</div>
+          <div class="warning-item-desc">Снимки на Илон Мъск, Григор Димитров и други в измамни реклами. Тези хора никога не са рекламирали подобни платформи.</div>
+        </li>
+        <li class="warning-item">
+          <div class="warning-item-title">4. Нестандартни плащания</div>
+          <div class="warning-item-desc">Искат плащания само в криптовалута или преводи към сметки на физически лица, вместо към корпоративни сметки на лицензирани брокери.</div>
+        </li>
+        <li class="warning-item">
+          <div class="warning-item-title">5. Непоискан контакт</div>
+          <div class="warning-item-desc">Свързват се без повод по телефон, социални мрежи или месинджър с обещания за бързи печалби. Легитимни брокери не правят студени обаждания.</div>
+        </li>
+      </ul>
+
+      <!-- Protection tips -->
+      <div class="protection">
+        <div class="section-title protection-title">
+          <span class="dot"></span> Как да се предпазите
+        </div>
+        <ul class="protection-list">
+          <li class="protection-item">
+            <div class="protection-item-title">Активирайте двустепенна верификация (2FA)</div>
+            <div class="protection-item-desc">Винаги включвайте 2FA за банкови и финансови приложения &mdash; най-сигурната бариера срещу неоторизиран достъп.</div>
+          </li>
+          <li class="protection-item">
+            <div class="protection-item-title">Не споделяйте лични данни</div>
+            <div class="protection-item-desc">Никога не предоставяйте снимки на лична карта, банкова информация или пароли в непроверени сайтове или при телефонни обаждания.</div>
+          </li>
+          <li class="protection-item">
+            <div class="protection-item-title">Проверявайте линкове преди клик</div>
+            <div class="protection-item-desc">Задръжте курсора за реалния URL. Не отваряйте линкове от непознати имейли, SMS или съобщения в месинджъри.</div>
+          </li>
+          <li class="protection-item">
+            <div class="protection-item-title">Внимавайте с AI Deepfakes</div>
+            <div class="protection-item-desc">AI може да клонира гласове и видео. Ако близък ви моли за пари по телефона, затворете и му се обадете лично.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right: Emergency Steps + Contacts -->
+    <div class="col-right">
+      <div class="emergency">
+        <div class="section-title emergency-title">
+          <span class="dot"></span> Ако сте жертва на измама
+        </div>
+        <ul class="steps-list">
+          <li class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">Спрете всякаква комуникация с измамниците</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">Не правете повече плащания под никакъв предлог</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">Информирайте своята банка незабавно</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-text">Подайте сигнал в най-близкото РПУ или ГДБОП</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">5</div>
+            <div class="step-text">Запазете всички чатове, имейли, банкови преписки, хешове на транзакции и крипто адреси</div>
+          </li>
+        </ul>
+        <div class="emergency-note">Не чакайте. Всеки час е от значение за възстановяването на средствата.</div>
+      </div>
+
+      <!-- Contacts -->
+      <div class="contacts">
+        <div class="contacts-title">Полезни контакти</div>
+        <div class="contact-row"><strong>ГДБОП (Киберпрестъпност):</strong> cybercrime.bg</div>
+        <div class="contact-row"><strong>КФН (Комисия за финансов надзор):</strong> fsc.bg</div>
+        <div class="contact-row"><strong>Европейски потребителски център:</strong> ecc.bg</div>
+        <div class="contact-row"><strong>Тел. 112</strong> &mdash; спешна помощ при измама в ход</div>
+      </div>
+
+      <!-- Extra tip box -->
+      <div class="contacts" style="border-color: rgba(245,158,11,0.2); margin-top: 3mm;">
+        <div class="contacts-title" style="color: #fbbf24;">Запомнете</div>
+        <div class="contact-row" style="font-size: 8px; color: #cbd5e1; line-height: 1.7;">
+          <strong style="color: #fbbf24;">Никоя легитимна компания</strong> няма да ви гарантира печалба, да ви кара да бързате или да ви моли за пари в криптовалута. Ако звучи твърде добре, за да е истина &mdash; вероятно е измама.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">&copy; 2026 Спри Измамата &bull; stop-the-scam.com</div>
+    <div class="footer-right">Повече информация: stop-the-scam.com</div>
+  </div>
+
+</div>
+</body>
+</html>
