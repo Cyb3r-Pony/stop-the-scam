@@ -542,10 +542,10 @@ const App: React.FC = () => {
                   </p>
                   <div className="bg-black/30 rounded p-3 mb-3">
                     <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">SHA-256</span>
-                    <code className="text-[11px] text-blue-400 break-all font-mono leading-relaxed select-all">9430314a6a3d9020c3b95e87ddeaf516a2830f4b3972c69243b1e50ad0ebd1be</code>
+                    <code className="text-[11px] text-blue-400 break-all font-mono leading-relaxed select-all">811eda3232b2f6b4c730b56ba4e05d46557162c0f9531a7de1e3838cd3e287de</code>
                   </div>
                   <a
-                    href="https://www.virustotal.com/gui/file/9430314a6a3d9020c3b95e87ddeaf516a2830f4b3972c69243b1e50ad0ebd1be"
+                    href="https://www.virustotal.com/gui/file/811eda3232b2f6b4c730b56ba4e05d46557162c0f9531a7de1e3838cd3e287de"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-xs text-blue-400 hover:text-blue-300 transition-colors"
