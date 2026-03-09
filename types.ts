@@ -49,11 +49,6 @@ export interface ContentStrings {
     subtitle: string;
     items: Array<{ title: string; desc: string; example: string }>;
   };
-  technical: {
-    title: string;
-    broker: { title: string; items: string[] };
-    platform: { title: string; items: string[] };
-  };
   protection: {
     title: string;
     steps: Array<{ title: string; desc: string }>;

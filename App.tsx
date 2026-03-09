@@ -3,6 +3,7 @@ import { SCAM_DOMAINS, CONTENT } from './constants';
 import { Lang, PhishingDomain } from './types';
 import Background from './components/Background';
 import Quiz from './components/Quiz';
+import SocialEngineering from './components/SocialEngineering';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
@@ -11,7 +12,7 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phishingDomains, setPhishingDomains] = useState<PhishingDomain[]>([]);
   const [phishingLoading, setPhishingLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'main' | 'quiz'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'quiz' | 'social-engineering'>('main');
   const [shareOpen, setShareOpen] = useState(false);
   const [blacklistVisible, setBlacklistVisible] = useState(40);
   const [phishingVisible, setPhishingVisible] = useState(40);
@@ -131,12 +132,12 @@ const App: React.FC = () => {
           <nav className="hidden md:flex items-center gap-0.5 lg:gap-1.5 overflow-x-auto no-scrollbar py-2">
             <button onClick={() => scrollToSection('scam-types')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-amber-500 transition-colors whitespace-nowrap">{t('Измами', 'Scams', 'Betrug')}</button>
             <button onClick={() => scrollToSection('warning-signs')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Признаци', 'Signs', 'Warnzeichen')}</button>
-            <button onClick={() => scrollToSection('attention')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Мерки', 'Markers', 'Merkmale')}</button>
             <button onClick={() => scrollToSection('protection')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Предпазване', 'Protection', 'Schutz')}</button>
             <button onClick={() => scrollToSection('registers')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Регистри', 'Registers', 'Register')}</button>
             <button onClick={() => scrollToSection('blacklist')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
             <button onClick={() => scrollToSection('phishing')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
             <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
+            <button onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-purple-600 hover:text-purple-400 transition-colors whitespace-nowrap border border-purple-600/30 rounded bg-purple-950/20 hover:bg-purple-950/40">{t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}</button>
             <button onClick={() => scrollToSection('victim')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
           </nav>
 
@@ -224,12 +225,6 @@ const App: React.FC = () => {
               {t('Признаци', 'Signs', 'Warnzeichen')}
             </button>
             <button
-              onClick={() => scrollToSection('attention')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Мерки', 'Markers', 'Merkmale')}
-            </button>
-            <button
               onClick={() => scrollToSection('protection')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
             >
@@ -260,6 +255,12 @@ const App: React.FC = () => {
               {t('Тест за киберсигурност', 'Security Quiz', 'Sicherheitsquiz')}
             </button>
             <button
+              onClick={() => { setMobileMenuOpen(false); setCurrentPage('social-engineering'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-purple-600 hover:text-purple-400 hover:bg-purple-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {t('Социално инженерство', 'Social Engineering', 'Social Engineering')}
+            </button>
+            <button
               onClick={() => scrollToSection('victim')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
             >
@@ -272,6 +273,8 @@ const App: React.FC = () => {
       <main className="flex-1">
         {currentPage === 'quiz' ? (
           <Quiz lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+        ) : currentPage === 'social-engineering' ? (
+          <SocialEngineering lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         ) : (
         <div key={lang}>
         {/* Section A: Institutional Guidance (Hero) */}
@@ -476,43 +479,6 @@ const App: React.FC = () => {
                 </a>
               </div>
             )}
-          </div>
-        </section>
-
-        {/* Technical Red Flags */}
-        <section id="attention" className="py-24 bg-slate-900/60 backdrop-blur-md border-b border-slate-800">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl font-extrabold mb-16 text-center text-white tracking-tight">{strings.technical.title}</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="bg-slate-950/50 p-10 rounded-lg border border-slate-800">
-                <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-blue-400">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-                  {strings.technical.broker.title}
-                </h3>
-                <ul className="space-y-6">
-                  {strings.technical.broker.items.map((item, i) => (
-                    <li key={i} className="flex gap-4 items-start group">
-                      <div className="w-1.5 h-6 bg-red-600 flex-shrink-0 mt-0.5 group-hover:h-8 transition-all"></div>
-                      <p className="text-slate-300 font-medium">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-slate-950/50 p-10 rounded-lg border border-slate-800">
-                <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-blue-400">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                  {strings.technical.platform.title}
-                </h3>
-                <ul className="space-y-6">
-                  {strings.technical.platform.items.map((item, i) => (
-                    <li key={i} className="flex gap-4 items-start group">
-                      <div className="w-1.5 h-6 bg-red-600 flex-shrink-0 mt-0.5 group-hover:h-8 transition-all"></div>
-                      <p className="text-slate-300 font-medium">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </section>
 

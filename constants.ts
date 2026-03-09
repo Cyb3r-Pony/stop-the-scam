@@ -120,7 +120,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "Тактика \"малка печалба\"", desc: "Позволяват ви да изтеглите малка сума, за да спечелят доверието ви. След това поискват значително по-голяма инвестиция, която никога няма да върнат." },
         { title: "Непоискан контакт", desc: "Свързват се с вас без повод чрез телефон, социални мрежи или месинджър. Легитимни брокери не правят студени обаждания с обещания за бързи печалби." },
         { title: "AI Deepfakes – клонирани гласове и видеа", desc: "Измамниците използват изкуствен интелект за клониране на гласове, снимки и видеа. Може да получите обаждане с гласа на ваш близък, който моли за спешна помощ. Винаги се обадете лично на човека за потвърждение." },
-        { title: "Фалшиви покупки и доставки", desc: "Обяви за несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Сайтът изчезва след няколко дни." }
+        { title: "Фалшиви покупки и доставки", desc: "Обяви за несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Сайтът изчезва след няколко дни." },
+        { title: "Технически маркери в комуникацията", desc: "Измамниците ползват Gmail/Outlook вместо корпоративен имейл, искат отдалечен достъп чрез AnyDesk/TeamViewer, звънят от екзотични държави и използват stock снимки за аватари." },
+        { title: "Технически маркери в платформата", desc: "Балансът расте през уикенда (когато пазарите спят), графиките никога не падат, искат \"данък 27%\" при опит за теглене и обещават нереална доходност от 10% на ден." }
       ],
       campaignLink: {
         text: "Кампания на КФН: Разпознай лицензирания инвестиционен посредник",
@@ -145,27 +147,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "AI Deepfake измами", desc: "Изкуственият интелект позволява клониране на глас, лице и видео на реални хора. Измамниците създават убедителни обаждания или видео съобщения от \"ваши близки\" или \"известни личности\", които молят за пари или рекламират фалшиви инвестиции.", example: "Получавате видео обаждане от \"вашия син\" с неговия глас и лице, който моли за спешен превод от 5 000 лв. В действителност е AI-генериран deepfake. Винаги се обадете лично за потвърждение." },
         { title: "Фалшиви покупки и доставки", desc: "Несъществуващи продукти на изгодни цени в социални мрежи или фалшиви онлайн магазини. Плащате, но никога не получавате стоката. Фалшиви SMS от \"куриерски\" фирми водят към сайтове за кражба на данни.", example: "Реклама във Facebook за маркови маратонки на 70% отстъпка. Сайтът изглежда професионално, но след плащане стоката никога не пристига, а данните на картата ви са откраднати." }
       ]
-    },
-    technical: {
-      title: "Технически маркери за внимание",
-      broker: {
-        title: "В комуникацията:",
-        items: [
-          "Ползват Gmail/Outlook вместо корпоративен имейл",
-          "Искат отдалечен достъп през AnyDesk или TeamViewer",
-          "Говорят български, но звънят от екзотични държави",
-          "Ползват stock снимки за аватари"
-        ]
-      },
-      platform: {
-        title: "В платформата:",
-        items: [
-          "Балансът расте през уикенда (когато пазарите спят)",
-          "Графиките никога не падат – само печалба",
-          "Искат 'данък 27%' при опит за теглене",
-          "Нереална доходност – 10% на ден"
-        ]
-      }
     },
     protection: {
       title: "Как да се предпазите",
@@ -311,7 +292,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "\"Small Win\" Tactic", desc: "They allow you to withdraw a small amount to build trust. Then they request a significantly larger deposit that you'll never get back." },
         { title: "Unsolicited Contact", desc: "They reach out to you uninvited via phone, social media, or messaging apps. Legitimate brokers don't make cold calls promising quick profits." },
         { title: "AI Deepfakes – Cloned Voices & Videos", desc: "Scammers use artificial intelligence to clone voices, photos, and videos. You may receive a call with a family member's voice asking for urgent help. Always call the person directly to verify." },
-        { title: "Fake Purchases & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. The site disappears within days." }
+        { title: "Fake Purchases & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. The site disappears within days." },
+        { title: "Technical Red Flags in Communication", desc: "Scammers use Gmail/Outlook instead of professional email, demand remote access via AnyDesk/TeamViewer, call from exotic countries, and use stock photos for profile pictures." },
+        { title: "Technical Red Flags on the Platform", desc: "Balance grows during weekends when markets are closed, charts never drop, they demand a '27% tax' during withdrawal attempts, and promise unrealistic yields like 10% per day." }
       ],
       campaignLink: {
         text: "FSC Campaign: \"Recognize the Licensed Investment Intermediary\"",
@@ -336,27 +319,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "AI Deepfake Scams", desc: "Artificial intelligence enables cloning of real people's voice, face, and video. Scammers create convincing calls or video messages from \"your relatives\" or \"celebrities\" requesting money or promoting fake investments.", example: "You receive a video call from \"your son\" with his voice and face, asking for an urgent transfer of $5,000. In reality, it's an AI-generated deepfake. Always call back personally to verify." },
         { title: "Fake Purchase & Delivery Scams", desc: "Non-existent products at bargain prices on social media or fake online stores. You pay but never receive the goods. Fake SMS from \"courier\" services lead to sites that steal your payment details.", example: "Facebook ad for branded sneakers at 70% off. The site looks professional, but after payment the goods never arrive and your card details are stolen." }
       ]
-    },
-    technical: {
-      title: "Technical Red Flags",
-      broker: {
-        title: "Communication:",
-        items: [
-          "Using Gmail/Outlook instead of professional email",
-          "Demanding remote access via AnyDesk or TeamViewer",
-          "Speaking your language but calling from abroad",
-          "Using stock photos for profile pictures"
-        ]
-      },
-      platform: {
-        title: "On the platform:",
-        items: [
-          "Balance grows during weekends (when markets are closed)",
-          "Charts never drop – only profit shown",
-          "Demanding '27% tax' during withdrawal attempts",
-          "Unrealistic yields like 10% per day"
-        ]
-      }
     },
     protection: {
       title: "How to Protect Yourself",
@@ -502,7 +464,9 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "\"Kleiner Gewinn\"-Taktik", desc: "Sie erlauben eine kleine Auszahlung, um Vertrauen aufzubauen. Dann fordern sie eine deutlich grössere Einzahlung, die Sie nie zurückbekommen." },
         { title: "Unaufgeforderte Kontaktaufnahme", desc: "Sie melden sich ungefragt per Telefon, Social Media oder Messenger-Apps. Seriöse Broker machen keine Kaltakquise mit Versprechen schneller Gewinne." },
         { title: "AI Deepfakes – Geklonte Stimmen & Videos", desc: "Betrüger nutzen künstliche Intelligenz zum Klonen von Stimmen, Fotos und Videos. Sie könnten einen Anruf mit der Stimme eines Familienmitglieds erhalten, das um dringende Hilfe bittet. Rufen Sie die Person immer direkt an." },
-        { title: "Gefälschte Käufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnäppchenpreisen in sozialen Medien oder gefälschten Online-Shops. Sie zahlen, erhalten aber nie die Ware. Die Seite verschwindet innerhalb von Tagen." }
+        { title: "Gefälschte Käufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnäppchenpreisen in sozialen Medien oder gefälschten Online-Shops. Sie zahlen, erhalten aber nie die Ware. Die Seite verschwindet innerhalb von Tagen." },
+        { title: "Technische Warnsignale in der Kommunikation", desc: "Betrüger verwenden Gmail/Outlook statt professioneller E-Mail, verlangen Fernzugriff über AnyDesk/TeamViewer, rufen aus exotischen Ländern an und verwenden Stock-Fotos als Profilbilder." },
+        { title: "Technische Warnsignale auf der Plattform", desc: "Guthaben wächst am Wochenende (wenn die Märkte geschlossen sind), Charts fallen nie, sie fordern '27% Steuer' bei Auszahlungsversuchen und versprechen unrealistische Renditen von 10% pro Tag." }
       ],
       campaignLink: {
         text: "FSC-Kampagne: Den lizenzierten Anlagevermittler erkennen",
@@ -527,27 +491,6 @@ export const CONTENT: Record<Lang, ContentStrings> = {
         { title: "AI-Deepfake-Betrug", desc: "Künstliche Intelligenz ermöglicht das Klonen von Stimme, Gesicht und Video realer Personen. Betrüger erstellen überzeugende Anrufe oder Videonachrichten von \"Ihren Angehörigen\" oder \"Prominenten\", die um Geld bitten.", example: "Sie erhalten einen Videoanruf von \"Ihrem Sohn\" mit seiner Stimme und seinem Gesicht, der um eine dringende Überweisung von 5.000 EUR bittet. In Wirklichkeit ist es ein KI-generierter Deepfake. Rufen Sie immer persönlich zurück." },
         { title: "Gefälschte Käufe & Lieferbetrug", desc: "Nicht existierende Produkte zu Schnäppchenpreisen in sozialen Medien oder gefälschten Online-Shops. Sie zahlen, aber die Ware kommt nie an. Gefälschte SMS von \"Kurierdiensten\" führen zu Datendiebstahl-Seiten.", example: "Facebook-Werbung für Marken-Sneaker mit 70% Rabatt. Die Seite sieht professionell aus, aber nach der Zahlung kommt die Ware nie an und Ihre Kartendaten werden gestohlen." }
       ]
-    },
-    technical: {
-      title: "Technische Warnhinweise",
-      broker: {
-        title: "In der Kommunikation:",
-        items: [
-          "Verwendung von Gmail/Outlook statt professioneller E-Mail",
-          "Fernzugriff über AnyDesk oder TeamViewer wird verlangt",
-          "Sprechen Ihre Sprache, rufen aber aus dem Ausland an",
-          "Verwendung von Stock-Fotos als Profilbilder"
-        ]
-      },
-      platform: {
-        title: "Auf der Plattform:",
-        items: [
-          "Guthaben wächst am Wochenende (wenn die Märkte geschlossen sind)",
-          "Diagramme fallen nie – nur Gewinn wird angezeigt",
-          "Forderung von '27% Steuer' bei Auszahlungsversuchen",
-          "Unrealistische Renditen wie 10% pro Tag"
-        ]
-      }
     },
     protection: {
       title: "So schützen Sie sich",
