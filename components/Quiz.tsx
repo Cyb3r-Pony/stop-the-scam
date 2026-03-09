@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Lang } from '../types';
 import { PoolQuestion, individualsPool } from './individualsQuestions';
 import { itAdminsPool } from './itAdminsQuestions';
@@ -339,6 +339,18 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   const [wrongQuestions, setWrongQuestions] = useState<PoolQuestion[]>([]);
   const [quizComplete, setQuizComplete] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(new Array(10).fill(false));
+  const [scrollTrigger, setScrollTrigger] = useState(0);
+  const quizTopRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to quiz top after question/screen changes (fires after React re-render)
+  useEffect(() => {
+    if (scrollTrigger === 0) return;
+    if (quizTopRef.current) {
+      quizTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [scrollTrigger]);
 
   const categoryMeta = getCategoryMeta(lang);
   const categories: QuizCategory[] = ['individuals', 'it-admins', 'executives'];
@@ -394,11 +406,10 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
       setCurrentQuestion(prev => prev + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setQuizComplete(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    setScrollTrigger(prev => prev + 1);
   };
 
   const optionLabels = ['A', 'B', 'C', 'D'];
@@ -406,7 +417,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   // ─── Category selection screen ─────────────────────────────────
   if (!selectedCategory) {
     return (
-      <div className="min-h-screen pt-8 pb-24 px-6">
+      <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
         <div className="max-w-5xl mx-auto">
           {/* Back button */}
           <button
@@ -487,7 +498,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
     const percentage = Math.round((score / 10) * 100);
 
     return (
-      <div className="min-h-screen pt-8 pb-24 px-6">
+      <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
         <div className="max-w-3xl mx-auto">
           {/* Back button */}
           <button
@@ -602,7 +613,7 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   const isCorrect = selectedAnswer === question.correct;
 
   return (
-    <div className="min-h-screen pt-8 pb-24 px-6">
+    <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
       <div className="max-w-3xl mx-auto">
         {/* Top bar */}
         <div className="flex items-center justify-between mb-8">
