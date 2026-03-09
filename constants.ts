@@ -61,7 +61,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Спри Измамата",
     },
     hero: {
-      title: "Защитете своите спестявания от инвестиционни измами",
+      title: "Научете как работят онлайн измамите и как да ги спрете",
       description: "Вашият първи щит срещу финансови злоупотреби. Научете как да разпознавате фалшиви платформи и да инвестирате сигурно."
     },
     statistics: {
@@ -252,7 +252,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Stop The Scam",
     },
     hero: {
-      title: "Protect Your Savings from Investment Fraud",
+      title: "Learn How Online Scams Work and How to Stop Them",
       description: "Your primary shield against financial abuse. Learn to recognize fraudulent platforms and invest securely."
     },
     statistics: {
@@ -443,7 +443,7 @@ export const CONTENT: Record<Lang, ContentStrings> = {
       title: "Stopp den Betrug",
     },
     hero: {
-      title: "Schützen Sie Ihre Ersparnisse vor Anlagebetrug",
+      title: "Erfahren Sie, wie Online-Betrug funktioniert und wie Sie ihn stoppen",
       description: "Ihr erster Schutzschild gegen Finanzbetrug. Lernen Sie, betrügerische Plattformen zu erkennen und sicher zu investieren."
     },
     statistics: {
