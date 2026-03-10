@@ -4,6 +4,7 @@ import { Lang, PhishingDomain } from './types';
 import Background from './components/Background';
 import Quiz from './components/Quiz';
 import SocialEngineering from './components/SocialEngineering';
+import ScamLab from './components/ScamLab';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
@@ -12,7 +13,7 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phishingDomains, setPhishingDomains] = useState<PhishingDomain[]>([]);
   const [phishingLoading, setPhishingLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'main' | 'quiz' | 'social-engineering'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'quiz' | 'social-engineering' | 'scam-lab'>('main');
   const [shareOpen, setShareOpen] = useState(false);
   const [blacklistVisible, setBlacklistVisible] = useState(40);
   const [phishingVisible, setPhishingVisible] = useState(40);
@@ -138,6 +139,7 @@ const App: React.FC = () => {
             <button onClick={() => scrollToSection('phishing')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
             <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
             <button onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-purple-600 hover:text-purple-400 transition-colors whitespace-nowrap border border-purple-600/30 rounded bg-purple-950/20 hover:bg-purple-950/40">{t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}</button>
+            <button onClick={() => { setCurrentPage('scam-lab'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-orange-600 hover:text-orange-400 transition-colors whitespace-nowrap border border-orange-600/30 rounded bg-orange-950/20 hover:bg-orange-950/40">{t('Лаборатория', 'Scam Lab', 'Labor')}</button>
             <button onClick={() => scrollToSection('victim')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
           </nav>
 
@@ -261,6 +263,12 @@ const App: React.FC = () => {
               {t('Социално инженерство', 'Social Engineering', 'Social Engineering')}
             </button>
             <button
+              onClick={() => { setMobileMenuOpen(false); setCurrentPage('scam-lab'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-orange-600 hover:text-orange-400 hover:bg-orange-50 transition-colors text-left border-b border-slate-200/50"
+            >
+              {t('Лаборатория за измами', 'Scam Detection Lab', 'Betrugserkennungs-Labor')}
+            </button>
+            <button
               onClick={() => scrollToSection('victim')}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
             >
@@ -275,6 +283,8 @@ const App: React.FC = () => {
           <Quiz lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         ) : currentPage === 'social-engineering' ? (
           <SocialEngineering lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+        ) : currentPage === 'scam-lab' ? (
+          <ScamLab lang={lang} onBack={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         ) : (
         <div key={lang}>
         {/* Section A: Institutional Guidance (Hero) */}
