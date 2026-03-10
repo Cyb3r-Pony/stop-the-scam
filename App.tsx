@@ -130,17 +130,13 @@ const App: React.FC = () => {
           </div>
 
           {/* Desktop Navigation - hidden on mobile */}
-          <nav className="hidden md:flex items-center gap-0.5 lg:gap-1.5 overflow-x-auto no-scrollbar py-2">
-            <button onClick={() => scrollToSection('scam-types')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-amber-500 transition-colors whitespace-nowrap">{t('Измами', 'Scams', 'Betrug')}</button>
-            <button onClick={() => scrollToSection('warning-signs')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Признаци', 'Signs', 'Warnzeichen')}</button>
-            <button onClick={() => scrollToSection('protection')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Предпазване', 'Protection', 'Schutz')}</button>
-            <button onClick={() => scrollToSection('registers')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap">{t('Регистри', 'Registers', 'Register')}</button>
-            <button onClick={() => scrollToSection('blacklist')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-600 hover:text-red-600 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
-            <button onClick={() => scrollToSection('phishing')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-blue-600 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
-            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
-            <button onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-purple-600 hover:text-purple-400 transition-colors whitespace-nowrap border border-purple-600/30 rounded bg-purple-950/20 hover:bg-purple-950/40">{t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}</button>
-            <button onClick={() => { setCurrentPage('scam-lab'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-orange-600 hover:text-orange-400 transition-colors whitespace-nowrap border border-orange-600/30 rounded bg-orange-950/20 hover:bg-orange-950/40">{t('Лаборатория', 'Scam Lab', 'Labor')}</button>
-            <button onClick={() => scrollToSection('victim')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-red-600 hover:text-red-700 transition-colors whitespace-nowrap">{t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}</button>
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2 py-2">
+            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
+            <button onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-purple-600 hover:text-purple-400 transition-colors whitespace-nowrap border border-purple-600/30 rounded bg-purple-950/20 hover:bg-purple-950/40">{t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}</button>
+            <button onClick={() => { setCurrentPage('scam-lab'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-orange-600 hover:text-orange-400 transition-colors whitespace-nowrap border border-orange-600/30 rounded bg-orange-950/20 hover:bg-orange-950/40">{t('Лаборатория', 'Scam Lab', 'Labor')}</button>
+            <div className="w-px h-4 bg-slate-600/30 mx-1"></div>
+            <button onClick={() => scrollToSection('blacklist')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-500 hover:text-red-500 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
+            <button onClick={() => scrollToSection('phishing')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-500 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
           </nav>
 
           {/* Desktop Language Toggle - always visible, outside scrollable nav */}
@@ -215,42 +211,6 @@ const App: React.FC = () => {
         >
           <nav className="flex flex-col border-t border-blue-900/20 bg-white/80 backdrop-blur-md">
             <button
-              onClick={() => scrollToSection('scam-types')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-amber-500 hover:bg-amber-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Видове измами', 'Types of Scams', 'Betrugsarten')}
-            </button>
-            <button
-              onClick={() => scrollToSection('warning-signs')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Признаци', 'Signs', 'Warnzeichen')}
-            </button>
-            <button
-              onClick={() => scrollToSection('protection')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Предпазване', 'Protection', 'Schutz')}
-            </button>
-            <button
-              onClick={() => scrollToSection('registers')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Регистри', 'Registers', 'Register')}
-            </button>
-            <button
-              onClick={() => scrollToSection('blacklist')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
-            </button>
-            <button
-              onClick={() => scrollToSection('phishing')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-500 hover:bg-blue-50 transition-colors text-left border-b border-slate-200/50"
-            >
-              {t('Фишинг', 'Phishing', 'Phishing')}
-            </button>
-            <button
               onClick={() => { setMobileMenuOpen(false); setCurrentPage('quiz'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
               className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 hover:bg-emerald-50 transition-colors text-left border-b border-slate-200/50"
             >
@@ -268,11 +228,20 @@ const App: React.FC = () => {
             >
               {t('Лаборатория за измами', 'Scam Detection Lab', 'Betrugserkennungs-Labor')}
             </button>
+            <div className="px-6 py-1.5 border-b border-slate-200/50">
+              <span className="text-[8px] font-bold uppercase tracking-widest text-slate-400">{t('Инструменти', 'Tools', 'Werkzeuge')}</span>
+            </div>
             <button
-              onClick={() => scrollToSection('victim')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors text-left"
+              onClick={() => scrollToSection('blacklist')}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
             >
-              {t('Ако сте жертва', 'Victim Help', 'Opferhilfe')}
+              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
+            </button>
+            <button
+              onClick={() => scrollToSection('phishing')}
+              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left"
+            >
+              {t('Фишинг детектор', 'Phishing Detector', 'Phishing-Detektor')}
             </button>
           </nav>
         </div>
