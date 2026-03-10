@@ -769,4 +769,345 @@ export const scenarios: LabScenario[] = [
       },
     },
   },
+
+  // === SCENARIO 11: AI Deepfake Voice — Family Emergency ===
+  {
+    id: 'deepfake_voice_11',
+    category: 'AI Deepfake',
+    categoryBg: 'AI Deepfake',
+    categoryDe: 'KI-Deepfake',
+    type: 'message',
+    difficulty: 'advanced',
+    en: {
+      title: 'Urgent Voice Message from Your Son',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Alex (Son)',
+        body: '[Voice Message — 0:47]\n\n"Dad, please don\'t panic but I\'m in serious trouble. I was in a car accident in Plovdiv and the other driver is threatening to press charges unless I pay him 2,000 EUR right now. I can\'t use my bank app — my phone screen is cracked. Can you send the money to this IBAN? I\'ll explain everything when I get home. Please hurry, he\'s getting aggressive."\n\nIBAN: BG80BNBG96611020345678\nReceiver: Dimitar Stoyanov\n\n[The voice sounds exactly like your son Alex]',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'This is an AI deepfake voice scam. Modern AI can clone a person\'s voice from just a few seconds of audio found on social media. The scammer creates a convincing voice message impersonating a family member to extract urgent payments.',
+        redFlags: [
+          { title: 'AI-cloned voice', description: 'Deepfake technology can replicate voices with startling accuracy. A familiar voice does NOT guarantee authenticity.' },
+          { title: 'Emergency + money request', description: 'The classic scam formula: fabricated crisis + immediate payment demand. Real emergencies don\'t require instant IBAN transfers to strangers.' },
+          { title: 'Third-party IBAN', description: 'The payment goes to "Dimitar Stoyanov" — not your son\'s account. This is a money mule account.' },
+          { title: 'Prevents verification', description: '"Phone screen is cracked" is an excuse to prevent you from calling back to verify. Scammers always have a reason you can\'t reach the person directly.' },
+          { title: 'Emotional pressure', description: '"He\'s getting aggressive" and "please hurry" are designed to trigger a panic response that overrides critical thinking.' },
+        ],
+        defensiveAdvice: 'ALWAYS hang up and call the person directly on their known number. Establish a family code word for emergencies. Never transfer money based on voice messages alone — AI can clone any voice.',
+      },
+    },
+    bg: {
+      title: 'Спешно гласово съобщение от сина ви',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Алекс (Син)',
+        body: '[Гласово съобщение — 0:47]\n\n"Тате, моля не се паникьосвай, но имам сериозен проблем. Катастрофирах в Пловдив и другият шофьор заплашва да ме съди, ако не му платя 2 000 EUR веднага. Не мога да ползвам банковото приложение — екранът на телефона ми е счупен. Можеш ли да изпратиш парите на този IBAN? Ще обясня всичко като се прибера. Моля побързай, става агресивен."\n\nIBAN: BG80BNBG96611020345678\nПолучател: Димитър Стоянов\n\n[Гласът звучи точно като вашия син Алекс]',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Това е измама с AI deepfake глас. Съвременният AI може да клонира гласа на човек от само няколко секунди аудио от социалните мрежи. Измамникът създава убедително гласово съобщение, имитиращо член на семейството, за да извлече спешни плащания.',
+        redFlags: [
+          { title: 'AI-клониран глас', description: 'Deepfake технологията може да възпроизведе гласове с поразителна точност. Познат глас НЕ гарантира автентичност.' },
+          { title: 'Спешност + искане за пари', description: 'Класическата формула на измамата: измислена криза + незабавно искане за плащане. Реалните извънредни ситуации не изискват мигновени IBAN преводи към непознати.' },
+          { title: 'IBAN на трето лице', description: 'Плащането отива към "Димитър Стоянов" — не към сметката на сина ви. Това е сметка на паричен мул.' },
+          { title: 'Предотвратява проверка', description: '"Екранът на телефона ми е счупен" е извинение, за да ви попречи да се обадите обратно. Измамниците винаги имат причина да не можете да достигнете човека директно.' },
+          { title: 'Емоционален натиск', description: '"Става агресивен" и "моля побързай" са предназначени да предизвикат паника, която преодолява критичното мислене.' },
+        ],
+        defensiveAdvice: 'ВИНАГИ затворете и се обадете на човека директно на познатия му номер. Установете семейна кодова дума за извънредни ситуации. Никога не превеждайте пари само на базата на гласови съобщения — AI може да клонира всеки глас.',
+      },
+    },
+    de: {
+      title: 'Dringende Sprachnachricht von Ihrem Sohn',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Alex (Sohn)',
+        body: '[Sprachnachricht — 0:47]\n\n"Papa, bitte keine Panik, aber ich bin in ernsten Schwierigkeiten. Ich hatte einen Autounfall in Plovdiv und der andere Fahrer droht, mich anzuzeigen, wenn ich ihm nicht sofort 2.000 EUR zahle. Ich kann meine Bank-App nicht nutzen — mein Handybildschirm ist kaputt. Kannst du das Geld auf diese IBAN ueberweisen? Ich erklaere alles, wenn ich zu Hause bin. Bitte beeil dich, er wird aggressiv."\n\nIBAN: BG80BNBG96611020345678\nEmpfaenger: Dimitar Stoyanov\n\n[Die Stimme klingt genau wie Ihr Sohn Alex]',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Dies ist ein KI-Deepfake-Stimmbetrug. Moderne KI kann die Stimme einer Person aus nur wenigen Sekunden Audio aus sozialen Medien klonen. Der Betrueger erstellt eine ueberzeugende Sprachnachricht, die ein Familienmitglied imitiert, um dringende Zahlungen zu erpressen.',
+        redFlags: [
+          { title: 'KI-geklonte Stimme', description: 'Deepfake-Technologie kann Stimmen mit erstaunlicher Genauigkeit nachbilden. Eine vertraute Stimme garantiert NICHT die Authentizitaet.' },
+          { title: 'Notfall + Geldforderung', description: 'Die klassische Betrugsformel: erfundene Krise + sofortige Zahlungsaufforderung. Echte Notfaelle erfordern keine sofortigen IBAN-Ueberweisungen an Fremde.' },
+          { title: 'IBAN eines Dritten', description: 'Die Zahlung geht an "Dimitar Stoyanov" — nicht an das Konto Ihres Sohnes. Dies ist ein Geldwaesche-Konto.' },
+          { title: 'Verhindert Verifizierung', description: '"Handybildschirm ist kaputt" ist eine Ausrede, um Sie daran zu hindern, zurueckzurufen. Betrueger haben immer einen Grund, warum Sie die Person nicht direkt erreichen koennen.' },
+          { title: 'Emotionaler Druck', description: '"Er wird aggressiv" und "bitte beeil dich" sollen eine Panikreaktion ausloesen, die kritisches Denken ueberwindet.' },
+        ],
+        defensiveAdvice: 'Legen Sie IMMER auf und rufen Sie die Person direkt unter ihrer bekannten Nummer an. Vereinbaren Sie ein Familien-Codewort fuer Notfaelle. Ueberweisen Sie nie Geld nur auf Basis von Sprachnachrichten — KI kann jede Stimme klonen.',
+      },
+    },
+  },
+
+  // === SCENARIO 12: Pig Butchering — Long-Con Investment ===
+  {
+    id: 'pig_butchering_12',
+    category: 'Pig Butchering Scam',
+    categoryBg: 'Pig Butchering измама',
+    categoryDe: 'Pig-Butchering-Betrug',
+    type: 'message',
+    difficulty: 'advanced',
+    en: {
+      title: 'Conference Contact Shares Investment Tips',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Elena K. — Met at Tech Summit',
+        body: 'Hey! How was your weekend? I finally tried that Italian place you recommended — the pasta was amazing!\n\nBtw, remember when I mentioned my side income from trading? I took a screenshot of my portfolio this morning — I\'m up 340% since September. My mentor runs a private group where he shares analysis before the market opens.\n\nI\'m not trying to sell you anything haha, I just thought of you because you mentioned wanting to diversify. He only accepts 5 new people per month.\n\nHere\'s the platform we use: https://nexus-tradepro.com\n\nMy referral code gets you a waived minimum deposit. No pressure at all — just thought I\'d share since we\'re friends now. Let me know if you have questions!',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'This is a "pig butchering" scam — a sophisticated long-con where the scammer invests weeks or months building a genuine-seeming friendship before gradually introducing a fraudulent investment platform. The casual, non-pushy tone is deliberate and calculated.',
+        redFlags: [
+          { title: 'Manufactured friendship', description: 'The relationship was built specifically to exploit trust. References to shared experiences ("Italian place") create false intimacy designed to lower your guard.' },
+          { title: 'Unrealistic returns', description: '340% returns since September is extraordinarily high. Legitimate investors don\'t casually share such figures with acquaintances.' },
+          { title: 'Exclusive access illusion', description: '"Only accepts 5 new people per month" and "private group" create artificial scarcity — a classic manipulation technique.' },
+          { title: 'Unregulated platform', description: '"nexus-tradepro.com" is not a registered financial platform. Legitimate brokers are licensed and appear in regulatory registers.' },
+          { title: 'Calculated casualness', description: '"Not trying to sell you anything" and "no pressure" are psychological techniques. Real friends don\'t systematically guide you toward investment platforms.' },
+        ],
+        defensiveAdvice: 'Be wary of anyone who builds a friendship and then steers conversations toward investments. Always verify trading platforms in official regulatory registers (FSC, FCA, ESMA). Remember: if someone you barely know shares "secret" investment opportunities, it\'s almost certainly a scam.',
+      },
+    },
+    bg: {
+      title: 'Познат от конференция споделя инвестиционни съвети',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Елена К. — От Tech Summit',
+        body: 'Здравей! Как мина уикендът ти? Най-накрая пробвах онзи италиански ресторант, който препоръча — пастата беше невероятна!\n\nМежду другото, помниш ли как споменах за допълнителния ми доход от търговия? Направих скрийншот на портфолиото си тази сутрин — имам 340% ръст от септември. Менторът ми води частна група, където споделя анализи преди отварянето на пазара.\n\nНе се опитвам да ти продавам нищо хаха, просто се сетих за теб, защото спомена, че искаш да диверсифицираш. Той приема само 5 нови души на месец.\n\nЕто платформата, която ползваме: https://nexus-tradepro.com\n\nС моя реферален код минималният депозит е отменен. Без натиск — просто исках да споделя, щом вече сме приятели. Кажи ако имаш въпроси!',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Това е "pig butchering" измама — усъвършенстван дългосрочен кон, при който измамникът инвестира седмици или месеци в изграждане на истинско приятелство, преди постепенно да въведе измамна инвестиционна платформа. Небрежният, ненатрапчив тон е умишлен и пресметнат.',
+        redFlags: [
+          { title: 'Конструирано приятелство', description: 'Връзката е изградена специално за експлоатация на доверието. Препратките към общи преживявания ("италианския ресторант") създават фалшива близост.' },
+          { title: 'Нереалистична доходност', description: '340% доходност от септември е извънредно висока. Легитимните инвеститори не споделят подобни цифри небрежно с познати.' },
+          { title: 'Илюзия за ексклузивност', description: '"Приема само 5 нови души на месец" и "частна група" създават изкуствен дефицит — класическа манипулативна техника.' },
+          { title: 'Нерегулирана платформа', description: '"nexus-tradepro.com" не е регистрирана финансова платформа. Легитимните брокери са лицензирани и фигурират в регулаторни регистри.' },
+          { title: 'Пресметната небрежност', description: '"Не се опитвам да ти продавам нищо" и "без натиск" са психологически техники. Истинските приятели не ви насочват систематично към инвестиционни платформи.' },
+        ],
+        defensiveAdvice: 'Бъдете внимателни към всеки, който изгражда приятелство и след това насочва разговорите към инвестиции. Винаги проверявайте платформите в официални регулаторни регистри (КФН, FCA, ESMA). Ако някой, когото почти не познавате, споделя "тайни" инвестиционни възможности — почти сигурно е измама.',
+      },
+    },
+    de: {
+      title: 'Konferenzbekanntschaft teilt Investmenttipps',
+      content: {
+        app: 'WhatsApp',
+        senderName: 'Elena K. — Vom Tech Summit',
+        body: 'Hey! Wie war dein Wochenende? Ich habe endlich das italienische Restaurant ausprobiert, das du empfohlen hast — die Pasta war fantastisch!\n\nUebrigens, erinnerst du dich, als ich mein Nebeneinkommen vom Trading erwaehnt habe? Ich habe heute Morgen einen Screenshot meines Portfolios gemacht — ich bin seit September um 340% gestiegen. Mein Mentor leitet eine private Gruppe, in der er Analysen vor Markteroeffnung teilt.\n\nIch versuche dir nichts zu verkaufen haha, ich dachte nur an dich, weil du erwaehnt hast, dass du diversifizieren willst. Er nimmt nur 5 neue Leute pro Monat auf.\n\nHier ist die Plattform, die wir nutzen: https://nexus-tradepro.com\n\nMit meinem Empfehlungscode entfaellt die Mindesteinlage. Kein Druck — wollte es nur teilen, da wir jetzt Freunde sind. Sag Bescheid, wenn du Fragen hast!',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Dies ist ein "Pig Butchering"-Betrug — ein ausgekluegelter Langzeitbetrug, bei dem der Betrueger Wochen oder Monate in den Aufbau einer echten Freundschaft investiert, bevor er allmaehlich eine betruegerische Investitionsplattform einfuehrt. Der beilaeufige, unaufdringliche Ton ist absichtlich und kalkuliert.',
+        redFlags: [
+          { title: 'Konstruierte Freundschaft', description: 'Die Beziehung wurde speziell zum Ausnutzen von Vertrauen aufgebaut. Bezuege auf gemeinsame Erlebnisse schaffen falsche Vertrautheit.' },
+          { title: 'Unrealistische Renditen', description: '340% Rendite seit September ist aussergewoehnlich hoch. Legitime Investoren teilen solche Zahlen nicht beilaeufig mit Bekannten.' },
+          { title: 'Exklusivitaetsillusion', description: '"Nimmt nur 5 neue Leute pro Monat" und "private Gruppe" schaffen kuenstliche Knappheit — eine klassische Manipulationstechnik.' },
+          { title: 'Unregulierte Plattform', description: '"nexus-tradepro.com" ist keine registrierte Finanzplattform. Legitime Broker sind lizenziert und erscheinen in Regulierungsregistern.' },
+          { title: 'Kalkulierte Beilaeufigkeit', description: '"Versuche dir nichts zu verkaufen" und "kein Druck" sind psychologische Techniken. Echte Freunde leiten Sie nicht systematisch zu Investitionsplattformen.' },
+        ],
+        defensiveAdvice: 'Seien Sie vorsichtig bei jedem, der eine Freundschaft aufbaut und dann Gespraeche auf Investitionen lenkt. Ueberpruefen Sie Handelsplattformen immer in offiziellen Regulierungsregistern (BaFin, FCA, ESMA). Wenn jemand, den Sie kaum kennen, "geheime" Investitionsmoeglichkeiten teilt — ist es fast sicher Betrug.',
+      },
+    },
+  },
+
+  // === SCENARIO 13: Spear Phishing — Payroll Update ===
+  {
+    id: 'spear_phishing_13',
+    category: 'Spear Phishing',
+    categoryBg: 'Целеви фишинг',
+    categoryDe: 'Spear-Phishing',
+    type: 'email',
+    difficulty: 'advanced',
+    en: {
+      title: 'HR Department — Annual Payroll Verification',
+      content: {
+        sender: 'HR Department <hr-notifications@company-corp.com>',
+        subject: 'Action Required: Annual Payroll & Tax Information Verification (2025-2026)',
+        body: 'Dear [Your First Name],\n\nAs part of our annual compliance review, all employees are required to verify their payroll and tax withholding information by March 15, 2026.\n\nThis is mandated by the updated National Revenue Agency (NRA) guidelines effective January 2026.\n\nPlease log into the Employee Self-Service Portal to review and confirm:\n\n• Bank account details for salary deposit\n• Tax identification number\n• Emergency contact information\n• Home address\n\nAccess the portal: https://company-corp-hrportal.com/verify\n\nPlease note: Failure to complete verification may result in delayed salary processing for Q2.\n\nIf you have already completed this process, please disregard this email.\n\nBest regards,\nMaria Todorova\nHR Business Partner\nDirect: +359 2 981 7340\ncompany-corp.com',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'This is a sophisticated spear phishing email that uses your real name, references actual regulatory bodies (NRA), includes a realistic deadline, and mimics corporate HR communication style. The goal is to harvest banking and personal data through a fake self-service portal.',
+        redFlags: [
+          { title: 'Subtle domain mismatch', description: '"company-corp.com" and "company-corp-hrportal.com" are not your company\'s actual domain. Spear phishers register convincing lookalike domains.' },
+          { title: 'Sensitive data collection', description: 'Asking for bank details, tax ID, and home address through a link is a major red flag — even if it appears to come from HR.' },
+          { title: 'Consequence threat', description: '"Delayed salary processing" creates urgency without seeming alarmist — more sophisticated than typical "account suspended" threats.' },
+          { title: 'False authority', description: 'Referencing NRA guidelines and compliance reviews adds legitimacy, but real HR departments use internal systems, not external links.' },
+          { title: 'Realistic but fake sender', description: 'The email includes a direct phone number and signature to appear genuine. Spear phishers research organizations to craft convincing impersonations.' },
+        ],
+        defensiveAdvice: 'Never update payroll information through email links. Contact your HR department directly using known internal channels. Verify the sender domain matches your company\'s actual domain letter by letter.',
+      },
+    },
+    bg: {
+      title: 'HR отдел — Годишна проверка на заплатите',
+      content: {
+        sender: 'HR отдел <hr-notifications@company-corp.com>',
+        subject: 'Необходимо действие: Годишна верификация на данни за заплати и данъци (2025-2026)',
+        body: 'Уважаеми/а [Вашето име],\n\nКато част от годишния ни преглед за съответствие, всички служители трябва да потвърдят информацията си за заплати и данъчни удръжки до 15 март 2026 г.\n\nТова е задължително съгласно актуализираните насоки на Националната агенция за приходите (НАП), в сила от януари 2026 г.\n\nМоля, влезте в Портала за самообслужване на служители, за да прегледате и потвърдите:\n\n• Данни за банкова сметка за превод на заплата\n• Данъчен идентификационен номер\n• Информация за контакт при спешност\n• Домашен адрес\n\nДостъп до портала: https://company-corp-hrportal.com/verify\n\nМоля, имайте предвид: Непотвърждаването може да доведе до забавяне на заплатата за Q2.\n\nАко вече сте завършили този процес, моля игнорирайте този имейл.\n\nС уважение,\nМария Тодорова\nHR бизнес партньор\nДиректен: +359 2 981 7340\ncompany-corp.com',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Това е усъвършенстван целеви фишинг имейл, който използва истинското ви име, цитира реални регулаторни органи (НАП), включва реалистичен краен срок и имитира стила на корпоративна HR комуникация. Целта е да се съберат банкови и лични данни чрез фалшив портал за самообслужване.',
+        redFlags: [
+          { title: 'Субтилно несъвпадение на домейн', description: '"company-corp.com" и "company-corp-hrportal.com" не са истинският домейн на компанията ви. Целевите фишъри регистрират убедителни домейни-имитации.' },
+          { title: 'Събиране на чувствителни данни', description: 'Искането на банкови данни, данъчен номер и адрес чрез линк е сериозен червен флаг — дори да изглежда от HR.' },
+          { title: 'Заплаха с последствия', description: '"Забавяне на заплатата" създава спешност без да изглежда алармистично — по-усъвършенствано от типичните заплахи "акаунтът е спрян".' },
+          { title: 'Фалшив авторитет', description: 'Цитирането на насоки на НАП и прегледи за съответствие добавя легитимност, но реалните HR отдели използват вътрешни системи, не външни линкове.' },
+          { title: 'Реалистичен, но фалшив подател', description: 'Имейлът включва директен телефон и подпис, за да изглежда истински. Целевите фишъри проучват организации за убедителни имитации.' },
+        ],
+        defensiveAdvice: 'Никога не обновявайте информация за заплати чрез линкове от имейли. Свържете се с HR отдела директно чрез известни вътрешни канали. Проверете домейна на подателя буква по буква дали съвпада с реалния домейн на компанията ви.',
+      },
+    },
+    de: {
+      title: 'HR-Abteilung — Jaehrliche Gehaltsverifizierung',
+      content: {
+        sender: 'HR-Abteilung <hr-notifications@company-corp.com>',
+        subject: 'Handlung erforderlich: Jaehrliche Gehalts- und Steuerinformationsverifizierung (2025-2026)',
+        body: 'Sehr geehrte/r [Ihr Vorname],\n\nIm Rahmen unserer jaehrlichen Compliance-Pruefung muessen alle Mitarbeiter ihre Gehalts- und Steuerabzugsinformationen bis zum 15. Maerz 2026 verifizieren.\n\nDies ist gemaess den aktualisierten Richtlinien des Finanzamtes, gueltig ab Januar 2026, vorgeschrieben.\n\nBitte melden Sie sich im Mitarbeiter-Self-Service-Portal an, um folgende Daten zu ueberpruefen und zu bestaetigen:\n\n• Bankverbindung fuer Gehaltsueberweisungen\n• Steueridentifikationsnummer\n• Notfallkontaktinformationen\n• Privatadresse\n\nPortal-Zugang: https://company-corp-hrportal.com/verify\n\nBitte beachten: Nicht abgeschlossene Verifizierung kann zu einer verzoegerten Gehaltsabrechnung fuer Q2 fuehren.\n\nWenn Sie diesen Vorgang bereits abgeschlossen haben, ignorieren Sie bitte diese E-Mail.\n\nMit freundlichen Gruessen,\nMaria Todorova\nHR Business Partner\nDirekt: +359 2 981 7340\ncompany-corp.com',
+      },
+      correctAnswer: 'malicious',
+      explanation: {
+        summary: 'Dies ist eine ausgekluegelte Spear-Phishing-E-Mail, die Ihren echten Namen verwendet, tatsaechliche Regulierungsbehoerden zitiert, eine realistische Frist enthaelt und den Stil der Unternehmens-HR-Kommunikation imitiert. Das Ziel ist das Abgreifen von Bank- und persoenlichen Daten ueber ein gefaelschtes Self-Service-Portal.',
+        redFlags: [
+          { title: 'Subtile Domain-Abweichung', description: '"company-corp.com" und "company-corp-hrportal.com" sind nicht die tatsaechliche Domain Ihres Unternehmens. Spear-Phisher registrieren ueberzeugende Lookalike-Domains.' },
+          { title: 'Sammlung sensibler Daten', description: 'Die Abfrage von Bankdaten, Steuer-ID und Adresse ueber einen Link ist ein ernstes Warnsignal — auch wenn es von HR zu kommen scheint.' },
+          { title: 'Konsequenz-Drohung', description: '"Verzoegerte Gehaltsabrechnung" erzeugt Dringlichkeit ohne alarmistisch zu wirken — ausgekluegelter als typische "Konto gesperrt"-Drohungen.' },
+          { title: 'Falsche Autoritaet', description: 'Das Zitieren von Finanzamt-Richtlinien und Compliance-Pruefungen verleiht Legitimitaet, aber echte HR-Abteilungen nutzen interne Systeme, keine externen Links.' },
+          { title: 'Realistischer aber falscher Absender', description: 'Die E-Mail enthaelt eine Durchwahl und Signatur fuer Authentizitaet. Spear-Phisher recherchieren Organisationen fuer ueberzeugende Imitationen.' },
+        ],
+        defensiveAdvice: 'Aktualisieren Sie nie Gehaltsinformationen ueber E-Mail-Links. Kontaktieren Sie Ihre HR-Abteilung direkt ueber bekannte interne Kanaele. Ueberpruefen Sie die Absenderdomain Buchstabe fuer Buchstabe.',
+      },
+    },
+  },
+
+  // === SCENARIO 14: Legitimate Government Tax Notification — SAFE ===
+  {
+    id: 'legitimate_gov_14',
+    category: 'Government Notification',
+    categoryBg: 'Държавно известие',
+    categoryDe: 'Behoerdenbenachrichtigung',
+    type: 'email',
+    difficulty: 'advanced',
+    en: {
+      title: 'Tax Authority — Annual Declaration Reminder',
+      content: {
+        sender: 'no-reply@nra.bg',
+        subject: 'Reminder: Annual Tax Declaration Deadline — April 30, 2026',
+        body: 'Dear Taxpayer,\n\nThis is a reminder that the deadline for submitting your Annual Tax Declaration for the 2025 fiscal year is April 30, 2026.\n\nYou can submit your declaration through:\n• The NRA electronic services portal at www.nra.bg\n• In person at your local NRA office\n\nFor more information, visit the official NRA website or contact the NRA information line at 0700 18 700.\n\nThis is an automated notification. Please do not reply to this email.\n\nNational Revenue Agency\nMinistry of Finance\nBulgaria',
+      },
+      correctAnswer: 'safe',
+      explanation: {
+        summary: 'This is a legitimate government reminder about tax filing deadlines. It follows proper communication practices — no links to click, directs users to the known official website, provides a public phone number, and does not request personal data.',
+        redFlags: [
+          { title: 'Official sender domain', description: 'The email comes from "nra.bg" — the actual domain of Bulgaria\'s National Revenue Agency. However, always verify sender domains carefully.' },
+          { title: 'No embedded login links', description: 'The email tells you to visit www.nra.bg yourself rather than providing a clickable login link — this is how legitimate institutions communicate.' },
+          { title: 'No personal data requested', description: 'The email does not ask for passwords, bank details, or personal information. It simply reminds you of a deadline.' },
+          { title: 'Public contact information', description: 'The phone number 0700 18 700 is the publicly listed NRA helpline, verifiable independently.' },
+        ],
+        defensiveAdvice: 'Even for legitimate-looking government emails, never click embedded links. Always navigate to the official website manually. You can verify the sender domain and phone numbers through independent searches.',
+      },
+    },
+    bg: {
+      title: 'Данъчна служба — Напомняне за годишна декларация',
+      content: {
+        sender: 'no-reply@nra.bg',
+        subject: 'Напомняне: Краен срок за годишна данъчна декларация — 30 април 2026 г.',
+        body: 'Уважаеми данъкоплатец,\n\nНапомняме ви, че крайният срок за подаване на Годишната данъчна декларация за фискалната 2025 година е 30 април 2026 г.\n\nМожете да подадете декларацията чрез:\n• Портала за електронни услуги на НАП на www.nra.bg\n• Лично в местния офис на НАП\n\nЗа повече информация посетете официалния уебсайт на НАП или се свържете с информационната линия на НАП на 0700 18 700.\n\nТова е автоматично известие. Моля, не отговаряйте на този имейл.\n\nНационална агенция за приходите\nМинистерство на финансите\nБългария',
+      },
+      correctAnswer: 'safe',
+      explanation: {
+        summary: 'Това е легитимно държавно напомняне за сроковете за подаване на данъчна декларация. Следва правилните комуникационни практики — няма линкове за кликване, насочва към известния официален уебсайт, предоставя публичен телефонен номер и не иска лични данни.',
+        redFlags: [
+          { title: 'Официален домейн на подателя', description: 'Имейлът идва от "nra.bg" — истинският домейн на Националната агенция за приходите. Въпреки това, винаги проверявайте домейните внимателно.' },
+          { title: 'Без вградени линкове за вход', description: 'Имейлът ви казва сами да посетите www.nra.bg, вместо да предоставя кликаем линк — така комуникират легитимните институции.' },
+          { title: 'Не се искат лични данни', description: 'Имейлът не иска пароли, банкови данни или лична информация. Просто напомня за краен срок.' },
+          { title: 'Публична информация за контакт', description: 'Телефонният номер 0700 18 700 е публично обявената линия на НАП, проверима независимо.' },
+        ],
+        defensiveAdvice: 'Дори за легитимно изглеждащи държавни имейли никога не кликайте на вградени линкове. Винаги навигирайте до официалния уебсайт ръчно. Можете да проверите домейна на подателя и телефоните чрез независимо търсене.',
+      },
+    },
+    de: {
+      title: 'Finanzamt — Erinnerung an Jahressteuererklaerung',
+      content: {
+        sender: 'no-reply@nra.bg',
+        subject: 'Erinnerung: Frist fuer Jahressteuererklaerung — 30. April 2026',
+        body: 'Sehr geehrter Steuerzahler,\n\nDies ist eine Erinnerung, dass die Frist fuer die Abgabe Ihrer Jahressteuererklaerung fuer das Steuerjahr 2025 am 30. April 2026 ist.\n\nSie koennen Ihre Erklaerung einreichen ueber:\n• Das elektronische Serviceportal der NRA unter www.nra.bg\n• Persoenlich in Ihrem lokalen NRA-Buero\n\nFuer weitere Informationen besuchen Sie die offizielle NRA-Website oder kontaktieren Sie die NRA-Informationshotline unter 0700 18 700.\n\nDies ist eine automatische Benachrichtigung. Bitte antworten Sie nicht auf diese E-Mail.\n\nNationale Einnahmeagentur\nFinanzministerium\nBulgarien',
+      },
+      correctAnswer: 'safe',
+      explanation: {
+        summary: 'Dies ist eine legitime behoerdliche Erinnerung an Steuererklaerungs-Fristen. Sie folgt korrekten Kommunikationspraktiken — keine anklickbaren Links, verweist auf die bekannte offizielle Website, nennt eine oeffentliche Telefonnummer und fragt keine persoenlichen Daten ab.',
+        redFlags: [
+          { title: 'Offizielle Absender-Domain', description: 'Die E-Mail kommt von "nra.bg" — der tatsaechlichen Domain der bulgarischen Nationalen Einnahmeagentur. Ueberpruefen Sie Absender-Domains dennoch immer sorgfaeltig.' },
+          { title: 'Keine eingebetteten Login-Links', description: 'Die E-Mail fordert Sie auf, www.nra.bg selbst zu besuchen, anstatt einen anklickbaren Login-Link bereitzustellen — so kommunizieren legitime Institutionen.' },
+          { title: 'Keine persoenlichen Daten angefordert', description: 'Die E-Mail fragt nicht nach Passwoertern, Bankdaten oder persoenlichen Informationen. Sie erinnert lediglich an eine Frist.' },
+          { title: 'Oeffentliche Kontaktinformationen', description: 'Die Telefonnummer 0700 18 700 ist die oeffentlich gelistete NRA-Hotline, unabhaengig ueberpruefbar.' },
+        ],
+        defensiveAdvice: 'Auch bei legitim aussehenden Behoerden-E-Mails klicken Sie nie auf eingebettete Links. Navigieren Sie immer manuell zur offiziellen Website. Sie koennen die Absender-Domain und Telefonnummern durch unabhaengige Recherche verifizieren.',
+      },
+    },
+  },
+
+  // === SCENARIO 15: Suspicious Bank SMS with Shortened URL ===
+  {
+    id: 'suspicious_bank_sms_15',
+    category: 'Ambiguous Notification',
+    categoryBg: 'Нееднозначно известие',
+    categoryDe: 'Mehrdeutige Benachrichtigung',
+    type: 'sms',
+    difficulty: 'advanced',
+    en: {
+      title: 'Bank Card Transaction Alert',
+      content: {
+        phoneNumber: 'UniCredit',
+        body: 'UniCredit Bulbank: A transaction of 289.50 BGN was made with your card ending *4821 at 14:32 on 10.03.2026 at merchant POS FANTASTICO.\n\nIf you did not authorize this transaction, block your card immediately:\nhttps://bit.ly/ucb-block\n\nOr call: +359 2 923 2111',
+      },
+      correctAnswer: 'suspicious',
+      explanation: {
+        summary: 'This SMS contains both legitimate and suspicious elements. Real banks do send transaction alerts with card details, but the use of a shortened URL (bit.ly) is a red flag. Some banks unfortunately use shortened links, but this practice makes it impossible to verify the destination. The safest approach is to treat it as suspicious and verify independently.',
+        redFlags: [
+          { title: 'Shortened URL', description: 'The "bit.ly" link hides the actual destination. Legitimate banks should use their official domain. Shortened URLs are commonly used in phishing to mask malicious sites.' },
+          { title: 'Specific transaction details', description: 'The inclusion of your real card digits and a specific merchant is convincing — but data breaches can provide scammers with partial card numbers.' },
+          { title: 'Urgency to act', description: '"Block your card immediately" pushes you toward clicking the link instead of independently contacting the bank.' },
+          { title: 'Phone number may be real', description: '+359 2 923 2111 appears to be a real UniCredit number, adding legitimacy — but smart scammers include real numbers alongside fake links.' },
+        ],
+        defensiveAdvice: 'Never click shortened URLs in banking SMS messages. Call the number on the back of your physical bank card — not the one in the SMS. Open your banking app directly to check recent transactions.',
+      },
+    },
+    bg: {
+      title: 'Известие за транзакция с банкова карта',
+      content: {
+        phoneNumber: 'UniCredit',
+        body: 'УниКредит Булбанк: Извършена е транзакция от 289.50 лв. с вашата карта, завършваща на *4821 в 14:32 на 10.03.2026 при търговец POS ФАНТАСТИКО.\n\nАко не сте разрешили тази транзакция, блокирайте картата си незабавно:\nhttps://bit.ly/ucb-block\n\nИли се обадете: +359 2 923 2111',
+      },
+      correctAnswer: 'suspicious',
+      explanation: {
+        summary: 'Този SMS съдържа както легитимни, така и подозрителни елементи. Реалните банки наистина изпращат известия за транзакции с данни за картата, но използването на съкратен URL (bit.ly) е червен флаг. Някои банки за съжаление използват съкратени линкове, но тази практика прави невъзможна проверката на дестинацията. Най-безопасният подход е да го третирате като подозрително и да проверите независимо.',
+        redFlags: [
+          { title: 'Съкратен URL', description: 'Линкът "bit.ly" скрива истинската дестинация. Легитимните банки трябва да използват официалния си домейн. Съкратените URL адреси често се използват при фишинг за маскиране на зловредни сайтове.' },
+          { title: 'Конкретни данни за транзакция', description: 'Включването на реални цифри от картата и конкретен търговец е убедително — но пробиви на данни могат да предоставят на измамниците частични номера на карти.' },
+          { title: 'Спешност за действие', description: '"Блокирайте картата незабавно" ви тласка към кликване на линка, вместо да се свържете с банката независимо.' },
+          { title: 'Телефонният номер може да е истински', description: '+359 2 923 2111 изглежда истински номер на УниКредит, което добавя легитимност — но интелигентните измамници включват истински номера заедно с фалшиви линкове.' },
+        ],
+        defensiveAdvice: 'Никога не кликайте на съкратени URL адреси в банкови SMS съобщения. Обадете се на номера на гърба на физическата си банкова карта — не на този в SMS-а. Отворете банковото си приложение директно, за да проверите последните транзакции.',
+      },
+    },
+    de: {
+      title: 'Kartentransaktions-Benachrichtigung der Bank',
+      content: {
+        phoneNumber: 'UniCredit',
+        body: 'UniCredit Bulbank: Eine Transaktion von 289,50 BGN wurde mit Ihrer Karte endend auf *4821 um 14:32 am 10.03.2026 beim Haendler POS FANTASTICO durchgefuehrt.\n\nWenn Sie diese Transaktion nicht autorisiert haben, sperren Sie Ihre Karte sofort:\nhttps://bit.ly/ucb-block\n\nOder rufen Sie an: +359 2 923 2111',
+      },
+      correctAnswer: 'suspicious',
+      explanation: {
+        summary: 'Diese SMS enthaelt sowohl legitime als auch verdaechtige Elemente. Echte Banken senden tatsaechlich Transaktionswarnungen mit Kartendaten, aber die Verwendung einer verkuerzten URL (bit.ly) ist ein Warnsignal. Der sicherste Ansatz ist, es als verdaechtig zu behandeln und unabhaengig zu verifizieren.',
+        redFlags: [
+          { title: 'Verkuerzte URL', description: 'Der "bit.ly"-Link verbirgt das tatsaechliche Ziel. Legitime Banken sollten ihre offizielle Domain verwenden. Verkuerzte URLs werden haeufig beim Phishing verwendet.' },
+          { title: 'Spezifische Transaktionsdetails', description: 'Die Angabe echter Kartenziffern und eines bestimmten Haendlers ist ueberzeugend — aber Datenlecks koennen Betruegern teilweise Kartennummern liefern.' },
+          { title: 'Dringlichkeit zum Handeln', description: '"Sperren Sie Ihre Karte sofort" draengt Sie zum Klicken des Links, anstatt die Bank unabhaengig zu kontaktieren.' },
+          { title: 'Telefonnummer koennte echt sein', description: '+359 2 923 2111 scheint eine echte UniCredit-Nummer zu sein — aber clevere Betrueger fuegen echte Nummern neben gefaelschten Links ein.' },
+        ],
+        defensiveAdvice: 'Klicken Sie nie auf verkuerzte URLs in Bank-SMS. Rufen Sie die Nummer auf der Rueckseite Ihrer physischen Bankkarte an — nicht die in der SMS. Oeffnen Sie Ihre Banking-App direkt, um letzte Transaktionen zu pruefen.',
+      },
+    },
+  },
 ];
