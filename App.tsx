@@ -111,95 +111,105 @@ const App: React.FC = () => {
       <Background />
 
       {/* Institutional Header */}
-      <header className="sticky top-0 z-50 glass border-b border-blue-900/20 shadow-lg">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 shadow-xl shadow-black/20">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+
+          {/* Logo */}
           <div
-            className="flex items-center gap-4 cursor-pointer min-w-0"
+            className="flex items-center gap-3 cursor-pointer flex-shrink-0 group"
             onClick={() => { setCurrentPage('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 bg-blue-700 flex items-center justify-center rounded shadow-sm flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <div className="min-w-0">
-                <h1 className="font-bold text-sm tracking-tight text-slate-900 leading-tight uppercase whitespace-nowrap">{strings.header.title}</h1>
-              </div>
+            <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-lg shadow-md shadow-blue-900/40 group-hover:bg-blue-500 transition-colors flex-shrink-0">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
             </div>
+            <h1 className="font-extrabold text-sm tracking-widest text-white leading-tight uppercase whitespace-nowrap group-hover:text-blue-300 transition-colors">{strings.header.title}</h1>
           </div>
 
-          {/* Desktop Navigation - hidden on mobile */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2 py-2">
-            <button onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-400 transition-colors whitespace-nowrap border border-emerald-600/30 rounded bg-emerald-950/20 hover:bg-emerald-950/40">{t('Тест', 'Quiz', 'Quiz')}</button>
-            <button onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-purple-600 hover:text-purple-400 transition-colors whitespace-nowrap border border-purple-600/30 rounded bg-purple-950/20 hover:bg-purple-950/40">{t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}</button>
-            <button onClick={() => { setCurrentPage('scam-lab'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="px-2 py-1.5 text-[9px] font-black uppercase tracking-wider text-orange-600 hover:text-orange-400 transition-colors whitespace-nowrap border border-orange-600/30 rounded bg-orange-950/20 hover:bg-orange-950/40">{t('Лаборатория', 'Scam Lab', 'Labor')}</button>
-            <div className="w-px h-4 bg-slate-600/30 mx-1"></div>
-            <button onClick={() => scrollToSection('blacklist')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-500 hover:text-red-500 transition-colors whitespace-nowrap">{t('Черна листа', 'Blacklist', 'Schwarze Liste')}</button>
-            <button onClick={() => scrollToSection('phishing')} className="px-2 py-1 text-[9px] font-black uppercase tracking-wider text-slate-500 hover:text-blue-500 transition-colors whitespace-nowrap">{t('Фишинг', 'Phishing', 'Phishing')}</button>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1 flex-1 justify-center">
+            {/* Primary page buttons */}
+            <button
+              onClick={() => { setCurrentPage('quiz'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all whitespace-nowrap ${currentPage === 'quiz' ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
+            >
+              {t('Тест', 'Quiz', 'Quiz')}
+            </button>
+            <button
+              onClick={() => { setCurrentPage('social-engineering'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all whitespace-nowrap ${currentPage === 'social-engineering' ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
+            >
+              {t('Соц. инженерство', 'Social Eng.', 'Social Eng.')}
+            </button>
+            <button
+              onClick={() => { setCurrentPage('scam-lab'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all whitespace-nowrap ${currentPage === 'scam-lab' ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
+            >
+              {t('Лаборатория', 'Scam Lab', 'Labor')}
+            </button>
+
+            {/* Divider */}
+            <div className="w-px h-5 bg-slate-700 mx-2"></div>
+
+            {/* Scroll links */}
+            <button
+              onClick={() => scrollToSection('blacklist')}
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-all whitespace-nowrap"
+            >
+              {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
+            </button>
+            <button
+              onClick={() => scrollToSection('phishing')}
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-all whitespace-nowrap"
+            >
+              {t('Фишинг', 'Phishing', 'Phishing')}
+            </button>
           </nav>
 
-          {/* Desktop Language Toggle - always visible, outside scrollable nav */}
-          <div className="hidden md:flex bg-slate-200/50 p-0.5 rounded ml-2 flex-shrink-0">
-            <button
-              onClick={() => setLang('bg')}
-              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-            >
-              BG
-            </button>
-            <button
-              onClick={() => setLang('en')}
-              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang('de')}
-              className={`px-3 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-            >
-              DE
-            </button>
+          {/* Desktop Language Toggle */}
+          <div className="hidden md:flex bg-slate-800/70 border border-slate-700/50 p-0.5 rounded-lg flex-shrink-0">
+            {(['bg', 'en', 'de'] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={`px-3 py-1 rounded-md text-[10px] font-bold tracking-widest transition-all ${lang === l ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
           </div>
 
-          {/* Mobile Menu Button - visible only on mobile */}
+          {/* Mobile Right Controls */}
           <div className="flex md:hidden items-center gap-2 flex-shrink-0">
             {/* Language toggle for mobile */}
-            <div className="flex bg-slate-200/50 p-0.5 rounded flex-shrink-0">
-              <button
-                onClick={() => setLang('bg')}
-                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'bg' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                BG
-              </button>
-              <button
-                onClick={() => setLang('en')}
-                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'en' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLang('de')}
-                className={`px-2 py-1 rounded text-[10px] font-black tracking-tighter transition-all ${lang === 'de' ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-800'}`}
-              >
-                DE
-              </button>
+            <div className="flex bg-slate-800/70 border border-slate-700/50 p-0.5 rounded-lg">
+              {(['bg', 'en', 'de'] as const).map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-widest transition-all ${lang === l ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
             </div>
 
-            {/* Dropdown toggle button with arrow */}
+            {/* Hamburger button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex items-center gap-2 px-3 py-2 rounded bg-blue-700 text-white text-[10px] font-black uppercase tracking-wider transition-all hover:bg-blue-800"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700/50 text-slate-300 hover:text-white hover:bg-slate-700 text-[10px] font-bold uppercase tracking-wider transition-all"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
             >
-              <span>{t('Меню', 'Menu', 'Menü')}</span>
               <svg
                 className={`w-4 h-4 transition-transform duration-300 ${mobileMenuOpen ? 'rotate-180' : ''}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                {mobileMenuOpen
+                  ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+                }
               </svg>
             </button>
           </div>
@@ -209,37 +219,37 @@ const App: React.FC = () => {
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
         >
-          <nav className="flex flex-col border-t border-blue-900/20 bg-white/80 backdrop-blur-md">
+          <nav className="flex flex-col border-t border-slate-800 bg-slate-950/95 backdrop-blur-md">
             <button
               onClick={() => { setMobileMenuOpen(false); setCurrentPage('quiz'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-400 hover:bg-emerald-50 transition-colors text-left border-b border-slate-200/50"
+              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors text-left border-b border-slate-800/60"
             >
               {t('Тест за киберсигурност', 'Security Quiz', 'Sicherheitsquiz')}
             </button>
             <button
               onClick={() => { setMobileMenuOpen(false); setCurrentPage('social-engineering'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-purple-600 hover:text-purple-400 hover:bg-purple-50 transition-colors text-left border-b border-slate-200/50"
+              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors text-left border-b border-slate-800/60"
             >
               {t('Социално инженерство', 'Social Engineering', 'Social Engineering')}
             </button>
             <button
               onClick={() => { setMobileMenuOpen(false); setCurrentPage('scam-lab'); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350); }}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-orange-600 hover:text-orange-400 hover:bg-orange-50 transition-colors text-left border-b border-slate-200/50"
+              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors text-left border-b border-slate-800/60"
             >
               {t('Лаборатория за измами', 'Scam Detection Lab', 'Betrugserkennungs-Labor')}
             </button>
-            <div className="px-6 py-1.5 border-b border-slate-200/50">
-              <span className="text-[8px] font-bold uppercase tracking-widest text-slate-400">{t('Инструменти', 'Tools', 'Werkzeuge')}</span>
+            <div className="px-6 py-2 border-b border-slate-800/60">
+              <span className="text-[8px] font-bold uppercase tracking-widest text-slate-600">{t('Инструменти', 'Tools', 'Werkzeuge')}</span>
             </div>
             <button
               onClick={() => scrollToSection('blacklist')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors text-left border-b border-slate-200/50"
+              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors text-left border-b border-slate-800/60"
             >
               {t('Черна листа', 'Blacklist', 'Schwarze Liste')}
             </button>
             <button
               onClick={() => scrollToSection('phishing')}
-              className="px-6 py-3 text-[11px] font-black uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-left"
+              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors text-left"
             >
               {t('Фишинг детектор', 'Phishing Detector', 'Phishing-Detektor')}
             </button>
