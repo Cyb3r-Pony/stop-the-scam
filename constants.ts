@@ -1,7 +1,15 @@
 import { ContentStrings, Lang } from './types';
 
 export const SCAM_DOMAINS = [
-    "crescent-trustee.org", "ipgatetrade.pro", "saxogroup.biz", "bg.finance-investapp.com", "brevistechnology.co", "wealthoa.com", "aclon-finance.net", "cfixtrade.com", "bitstus.com",
+    "batm.pro", "dashboard.base4asset-advisory.org", "imtoka.com", "security-center-olaf.world", "acira-pay.netlify.app", "riovax.win", "cryptopened.com",
+    "cryptopen.com", "chainsanalyse.com", "member-zone.info", "member-zone.pro", "memberaccount.icu", "memberzone.digital",
+    "merc-consulting.net", "wt.memberaccount.digital", "monixplc.com", "gcffc.co", "pay1-exchange.com", "r-os.cc", "vip.investubs.com",         
+    "investubs.com", "primus.mn", "shop.tk7.gyi.com", "shop.dbmtk.com", "wxpostex.com", "dashboard.base4asset-advisory.net",
+    "nchian.com", "altscopx.com", "primus.ms", "bull-coin.top", "acys.cc", "hitnspin227.com", "capitaltradeasset.com", "cryptopened.com", 
+    "flintrade.com", "mig785.com", "alddn-etf.com", "academy-golden.com", "v-r.cc", "user.crescent-trustee.pro", "platform.beta-global.com", 
+    "bfbdt5.com", "verida-afi.com", "ip-t.trade", "bats.currency-l.com", "stst0ck.com", "ttiok.com", "renatechai.com",
+    "olympus-games.net", "stlfdr.cc", "fpkifw.cc", "m.nasdaqkgroup.cc", "crescent-trustee.org", "ipgatetrade.pro", "saxogroup.biz", 
+    "bg.finance-investapp.com", "brevistechnology.co", "wealthoa.com", "aclon-finance.net", "cfixtrade.com", "bitstus.com",
     "connectiveneuron.dev", "comexvault.com", "comexcloud.shop", "ammapp.cc", "tubezuo3.pro", "cacewuo0.pro", "taktkk.shop", "teletabi.sbs",
     "fastertradingfx.com", "pay1exchange.com", "gpgttkk.net", "moon-market.com", "aliexpress.hnyoueryuan.com", "usdc-eth.icu",
     "dashboard.white-arrow.org", "fondex.io", "bats.currency-r.com", "tkyin.com", "vip.bybxt.com", "limbeto.com",
