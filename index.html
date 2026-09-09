@@ -8,6 +8,7 @@
     <meta name="keywords" content="инвестиционна измама, фалшиви платформи, спри измамата, stop the scam, phishing, ГДБОП, cybercrime, финансови измами, Anlagebetrug, Finanzbetrug">
     <meta name="author" content="Stop The Scam">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="https://stop-the-scam.xyz/">
 
     <!-- Open Graph / Facebook / Viber / Telegram -->
@@ -60,51 +61,112 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* ==========================================================
+           STOP THE SCAM — DESIGN SYSTEM
+           Light institutional surfaces for guidance.
+           Dark "operational" surfaces for live threat data.
+
+           Semantic colour language (used consistently sitewide):
+             red      danger    — losses, blacklisted, malicious, emergency
+             orange   alarm     — scam mechanics, warning signs, suspicious
+             amber    exposure  — categories of fraud, examples
+             emerald  defence   — protection, verified, safe
+             blue     knowledge — brand, navigation, learning, registers
+             cyan     signal    — live automated detection feed
+           ========================================================== */
+
+        html {
             scroll-behavior: smooth;
         }
-        .mono {
-            font-family: 'IBM Plex Mono', monospace;
-        }
-        /* Glassmorphism utility */
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        
-        /* Global Neon Red Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #7f1d1d;
-            border: 2px solid #0f172a;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b91c1c;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 1);
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        /* Custom Scrollbar for inner containers */
+        .mono {
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+            font-variant-ligatures: none;
+        }
+
+        /* Optical tightening for large display type */
+        .display {
+            letter-spacing: -0.028em;
+        }
+
+        /* ---------- Structural textures (replaces glassmorphism) ---------- */
+
+        .texture-grid {
+            background-image:
+                linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+
+        .texture-grid-dark {
+            background-image:
+                linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+
+        /* Fades a texture out towards the bottom so it never fights the content */
+        .mask-fade-b {
+            -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+        }
+
+        .mask-fade-radial {
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+        }
+
+        /* ---------- Scrollbars ---------- */
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border: 3px solid #f1f5f9;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Inner panels on dark operational surfaces */
         .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b;
+            background: #0f172a;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #ef4444;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Inner panels on light surfaces */
+        .light-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .light-scrollbar::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        .light-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -113,6 +175,43 @@
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+
+        /* ---------- Motion ---------- */
+
+        @keyframes stsFadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .anim-fade-up {
+            animation: stsFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes stsPulseDot {
+            0%, 100% { opacity: 1; }
+            50%      { opacity: 0.25; }
+        }
+        .anim-live-dot {
+            animation: stsPulseDot 2s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .anim-fade-up, .anim-live-dot { animation: none; }
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ---------- Focus visibility (accessibility) ---------- */
+
+        :focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        .dark-zone :focus-visible {
+            outline-color: #60a5fa;
         }
     </style>
 <script type="importmap">
@@ -126,7 +225,7 @@
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="33d1bc5b-4c26-4f47-aa13-751b38c12fe2"></script>
 </head>
-<body class="text-slate-900 antialiased overflow-x-hidden">
+<body class="bg-white text-slate-900 antialiased overflow-x-hidden">
     <div id="root"></div>
 <script type="module" src="/index.tsx"></script>
 </body>

@@ -3,6 +3,7 @@ import { Lang } from '../types';
 import { PoolQuestion, individualsPool } from './individualsQuestions';
 import { itAdminsPool } from './itAdminsQuestions';
 import { executivesPool } from './executivesQuestions';
+import { PageHeader, Section, Container, Btn, LiveDot, ACCENTS, Accent } from './ui';
 
 type QuizCategory = 'individuals' | 'it-admins' | 'executives';
 
@@ -414,79 +415,74 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
 
   const optionLabels = ['A', 'B', 'C', 'D'];
 
+
+  // Tier presentation derived from score — red at risk, amber partial, emerald solid
+  const tierTone = (s: number) =>
+    s <= 3
+      ? { text: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', solid: 'bg-red-600', bar: 'bg-red-500', rule: 'bg-red-600' }
+      : s <= 7
+      ? { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', solid: 'bg-amber-500', bar: 'bg-amber-500', rule: 'bg-amber-500' }
+      : { text: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', solid: 'bg-emerald-600', bar: 'bg-emerald-500', rule: 'bg-emerald-500' };
+
   // ─── Category selection screen ─────────────────────────────────
   if (!selectedCategory) {
     return (
-      <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
-        <div className="max-w-5xl mx-auto">
-          {/* Back button */}
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 group"
-          >
-            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-            <span className="text-sm font-bold uppercase tracking-wider">
-              {t(lang, 'Обратно към началото', 'Back to Home', 'Zurueck zur Startseite')}
-            </span>
-          </button>
+      <div ref={quizTopRef} className="bg-white scroll-mt-[72px]">
+        <PageHeader
+          accent="emerald"
+          eyebrow={t(lang, 'Самооценка', 'Self-assessment', 'Selbsteinschätzung')}
+          title={t(lang, 'Тествайте знанията си', 'Test Your Knowledge', 'Testen Sie Ihr Wissen')}
+          lead={t(lang,
+            'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове. Всяка сесия е различна — 10 произволни въпроса от 30.',
+            'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk. Each session is different — 10 random questions from a pool of 30.',
+            'Praktische Entscheidungsfragen zu realen Betrugsmaschen, Phishing, Ransomware und Geschaeftsrisiken. Jede Sitzung ist anders — 10 zufaellige Fragen aus einem Pool von 30.')}
+          onBack={onBack}
+          backLabel={t(lang, 'Начало', 'Home', 'Startseite')}
+          meta={<LiveDot accent="emerald">{t(lang, '3 профила · 10 въпроса на сесия', '3 profiles · 10 questions per session', '3 Profile · 10 Fragen pro Sitzung')}</LiveDot>}
+        />
 
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-4 mb-8">
-              <div className="w-12 h-0.5 bg-emerald-600/30 rounded-full hidden sm:block"></div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-900/40 backdrop-blur-md border border-emerald-500/30 rounded-full text-emerald-400 text-[11px] font-bold uppercase tracking-[0.2em]">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                {t(lang, 'ТЕСТ ЗА КИБЕРСИГУРНОСТ', 'CYBERSECURITY QUIZ', 'CYBERSICHERHEITS-QUIZ')}
-              </div>
-              <div className="w-12 h-0.5 bg-emerald-600/30 rounded-full hidden sm:block"></div>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.05] max-w-4xl mx-auto mb-6">
-              {t(lang, 'Тествайте знанията си', 'Test Your Knowledge', 'Testen Sie Ihr Wissen')}
+        <Section tone="white" size="md">
+          <Container>
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.15em] text-slate-500 mb-8">
+              {t(lang, 'Изберете вашия профил', 'Choose your profile', 'Wählen Sie Ihr Profil')}
             </h2>
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-              {t(lang,
-                'Практически въпроси за вземане на решения, свързани с реални измами, фишинг, рансъмуер и бизнес рискове. Всяка сесия е различна — 10 произволни въпроса от 30.',
-                'Practical decision-making questions tied to real-world scams, phishing, ransomware, and business risk. Each session is different — 10 random questions from a pool of 30.',
-                'Praktische Entscheidungsfragen zu realen Betrugsmaschen, Phishing, Ransomware und Geschaeftsrisiken. Jede Sitzung ist anders — 10 zufaellige Fragen aus einem Pool von 30.')}
-            </p>
-          </div>
 
-          {/* Category cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.map((cat) => {
-              const meta = categoryMeta[cat];
-              const catColors = cat === 'individuals'
-                ? { border: 'border-blue-500/30', hover: 'hover:border-blue-400', bg: 'bg-blue-600', text: 'text-blue-400', glow: 'hover:shadow-blue-900/30' }
-                : cat === 'it-admins'
-                ? { border: 'border-cyan-500/30', hover: 'hover:border-cyan-400', bg: 'bg-cyan-600', text: 'text-cyan-400', glow: 'hover:shadow-cyan-900/30' }
-                : { border: 'border-purple-500/30', hover: 'hover:border-purple-400', bg: 'bg-purple-600', text: 'text-purple-400', glow: 'hover:shadow-purple-900/30' };
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {categories.map((cat) => {
+                const meta = categoryMeta[cat];
+                const accent: Accent = cat === 'individuals' ? 'blue' : cat === 'it-admins' ? 'cyan' : 'violet';
+                const a = ACCENTS[accent];
 
-              return (
-                <button
-                  key={cat}
-                  onClick={() => handleCategorySelect(cat)}
-                  className={`relative p-8 rounded-xl border ${catColors.border} ${catColors.hover} bg-white/5 hover:bg-white/10 transition-all group text-left hover:shadow-2xl ${catColors.glow} hover:-translate-y-1 duration-300`}
-                >
-                  <div className={`w-14 h-14 rounded-lg ${catColors.bg} text-white flex items-center justify-center mb-6 shadow-lg`}>
-                    {meta.icon}
-                  </div>
-                  <h3 className={`text-2xl font-bold text-white mb-2 group-hover:${catColors.text} transition-colors`}>
-                    {meta.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm mb-6">{meta.subtitle}</p>
-                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <span>10 {t(lang, 'от 30 въпроса', 'of 30 questions', 'von 30 Fragen')}</span>
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => handleCategorySelect(cat)}
+                    className={`group relative flex flex-col text-left rounded-xl border border-slate-200 bg-white p-8 overflow-hidden transition-all duration-200 ${a.hoverBorder} hover:shadow-[0_2px_20px_-6px_rgba(15,23,42,0.16)]`}
+                  >
+                    <span className={`absolute top-0 left-0 right-0 h-1 ${a.rule}`} aria-hidden="true" />
+                    <span className={`w-12 h-12 rounded-lg ${a.solid} text-white flex items-center justify-center mb-6`}>
+                      {meta.icon}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900 mb-1.5">{meta.title}</h3>
+                    <p className="text-[14px] text-slate-500 mb-8">{meta.subtitle}</p>
+                    <div className="mt-auto flex items-center justify-between gap-3">
+                      <span className="mono text-[11px] text-slate-500">
+                        10 {t(lang, 'от 30 въпроса', 'of 30 questions', 'von 30 Fragen')}
+                      </span>
+                      <span className={`inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.12em] ${a.text}`}>
+                        {t(lang, 'Започни', 'Start', 'Starten')}
+                        <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </Container>
+        </Section>
       </div>
     );
   }
@@ -496,110 +492,106 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
     const recommendation = getRecommendations(lang, selectedCategory, score);
     const topicTips = getTopicRecommendations(lang, selectedCategory, wrongQuestions);
     const percentage = Math.round((score / 10) * 100);
+    const tone = tierTone(score);
 
     return (
-      <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
-        <div className="max-w-3xl mx-auto">
-          {/* Back button */}
-          <button
-            onClick={() => { setSelectedCategory(null); }}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 group"
-          >
-            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-            <span className="text-sm font-bold uppercase tracking-wider">
+      <div ref={quizTopRef} className="bg-white scroll-mt-[72px]">
+        <Section tone="white" size="sm">
+          <Container width="prose">
+            <button
+              type="button"
+              onClick={() => { setSelectedCategory(null); }}
+              className="group inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-slate-500 hover:text-slate-900 transition-colors mb-12"
+            >
+              <svg className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
               {t(lang, 'Обратно към тестовете', 'Back to Quizzes', 'Zurueck zu den Quizzes')}
-            </span>
-          </button>
+            </button>
 
-          {/* Score Header */}
-          <div className="text-center mb-12">
-            <div className={`inline-flex items-center gap-2 px-4 py-1.5 ${recommendation.tierBg} backdrop-blur-md border ${recommendation.tierBorder} rounded-full ${recommendation.tierColor} text-[11px] font-bold uppercase tracking-[0.2em] mb-8`}>
-              {recommendation.tier}
-            </div>
-            <h2 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-4">
-              {score}<span className="text-slate-600">/10</span>
-            </h2>
-            <p className="text-xl text-slate-400">{percentage}% {t(lang, 'правилни', 'correct', 'richtig')}</p>
+            {/* Score */}
+            <div className="rounded-xl border border-slate-200 bg-white p-8 md:p-10 mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+                <div>
+                  <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${tone.bg} border ${tone.border} mono text-[10px] font-semibold uppercase tracking-[0.15em] ${tone.text} mb-5`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${tone.rule}`} aria-hidden="true" />
+                    {recommendation.tier}
+                  </span>
+                  <div className="display text-6xl font-extrabold text-slate-900 tabular-nums leading-none">
+                    {score}<span className="text-slate-300">/10</span>
+                  </div>
+                </div>
+                <div className="mono text-[13px] text-slate-500 tabular-nums">
+                  {percentage}% {t(lang, 'правилни', 'correct', 'richtig')}
+                </div>
+              </div>
 
-            {/* Score bar */}
-            <div className="max-w-md mx-auto mt-8">
-              <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+              <div className="mt-8 w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                 <div
-                  className={`h-full rounded-full transition-all duration-1000 ease-out ${
-                    score <= 3 ? 'bg-red-500' : score <= 7 ? 'bg-yellow-500' : 'bg-emerald-500'
-                  }`}
+                  className={`h-full rounded-full transition-all duration-1000 ease-out ${tone.bar}`}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
             </div>
-          </div>
 
-          {/* Recommendation card */}
-          <div className={`p-8 rounded-xl ${recommendation.tierBg} border ${recommendation.tierBorder} mb-8`}>
-            <p className="text-lg text-white font-medium mb-6">{recommendation.message}</p>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">
-              {t(lang, 'Препоръчани действия:', 'Recommended Actions:', 'Empfohlene Massnahmen:')}
-            </h4>
-            <div className="space-y-3">
-              {recommendation.actions.map((action, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <div className={`w-6 h-6 rounded flex-shrink-0 flex items-center justify-center text-[10px] font-black ${
-                    score <= 3 ? 'bg-red-600' : score <= 7 ? 'bg-yellow-600' : 'bg-emerald-600'
-                  } text-white`}>
-                    {i + 1}
-                  </div>
-                  <p className="text-slate-300 text-sm leading-relaxed">{action}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-                {t(lang, 'Приоритет:', 'Priority:', 'Prioritaet:')}
-              </span>
-              <p className={`${recommendation.tierColor} font-bold mt-1`}>{recommendation.priority}</p>
-            </div>
-          </div>
+            {/* Recommendation */}
+            <div className={`rounded-xl border ${tone.border} ${tone.bg} p-8 mb-6`}>
+              <p className="text-[17px] font-semibold text-slate-900 leading-relaxed mb-8">{recommendation.message}</p>
 
-          {/* Topic-based bonus recommendations */}
-          {topicTips.length > 0 && (
-            <div className="p-8 rounded-xl bg-slate-900/60 border border-slate-800 mb-8">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-4">
-                {t(lang, 'Допълнителни препоръки по теми:', 'Topic-Based Recommendations:', 'Themenbasierte Empfehlungen:')}
-              </h4>
-              <div className="space-y-3">
-                {topicTips.map((tip, i) => (
-                  <div key={i} className="flex gap-3 items-start">
-                    <svg className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-slate-300 text-sm leading-relaxed">{tip}</p>
-                  </div>
+              <h3 className="mono text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 mb-5">
+                {t(lang, 'Препоръчани действия', 'Recommended actions', 'Empfohlene Massnahmen')}
+              </h3>
+              <ol className="space-y-4">
+                {recommendation.actions.map((action, i) => (
+                  <li key={i} className="flex gap-4 items-start">
+                    <span className={`flex-shrink-0 w-6 h-6 rounded ${tone.solid} text-white flex items-center justify-center mono text-[11px] font-semibold tabular-nums`}>
+                      {i + 1}
+                    </span>
+                    <p className="text-[14px] leading-relaxed text-slate-700">{action}</p>
+                  </li>
                 ))}
+              </ol>
+
+              <div className="mt-8 pt-6 border-t border-slate-900/10">
+                <span className="mono text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  {t(lang, 'Приоритет', 'Priority', 'Prioritaet')}
+                </span>
+                <p className={`${tone.text} font-bold mt-1.5`}>{recommendation.priority}</p>
               </div>
             </div>
-          )}
 
-          {/* Action buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={() => { resetQuiz(); }}
-              className="flex-1 px-6 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all flex items-center justify-center gap-2"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              {t(lang, 'Опитай с нови въпроси', 'Try With New Questions', 'Mit neuen Fragen versuchen')}
-            </button>
-            <button
-              onClick={() => { setSelectedCategory(null); }}
-              className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all border border-white/10"
-            >
-              {t(lang, 'Избери друг тест', 'Choose Another Quiz', 'Anderes Quiz waehlen')}
-            </button>
-          </div>
-        </div>
+            {/* Topic-based tips */}
+            {topicTips.length > 0 && (
+              <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-8 mb-6">
+                <h3 className="mono text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700 mb-5">
+                  {t(lang, 'Допълнителни препоръки по теми', 'Topic-based recommendations', 'Themenbasierte Empfehlungen')}
+                </h3>
+                <ul className="space-y-4">
+                  {topicTips.map((tip, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <p className="text-[14px] leading-relaxed text-slate-700">{tip}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Btn accent="emerald" size="lg" onClick={() => { resetQuiz(); }} className="flex-1">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                {t(lang, 'Опитай с нови въпроси', 'Try With New Questions', 'Mit neuen Fragen versuchen')}
+              </Btn>
+              <Btn variant="outline" size="lg" onClick={() => { setSelectedCategory(null); }} className="flex-1">
+                {t(lang, 'Избери друг тест', 'Choose Another Quiz', 'Anderes Quiz waehlen')}
+              </Btn>
+            </div>
+          </Container>
+        </Section>
       </div>
     );
   }
@@ -613,179 +605,155 @@ const Quiz: React.FC<QuizProps> = ({ lang, onBack }) => {
   const isCorrect = selectedAnswer === question.correct;
 
   return (
-    <div ref={quizTopRef} className="min-h-screen pt-8 pb-24 px-6 scroll-mt-[72px]">
-      <div className="max-w-3xl mx-auto">
-        {/* Top bar */}
-        <div className="flex items-center justify-between mb-8">
-          <button
-            onClick={() => { setSelectedCategory(null); }}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
-          >
-            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-            <span className="text-sm font-bold uppercase tracking-wider hidden sm:inline">
-              {t(lang, 'Изход', 'Exit', 'Beenden')}
-            </span>
-          </button>
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-              {categoryMeta[selectedCategory].title}
-            </span>
-            <div className="px-3 py-1 bg-slate-800 rounded text-emerald-400 text-sm font-bold mono">
-              {score}/{currentQuestion + (showExplanation ? 1 : 0)}
-            </div>
-          </div>
-        </div>
+    <div ref={quizTopRef} className="bg-white scroll-mt-[72px]">
+      <Section tone="white" size="sm">
+        <Container width="prose">
 
-        {/* Progress bar */}
-        <div className="mb-10">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-              {t(lang, 'Напредък', 'Progress', 'Fortschritt')}
-            </span>
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-              {currentQuestion + 1}/10
-            </span>
-          </div>
-          <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-            <div
-              className="h-full bg-emerald-500 rounded-full transition-all duration-500 ease-out"
-              style={{ width: `${((currentQuestion + (showExplanation ? 1 : 0)) / 10) * 100}%` }}
-            />
-          </div>
-          {/* Question dots */}
-          <div className="flex gap-1.5 mt-3 justify-center">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div
-                key={i}
-                className={`w-2.5 h-2.5 rounded-full transition-all ${
-                  i === currentQuestion
-                    ? 'bg-emerald-400 scale-125'
-                    : answeredQuestions[i]
-                    ? 'bg-slate-600'
-                    : 'bg-slate-800'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+          {/* Session bar */}
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <button
+              type="button"
+              onClick={() => { setSelectedCategory(null); }}
+              className="group inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-slate-500 hover:text-slate-900 transition-colors"
+            >
+              <svg className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="hidden sm:inline">{t(lang, 'Изход', 'Exit', 'Beenden')}</span>
+            </button>
 
-        {/* Topic tag */}
-        <div className="mb-4">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-900/30 border border-blue-500/20 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider">
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-            </svg>
-            {topicLabel}
-          </span>
-        </div>
-
-        {/* Question */}
-        <div className="mb-8">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-black flex-shrink-0 shadow-lg">
-              {currentQuestion + 1}
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight pt-1">
-              {langData.question}
-            </h3>
-          </div>
-        </div>
-
-        {/* Options */}
-        <div className="space-y-3 mb-8">
-          {langData.options.map((option, i) => {
-            let optionStyle = 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-emerald-500/30 cursor-pointer';
-
-            if (showExplanation) {
-              if (i === question.correct) {
-                optionStyle = 'border-emerald-500 bg-emerald-950/40 cursor-default';
-              } else if (i === selectedAnswer && !isCorrect) {
-                optionStyle = 'border-red-500 bg-red-950/40 cursor-default';
-              } else {
-                optionStyle = 'border-white/5 bg-white/[0.02] opacity-50 cursor-default';
-              }
-            }
-
-            return (
-              <button
-                key={i}
-                onClick={() => handleAnswerSelect(i)}
-                disabled={showExplanation}
-                className={`w-full p-5 rounded-lg border ${optionStyle} transition-all text-left flex items-center gap-4 group`}
-              >
-                <div className={`w-10 h-10 rounded flex items-center justify-center font-black text-sm flex-shrink-0 ${
-                  showExplanation && i === question.correct
-                    ? 'bg-emerald-600 text-white'
-                    : showExplanation && i === selectedAnswer && !isCorrect
-                    ? 'bg-red-600 text-white'
-                    : 'bg-slate-800 text-slate-400 group-hover:bg-emerald-600/20 group-hover:text-emerald-400'
-                } transition-all`}>
-                  {showExplanation && i === question.correct ? (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : showExplanation && i === selectedAnswer && !isCorrect ? (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  ) : (
-                    optionLabels[i]
-                  )}
-                </div>
-                <span className={`text-sm md:text-base font-medium ${
-                  showExplanation && i === question.correct ? 'text-emerald-200' :
-                  showExplanation && i === selectedAnswer && !isCorrect ? 'text-red-200' :
-                  showExplanation ? 'text-slate-600' : 'text-slate-300'
-                }`}>
-                  {option}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Feedback + Explanation */}
-        {showExplanation && (
-          <div className="space-y-4 mb-8">
-            {/* Correct/Incorrect banner */}
-            <div className={`p-4 rounded-lg flex items-center gap-3 ${
-              isCorrect
-                ? 'bg-emerald-950/40 border border-emerald-600/50'
-                : 'bg-red-950/40 border border-red-600/50'
-            }`}>
-              <span className="text-2xl">{isCorrect ? '\u2705' : '\u274C'}</span>
-              <span className={`font-bold text-lg ${isCorrect ? 'text-emerald-300' : 'text-red-300'}`}>
-                {isCorrect
-                  ? t(lang, 'Правилно!', 'Correct!', 'Richtig!')
-                  : t(lang, 'Грешно!', 'Incorrect!', 'Falsch!')}
+            <div className="flex items-center gap-3">
+              <span className="mono text-[11px] uppercase tracking-[0.12em] text-slate-500 hidden sm:inline">
+                {categoryMeta[selectedCategory].title}
+              </span>
+              <span className="mono px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold tabular-nums">
+                {score}/{currentQuestion + (showExplanation ? 1 : 0)}
               </span>
             </div>
-
-            {/* Explanation */}
-            <div className="p-6 rounded-lg bg-slate-900/60 border border-slate-800">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-3">
-                {t(lang, 'Обяснение', 'Explanation', 'Erklaerung')}
-              </h4>
-              <p className="text-slate-300 leading-relaxed">{langData.explanation}</p>
-            </div>
-
-            {/* Next button */}
-            <button
-              onClick={handleNextQuestion}
-              className="w-full px-6 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all flex items-center justify-center gap-2"
-            >
-              {currentQuestion < 9
-                ? t(lang, 'Следващ въпрос', 'Next Question', 'Naechste Frage')
-                : t(lang, 'Виж резултатите', 'See Results', 'Ergebnisse anzeigen')}
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
           </div>
-        )}
-      </div>
+
+          {/* Progress */}
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="mono text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+                {t(lang, 'Напредък', 'Progress', 'Fortschritt')}
+              </span>
+              <span className="mono text-[11px] text-slate-500 tabular-nums">{currentQuestion + 1}/10</span>
+            </div>
+            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="h-full bg-emerald-500 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${((currentQuestion + (showExplanation ? 1 : 0)) / 10) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Question */}
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-600 mb-6">
+              {topicLabel}
+            </span>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center mono text-[13px] font-semibold tabular-nums">
+                {currentQuestion + 1}
+              </span>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 leading-snug pt-0.5">
+                {langData.question}
+              </h2>
+            </div>
+          </div>
+
+          {/* Options */}
+          <div className="space-y-3 mb-8">
+            {langData.options.map((option, i) => {
+              let optionStyle = 'border-slate-200 bg-white hover:border-emerald-400 hover:bg-emerald-50/40 cursor-pointer';
+              let markStyle = 'bg-slate-100 text-slate-500 group-hover:bg-emerald-600 group-hover:text-white';
+              let textStyle = 'text-slate-700';
+
+              if (showExplanation) {
+                if (i === question.correct) {
+                  optionStyle = 'border-emerald-500 bg-emerald-50 cursor-default';
+                  markStyle = 'bg-emerald-600 text-white';
+                  textStyle = 'text-slate-900 font-semibold';
+                } else if (i === selectedAnswer && !isCorrect) {
+                  optionStyle = 'border-red-500 bg-red-50 cursor-default';
+                  markStyle = 'bg-red-600 text-white';
+                  textStyle = 'text-slate-900 font-semibold';
+                } else {
+                  optionStyle = 'border-slate-200 bg-white opacity-50 cursor-default';
+                  markStyle = 'bg-slate-100 text-slate-400';
+                  textStyle = 'text-slate-500';
+                }
+              }
+
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => handleAnswerSelect(i)}
+                  disabled={showExplanation}
+                  className={`group w-full p-5 rounded-xl border ${optionStyle} transition-all duration-200 text-left flex items-center gap-4`}
+                >
+                  <span className={`w-9 h-9 rounded-lg flex items-center justify-center mono text-[13px] font-semibold flex-shrink-0 transition-colors ${markStyle}`}>
+                    {showExplanation && i === question.correct ? (
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : showExplanation && i === selectedAnswer && !isCorrect ? (
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    ) : (
+                      optionLabels[i]
+                    )}
+                  </span>
+                  <span className={`text-[15px] leading-relaxed ${textStyle}`}>{option}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Feedback */}
+          {showExplanation && (
+            <div className="space-y-4">
+              <div className={`flex items-center gap-3 p-4 rounded-xl border ${
+                isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'
+              }`}>
+                <span className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  isCorrect ? 'bg-emerald-600' : 'bg-red-600'
+                }`}>
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {isCorrect
+                      ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />}
+                  </svg>
+                </span>
+                <span className={`font-bold text-[16px] ${isCorrect ? 'text-emerald-800' : 'text-red-800'}`}>
+                  {isCorrect
+                    ? t(lang, 'Правилно!', 'Correct!', 'Richtig!')
+                    : t(lang, 'Грешно!', 'Incorrect!', 'Falsch!')}
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">
+                <h3 className="mono text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700 mb-3">
+                  {t(lang, 'Обяснение', 'Explanation', 'Erklaerung')}
+                </h3>
+                <p className="text-[15px] leading-relaxed text-slate-700">{langData.explanation}</p>
+              </div>
+
+              <Btn accent="emerald" size="lg" onClick={handleNextQuestion} className="w-full">
+                {currentQuestion < 9
+                  ? t(lang, 'Следващ въпрос', 'Next Question', 'Naechste Frage')
+                  : t(lang, 'Виж резултатите', 'See Results', 'Ergebnisse anzeigen')}
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Btn>
+            </div>
+          )}
+        </Container>
+      </Section>
     </div>
   );
 };

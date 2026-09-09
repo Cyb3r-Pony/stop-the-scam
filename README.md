@@ -16,24 +16,43 @@
 
 **Stop The Scam** is a public-interest web application designed to protect citizens from the rising tide of investment fraud and cryptocurrency scams. It serves as a central hub for authoritative guidance, providing real-time access to blacklisted domains and educational resources.
 
-The platform utilizes a **dual-tone visual system**:
-- **Guidance Sections**: Calm, trust-focused UI for education and registers.
-- **Alert Sections**: High-urgency, high-contrast UI for emergency actions and blacklist monitoring.
+## 🎨 Design System
+
+The platform runs on **two surface families**, so the interface always tells you what kind of
+information you are looking at:
+
+- **Light institutional surfaces** — guidance, education, registers and training. Generous
+  whitespace, hairline borders, no decoration competing with the content.
+- **Dark operational surfaces** — live threat data, examined specimens and the emergency
+  protocol. Monospace typography, terminal-style panel headers, live status indicators.
+
+**Colour carries meaning and is never decorative:**
+
+| Colour | Meaning | Used for |
+|--------|---------|----------|
+| 🔴 Red | Danger | Losses, blacklisted domains, malicious verdicts, emergency response |
+| 🟠 Orange | Alarm | Scam mechanics, warning signs, suspicious verdicts |
+| 🟡 Amber | Exposure | Fraud categories and real-world examples |
+| 🟢 Emerald | Defence | Protection measures, verified and safe verdicts |
+| 🔵 Blue | Knowledge | Brand, navigation, the Lab, official registers |
+| 🟦 Cyan | Live signal | Automated phishing detection feed |
 
 ## ✨ Key Features
 
 - **🔍 Live Domain Blacklist**: Searchable database of fraudulent domains (sourced from GDCOC-MoI data).
-- **🌊 Threat Flow Grid**: A custom HTML5 Canvas background visualizing real-time data flow and security monitoring.
-- **🧠 Psychological Warning Signs**: Detailed breakdown of common social engineering tactics used by scammers.
+- **📡 Phishing Detector**: Automated real-time feed of phishing domains targeting Bulgarian users.
+- **🧪 Scam Detection Lab**: Realistic specimens — emails, SMS, fake platforms — to classify as safe, suspicious, or malicious, each with a full breakdown.
+- **🧠 Social Engineering**: The psychological levers and attack techniques behind every scam.
+- **📊 Security Quiz**: Risk assessment tailored to three profiles, with a personalised action plan.
 - **📑 Official Registers**: Direct access to local (FSC, BNB) and international (ESMA, FINRA, FCA) regulatory databases.
 - **🚨 Victim Emergency Guide**: Clear, step-by-step instructions for victims to take immediate action.
-- **🌐 Dual-Language Support**: Fully localized in both **Bulgarian** and **English**.
+- **🌐 Trilingual**: Fully localized in **Bulgarian**, **English**, and **German**.
 
 ## 🚀 Tech Stack
 
 - **Frontend**: React 19 (ESM)
-- **Styling**: Tailwind CSS with Glassmorphism
-- **Animations**: Native HTML5 Canvas API (optimized 30 FPS rendering)
+- **Styling**: Tailwind CSS — shared design-system primitives in `components/ui.tsx`
+- **Animations**: Native HTML5 Canvas, scoped to the operational zone (24 FPS, respects `prefers-reduced-motion`)
 - **Typography**: Inter (Institutional) & IBM Plex Mono (Technical/Data)
 
 ## 🛠️ Local Development

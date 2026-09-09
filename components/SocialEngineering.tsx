@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Lang } from '../types';
+import { PageHeader, Section, Container, SectionHeading, Btn, LiveDot } from './ui';
 
 interface SocialEngineeringProps {
   lang: Lang;
@@ -393,71 +394,50 @@ const SocialEngineering: React.FC<SocialEngineeringProps> = ({ lang, onBack }) =
     },
   ];
 
+
+  // Each psychological lever gets its own colour so the six read as distinct forces
+  const principleTone: Record<string, { bg: string; border: string; text: string; rule: string }> = {
+    blue:    { bg: 'bg-blue-50',    border: 'border-blue-200',    text: 'text-blue-600',    rule: 'bg-blue-600' },
+    red:     { bg: 'bg-red-50',     border: 'border-red-200',     text: 'text-red-600',     rule: 'bg-red-600' },
+    amber:   { bg: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-600',   rule: 'bg-amber-500' },
+    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-600', rule: 'bg-emerald-500' },
+    rose:    { bg: 'bg-rose-50',    border: 'border-rose-200',    text: 'text-rose-600',    rule: 'bg-rose-500' },
+    purple:  { bg: 'bg-violet-50',  border: 'border-violet-200',  text: 'text-violet-600',  rule: 'bg-violet-500' },
+  };
+
   return (
-    <div ref={topRef} className="scroll-mt-[72px]">
-      {/* Hero / Header */}
-      <section className="relative py-20 px-6 overflow-hidden">
-        <div className="max-w-5xl mx-auto">
-          {/* Back button */}
-          <button
-            onClick={onBack}
-            className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12"
-          >
-            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span className="text-sm font-bold uppercase tracking-wider">
-              {t(lang, 'Назад', 'Back', 'Zurueck')}
-            </span>
-          </button>
+    <div ref={topRef} className="bg-white scroll-mt-[72px]">
+      <PageHeader
+        accent="violet"
+        eyebrow={t(lang, 'Психология на измамата', 'The psychology of fraud', 'Die Psychologie des Betrugs')}
+        title={t(lang, 'Как измамниците манипулират хората', 'How Scammers Manipulate People', 'Wie Betrueger Menschen manipulieren')}
+        lead={t(
+          lang,
+          'Социалното инженерство е изкуството на манипулацията — използване на човешката психология вместо технически уязвимости. Разберете как работи, за да не станете жертва.',
+          'Social engineering is the art of manipulation — exploiting human psychology instead of technical vulnerabilities. Understand how it works so you don\'t become a victim.',
+          'Social Engineering ist die Kunst der Manipulation — die Ausnutzung menschlicher Psychologie statt technischer Schwachstellen. Verstehen Sie, wie es funktioniert, damit Sie kein Opfer werden.'
+        )}
+        onBack={onBack}
+        backLabel={t(lang, 'Начало', 'Home', 'Startseite')}
+        meta={
+          <LiveDot accent="violet">
+            {principles.length} {t(lang, 'принципа', 'principles', 'Prinzipien')} · {techniques.length} {t(lang, 'техники', 'techniques', 'Techniken')}
+          </LiveDot>
+        }
+      />
 
-          <div className="flex flex-col items-center text-center space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-900/40 backdrop-blur-md border border-purple-500/30 rounded-full text-purple-400 text-[11px] font-bold uppercase tracking-[0.2em]">
-              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-              {t(lang, 'СОЦИАЛНО ИНЖЕНЕРСТВО', 'SOCIAL ENGINEERING', 'SOCIAL ENGINEERING')}
+      {/* Definition */}
+      <Section tone="white" size="md">
+        <Container width="narrow">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-4">
+              <SectionHeading
+                accent="violet"
+                eyebrow={t(lang, 'Определение', 'Definition', 'Definition')}
+                title={t(lang, 'Какво е социално инженерство?', 'What is Social Engineering?', 'Was ist Social Engineering?')}
+              />
             </div>
-
-            {/* Title */}
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.05] max-w-4xl drop-shadow-2xl">
-              {t(
-                lang,
-                'Как измамниците манипулират хората',
-                'How Scammers Manipulate People',
-                'Wie Betrueger Menschen manipulieren'
-              )}
-            </h2>
-
-            {/* Subtitle */}
-            <p className="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed font-medium">
-              {t(
-                lang,
-                'Социалното инженерство е изкуството на манипулацията — използване на човешката психология вместо технически уязвимости. Разберете как работи, за да не станете жертва.',
-                'Social engineering is the art of manipulation — exploiting human psychology instead of technical vulnerabilities. Understand how it works so you don\'t become a victim.',
-                'Social Engineering ist die Kunst der Manipulation — die Ausnutzung menschlicher Psychologie statt technischer Schwachstellen. Verstehen Sie, wie es funktioniert, damit Sie kein Opfer werden.'
-              )}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What is Social Engineering */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="rounded-2xl p-8 md:p-12 border border-slate-700/50 bg-slate-900/60">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 bg-purple-900/40 rounded-xl flex items-center justify-center flex-shrink-0 border border-purple-500/20">
-                <svg className="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
-                  {t(lang, 'Какво е социално инженерство?', 'What is Social Engineering?', 'Was ist Social Engineering?')}
-                </h3>
-              </div>
-            </div>
-            <div className="space-y-4 text-slate-300 leading-relaxed">
+            <div className="lg:col-span-8 space-y-5 text-[15px] leading-relaxed text-slate-600">
               <p>
                 {t(
                   lang,
@@ -466,7 +446,7 @@ const SocialEngineering: React.FC<SocialEngineeringProps> = ({ lang, onBack }) =
                   'Social Engineering ist eine Manipulationsmethode, bei der Betrueger menschliche Emotionen und Verhaltensmuster ausnutzen, anstatt technische Systeme anzugreifen. Statt Ihren Computer zu hacken, „hacken" sie Sie — Ihr Vertrauen, Ihre Angst oder Ihren Wunsch nach Gewinn.'
                 )}
               </p>
-              <p>
+              <p className="pl-5 border-l-2 border-violet-400 text-slate-800 font-medium">
                 {t(
                   lang,
                   'Тази техника е в основата на над 90% от успешните кибератаки. Независимо колко добра е техническата ви защита, ако измамник успее да ви убеди да кликнете на линк или да споделите парола — защитата е безполезна.',
@@ -476,204 +456,184 @@ const SocialEngineering: React.FC<SocialEngineeringProps> = ({ lang, onBack }) =
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Psychological Principles */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-              {t(lang, 'Защо работи?', 'Why Does It Work?', 'Warum funktioniert es?')}
-            </h3>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              {t(
-                lang,
-                'Измамниците използват фундаментални психологически принципи, на които всеки човек е податлив.',
-                'Scammers exploit fundamental psychological principles that every person is susceptible to.',
-                'Betrueger nutzen grundlegende psychologische Prinzipien aus, fuer die jeder Mensch anfaellig ist.'
-              )}
-            </p>
-          </div>
+      {/* Psychological principles */}
+      <Section tone="tint" size="md">
+        <Container>
+          <SectionHeading
+            accent="violet"
+            eyebrow={t(lang, 'Механизъм', 'Mechanism', 'Mechanismus')}
+            title={t(lang, 'Защо работи?', 'Why Does It Work?', 'Warum funktioniert es?')}
+            lead={t(
+              lang,
+              'Измамниците използват фундаментални психологически принципи, на които всеки човек е податлив.',
+              'Scammers exploit fundamental psychological principles that every person is susceptible to.',
+              'Betrueger nutzen grundlegende psychologische Prinzipien aus, fuer die jeder Mensch anfaellig ist.'
+            )}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {principles.map((principle, i) => {
-              const colorMap: Record<string, { bg: string; border: string; text: string }> = {
-                blue: { bg: 'bg-blue-900/30', border: 'border-blue-500/20', text: 'text-blue-400' },
-                red: { bg: 'bg-red-900/30', border: 'border-red-500/20', text: 'text-red-400' },
-                amber: { bg: 'bg-amber-900/30', border: 'border-amber-500/20', text: 'text-amber-400' },
-                emerald: { bg: 'bg-emerald-900/30', border: 'border-emerald-500/20', text: 'text-emerald-400' },
-                rose: { bg: 'bg-rose-900/30', border: 'border-rose-500/20', text: 'text-rose-400' },
-                purple: { bg: 'bg-purple-900/30', border: 'border-purple-500/20', text: 'text-purple-400' },
-              };
-              const colors = colorMap[principle.color];
-
+              const tone = principleTone[principle.color] ?? principleTone.blue;
               return (
-                <div key={i} className={`rounded-xl p-6 border ${colors.border} ${colors.bg} hover:brightness-125 transition-all`}>
-                  <div className={`w-14 h-14 bg-slate-950/60 rounded-xl flex items-center justify-center mb-4 border ${colors.border}`}>
-                    <span className={colors.text}>{principle.icon}</span>
-                  </div>
-                  <h4 className="text-lg font-bold text-white mb-2">{principle.title}</h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">{principle.description}</p>
+                <div key={i} className="relative rounded-xl border border-slate-200 bg-white p-7 overflow-hidden">
+                  <span className={`absolute top-0 left-0 right-0 h-1 ${tone.rule}`} aria-hidden="true" />
+                  <span className={`w-12 h-12 rounded-lg ${tone.bg} border ${tone.border} ${tone.text} flex items-center justify-center mb-5`}>
+                    {principle.icon}
+                  </span>
+                  <h3 className="text-[17px] font-bold text-slate-900 mb-2.5">{principle.title}</h3>
+                  <p className="text-[14px] leading-relaxed text-slate-600">{principle.description}</p>
                 </div>
               );
             })}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Techniques */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-              {t(lang, 'Техники за атака', 'Attack Techniques', 'Angriffstechniken')}
-            </h3>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              {t(
-                lang,
-                'Основните методи, които измамниците използват, за да достигнат до жертвите си.',
-                'The main methods scammers use to reach their victims.',
-                'Die wichtigsten Methoden, die Betrueger verwenden, um ihre Opfer zu erreichen.'
-              )}
-            </p>
-          </div>
+      {/* Attack techniques */}
+      <Section tone="white" size="md">
+        <Container width="narrow">
+          <SectionHeading
+            accent="orange"
+            eyebrow={t(lang, 'Вектори на атака', 'Attack vectors', 'Angriffsvektoren')}
+            title={t(lang, 'Техники за атака', 'Attack Techniques', 'Angriffstechniken')}
+            lead={t(
+              lang,
+              'Основните методи, които измамниците използват, за да достигнат до жертвите си.',
+              'The main methods scammers use to reach their victims.',
+              'Die wichtigsten Methoden, die Betrueger verwenden, um ihre Opfer zu erreichen.'
+            )}
+          />
 
-          <div className="space-y-4">
-            {techniques.map((technique, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-700/50 overflow-hidden transition-all bg-slate-900/40"
-              >
-                <button
-                  onClick={() => setExpandedTechnique(expandedTechnique === i ? null : i)}
-                  className="w-full px-6 py-5 flex items-center gap-4 text-left hover:bg-white/[0.02] transition-colors"
-                >
-                  <div className="w-12 h-12 bg-slate-800/80 rounded-xl flex items-center justify-center flex-shrink-0 border border-slate-600/30">
-                    <span className="text-blue-400">{technique.icon}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-lg font-bold text-white">{technique.title}</h4>
-                    <p className="text-sm text-slate-400">{technique.subtitle}</p>
-                  </div>
-                  <svg
-                    className={`w-5 h-5 text-slate-400 transition-transform flex-shrink-0 ${expandedTechnique === i ? 'rotate-180' : ''}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+          <div className="mt-12 rounded-xl border border-slate-200 overflow-hidden divide-y divide-slate-200">
+            {techniques.map((technique, i) => {
+              const open = expandedTechnique === i;
+              return (
+                <div key={i} className={open ? 'bg-slate-50' : 'bg-white'}>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedTechnique(open ? null : i)}
+                    aria-expanded={open}
+                    className="w-full px-6 py-5 flex items-center gap-4 text-left hover:bg-slate-50 transition-colors"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                    <span className={`w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                      open ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-500'
+                    }`}>
+                      {technique.icon}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-[16px] font-bold text-slate-900">{technique.title}</span>
+                      <span className="block text-[13px] text-slate-500 mt-0.5">{technique.subtitle}</span>
+                    </span>
+                    <svg
+                      className={`w-5 h-5 text-slate-400 transition-transform duration-200 flex-shrink-0 ${open ? 'rotate-180' : ''}`}
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-                {expandedTechnique === i && (
-                  <div className="px-6 pb-6 border-t border-slate-700/30">
-                    <p className="text-slate-300 leading-relaxed mt-4 mb-4">{technique.description}</p>
-                    <div className="bg-red-950/30 border border-red-500/20 rounded-lg p-4">
-                      <div className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                        <div>
-                          <p className="text-red-300 text-sm font-semibold mb-1">
-                            {t(lang, 'Пример:', 'Example:', 'Beispiel:')}
-                          </p>
-                          <p className="text-red-200/80 text-sm italic">{technique.example}</p>
-                        </div>
+                  {open && (
+                    <div className="px-6 pb-6 pl-[76px] anim-fade-up">
+                      <p className="text-[15px] leading-relaxed text-slate-600 mb-5">{technique.description}</p>
+                      <div className="border-l-2 border-red-500 bg-red-50 rounded-r-lg px-5 py-4">
+                        <span className="block mono text-[10px] font-semibold uppercase tracking-[0.15em] text-red-700 mb-2">
+                          {t(lang, 'Пример от практиката', 'Example from practice', 'Beispiel aus der Praxis')}
+                        </span>
+                        <p className="text-[14px] leading-relaxed text-slate-700">{technique.example}</p>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Red Flags */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-              {t(lang, 'Червени флагове', 'Red Flags', 'Warnsignale')}
-            </h3>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              {t(
-                lang,
-                'Ако забележите някой от тези признаци, бъдете нащрек — вероятно е опит за измама.',
-                'If you notice any of these signs, be alert — it\'s likely a scam attempt.',
-                'Wenn Sie eines dieser Anzeichen bemerken, seien Sie wachsam — es handelt sich wahrscheinlich um einen Betrugsversuch.'
-              )}
-            </p>
-          </div>
+      {/* Red flags */}
+      <Section tone="tint" size="md">
+        <Container width="narrow">
+          <SectionHeading
+            accent="red"
+            eyebrow={t(lang, 'Сигнали за тревога', 'Alarm signals', 'Alarmsignale')}
+            title={t(lang, 'Червени флагове', 'Red Flags', 'Warnsignale')}
+            lead={t(
+              lang,
+              'Ако забележите някой от тези признаци, бъдете нащрек — вероятно е опит за измама.',
+              'If you notice any of these signs, be alert — it\'s likely a scam attempt.',
+              'Wenn Sie eines dieser Anzeichen bemerken, seien Sie wachsam — es handelt sich wahrscheinlich um einen Betrugsversuch.'
+            )}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-3">
             {redFlags.map((flag, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-lg p-4 border border-red-900/30 bg-red-950/20">
-                <div className="w-6 h-6 rounded-full bg-red-900/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              <li key={i} className="flex items-start gap-3.5 rounded-xl border border-red-200 bg-white p-5">
+                <span className="w-6 h-6 rounded-md bg-red-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
-                </div>
-                <p className="text-slate-300 text-sm leading-relaxed">{flag.text}</p>
-              </div>
+                </span>
+                <p className="text-[14px] leading-relaxed text-slate-700">{flag.text}</p>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </Container>
+      </Section>
 
-      {/* Protection Steps */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-              {t(lang, 'Как да се защитите', 'How to Protect Yourself', 'Wie Sie sich schuetzen')}
-            </h3>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              {t(
-                lang,
-                'Следвайте тези стъпки, за да намалите значително риска от атака чрез социално инженерство.',
-                'Follow these steps to significantly reduce your risk of a social engineering attack.',
-                'Befolgen Sie diese Schritte, um Ihr Risiko eines Social-Engineering-Angriffs erheblich zu reduzieren.'
-              )}
-            </p>
-          </div>
+      {/* Protection */}
+      <Section tone="white" size="md">
+        <Container>
+          <SectionHeading
+            accent="emerald"
+            eyebrow={t(lang, 'Противодействие', 'Countermeasures', 'Gegenmaßnahmen')}
+            title={t(lang, 'Как да се защитите', 'How to Protect Yourself', 'Wie Sie sich schuetzen')}
+            lead={t(
+              lang,
+              'Следвайте тези стъпки, за да намалите значително риска от атака чрез социално инженерство.',
+              'Follow these steps to significantly reduce your risk of a social engineering attack.',
+              'Befolgen Sie diese Schritte, um Ihr Risiko eines Social-Engineering-Angriffs erheblich zu reduzieren.'
+            )}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {protectionSteps.map((step, i) => (
-              <div key={i} className="rounded-xl p-6 border border-slate-700/50 relative bg-slate-900/40">
-                <div className="absolute -top-3 -left-3 w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                  {i + 1}
+              <div
+                key={i}
+                className="group rounded-xl border border-slate-200 bg-white p-7 transition-all duration-200 hover:border-emerald-400 hover:shadow-[0_2px_16px_-4px_rgba(15,23,42,0.12)]"
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-colors">
+                    {step.icon}
+                  </span>
+                  <span className="mono text-[11px] font-semibold text-slate-400 tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                 </div>
-                <div className="w-10 h-10 bg-emerald-900/30 rounded-lg flex items-center justify-center mb-4 border border-emerald-500/20">
-                  <span className="text-emerald-400">{step.icon}</span>
-                </div>
-                <h4 className="text-lg font-bold text-white mb-2">{step.title}</h4>
-                <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-[17px] font-bold text-slate-900 mb-2.5">{step.title}</h3>
+                <p className="text-[14px] leading-relaxed text-slate-600">{step.description}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Key Takeaway / CTA */}
-      <section className="py-16 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="rounded-2xl p-8 md:p-12 border border-purple-500/20 text-center bg-purple-950/30">
-            <div className="w-16 h-16 bg-purple-900/40 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-purple-500/20">
-              <svg className="w-9 h-9 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      {/* Takeaway */}
+      <Section tone="tint" size="sm">
+        <Container width="prose">
+          <div className="relative rounded-xl border border-violet-200 bg-white p-10 md:p-12 text-center overflow-hidden">
+            <span className="absolute top-0 left-0 right-0 h-1 bg-violet-500" aria-hidden="true" />
+            <span className="inline-flex w-14 h-14 rounded-xl bg-violet-50 border border-violet-200 text-violet-600 items-center justify-center mb-6">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-              {t(
-                lang,
-                'Най-добрата защита е знанието',
-                'Knowledge is the Best Defense',
-                'Wissen ist die beste Verteidigung'
-              )}
-            </h3>
-            <p className="text-slate-300 leading-relaxed mb-8 max-w-xl mx-auto">
+            </span>
+            <h2 className="display text-2xl md:text-3xl font-extrabold text-slate-900 mb-4">
+              {t(lang, 'Най-добрата защита е знанието', 'Knowledge is the Best Defense', 'Wissen ist die beste Verteidigung')}
+            </h2>
+            <p className="text-[15px] leading-relaxed text-slate-600 mb-8 max-w-xl mx-auto">
               {t(
                 lang,
                 'Социалното инженерство разчита на неведението. Сега, когато знаете как работи, вие сте значително по-трудна мишена. Споделете тези знания с близките си.',
@@ -681,18 +641,12 @@ const SocialEngineering: React.FC<SocialEngineeringProps> = ({ lang, onBack }) =
                 'Social Engineering beruht auf Unwissenheit. Jetzt, da Sie wissen, wie es funktioniert, sind Sie ein deutlich schwierigeres Ziel. Teilen Sie dieses Wissen mit Ihren Angehoerigen.'
               )}
             </p>
-            <button
-              onClick={onBack}
-              className="px-6 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-all inline-flex items-center gap-2 shadow-lg shadow-purple-600/20"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
+            <Btn accent="violet" size="lg" onClick={onBack}>
               {t(lang, 'Обратно към началото', 'Back to Homepage', 'Zurueck zur Startseite')}
-            </button>
+            </Btn>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
     </div>
   );
 };
