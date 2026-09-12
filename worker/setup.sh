@@ -135,7 +135,32 @@ else
   wr deploy || true
 fi
 
-WORKER_URL="$(grep -oaE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$DEPLOY_LOG" 2>/dev/null | head -1 || true)"
+# Match the Worker's own hostname specifically. On a first deploy the output also
+# contains the bare account subdomain ("Creating a workers.dev subdomain ... at
+# https://<sub>.workers.dev"), which appears FIRST and is not a working URL —
+# taking the first match wrote a hostname with no DNS record behind it.
+WORKER_NAME="$(sed -n 's/^[[:space:]]*name[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' wrangler.toml | head -1)"
+WORKER_URL=""
+if [ -n "$WORKER_NAME" ]; then
+  WORKER_URL="$(grep -oaE "https://${WORKER_NAME}\.[a-zA-Z0-9.-]+\.workers\.dev" "$DEPLOY_LOG" 2>/dev/null | head -1 || true)"
+fi
+# Fall back to the last workers.dev URL, which is the deployed one.
+if [ -z "$WORKER_URL" ]; then
+  WORKER_URL="$(grep -oaE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$DEPLOY_LOG" 2>/dev/null | tail -1 || true)"
+fi
+
+# Never accept a URL that does not resolve — that is exactly the failure this
+# guards against, and a wrong value here silently breaks the live site.
+if [ -n "$WORKER_URL" ]; then
+  host="${WORKER_URL#https://}"
+  if command -v dig >/dev/null 2>&1 && [ -z "$(dig +short "$host" A 2>/dev/null)" ]; then
+    warn "$WORKER_URL has no DNS record yet"
+    if [ -n "$WORKER_NAME" ] && [ "${host%%.*}" != "$WORKER_NAME" ]; then
+      warn "it also lacks the Worker name — discarding it"
+      WORKER_URL=""
+    fi
+  fi
+fi
 
 # Fall back to asking, rather than silently leaving the site unwired.
 if [ -z "$WORKER_URL" ]; then
@@ -169,6 +194,15 @@ EOF
   ok "wrote $SITE_ROOT/.env"
   echo "     Commit it so the GitHub Pages build picks it up:"
   echo "       git add .env && git commit -m 'chore: point site at threat proxy' && git push"
+
+  # Vite ranks .env.local above .env, so a leftover from local development
+  # silently wins and points the site at a wrangler dev server that is not running.
+  if [ -f "$SITE_ROOT/.env.local" ] && grep -q "VITE_API_BASE" "$SITE_ROOT/.env.local" 2>/dev/null; then
+    echo
+    warn ".env.local also sets VITE_API_BASE and Vite prefers it over .env:"
+    grep "VITE_API_BASE" "$SITE_ROOT/.env.local" | sed 's/^/       /'
+    warn "delete that line (or the file) or the site will keep using it."
+  fi
 else
   warn "skipped — no Worker URL"
 fi
