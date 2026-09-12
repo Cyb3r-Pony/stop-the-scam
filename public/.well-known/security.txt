@@ -1,0 +1,16 @@
+# Security contact for stop-the-scam.xyz — RFC 9116
+#
+# If you have found a vulnerability in this site, please report it to the
+# address below. We will acknowledge your report and will not pursue action
+# against good-faith research.
+#
+# Ако сте открили уязвимост в този сайт, моля докладвайте я на адреса по-долу.
+
+Contact: mailto:security@stop-the-scam.xyz
+Expires: 2027-09-12T00:00:00.000Z
+Preferred-Languages: bg, en
+Canonical: https://stop-the-scam.xyz/.well-known/security.txt
+
+# Scam reports are not security reports. To report a fraudulent website or a
+# scam attempt, use the Bulgarian cybercrime directorate instead:
+# https://cybercrime.bg
