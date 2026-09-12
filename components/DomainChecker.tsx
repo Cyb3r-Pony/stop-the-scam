@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Lang } from '../types';
 import { PageHeader, Section, Container, Btn, LiveDot, Icon, tr } from './ui';
 import {
@@ -254,14 +254,22 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
   const [checked, setChecked] = useState<{ kind: TargetKind; target: string } | null>(null);
   const apiConfigured = isThreatApiConfigured();
 
+  // Identifies the check currently on screen. The reputation lookup continues
+  // after the DNS half has rendered, so without this a slow answer for an
+  // earlier domain could land on — and be merged into — a later one's report.
+  const runId = useRef(0);
+
   /**
    * Domains get the DNS scorecard plus reputation; IP addresses get reputation
    * only, since none of the DNS hygiene checks apply to a bare address.
    */
   const check = async (value?: string) => {
     const raw = (value ?? input).trim();
-    if (!raw || loading) return;
+    if (!raw) return;
     if (value) setInput(value);
+
+    const id = ++runId.current;
+    const current = () => id === runId.current;
 
     setLoading(true);
     setError(null);
@@ -274,13 +282,17 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
       setLoading(false);
       setThreatLoading(apiConfigured);
       if (apiConfigured) {
-        setThreat(await fetchThreatReport('ip', raw));
+        const intel = await fetchThreatReport('ip', raw);
+        if (!current()) return;
+        setThreat(intel);
         setThreatLoading(false);
       }
       return;
     }
 
     const result = await runDomainReport(raw);
+    if (!current()) return;
+
     if ('kind' in result) {
       setError(result);
       setLoading(false);
@@ -294,6 +306,7 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
     if (apiConfigured) {
       setThreatLoading(true);
       const intel = await fetchThreatReport('domain', result.domain);
+      if (!current()) return;
       setThreat(intel);
       setThreatLoading(false);
 

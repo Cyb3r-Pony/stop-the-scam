@@ -20,60 +20,49 @@ interface AccentTokens {
   textSoft: string;
   bgSoft: string;
   border: string;
-  borderStrong: string;
   solid: string;
   solidHover: string;
   rule: string;
   hoverBorder: string;
-  ring: string;
-  /* dark-surface variants */
+  /** used on dark operational surfaces */
   dText: string;
-  dBgSoft: string;
-  dBorder: string;
 }
 
 export const ACCENTS: Record<Accent, AccentTokens> = {
   red: {
-    text: 'text-red-600', textSoft: 'text-red-700', bgSoft: 'bg-red-50', border: 'border-red-200',
-    borderStrong: 'border-red-500', solid: 'bg-red-600', solidHover: 'hover:bg-red-700',
-    rule: 'bg-red-600', hoverBorder: 'hover:border-red-400', ring: 'focus:ring-red-500/40',
-    dText: 'text-red-400', dBgSoft: 'bg-red-950/40', dBorder: 'border-red-900/60',
+    text: 'text-red-600', textSoft: 'text-red-700', bgSoft: 'bg-red-50', border: 'border-red-200', solid: 'bg-red-600', solidHover: 'hover:bg-red-700',
+    rule: 'bg-red-600', hoverBorder: 'hover:border-red-400',
+    dText: 'text-red-400',
   },
   orange: {
-    text: 'text-orange-600', textSoft: 'text-orange-700', bgSoft: 'bg-orange-50', border: 'border-orange-200',
-    borderStrong: 'border-orange-500', solid: 'bg-orange-600', solidHover: 'hover:bg-orange-700',
-    rule: 'bg-orange-500', hoverBorder: 'hover:border-orange-400', ring: 'focus:ring-orange-500/40',
-    dText: 'text-orange-400', dBgSoft: 'bg-orange-950/40', dBorder: 'border-orange-900/60',
+    text: 'text-orange-600', textSoft: 'text-orange-700', bgSoft: 'bg-orange-50', border: 'border-orange-200', solid: 'bg-orange-600', solidHover: 'hover:bg-orange-700',
+    rule: 'bg-orange-500', hoverBorder: 'hover:border-orange-400',
+    dText: 'text-orange-400',
   },
   amber: {
-    text: 'text-amber-600', textSoft: 'text-amber-700', bgSoft: 'bg-amber-50', border: 'border-amber-200',
-    borderStrong: 'border-amber-500', solid: 'bg-amber-500', solidHover: 'hover:bg-amber-600',
-    rule: 'bg-amber-500', hoverBorder: 'hover:border-amber-400', ring: 'focus:ring-amber-500/40',
-    dText: 'text-amber-400', dBgSoft: 'bg-amber-950/40', dBorder: 'border-amber-900/60',
+    text: 'text-amber-600', textSoft: 'text-amber-700', bgSoft: 'bg-amber-50', border: 'border-amber-200', solid: 'bg-amber-500', solidHover: 'hover:bg-amber-600',
+    rule: 'bg-amber-500', hoverBorder: 'hover:border-amber-400',
+    dText: 'text-amber-400',
   },
   emerald: {
-    text: 'text-emerald-600', textSoft: 'text-emerald-700', bgSoft: 'bg-emerald-50', border: 'border-emerald-200',
-    borderStrong: 'border-emerald-500', solid: 'bg-emerald-600', solidHover: 'hover:bg-emerald-700',
-    rule: 'bg-emerald-500', hoverBorder: 'hover:border-emerald-400', ring: 'focus:ring-emerald-500/40',
-    dText: 'text-emerald-400', dBgSoft: 'bg-emerald-950/40', dBorder: 'border-emerald-900/60',
+    text: 'text-emerald-600', textSoft: 'text-emerald-700', bgSoft: 'bg-emerald-50', border: 'border-emerald-200', solid: 'bg-emerald-600', solidHover: 'hover:bg-emerald-700',
+    rule: 'bg-emerald-500', hoverBorder: 'hover:border-emerald-400',
+    dText: 'text-emerald-400',
   },
   blue: {
-    text: 'text-blue-600', textSoft: 'text-blue-700', bgSoft: 'bg-blue-50', border: 'border-blue-200',
-    borderStrong: 'border-blue-500', solid: 'bg-blue-600', solidHover: 'hover:bg-blue-700',
-    rule: 'bg-blue-600', hoverBorder: 'hover:border-blue-400', ring: 'focus:ring-blue-500/40',
-    dText: 'text-blue-400', dBgSoft: 'bg-blue-950/40', dBorder: 'border-blue-900/60',
+    text: 'text-blue-600', textSoft: 'text-blue-700', bgSoft: 'bg-blue-50', border: 'border-blue-200', solid: 'bg-blue-600', solidHover: 'hover:bg-blue-700',
+    rule: 'bg-blue-600', hoverBorder: 'hover:border-blue-400',
+    dText: 'text-blue-400',
   },
   cyan: {
-    text: 'text-cyan-600', textSoft: 'text-cyan-700', bgSoft: 'bg-cyan-50', border: 'border-cyan-200',
-    borderStrong: 'border-cyan-500', solid: 'bg-cyan-600', solidHover: 'hover:bg-cyan-700',
-    rule: 'bg-cyan-500', hoverBorder: 'hover:border-cyan-400', ring: 'focus:ring-cyan-500/40',
-    dText: 'text-cyan-400', dBgSoft: 'bg-cyan-950/40', dBorder: 'border-cyan-900/60',
+    text: 'text-cyan-600', textSoft: 'text-cyan-700', bgSoft: 'bg-cyan-50', border: 'border-cyan-200', solid: 'bg-cyan-600', solidHover: 'hover:bg-cyan-700',
+    rule: 'bg-cyan-500', hoverBorder: 'hover:border-cyan-400',
+    dText: 'text-cyan-400',
   },
   violet: {
-    text: 'text-violet-600', textSoft: 'text-violet-700', bgSoft: 'bg-violet-50', border: 'border-violet-200',
-    borderStrong: 'border-violet-500', solid: 'bg-violet-600', solidHover: 'hover:bg-violet-700',
-    rule: 'bg-violet-500', hoverBorder: 'hover:border-violet-400', ring: 'focus:ring-violet-500/40',
-    dText: 'text-violet-400', dBgSoft: 'bg-violet-950/40', dBorder: 'border-violet-900/60',
+    text: 'text-violet-600', textSoft: 'text-violet-700', bgSoft: 'bg-violet-50', border: 'border-violet-200', solid: 'bg-violet-600', solidHover: 'hover:bg-violet-700',
+    rule: 'bg-violet-500', hoverBorder: 'hover:border-violet-400',
+    dText: 'text-violet-400',
   },
 };
 

@@ -16,7 +16,7 @@ export const isThreatApiConfigured = (): boolean => API_BASE.length > 0;
 
 export type TargetKind = 'ip' | 'domain';
 
-export interface ProviderResult {
+interface ProviderResult {
   ok: boolean;
   error?: string;
   [key: string]: unknown;
@@ -143,7 +143,7 @@ export function summarise(report: ThreatReport): { verdict: Verdict; reasons: st
 /* Fallback deep links — useful with no worker and no key              */
 /* ------------------------------------------------------------------ */
 
-export interface DeepLink { name: string; url: string }
+interface DeepLink { name: string; url: string }
 
 export function deepLinks(kind: TargetKind, target: string): DeepLink[] {
   const e = encodeURIComponent(target);

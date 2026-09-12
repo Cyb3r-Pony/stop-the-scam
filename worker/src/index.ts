@@ -326,7 +326,9 @@ async function webSurface(domain: string): Promise<Source> {
   return {
     ok: true,
     reachable: true,
-    https: res.url.startsWith('https://') || res.status > 0,
+    // Strictly the final URL: a site that redirects HTTPS down to HTTP has not
+    // served us securely, and `status > 0` would have called every reply a pass.
+    https: res.url.startsWith('https://'),
     status: res.status,
     httpsRedirect,
     hsts: !!hsts,
@@ -337,7 +339,6 @@ async function webSurface(domain: string): Promise<Source> {
     referrerPolicy: !!h.get('referrer-policy'),
     permissionsPolicy: !!h.get('permissions-policy'),
     securityTxt,
-    server: h.get('server'),
   };
 }
 
@@ -382,6 +383,23 @@ async function rateLimited(request: Request, env: Env): Promise<boolean> {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const origin = request.headers.get('Origin');
+    try {
+      return await handle(request, env, ctx, origin);
+    } catch {
+      // An uncaught throw would return Cloudflare's own error page, which carries
+      // no CORS headers — the browser would then report an opaque network failure
+      // instead of letting the page fall back gracefully.
+      return json({ error: 'internal_error' }, origin, 500);
+    }
+  },
+};
+
+async function handle(
+  request: Request,
+  env: Env,
+  ctx: ExecutionContext,
+  origin: string | null,
+): Promise<Response> {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
@@ -398,7 +416,17 @@ export default {
     if (!match) return json({ error: 'not_found' }, origin, 404);
 
     const [, kind, rawTarget] = match;
-    const target = decodeURIComponent(rawTarget);
+
+    // decodeURIComponent throws URIError on a malformed escape such as "%E0%A4%A",
+    // which surfaced as a Worker exception (Cloudflare error 1101) rather than a
+    // clean rejection.
+    let target: string;
+    try {
+      target = decodeURIComponent(rawTarget);
+    } catch {
+      return json({ error: 'invalid_target' }, origin, 400);
+    }
+    if (target.length > 260) return json({ error: 'invalid_target' }, origin, 400);
 
     const validated = kind === 'ip' ? validPublicIp(target) : validDomain(target);
     if (!validated) {
@@ -449,5 +477,4 @@ export default {
     // the copy the visitor receives does not, so their browser always re-asks.
     ctx.waitUntil(cache.put(cacheKey, json(payload, origin, 200, true)));
     return json(payload, origin);
-  },
-};
+}

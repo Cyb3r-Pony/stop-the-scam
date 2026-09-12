@@ -109,7 +109,7 @@ function findTxt(res: DnsResponse | null, prefix: string): string | null {
  * Accepts what people actually paste: a bare domain, a full URL, something with
  * a trailing slash, or a stray "www.".
  */
-export function normalizeDomain(raw: string): string | LookupError {
+function normalizeDomain(raw: string): string | LookupError {
   let s = raw.trim().toLowerCase();
   if (!s) return { kind: 'invalid' };
 
