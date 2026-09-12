@@ -8,6 +8,7 @@ import ScamLab from './components/ScamLab';
 import ScamTypes from './components/ScamTypes';
 import WarningSigns from './components/WarningSigns';
 import Protection from './components/Protection';
+import ExternalTools from './components/ExternalTools';
 import { Section, Container, SectionHeading, Eyebrow, Btn, ArrowLink, LiveDot, PanelHeader, Icon, ACCENTS } from './components/ui';
 
 type Page =
@@ -17,7 +18,8 @@ type Page =
   | 'scam-lab'
   | 'scam-types'
   | 'warning-signs'
-  | 'protection';
+  | 'protection'
+  | 'tools';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
@@ -209,6 +211,17 @@ const App: React.FC = () => {
           label: t('Официални регистри', 'Official Registers', 'Offizielle Register'),
           desc: t('Проверете лиценз преди да инвестирате', 'Verify a licence before you invest', 'Lizenz prüfen, bevor Sie investieren'),
           anchor: 'registers',
+        },
+      ],
+    },
+    {
+      id: 'resources',
+      label: t('Ресурси', 'Resources', 'Ressourcen'),
+      items: [
+        {
+          label: t('Външни инструменти', 'External Tools', 'Externe Werkzeuge'),
+          desc: t('Безплатни услуги за проверка на линк, файл или IP', 'Free services to check a link, file, or IP', 'Kostenlose Dienste zur Prüfung von Link, Datei oder IP'),
+          page: 'tools',
         },
       ],
     },
@@ -471,6 +484,8 @@ const App: React.FC = () => {
           <WarningSigns lang={lang} onBack={goHome} onNavigate={goTo} />
         ) : currentPage === 'protection' ? (
           <Protection lang={lang} onBack={goHome} onNavigate={goTo} />
+        ) : currentPage === 'tools' ? (
+          <ExternalTools lang={lang} onBack={goHome} />
         ) : (
         <div key={lang}>
 
