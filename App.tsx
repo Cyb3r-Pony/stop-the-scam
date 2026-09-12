@@ -226,8 +226,8 @@ const App: React.FC = () => {
           page: 'tools',
         },
         {
-          label: t('Проверка на домейн', 'Domain Check', 'Domain-Prüfung'),
-          desc: t('Оценка на защитата на домейн директно тук', 'Score a domain\'s protection right here', 'Domain-Schutz direkt hier bewerten'),
+          label: t('Проверка на домейн или IP', 'Domain & IP Check', 'Domain- & IP-Prüfung'),
+          desc: t('Оценка и репутация, директно тук', 'Hygiene score and reputation, right here', 'Bewertung und Reputation, direkt hier'),
           page: 'checker',
         },
       ],

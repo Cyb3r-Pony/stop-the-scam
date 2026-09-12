@@ -4,6 +4,10 @@ import { PageHeader, Section, Container, Btn, LiveDot, Icon, tr } from './ui';
 import {
   runDomainReport, DomainReport, LookupError, CheckId, CheckResult, CheckStatus,
 } from './domainChecks';
+import ThreatPanel from './ThreatPanel';
+import {
+  fetchThreatReport, isThreatApiConfigured, looksLikeIp, ThreatReport, TargetKind,
+} from './threatApi';
 
 interface Props {
   lang: Lang;
@@ -149,26 +153,57 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<DomainReport | null>(null);
   const [error, setError] = useState<LookupError | null>(null);
+  const [threat, setThreat] = useState<ThreatReport | null>(null);
+  const [threatLoading, setThreatLoading] = useState(false);
+  const [checked, setChecked] = useState<{ kind: TargetKind; target: string } | null>(null);
+  const apiConfigured = isThreatApiConfigured();
 
+  /**
+   * Domains get the DNS scorecard plus reputation; IP addresses get reputation
+   * only, since none of the DNS hygiene checks apply to a bare address.
+   */
   const check = async (value?: string) => {
-    const target = (value ?? input).trim();
-    if (!target || loading) return;
+    const raw = (value ?? input).trim();
+    if (!raw || loading) return;
     if (value) setInput(value);
+
     setLoading(true);
     setError(null);
     setReport(null);
-    const result = await runDomainReport(target);
+    setThreat(null);
+    setChecked(null);
+
+    if (looksLikeIp(raw)) {
+      setChecked({ kind: 'ip', target: raw });
+      setLoading(false);
+      setThreatLoading(apiConfigured);
+      if (apiConfigured) {
+        setThreat(await fetchThreatReport('ip', raw));
+        setThreatLoading(false);
+      }
+      return;
+    }
+
+    const result = await runDomainReport(raw);
     if ('kind' in result) {
       setError(result);
-    } else {
-      setReport(result);
+      setLoading(false);
+      return;
     }
+    setReport(result);
     setLoading(false);
+
+    setChecked({ kind: 'domain', target: result.domain });
+    if (apiConfigured) {
+      setThreatLoading(true);
+      setThreat(await fetchThreatReport('domain', result.domain));
+      setThreatLoading(false);
+    }
   };
 
   const errorText = (e: LookupError) => ({
     invalid: t('Това не изглежда като валиден домейн. Опитайте например: banka.bg', 'That does not look like a valid domain. Try something like: example.com', 'Das sieht nicht nach einer gültigen Domain aus. Versuchen Sie z. B.: example.com'),
-    'is-ip': t('Въвели сте IP адрес. Тази проверка работи с домейни — за IP адреси използвайте инструментите от раздел Ресурси.', 'You entered an IP address. This check works with domains — for IP addresses use the tools in the Resources section.', 'Sie haben eine IP-Adresse eingegeben. Diese Prüfung funktioniert mit Domains — für IP-Adressen nutzen Sie die Werkzeuge im Bereich Ressourcen.'),
+    'is-ip': t('Това не изглежда като валиден IP адрес.', 'That does not look like a valid IP address.', 'Das sieht nicht nach einer gültigen IP-Adresse aus.'),
     nxdomain: t('Този домейн не съществува. Проверете за печатна грешка.', 'This domain does not exist. Check for a typo.', 'Diese Domain existiert nicht. Prüfen Sie auf Tippfehler.'),
     network: t('Проверката не успя. Проверете връзката си и опитайте отново.', 'The check failed. Check your connection and try again.', 'Die Prüfung ist fehlgeschlagen. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.'),
   }[e.kind]);
@@ -224,7 +259,7 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
                 spellCheck={false}
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                placeholder={t('например: banka.bg', 'e.g. example.com', 'z. B. example.com')}
+                placeholder={t('домейн или IP адрес, напр. banka.bg', 'domain or IP address, e.g. example.com', 'Domain oder IP-Adresse, z. B. example.com')}
                 className="mono w-full bg-white border border-slate-300 text-slate-900 placeholder:text-slate-400 py-3.5 pl-11 pr-4 rounded-lg text-[14px] focus:outline-none focus:border-blue-500 transition-colors"
               />
               <span className="absolute left-4 top-4 text-slate-400">{Icon.search('w-4 h-4')}</span>
@@ -240,7 +275,7 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
             <span className="mono text-[11px] text-slate-400">
               {t('Опитайте:', 'Try:', 'Versuchen Sie:')}
             </span>
-            {['mvr.bg', 'stop-the-scam.xyz'].map(d => (
+            {['mvr.bg', 'stop-the-scam.xyz', '8.8.8.8'].map(d => (
               <button
                 key={d}
                 type="button"
@@ -272,10 +307,11 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
         </Container>
       </Section>
 
-      {/* Report */}
-      {report && !loading && (
+      {/* Results */}
+      {checked && !loading && (
         <Section tone="tint" size="sm" className="anim-fade-up">
           <Container width="narrow">
+            {report && (<>
             {/* Summary */}
             <div className="rounded-xl border border-slate-200 bg-white p-7 md:p-8 mb-5">
               <div className="flex flex-col sm:flex-row items-start gap-7">
@@ -338,7 +374,20 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
               </div>
             ))}
 
+            </>)}
+
+            {/* Reputation, from the threat-intelligence proxy */}
+            <ThreatPanel
+              lang={lang}
+              kind={checked.kind}
+              target={checked.target}
+              report={threat}
+              configured={apiConfigured}
+              loading={threatLoading}
+            />
+
             {/* Scope honesty + deeper tests */}
+            {report && (
             <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-6">
               <h3 className="text-[14px] font-bold text-slate-900 mb-2">
                 {t('Какво тази проверка не обхваща', 'What this check does not cover', 'Was diese Prüfung nicht abdeckt')}
@@ -376,12 +425,13 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
                 </button>
               </div>
             </div>
+            )}
           </Container>
         </Section>
       )}
 
       {/* Standing caveat — shown before any check is run */}
-      {!report && !loading && (
+      {!checked && !loading && (
         <Section tone="tint" size="sm">
           <Container width="narrow">
             <div className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-7">

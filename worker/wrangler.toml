@@ -1,0 +1,17 @@
+name = "sts-api"
+main = "src/index.ts"
+compatibility_date = "2025-07-18"
+
+# Secrets are NEVER set here. This file is committed to git.
+# Set them once with:  wrangler secret put ABUSEIPDB_KEY   (etc.)
+
+# Per-IP rate limiting. Requires no KV namespace or other resource.
+# If you remove this block the worker still runs — it just stops limiting.
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 20, period = 60 }
+
+[observability]
+enabled = true
