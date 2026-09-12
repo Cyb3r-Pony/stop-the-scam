@@ -38,24 +38,13 @@ const GROUPS: ToolGroup[] = [
   {
     accent: 'red',
     icon: Icon.search('w-5 h-5'),
-    title: t => t('Проверка на линк или файл', 'Check a link or file', 'Link oder Datei prüfen'),
+    title: t => t('Проверка на линк, файл или IP адрес', 'Check a link, file, or IP address', 'Link, Datei oder IP-Adresse prüfen'),
     lead: t => t(
-      'Получили сте съмнителен линк или прикачен файл — проверете го, преди да го отворите.',
-      'You received a suspicious link or attachment — check it before opening.',
-      'Sie haben einen verdächtigen Link oder Anhang erhalten — prüfen Sie ihn vor dem Öffnen.'
+      'Получили сте съмнителен линк, прикачен файл или искате да разберете кой стои зад един IP адрес.',
+      'You received a suspicious link or attachment, or want to know who is behind an IP address.',
+      'Sie haben einen verdächtigen Link oder Anhang erhalten oder möchten wissen, wer hinter einer IP-Adresse steckt.'
     ),
     tools: [
-      {
-        name: 'VirusTotal',
-        host: 'virustotal.com',
-        url: 'https://www.virustotal.com/gui/home/url',
-        badges: ['free', 'publicResult'],
-        desc: t => t(
-          'Проверява линк, файл, домейн или IP адрес срещу над 70 антивирусни системи наведнъж. Най-използваният инструмент за бърза първа проверка.',
-          'Checks a link, file, domain, or IP against more than 70 antivirus engines at once. The most widely used tool for a quick first check.',
-          'Prüft einen Link, eine Datei, eine Domain oder IP gegen über 70 Antiviren-Systeme gleichzeitig. Das meistgenutzte Werkzeug für eine schnelle Erstprüfung.'
-        ),
-      },
       {
         name: 'urlscan.io',
         host: 'urlscan.io',
@@ -78,18 +67,6 @@ const GROUPS: ToolGroup[] = [
           'Zeigt, ob Google eine Website als gefährlich markiert hat. Dies ist dieselbe Datenbank, die in Chrome und Android warnt.'
         ),
       },
-    ],
-  },
-  {
-    accent: 'blue',
-    icon: Icon.search('w-5 h-5'),
-    title: t => t('Проверка на IP адрес', 'Check an IP address', 'IP-Adresse prüfen'),
-    lead: t => t(
-      'Кой стои зад един IP адрес, от коя държава е и има ли сигнали за злоупотреба срещу него.',
-      'Who is behind an IP address, what country it is in, and whether it has abuse reports against it.',
-      'Wer hinter einer IP-Adresse steckt, aus welchem Land sie stammt und ob Missbrauchsmeldungen vorliegen.'
-    ),
-    tools: [
       {
         name: 'AbuseIPDB',
         host: 'abuseipdb.com',
@@ -130,11 +107,22 @@ const GROUPS: ToolGroup[] = [
     icon: Icon.alert('w-5 h-5'),
     title: t => t('Зловреден софтуер и активни заплахи', 'Malware and active threats', 'Schadsoftware und aktive Bedrohungen'),
     lead: t => t(
-      'Публични бази на abuse.ch — швейцарска организация, която проследява активни кампании в реално време.',
-      'Public databases from abuse.ch — a Swiss organisation tracking active campaigns in real time.',
-      'Öffentliche Datenbanken von abuse.ch — einer Schweizer Organisation, die aktive Kampagnen in Echtzeit verfolgt.'
+      'Антивирусни системи и публичните бази на abuse.ch, която проследява активни кампании в реално време.',
+      'Antivirus engines and the public databases of abuse.ch, which tracks active campaigns in real time.',
+      'Antiviren-Systeme und die öffentlichen Datenbanken von abuse.ch, das aktive Kampagnen in Echtzeit verfolgt.'
     ),
     tools: [
+      {
+        name: 'VirusTotal',
+        host: 'virustotal.com',
+        url: 'https://www.virustotal.com/gui/home/url',
+        badges: ['free', 'publicResult'],
+        desc: t => t(
+          'Проверява линк, файл, домейн или IP адрес срещу над 70 антивирусни системи наведнъж. Най-използваният инструмент за бърза първа проверка.',
+          'Checks a link, file, domain, or IP against more than 70 antivirus engines at once. The most widely used tool for a quick first check.',
+          'Prüft einen Link, eine Datei, eine Domain oder IP gegen über 70 Antiviren-Systeme gleichzeitig. Das meistgenutzte Werkzeug für eine schnelle Erstprüfung.'
+        ),
+      },
       {
         name: 'URLhaus',
         host: 'urlhaus.abuse.ch',
@@ -166,51 +154,6 @@ const GROUPS: ToolGroup[] = [
           'Търсене на зловреден файл по неговия хеш. Полезно, ако сте изтеглили подозрителен файл и искате да проверите какъв е, без да го отваряте.',
           'Search for a malicious file by its hash. Useful if you downloaded a suspicious file and want to check what it is without opening it.',
           'Suche nach einer schädlichen Datei anhand ihres Hashes. Nützlich, wenn Sie eine verdächtige Datei heruntergeladen haben und prüfen möchten, was sie ist, ohne sie zu öffnen.'
-        ),
-      },
-    ],
-  },
-  {
-    accent: 'emerald',
-    icon: Icon.shield('w-5 h-5'),
-    title: t => t('Сигурност и хигиена на домейн', 'Domain security and hygiene', 'Domain-Sicherheit und -Hygiene'),
-    lead: t => t(
-      'Доколко сериозно една организация се отнася към собствената си сигурност. Слабата хигиена не доказва измама, но е показателна.',
-      'How seriously an organisation takes its own security. Weak hygiene does not prove fraud, but it is telling.',
-      'Wie ernst eine Organisation ihre eigene Sicherheit nimmt. Schwache Hygiene beweist keinen Betrug, ist aber aufschlussreich.'
-    ),
-    tools: [
-      {
-        name: 'Internet.nl',
-        host: 'internet.nl',
-        url: 'https://internet.nl/test-site/',
-        badges: ['free'],
-        desc: t => t(
-          'Най-подробният безплатен тест за домейн: съвременни стандарти за сигурност, защита на пощата и криптиране. Поддържа се от нидерландското правителство.',
-          'The most detailed free domain test: modern security standards, email protection, and encryption. Supported by the Dutch government.',
-          'Der detaillierteste kostenlose Domain-Test: moderne Sicherheitsstandards, E-Mail-Schutz und Verschlüsselung. Unterstützt von der niederländischen Regierung.'
-        ),
-      },
-      {
-        name: 'CyberStatus',
-        host: 'cyberstatus.net',
-        url: 'https://cyberstatus.net/',
-        badges: ['free'],
-        desc: t => t(
-          'Оценка от 0 до 100 за киберхигиената на домейн, с класация на български организации. Бърз преглед на същите проверки, които правим и тук.',
-          'A 0-to-100 score for a domain\'s cyber hygiene, with a ranking of Bulgarian organisations. A quick view of the same checks we run here.',
-          'Eine Bewertung von 0 bis 100 für die Cyber-Hygiene einer Domain, mit einem Ranking bulgarischer Organisationen. Ein schneller Überblick über dieselben Prüfungen, die wir hier durchführen.'
-        ),
-      },
-      {
-        name: 'Mozilla HTTP Observatory',
-        host: 'developer.mozilla.org',
-        url: 'https://developer.mozilla.org/en-US/observatory',
-        badges: ['free'],
-        desc: t => t(
-          'Проверява настройките за сигурност на един уебсайт и обяснява какво липсва и как се поправя.',
-          'Checks a website\'s security settings and explains what is missing and how to fix it.',
-          'Prüft die Sicherheitseinstellungen einer Website und erklärt, was fehlt und wie es behoben wird.'
         ),
       },
     ],

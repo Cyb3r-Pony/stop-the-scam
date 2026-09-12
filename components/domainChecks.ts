@@ -30,10 +30,15 @@ export interface CheckResult {
 
 export type CheckId =
   | 'dmarc' | 'spf' | 'mtaSts' | 'tlsRpt'
-  | 'dnssec' | 'caa' | 'ipv6';
+  | 'dnssec' | 'caa' | 'ipv6'
+  | 'https' | 'httpsRedirect' | 'hsts' | 'csp'
+  | 'clickjacking' | 'nosniff' | 'referrerPolicy' | 'permissionsPolicy'
+  | 'securityTxt';
+
+export type GroupId = 'email' | 'integrity' | 'web' | 'disclosure';
 
 export interface CheckGroup {
-  id: 'email' | 'integrity';
+  id: GroupId;
   score: number;
   max: number;
   checks: CheckResult[];
@@ -226,6 +231,106 @@ function checkIpv6(res: DnsResponse | null): CheckResult {
 }
 
 /* ------------------------------------------------------------------ */
+/* Web surface — scored from data the worker collected                 */
+/* ------------------------------------------------------------------ */
+
+const group = (id: GroupId, checks: CheckResult[]): CheckGroup => ({
+  id,
+  checks,
+  score: checks.reduce((n, c) => n + c.score, 0),
+  max: checks.reduce((n, c) => n + c.max, 0),
+});
+
+/** Shape of the `web` source returned by the worker. */
+export interface WebSurface {
+  ok?: boolean;
+  reachable?: boolean;
+  https?: boolean;
+  httpsRedirect?: boolean;
+  hsts?: boolean;
+  hstsMaxAge?: number;
+  csp?: boolean;
+  clickjacking?: boolean;
+  nosniff?: boolean;
+  referrerPolicy?: boolean;
+  permissionsPolicy?: boolean;
+  securityTxt?: boolean;
+  [key: string]: unknown;
+}
+
+/**
+ * Turns the worker's raw header observations into the two remaining scored
+ * groups. Weights follow the same published methodology as the DNS checks, so
+ * a complete report totals 100.
+ *
+ * Reading another origin's response headers is forbidden to browser JavaScript,
+ * which is why this half depends on the worker rather than running locally.
+ */
+export function buildWebGroups(web: WebSurface | null | undefined): CheckGroup[] {
+  if (!web || web.ok === false) return [];
+
+  const yes = (id: CheckId, cond: boolean, max: number, pass: string, fail: string): CheckResult => ({
+    id,
+    status: cond ? 'pass' : 'fail',
+    score: cond ? max : 0,
+    max,
+    value: null,
+    finding: cond ? pass : fail,
+  });
+
+  // A site that does not answer over HTTPS at all fails the whole group rather
+  // than being scored on headers it never got the chance to send.
+  if (!web.reachable) {
+    const dead = (id: CheckId, max: number): CheckResult =>
+      ({ id, status: 'fail', score: 0, max, value: null, finding: 'unreachable' });
+    return [
+      group('web', [
+        dead('https', 11), dead('httpsRedirect', 5), dead('hsts', 7), dead('csp', 7),
+        dead('clickjacking', 3), dead('nosniff', 1), dead('referrerPolicy', 1), dead('permissionsPolicy', 1),
+      ]),
+      group('disclosure', [dead('securityTxt', 10)]),
+    ];
+  }
+
+  const hstsLong = !!web.hsts && Number(web.hstsMaxAge ?? 0) >= 15552000;   // 180 days
+  const hsts: CheckResult = web.hsts
+    ? {
+        id: 'hsts',
+        status: hstsLong ? 'pass' : 'partial',
+        score: hstsLong ? 7 : 4,
+        max: 7,
+        value: `max-age=${web.hstsMaxAge ?? 0}`,
+        finding: hstsLong ? 'present' : 'shortMaxAge',
+      }
+    : { id: 'hsts', status: 'fail', score: 0, max: 7, value: null, finding: 'missing' };
+
+  return [
+    group('web', [
+      yes('https', !!web.https, 11, 'present', 'missing'),
+      yes('httpsRedirect', !!web.httpsRedirect, 5, 'present', 'missing'),
+      hsts,
+      yes('csp', !!web.csp, 7, 'present', 'missing'),
+      yes('clickjacking', !!web.clickjacking, 3, 'present', 'missing'),
+      yes('nosniff', !!web.nosniff, 1, 'present', 'missing'),
+      yes('referrerPolicy', !!web.referrerPolicy, 1, 'present', 'missing'),
+      yes('permissionsPolicy', !!web.permissionsPolicy, 1, 'present', 'missing'),
+    ]),
+    group('disclosure', [
+      yes('securityTxt', !!web.securityTxt, 10, 'present', 'missing'),
+    ]),
+  ];
+}
+
+/** Recomputes the headline figure once the web groups have been merged in. */
+export function withGroups(report: DomainReport, extra: CheckGroup[]): DomainReport {
+  if (extra.length === 0) return report;
+  const groups = [...report.groups, ...extra];
+  const score = groups.reduce((n, g) => n + g.score, 0);
+  const max = groups.reduce((n, g) => n + g.max, 0);
+  return { ...report, groups, score, max, percent: Math.round((score / max) * 100) };
+}
+
+/* ------------------------------------------------------------------ */
 /* Runner                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -262,13 +367,6 @@ export async function runDomainReport(input: string): Promise<DomainReport | Loo
     checkCaa(caaRes),
     checkIpv6(aaaaRes),
   ];
-
-  const group = (id: CheckGroup['id'], checks: CheckResult[]): CheckGroup => ({
-    id,
-    checks,
-    score: checks.reduce((n, c) => n + c.score, 0),
-    max: checks.reduce((n, c) => n + c.max, 0),
-  });
 
   const groups = [group('email', email), group('integrity', integrity)];
   const score = groups.reduce((n, g) => n + g.score, 0);

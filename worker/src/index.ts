@@ -238,18 +238,37 @@ async function threatFox(target: string, key?: string): Promise<Source> {
  */
 async function urlscan(domain: string, key?: string): Promise<Source> {
   if (!key) return { ok: false, error: 'not_configured' };
+
+  // The field matters: a bare `domain:` search matches the term anywhere in the
+  // scan, so `domain:google.com` returns scans of unrelated sites that merely
+  // loaded a Google resource. `page.domain` is the domain actually visited.
   const r = await req(
-    `https://urlscan.io/api/v1/search/?q=page.domain%3A%22${encodeURIComponent(domain)}%22&size=1`,
+    `https://urlscan.io/api/v1/search/?q=page.domain%3A%22${encodeURIComponent(domain)}%22&size=20`,
     { headers: { 'API-Key': key } }
   );
   if (!r.ok) return { ok: false, error: `http_${r.status}` };
   const d = await r.json() as any;
-  const first = (d.results ?? [])[0];
-  if (!first) return { ok: true, scanned: false };
+
+  // Keep only this domain and its subdomains, so a change in urlscan's matching
+  // can never make us report a neighbour's scan as this domain's.
+  const results = (d.results ?? []).filter((x: any) => {
+    const pd = String(x?.page?.domain ?? '').toLowerCase();
+    return pd === domain || pd.endsWith(`.${domain}`);
+  });
+  if (results.length === 0) return { ok: true, scanned: false };
+
+  // Prefer a scan of the apex itself over one of a subdomain.
+  const exact = results.find((x: any) => {
+    const pd = String(x?.page?.domain ?? '').toLowerCase();
+    return pd === domain || pd === `www.${domain}`;
+  });
+  const first = exact ?? results[0];
+
   return {
     ok: true,
     scanned: true,
-    total: d.total ?? 0,
+    total: d.total ?? results.length,
+    scannedDomain: first.page?.domain ?? null,
     lastScan: first.task?.time ?? null,
     // A domain registered days ago is among the strongest scam signals there is.
     apexDomainAgeDays: first.page?.apexDomainAgeDays ?? null,
@@ -264,35 +283,56 @@ async function urlscan(domain: string, key?: string): Promise<Source> {
 /* ------------------------------------------------------------------ */
 
 async function webSurface(domain: string): Promise<Source> {
-  const url = `https://${domain}/`;
   let res: Response;
   try {
-    res = await req(url, { method: 'GET', redirect: 'follow' });
+    res = await req(`https://${domain}/`, { method: 'GET', redirect: 'follow' });
   } catch {
-    return { ok: true, https: false, error: 'unreachable' };
+    return { ok: true, https: false, reachable: false };
   }
 
   const h = res.headers;
   const csp = h.get('content-security-policy');
   const hsts = h.get('strict-transport-security');
   const maxAge = hsts ? Number(/max-age=(\d+)/i.exec(hsts)?.[1] ?? 0) : 0;
+  const xfo = h.get('x-frame-options');
 
+  // Does the insecure address hand the visitor over to the secure one? Checked
+  // without following, so we see the redirect itself rather than its target.
+  let httpsRedirect = false;
+  try {
+    const plain = await req(`http://${domain}/`, { method: 'GET', redirect: 'manual' });
+    const location = plain.headers.get('location') ?? '';
+    httpsRedirect =
+      (plain.status >= 300 && plain.status < 400 && /^https:\/\//i.test(location)) ||
+      // Some hosts upgrade transparently and answer 200 already on HTTPS.
+      (plain.status === 200 && plain.url.startsWith('https://'));
+  } catch {
+    // Unreachable over plain HTTP counts as no redirect.
+  }
+
+  // A security.txt only counts if it is actually one — a soft 404 returning the
+  // site's HTML homepage is the common false positive here.
   let securityTxt = false;
   try {
     const st = await req(`https://${domain}/.well-known/security.txt`, { method: 'GET' });
-    securityTxt = st.ok && (st.headers.get('content-type') ?? '').includes('text');
+    if (st.ok && (st.headers.get('content-type') ?? '').toLowerCase().includes('text/plain')) {
+      const body = (await st.text()).slice(0, 4000);
+      securityTxt = /^\s*contact\s*:/im.test(body);
+    }
   } catch {
     // Absent is the answer.
   }
 
   return {
     ok: true,
-    https: true,
+    reachable: true,
+    https: res.url.startsWith('https://') || res.status > 0,
     status: res.status,
+    httpsRedirect,
     hsts: !!hsts,
     hstsMaxAge: maxAge,
     csp: !!csp,
-    xFrameOptions: !!h.get('x-frame-options') || /frame-ancestors/i.test(csp ?? ''),
+    clickjacking: !!xfo || /frame-ancestors/i.test(csp ?? ''),
     nosniff: (h.get('x-content-type-options') ?? '').toLowerCase() === 'nosniff',
     referrerPolicy: !!h.get('referrer-policy'),
     permissionsPolicy: !!h.get('permissions-policy'),

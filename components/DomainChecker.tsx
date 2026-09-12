@@ -3,6 +3,7 @@ import { Lang } from '../types';
 import { PageHeader, Section, Container, Btn, LiveDot, Icon, tr } from './ui';
 import {
   runDomainReport, DomainReport, LookupError, CheckId, CheckResult, CheckStatus,
+  buildWebGroups, withGroups, WebSurface, GroupId,
 } from './domainChecks';
 import ThreatPanel from './ThreatPanel';
 import {
@@ -74,6 +75,78 @@ const CHECK_META: Record<CheckId, { label: (t: T) => string; why: (t: T) => stri
       'Zeigt, dass die Infrastruktur modern gehalten wird.'
     ),
   },
+  https: {
+    label: () => 'HTTPS',
+    why: t => t(
+      'Криптира връзката, за да не може някой да чете или подменя данните по пътя.',
+      'Encrypts the connection so nobody can read or alter data in transit.',
+      'Verschlüsselt die Verbindung, damit niemand Daten unterwegs lesen oder ändern kann.'
+    ),
+  },
+  httpsRedirect: {
+    label: t => t('HTTP → HTTPS', 'HTTP → HTTPS', 'HTTP → HTTPS'),
+    why: t => t(
+      'Пренасочва незащитените заявки към защитената версия на сайта.',
+      'Redirects insecure requests to the secure version of the site.',
+      'Leitet unsichere Anfragen auf die sichere Version der Seite um.'
+    ),
+  },
+  hsts: {
+    label: () => 'HSTS',
+    why: t => t(
+      'Инструктира браузъра занапред да използва само защитена връзка към този сайт.',
+      'Tells the browser to use only a secure connection to this site from now on.',
+      'Weist den Browser an, künftig nur noch eine sichere Verbindung zu nutzen.'
+    ),
+  },
+  csp: {
+    label: () => 'Content Security Policy',
+    why: t => t(
+      'Ограничава какво съдържание може да се зарежда — основна защита срещу вградени скриптове.',
+      'Restricts what content may load — a core defence against injected scripts.',
+      'Beschränkt, welche Inhalte geladen werden dürfen — Kernschutz gegen eingeschleuste Skripte.'
+    ),
+  },
+  clickjacking: {
+    label: t => t('Защита от clickjacking', 'Clickjacking protection', 'Clickjacking-Schutz'),
+    why: t => t(
+      'Пречи страницата да бъде вградена в чужд сайт, който да краде кликовете ви.',
+      'Prevents the page being embedded in another site that steals your clicks.',
+      'Verhindert, dass die Seite in eine fremde Website eingebettet wird, die Ihre Klicks stiehlt.'
+    ),
+  },
+  nosniff: {
+    label: t => t('MIME защита', 'MIME protection', 'MIME-Schutz'),
+    why: t => t(
+      'Спира браузъра да гадае типа на файл — техника, използвана за заобикаляне на защити.',
+      'Stops the browser guessing a file\'s type — a technique used to bypass defences.',
+      'Hindert den Browser daran, den Dateityp zu erraten — eine Technik zur Umgehung von Schutzmaßnahmen.'
+    ),
+  },
+  referrerPolicy: {
+    label: () => 'Referrer Policy',
+    why: t => t(
+      'Ограничава каква информация за адреса ви изтича към други сайтове.',
+      'Limits what address information leaks to other sites.',
+      'Begrenzt, welche Adressinformationen an andere Seiten gelangen.'
+    ),
+  },
+  permissionsPolicy: {
+    label: () => 'Permissions Policy',
+    why: t => t(
+      'Определя кои устройства — камера, микрофон, местоположение — сайтът може да поиска.',
+      'Declares which devices — camera, microphone, location — the site may request.',
+      'Legt fest, welche Geräte — Kamera, Mikrofon, Standort — die Seite anfordern darf.'
+    ),
+  },
+  securityTxt: {
+    label: () => 'security.txt',
+    why: t => t(
+      'Публичен адрес за връзка, на който изследователите могат да докладват уязвимости.',
+      'A public contact address where researchers can report vulnerabilities.',
+      'Eine öffentliche Kontaktadresse, an die Forscher Schwachstellen melden können.'
+    ),
+  },
 };
 
 const FINDINGS: Record<string, (t: T) => string> = {
@@ -103,7 +176,30 @@ const FINDINGS: Record<string, (t: T) => string> = {
   'caa.missing': t => t('Липсва CAA ограничение.', 'No CAA restriction.', 'Keine CAA-Beschränkung.'),
   'ipv6.present': t => t('Публикуван е модерен IPv6 адрес.', 'A modern IPv6 address is published.', 'Eine moderne IPv6-Adresse ist veröffentlicht.'),
   'ipv6.missing': t => t('Няма IPv6 адрес.', 'No IPv6 address.', 'Keine IPv6-Adresse.'),
+
+  'https.present': t => t('Сайтът отговаря успешно през защитена връзка.', 'The site responds successfully over a secure connection.', 'Die Seite antwortet erfolgreich über eine sichere Verbindung.'),
+  'https.missing': t => t('Сайтът не отговаря през защитена връзка.', 'The site does not respond over a secure connection.', 'Die Seite antwortet nicht über eine sichere Verbindung.'),
+  'httpsRedirect.present': t => t('Незащитената заявка се пренасочва към HTTPS.', 'Insecure requests are redirected to HTTPS.', 'Unsichere Anfragen werden zu HTTPS umgeleitet.'),
+  'httpsRedirect.missing': t => t('Незащитената заявка не се пренасочва.', 'Insecure requests are not redirected.', 'Unsichere Anfragen werden nicht umgeleitet.'),
+  'hsts.present': t => t('Браузърът получава инструкция да използва само HTTPS.', 'The browser is instructed to use HTTPS only.', 'Der Browser wird angewiesen, nur HTTPS zu verwenden.'),
+  'hsts.shortMaxAge': t => t('Инструкцията важи за прекалено кратък период.', 'The instruction lasts too short a period.', 'Die Anweisung gilt für einen zu kurzen Zeitraum.'),
+  'hsts.missing': t => t('Липсва HSTS инструкция.', 'No HSTS instruction.', 'Keine HSTS-Anweisung.'),
+  'csp.present': t => t('Публикувана е политика за разрешеното съдържание.', 'A content policy is published.', 'Eine Inhaltsrichtlinie ist veröffentlicht.'),
+  'csp.missing': t => t('Липсва Content Security Policy.', 'No Content Security Policy.', 'Keine Content Security Policy.'),
+  'clickjacking.present': t => t('Ограничено е вграждането на страницата в чужд frame.', 'Embedding the page in a foreign frame is restricted.', 'Das Einbetten der Seite in einen fremden Frame ist eingeschränkt.'),
+  'clickjacking.missing': t => t('Страницата може да бъде вградена в чужд сайт.', 'The page can be embedded in another site.', 'Die Seite kann in eine fremde Website eingebettet werden.'),
+  'nosniff.present': t => t('Браузърът няма да гадае типа на съдържанието.', 'The browser will not guess the content type.', 'Der Browser wird den Inhaltstyp nicht erraten.'),
+  'nosniff.missing': t => t('Липсва nosniff.', 'No nosniff.', 'Kein nosniff.'),
+  'referrerPolicy.present': t => t('Ограничено е изтичането на адресен контекст.', 'Leakage of address context is limited.', 'Das Durchsickern von Adresskontext ist begrenzt.'),
+  'referrerPolicy.missing': t => t('Липсва Referrer Policy.', 'No Referrer Policy.', 'Keine Referrer Policy.'),
+  'permissionsPolicy.present': t => t('Достъпът до устройства е ограничен изрично.', 'Device access is explicitly restricted.', 'Gerätezugriff ist ausdrücklich eingeschränkt.'),
+  'permissionsPolicy.missing': t => t('Липсва Permissions-Policy.', 'No Permissions-Policy.', 'Keine Permissions-Policy.'),
+  'securityTxt.present': t => t('Открит е валиден /.well-known/security.txt.', 'A valid /.well-known/security.txt was found.', 'Eine gültige /.well-known/security.txt wurde gefunden.'),
+  'securityTxt.missing': t => t('Не е открит валиден /.well-known/security.txt.', 'No valid /.well-known/security.txt found.', 'Keine gültige /.well-known/security.txt gefunden.'),
+  'https.unreachable': t => t('Сайтът е недостъпен, затова уеб проверките не могат да се извършат.', 'The site is unreachable, so the web checks cannot run.', 'Die Seite ist nicht erreichbar, daher können die Web-Prüfungen nicht laufen.'),
 };
+
+const UNREACHABLE = (t: T) => t('Сайтът е недостъпен.', 'The site is unreachable.', 'Die Seite ist nicht erreichbar.');
 
 const STATUS_STYLE: Record<CheckStatus, { dot: string; text: string; icon: React.ReactNode }> = {
   pass: {
@@ -190,14 +286,23 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
       setLoading(false);
       return;
     }
+    // Show the DNS half immediately; it needs nothing but the visitor's browser.
     setReport(result);
     setLoading(false);
-
     setChecked({ kind: 'domain', target: result.domain });
+
     if (apiConfigured) {
       setThreatLoading(true);
-      setThreat(await fetchThreatReport('domain', result.domain));
+      const intel = await fetchThreatReport('domain', result.domain);
+      setThreat(intel);
       setThreatLoading(false);
+
+      // The web-connection and disclosure checks can only be observed
+      // server-side, so they arrive with the intelligence response and are
+      // folded into the same scorecard, taking it from 54 points to 100.
+      const web = intel?.sources?.web as WebSurface | undefined;
+      const extra = buildWebGroups(web);
+      if (extra.length > 0) setReport(prev => (prev ? withGroups(prev, extra) : prev));
     }
   };
 
@@ -208,10 +313,12 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
     network: t('Проверката не успя. Проверете връзката си и опитайте отново.', 'The check failed. Check your connection and try again.', 'Die Prüfung ist fehlgeschlagen. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.'),
   }[e.kind]);
 
-  const groupTitle = (id: 'email' | 'integrity') =>
-    id === 'email'
-      ? t('Доверие в служебната поща', 'Email trust', 'Vertrauen in die E-Mail')
-      : t('Цялост на домейна', 'Domain integrity', 'Domain-Integrität');
+  const groupTitle = (id: GroupId) => ({
+    email: t('Доверие в служебната поща', 'Email trust', 'Vertrauen in die E-Mail'),
+    integrity: t('Цялост на домейна', 'Domain integrity', 'Domain-Integrität'),
+    web: t('Защита на уеб връзката', 'Web connection security', 'Sicherheit der Web-Verbindung'),
+    disclosure: t('Отговорно докладване', 'Responsible disclosure', 'Verantwortungsvolle Offenlegung'),
+  }[id]);
 
   const verdict = (percent: number) =>
     percent >= 80
@@ -224,12 +331,12 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
     <div className="bg-white">
       <PageHeader
         accent="blue"
-        eyebrow={t('Проверка на домейн', 'Domain check', 'Domain-Prüfung')}
+        eyebrow={t('Проверка на домейн или IP', 'Domain & IP check', 'Domain- & IP-Prüfung')}
         title={t('Колко сериозно се пази този домейн?', 'How well is this domain protected?', 'Wie gut ist diese Domain geschützt?')}
         lead={t(
-          'Въведете домейн и вижте дали собственикът му е взел основните мерки срещу фалшифициране на поща и пренасочване към фалшиви сайтове. Слабият резултат не доказва измама — но е основание да внимавате.',
-          'Enter a domain and see whether its owner has taken the basic measures against email forgery and redirection to fake sites. A weak result does not prove fraud — but it is a reason to be careful.',
-          'Geben Sie eine Domain ein und sehen Sie, ob ihr Eigentümer grundlegende Maßnahmen gegen E-Mail-Fälschung und Umleitung auf gefälschte Seiten ergriffen hat. Ein schwaches Ergebnis beweist keinen Betrug — ist aber ein Grund zur Vorsicht.'
+          'Въведете домейн за пълна оценка от 100 точки на защитата му, или IP адрес за проверка на репутацията му. Слабият резултат не доказва измама — но е основание да внимавате.',
+          'Enter a domain for a full 100-point assessment of its protection, or an IP address to check its reputation. A weak result does not prove fraud — but it is a reason to be careful.',
+          'Geben Sie eine Domain für eine vollständige 100-Punkte-Bewertung ihres Schutzes ein, oder eine IP-Adresse zur Reputationsprüfung. Ein schwaches Ergebnis beweist keinen Betrug — ist aber ein Grund zur Vorsicht.'
         )}
         onBack={onBack}
         backLabel={t('Начало', 'Home', 'Startseite')}
@@ -357,7 +464,9 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
                               </span>
                             </div>
                             <p className="text-[13px] leading-relaxed text-slate-700">
-                              {FINDINGS[`${c.id}.${c.finding}`]?.(t) ?? c.finding}
+                              {c.finding === 'unreachable'
+                                ? UNREACHABLE(t)
+                                : (FINDINGS[`${c.id}.${c.finding}`]?.(t) ?? c.finding)}
                             </p>
                             <p className="text-[12px] leading-relaxed text-slate-500 mt-1">{meta.why(t)}</p>
                             {c.value && (
@@ -386,28 +495,20 @@ const DomainChecker: React.FC<Props> = ({ lang, onBack, onNavigate }) => {
               loading={threatLoading}
             />
 
-            {/* Scope honesty + deeper tests */}
-            {report && (
+            {/* Shown only while the web half is unavailable */}
+            {report && report.max < 100 && (
             <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-6">
               <h3 className="text-[14px] font-bold text-slate-900 mb-2">
-                {t('Какво тази проверка не обхваща', 'What this check does not cover', 'Was diese Prüfung nicht abdeckt')}
+                {t('Частичен резултат', 'Partial result', 'Teilergebnis')}
               </h3>
               <p className="text-[13px] leading-relaxed text-slate-700 mb-5">
                 {t(
-                  'Проверяваме DNS записите на домейна. Настройките на самия уебсайт — HTTPS, HSTS, защитни заглавия — не могат да се четат директно от браузъра ви. За пълен тест използвайте инструментите по-долу.',
-                  'We check the domain\'s DNS records. The website\'s own settings — HTTPS, HSTS, security headers — cannot be read directly from your browser. For a complete test, use the tools below.',
-                  'Wir prüfen die DNS-Einträge der Domain. Die Einstellungen der Website selbst — HTTPS, HSTS, Sicherheits-Header — können nicht direkt aus Ihrem Browser gelesen werden. Für einen vollständigen Test nutzen Sie die Werkzeuge unten.'
+                  'Показани са само DNS проверките (54 от 100 точки). Проверките на самия уебсайт — HTTPS, HSTS, защитни заглавия и security.txt — не могат да се четат от браузъра ви и изискват услугата за проверка да е активна.',
+                  'Only the DNS checks are shown (54 of 100 points). The website\'s own checks — HTTPS, HSTS, security headers and security.txt — cannot be read from your browser and require the check service to be running.',
+                  'Es werden nur die DNS-Prüfungen angezeigt (54 von 100 Punkten). Die Prüfungen der Website selbst — HTTPS, HSTS, Sicherheits-Header und security.txt — können nicht aus Ihrem Browser gelesen werden und erfordern den aktiven Prüfdienst.'
                 )}
               </p>
               <div className="flex flex-wrap gap-3">
-                <a
-                  href={`https://internet.nl/site/${encodeURIComponent(report.domain)}/`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-bold transition-colors"
-                >
-                  {Icon.external('w-3.5 h-3.5')}
-                  {t('Пълен тест в Internet.nl', 'Full test on Internet.nl', 'Vollständiger Test auf Internet.nl')}
-                </a>
                 <a
                   href={`https://www.virustotal.com/gui/domain/${encodeURIComponent(report.domain)}`}
                   target="_blank" rel="noopener noreferrer"

@@ -158,7 +158,7 @@ export function deepLinks(kind: TargetKind, target: string): DeepLink[] {
         { name: 'VirusTotal', url: `https://www.virustotal.com/gui/domain/${e}` },
         { name: 'urlscan.io', url: `https://urlscan.io/domain/${e}` },
         { name: 'URLhaus', url: `https://urlhaus.abuse.ch/browse.php?search=${e}` },
-        { name: 'Internet.nl', url: `https://internet.nl/site/${e}/` },
+        { name: 'ThreatFox', url: `https://threatfox.abuse.ch/browse.php?search=ioc%3A${e}` },
       ];
 }
 

@@ -222,12 +222,12 @@ const App: React.FC = () => {
       items: [
         {
           label: t('Външни инструменти', 'External Tools', 'Externe Werkzeuge'),
-          desc: t('Безплатни услуги за проверка на линк, файл или IP', 'Free services to check a link, file, or IP', 'Kostenlose Dienste zur Prüfung von Link, Datei oder IP'),
+          desc: t('Проверка на линк, файл или IP', 'Check a link, file, or IP', 'Link, Datei oder IP prüfen'),
           page: 'tools',
         },
         {
           label: t('Проверка на домейн или IP', 'Domain & IP Check', 'Domain- & IP-Prüfung'),
-          desc: t('Оценка и репутация, директно тук', 'Hygiene score and reputation, right here', 'Bewertung und Reputation, direkt hier'),
+          desc: t('Оценка и репутация, директно тук', 'Hygiene score and reputation, here', 'Bewertung und Reputation, direkt hier'),
           page: 'checker',
         },
       ],
@@ -374,7 +374,7 @@ const App: React.FC = () => {
                 </button>
 
                 {openMenu === group.id && (
-                  <div className="absolute left-0 top-full mt-2 w-[340px] rounded-xl border border-slate-200 bg-white shadow-[0_12px_40px_-12px_rgba(15,23,42,0.25)] overflow-hidden anim-fade-up">
+                  <div className="absolute left-0 top-full mt-2 w-max min-w-[300px] max-w-[420px] rounded-xl border border-slate-200 bg-white shadow-[0_12px_40px_-12px_rgba(15,23,42,0.25)] overflow-hidden anim-fade-up">
                     {group.items.map((item, i) => (
                       <button
                         key={i}
@@ -385,7 +385,7 @@ const App: React.FC = () => {
                         } ${item.page && item.page === currentPage ? 'bg-blue-50/60' : ''}`}
                       >
                         <span className="block text-[14px] font-semibold text-slate-900 mb-0.5">{item.label}</span>
-                        <span className="block text-[12px] text-slate-500 leading-snug">{item.desc}</span>
+                        <span className="block text-[12px] text-slate-500 leading-snug whitespace-nowrap">{item.desc}</span>
                       </button>
                     ))}
                   </div>
