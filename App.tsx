@@ -9,6 +9,7 @@ import ScamTypes from './components/ScamTypes';
 import WarningSigns from './components/WarningSigns';
 import Protection from './components/Protection';
 import ExternalTools from './components/ExternalTools';
+import DomainChecker from './components/DomainChecker';
 import { Section, Container, SectionHeading, Eyebrow, Btn, ArrowLink, LiveDot, PanelHeader, Icon, ACCENTS } from './components/ui';
 
 type Page =
@@ -19,7 +20,8 @@ type Page =
   | 'scam-types'
   | 'warning-signs'
   | 'protection'
-  | 'tools';
+  | 'tools'
+  | 'checker';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Lang>('bg');
@@ -222,6 +224,11 @@ const App: React.FC = () => {
           label: t('Външни инструменти', 'External Tools', 'Externe Werkzeuge'),
           desc: t('Безплатни услуги за проверка на линк, файл или IP', 'Free services to check a link, file, or IP', 'Kostenlose Dienste zur Prüfung von Link, Datei oder IP'),
           page: 'tools',
+        },
+        {
+          label: t('Проверка на домейн', 'Domain Check', 'Domain-Prüfung'),
+          desc: t('Оценка на защитата на домейн директно тук', 'Score a domain\'s protection right here', 'Domain-Schutz direkt hier bewerten'),
+          page: 'checker',
         },
       ],
     },
@@ -486,6 +493,8 @@ const App: React.FC = () => {
           <Protection lang={lang} onBack={goHome} onNavigate={goTo} />
         ) : currentPage === 'tools' ? (
           <ExternalTools lang={lang} onBack={goHome} />
+        ) : currentPage === 'checker' ? (
+          <DomainChecker lang={lang} onBack={goHome} onNavigate={goTo} />
         ) : (
         <div key={lang}>
 
