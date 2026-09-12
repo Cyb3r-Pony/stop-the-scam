@@ -47,6 +47,40 @@ do for you is the browser login.
 A missing key is not an error — that provider reports `not_configured` and the rest
 still work, so you can start with a subset.
 
+### If you would rather use an API token than a browser login
+
+You do not need one for normal setup — `./setup.sh` opens a browser login, which is
+simpler and needs no token management. A token is only worth creating if you want to
+deploy from CI, or from a machine with no browser.
+
+At **dash.cloudflare.com → My Profile → API Tokens → Create Token**, either:
+
+**Use the template** — pick *"Edit Cloudflare Workers"*, set Account Resources to your
+account, and create it. This is the quickest route.
+
+**Or build a minimal custom token**, which grants strictly less. Choose *Create Custom
+Token* and add exactly two permissions:
+
+| Type | Resource | Level |
+|---|---|---|
+| Account | Workers Scripts | Edit |
+| Account | Account Settings | Read |
+
+`Workers Scripts: Edit` covers both deploying the code and managing its secrets.
+`Account Settings: Read` lets wrangler find which account to deploy into. Nothing else
+is needed: this Worker uses no KV, no D1, no queues, and no custom domain, so the
+Workers KV and Zone permissions the template includes are unnecessary here.
+
+Then:
+
+```bash
+CLOUDFLARE_API_TOKEN=<your-token> ./setup.sh
+```
+
+Treat that token like a password — it can deploy code to your account. Do not put it
+in the repository; pass it on the command line as above, or store it in your shell
+profile.
+
 ### After rotating your keys
 
 Update `.dev.vars`, then:
