@@ -161,28 +161,41 @@ interface SectionHeadingProps {
   dark?: boolean;
   /** Optional element rendered opposite the heading on wide screens */
   aside?: React.ReactNode;
+  /**
+   * Lets the title use the container's full width and stay on one line on large
+   * screens. Headings otherwise sit in a 2xl measure, which keeps prose readable
+   * but wraps a long title.
+   *
+   * Deliberately `lg` and not `md`: the longest of these titles renders about
+   * 860px at this size, which overflows the container between 768px and ~920px
+   * and pushes the whole page into horizontal scroll. Below `lg` they wrap,
+   * which is correct — no sentence-length title fits one phone line legibly.
+   */
+  nowrapTitle?: boolean;
   className?: string;
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
-  eyebrow, title, lead, accent = 'blue', align = 'left', dark = false, aside, className = '',
+  eyebrow, title, lead, accent = 'blue', align = 'left', dark = false, aside,
+  nowrapTitle = false, className = '',
 }) => {
   const centered = align === 'center';
+  const measure = centered ? 'flex flex-col items-center' : nowrapTitle ? 'max-w-none' : 'max-w-2xl';
   return (
     <div
       className={`${centered ? 'flex flex-col items-center text-center' : aside ? 'flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8' : ''} ${className}`}
     >
-      <div className={centered ? 'flex flex-col items-center' : 'max-w-2xl'}>
+      <div className={measure}>
         {eyebrow && (
           <div className={centered ? 'mb-6' : 'mb-5'}>
             <Eyebrow accent={accent} dark={dark}>{eyebrow}</Eyebrow>
           </div>
         )}
-        <h2 className={`display text-3xl md:text-[2.75rem] md:leading-[1.1] font-extrabold ${dark ? 'text-white' : 'text-slate-900'}`}>
+        <h2 className={`display text-3xl md:text-[2.75rem] md:leading-[1.1] font-extrabold ${nowrapTitle ? 'lg:whitespace-nowrap' : ''} ${dark ? 'text-white' : 'text-slate-900'}`}>
           {title}
         </h2>
         {lead && (
-          <p className={`mt-5 text-lg leading-relaxed ${dark ? 'text-slate-400' : 'text-slate-600'} ${centered ? 'max-w-2xl' : ''}`}>
+          <p className={`mt-5 text-lg leading-relaxed ${dark ? 'text-slate-400' : 'text-slate-600'} ${centered || nowrapTitle ? 'max-w-2xl' : ''}`}>
             {lead}
           </p>
         )}

@@ -22,50 +22,61 @@ JavaScript.
 
 ## Deploy
 
-From this directory, once:
+Put your keys in `.dev.vars` in this directory, one per line (this file is
+gitignored and never leaves your machine):
 
-```bash
-npm install
+```
+ABUSEIPDB_KEY=...
+IPINFO_KEY=...
+VIRUSTOTAL_KEY=...
+URLSCAN_KEY=...
+ABUSECH_KEY=...
 ```
 
-```bash
-npx wrangler login
-```
-
-Then set each key. `wrangler` prompts for the value and stores it encrypted — the
-value never touches a file in the repo:
+Then run:
 
 ```bash
-npx wrangler secret put ABUSEIPDB_KEY
+./setup.sh
 ```
+
+That installs dependencies, logs you into Cloudflare (a browser window opens once),
+deploys the Worker, uploads each key as an encrypted secret, writes the Worker's URL
+into the site's `.env`, and verifies every provider answers. The only step it cannot
+do for you is the browser login.
+
+A missing key is not an error — that provider reports `not_configured` and the rest
+still work, so you can start with a subset.
+
+### After rotating your keys
+
+Update `.dev.vars`, then:
 
 ```bash
-npx wrangler secret put IPINFO_KEY
+./setup.sh --keys-only
 ```
+
+New secrets take effect on the next request; no redeploy is needed.
+
+### Useful commands
 
 ```bash
-npx wrangler secret put VIRUSTOTAL_KEY
+npx wrangler tail
 ```
+
+Live log of requests hitting the Worker.
 
 ```bash
-npx wrangler secret put URLSCAN_KEY
+npx wrangler secret list
 ```
+
+Shows which secrets are set — names only, never values.
 
 ```bash
-npx wrangler secret put ABUSECH_KEY
+npx wrangler delete
 ```
 
-Deploy:
-
-```bash
-npx wrangler deploy
-```
-
-Wrangler prints the live URL, of the form `https://sts-api.<your-subdomain>.workers.dev`.
-Put that in the site's `.env` as `VITE_API_BASE` and redeploy the site.
-
-A missing key is not an error — that provider simply reports `not_configured` and the
-rest still work. You can deploy with a subset and add the others later.
+Takes the Worker offline. The site keeps working: the domain scorecard falls back to
+its DNS-only half and the provider links still work.
 
 ## Local development
 

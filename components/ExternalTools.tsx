@@ -278,6 +278,7 @@ const ExternalTools: React.FC<Props> = ({ lang, onBack }) => {
             <Container>
               <SectionHeading
                 accent={group.accent}
+                nowrapTitle
                 eyebrow={
                   <span className="inline-flex items-center gap-2">
                     {group.icon}
